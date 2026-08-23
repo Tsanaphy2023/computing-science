@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>วิทยาการคำนวณและปัญญาประดิษฐ์เชิงประยุกต์ • 50 Interactive Labs</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Prompt:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: radial-gradient(circle at top, #0d1527 0%, #050811 100%);
+      color: #f8fafc;
+      font-family: 'Prompt', sans-serif;
+      min-height: 100vh;
+      padding-bottom: 40px;
+    }
+    header {
+      background: rgba(9, 19, 40, 0.9);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(0, 240, 255, 0.3);
+      padding: 30px 20px;
+      text-align: center;
+    }
+    .badge {
+      display: inline-block;
+      background: linear-gradient(90deg, #00f0ff, #34d399);
+      color: #050811;
+      font-weight: 800;
+      font-size: 0.85em;
+      padding: 4px 16px;
+      border-radius: 20px;
+      margin-bottom: 12px;
+    }
+    h1 {
+      font-size: 2.2em;
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 8px;
+    }
+    p.subtitle {
+      color: #94a3b8;
+      font-size: 1.05em;
+      max-width: 800px;
+      margin: 0 auto 16px auto;
+      line-height: 1.6;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 30px auto;
+      padding: 0 20px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 16px;
+    }
+    .card {
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid rgba(0, 240, 255, 0.2);
+      border-radius: 12px;
+      padding: 16px;
+      transition: all 0.25s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: #00f0ff;
+      box-shadow: 0 8px 24px rgba(0, 240, 255, 0.25);
+    }
+    .card-title {
+      color: #38bdf8;
+      font-weight: 700;
+      font-size: 1.0em;
+      margin-bottom: 8px;
+    }
+    .card-desc {
+      color: #cbd5e1;
+      font-size: 0.85em;
+      line-height: 1.5;
+      margin-bottom: 14px;
+    }
+    .btn-launch {
+      background: linear-gradient(135deg, #0284c7, #0369a1);
+      color: #ffffff;
+      padding: 8px 14px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-size: 0.85em;
+      font-weight: 700;
+      text-align: center;
+      transition: all 0.2s;
+    }
+    .btn-launch:hover {
+      background: #0284c7;
+      box-shadow: 0 0 12px rgba(0, 240, 255, 0.4);
+    }
+    footer {
+      text-align: center;
+      margin-top: 50px;
+      color: #64748b;
+      font-size: 0.88em;
+      border-top: 1px solid #1e293b;
+      padding-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <span class="badge">RBRU MOOC 3-0-6</span>
+    <h1>วิทยาการคำนวณและปัญญาประดิษฐ์เชิงประยุกต์</h1>
+    <p class="subtitle">
+      ศูนย์รวม 50 ห้องปฏิบัติการจำลองเสมือนจริง (Interactive 3D Virtual Labs) สำหรับการเรียนรู้ดิจิทัลตลอดชีวิต มหาวิทยาลัยราชภัฏรำไพพรรณี
+    </p>
+    <a href="https://elearning.rbru.ac.th/course/view.php?id=259" style="color: #00f0ff; font-size: 0.95em; text-decoration: none; font-weight: 600;">
+      ⬅ เข้าสู่บทเรียนหลักบน RBRU LMS (Course 259)
+    </a>
+  </header>
+
+  <div class="container">
+    <div class="grid" id="labs-grid">
+      <!-- 50 Labs list will be injected here -->
+    </div>
+  </div>
+
+  <footer>
+    ผู้พัฒนาหลักสูตร: ผู้ช่วยศาสตราจารย์ ดร.ชีวะ ทัศนา • สาขาวิชาฟิสิกส์ คณะวิทยาศาสตร์และเทคโนโลยี มหาวิทยาลัยราชภัฏรำไพพรรณี
+  </footer>
+
+  <script>
+    const labs = [
+      { id: "1.0", file: "simulators/chapter01_river_crossing.html", title: "1.0 ปริศนาข้ามแม่น้ำเชิงตรรกะ", desc: "ทดลองแก้ปริศนาข้ามแม่น้ำและตรวจสอบ State Safety" },
+      { id: "1.1", file: "simulators/chapter01_decomposition_tree.html", title: "1.1 ผังต้นไม้ย่อยปัญหา (Decomposition)", desc: "แตกปัญหาระบบ EV และแปลงเกษตรอัจฉริยะ" },
+      { id: "1.2", file: "simulators/chapter01_pattern_recognition.html", title: "1.2 ค้นหารูปแบบและความเหมือน", desc: "วิเคราะห์ฟังก์ชันเชิงเส้นและลำดับฟีโบนัชชี" },
+      { id: "1.3", file: "simulators/chapter01_abstraction_sandbox.html", title: "1.3 แบบจำลองมวลจุดเชิงนามธรรม 3D", desc: "ตัดตัวแปรไม่จำเป็นและสร้างแบบจำลองมวลจุด" },
+      { id: "1.4", file: "simulators/chapter01_robot_grid_navigator.html", title: "1.4 นำทางหุ่นยนต์บนตารางกริด", desc: "ฝึกเขียนขั้นตอนวิธีหลบสิ่งกีดขวางบนกริด 5x5" },
+      { id: "2.0", file: "simulators/chapter02_visual_flowchart_intro.html", title: "2.0 โปรแกรมจำลองการทำงานของผังงาน", desc: "ทดลองรันผังงานมาตรฐาน ISO 5807 แบบ Interactive" },
+      { id: "2.1", file: "simulators/chapter02_pseudocode_linter.html", title: "2.1 เครื่องมือตรวจสอบรหัสลำลอง", desc: "พิมพ์ Pseudocode แปลงเป็น Python อัตโนมัติ" },
+      { id: "2.2", file: "simulators/chapter02_flowchart_builder.html", title: "2.2 เครื่องมือต่อบล็อกผังงาน 2 มิติ", desc: "สร้างผังงานโครงสร้างแบบเรียงลำดับ" },
+      { id: "2.3", file: "simulators/chapter02_decision_branching.html", title: "2.3 จำลองการแตกแขนงเงื่อนไข", desc: "ทดลองตรรกะการตัดสินใจ If-Else แบบแสงไหล" },
+      { id: "2.4", file: "simulators/chapter02_trace_table_runner.html", title: "2.4 เครื่องมือทดสอบตารางดรายรัน", desc: "ทดสอบลูปการทำงานซ้ำและบันทึกค่าตัวแปร" },
+      { id: "3.0", file: "simulators/chapter03_inbrowser_python_sandbox.html", title: "3.0 แซนด์บ็อกซ์รันโค้ด Python", desc: "รันภาษา Python 3.11 บนเบราว์เซอร์สดทันที" },
+      { id: "3.1", file: "simulators/chapter03_variable_memory_model.html", title: "3.1 ตัวจำลองหน่วยความจำตัวแปร", desc: "ดูการผูก Memory Address ของตัวแปรในระบบ" },
+      { id: "3.2", file: "simulators/chapter03_datatype_casting_lab.html", title: "3.2 ห้องทดลองแปลงชนิดข้อมูล", desc: "ทดลอง Typecasting และดูผลลัพธ์แบบสด" },
+      { id: "3.3", file: "simulators/chapter03_pemdas_evaluator.html", title: "3.3 วิเคราะห์ลำดับคำนวณ PEMDAS", desc: "วิเคราะห์ลำดับประมวลผลนิพจน์คณิตศาสตร์" },
+      { id: "3.4", file: "simulators/chapter03_kinetic_energy_calc.html", title: "3.4 คำนวณพลังงานจลน์และฟิสิกส์", desc: "คำนวณ E = 1/2 m v^2 พร้อมพล็อตกราฟ" },
+      { id: "4.0", file: "simulators/chapter04_automated_decision_system.html", title: "4.0 ระบบตัดสินใจอัตโนมัติ", desc: "จำลองระบบควบคุมอุณหภูมิโรงเรือนอัจฉริยะ" },
+      { id: "4.1", file: "simulators/chapter04_branching_sandbox.html", title: "4.1 แซนด์บ็อกซ์โครงสร้างทางเลือก", desc: "ทดลองปรับตรรกะ AND / OR / NOT" },
+      { id: "4.2", file: "simulators/chapter04_greenhouse_climate_controller.html", title: "4.2 ควบคุมสภาพแวดล้อมโรงเรือน", desc: "สั่งการพัดลม ฮีตเตอร์ ด้วย If-Elif-Else" },
+      { id: "4.3", file: "simulators/chapter04_loop_visualizer.html", title: "4.3 แอนิเมชันลูป For และ Range", desc: "ดูการวนรอบของตัวแปรนับทีละสเต็ป" },
+      { id: "4.4", file: "simulators/chapter04_sensor_polling_loop.html", title: "4.4 วงรอบอ่านค่าเซนเซอร์สด", desc: "จำลอง Polling Loop พร้อมปุ่ม Break" },
+      { id: "5.0", file: "simulators/chapter05_data_storage_explorer.html", title: "5.0 สำรวจโครงสร้างข้อมูลเชิงลึก", desc: "เปรียบเทียบ Array, Linked List, Hash Table" },
+      { id: "5.1", file: "simulators/chapter05_dynamic_list_visualizer.html", title: "5.1 ไดนามิกอาร์เรย์และ List Comp", desc: "ทดลอง append, pop และ List Comprehension" },
+      { id: "5.2", file: "simulators/chapter05_dictionary_hash_table.html", title: "5.2 แซนด์บ็อกซ์ตารางแฮชและ Dict", desc: "แปลงคีย์เป็นดัชนีช่องหน่วยความจำใน O(1)" },
+      { id: "5.3", file: "simulators/chapter05_linear_search_race.html", title: "5.3 จำลองการค้นหาแบบเชิงเส้น", desc: "สังเกตการวิ่งค้นหาข้อมูลจากต้นจนจบแถว" },
+      { id: "5.4", file: "simulators/chapter05_binary_search_speed_race.html", title: "5.4 ประลองความเร็วค้นหา 10 ล้านข้อมูล", desc: "แข่งความเร็ว Linear O(N) vs Binary O(log N)" },
+      { id: "6.0", file: "simulators/chapter06_datacenter_sorting_energy.html", title: "6.0 จำลองพลังงานจัดเรียงข้อมูล", desc: "วัดการใช้ไฟฟ้าของ Data Center ในการ Sort" },
+      { id: "6.1", file: "simulators/chapter06_big_o_curve_comparator.html", title: "6.1 กราฟเปรียบเทียบอัตราโต Big-O", desc: "เปรียบเทียบกราฟเวลา O(1) ถึง O(N^2)" },
+      { id: "6.2", file: "simulators/chapter06_bubble_selection_visualizer.html", title: "6.2 แอนิเมชัน Bubble & Selection", desc: "ดูแท่งกราฟิกสลับค่าเปรียบเทียบสด" },
+      { id: "6.3", file: "simulators/chapter06_card_insertion_playground.html", title: "6.3 จัดเรียงไพ่ด้วย Insertion Sort", desc: "ลากและแทรกไพ่ลงในตำแหน่งที่ถูกต้อง" },
+      { id: "6.4", file: "simulators/chapter06_divide_and_conquer_tree.html", title: "6.4 ต้นไม้แบ่งแยกเพื่อพิชิต Merge", desc: "ดูการแตกกิ่งและผสานคืนในเวลา O(N log N)" },
+      { id: "7.0", file: "simulators/chapter07_refactoring_visualizer.html", title: "7.0 ประเมินความซับซ้อนของโค้ด", desc: "แยกฟังก์ชันตามหลัก SRP เพื่อ Clean Code" },
+      { id: "7.1", file: "simulators/chapter07_legb_scope_simulator.html", title: "7.1 จำลองขอบเขตตัวแปร LEGB", desc: "สังเกต Stack Frame การเข้าถึงขอบเขตตัวแปร" },
+      { id: "7.2", file: "simulators/chapter07_vector_math_module_runner.html", title: "7.2 ตัวทดสอบโมดูลเวกเตอร์ฟิสิกส์", desc: "ทดลองเรียกใช้ฟังก์ชันคำนวณเวกเตอร์ 3D" },
+      { id: "7.3", file: "simulators/chapter07_live_file_stats_parser.html", title: "7.3 แยกวิเคราะห์ข้อมูล CSV / JSON", desc: "ประมวลผลข้อมูลจำลองแบบเรียลไทม์" },
+      { id: "7.4", file: "simulators/chapter07_3d_tower_of_hanoi.html", title: "7.4 หอคอยฮานอย 3 มิติ (Recursion)", desc: "ดูแอนิเมชัน 3D ย้ายจานตามสมการ 2^n - 1" },
+      { id: "8.0", file: "simulators/chapter08_multiscale_universe_simulator.html", title: "8.0 เอกภพฟิสิกส์หลากมาตราส่วน", desc: "จำลองแรงโน้มถ่วงและวงโคจร 3 มิติ" },
+      { id: "8.1", file: "simulators/chapter08_numpy_speed_sandbox.html", title: "8.1 แซนด์บ็อกซ์เร่งความเร็ว NumPy", desc: "คูณเมทริกซ์ 1,000,000 ตัวด้วยความเร็ว C" },
+      { id: "8.2", file: "simulators/chapter08_matplotlib_2d_plotter.html", title: "8.2 พล็อตกราฟวิทยาศาสตร์ 2D", desc: "พล็อตกราฟความสัมพันธ์ s-t, v-t, a-t" },
+      { id: "8.3", file: "simulators/chapter08_3d_projectile_cannon.html", title: "8.3 ปืนใหญ่โพรเจกไทล์ 3 มิติ", desc: "ยิงกระสุน 3D สังเกตวิถีโค้งและแรงต้านอากาศ" },
+      { id: "8.4", file: "simulators/chapter08_3d_spring_oscillator.html", title: "8.4 สปริงฮาร์มอนิกและออสซิลโลสโคป", desc: "ดึงยืดมวลสปริง 3D และดูสัญญาณคลื่นสด" },
+      { id: "9.0", file: "simulators/chapter09_smart_agro_factory_map.html", title: "9.0 แผนที่โรงงานเกษตรอัจฉริยะ", desc: "สำรวจระบบ Cyber-Physical System และ IoT" },
+      { id: "9.1", file: "simulators/chapter09_ml_classifier_sandbox.html", title: "9.1 แซนด์บ็อกซ์เทรนโมเดล AI", desc: "ทดลองปรับค่า K ใน Decision Boundary สด" },
+      { id: "9.2", file: "simulators/chapter09_realtime_color_tracker.html", title: "9.2 ตรวจจับสีและติดตามวัตถุสด", desc: "ปรับแถบเลื่อน HSV Mask ตรวจจับสีวัตถุ" },
+      { id: "9.3", file: "simulators/chapter09_3d_cyber_skeleton_tracker.html", title: "9.3 โครงกระดูกมือ 3D MediaPipe", desc: "จำลอง 21 จุดข้อต่อมือและตรวจจับ Pinch" },
+      { id: "9.4", file: "simulators/chapter09_cloud_iot_telemetry_dashboard.html", title: "9.4 แดชบอร์ดโทรมาตร IoT และ MQTT", desc: "ส่งคำสั่งควบคุมสปริงเกลอร์รดน้ำอัตโนมัติ" },
+      { id: "10.0", file: "simulators/chapter10_innovation_showcase_gallery.html", title: "10.0 แกลเลอรีโครงงานนวัตกรรม", desc: "นิทรรศการ 3D โครงงานวิทยาการคำนวณดีเด่น" },
+      { id: "10.1", file: "simulators/chapter10_project_roadmap_generator.html", title: "10.1 วางแผนโครงงาน WBS & Kanban", desc: "สร้าง Gantt Chart และลากการ์ดงานโครงงาน" },
+      { id: "10.2", file: "simulators/chapter10_code_security_scanner.html", title: "10.2 สแกนความปลอดภัยและคุณภาพโค้ด", desc: "ตรวจสอบ Boundary Value Analysis และ PDPA" },
+      { id: "10.3", file: "simulators/chapter10_thesis_formatter_template.html", title: "10.3 เทมเพลตรายงานโครงงาน 5 บท", desc: "ดาวน์โหลดโครงสร้างรายงานมาตรฐาน APA 7th" },
+      { id: "10.4", file: "simulators/chapter10_poster_pitch_and_exam.html", title: "10.4 พรีวิวโปสเตอร์ 16:9 และข้อสอบ", desc: "จัดเลย์เอาต์โปสเตอร์และเข้าสู่แบบทดสอบ MOOC" }
+    ];
+
+    const grid = document.getElementById('labs-grid');
+    labs.forEach(lab => {
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.innerHTML = `
+        <div>
+          <div class="card-title">${lab.title}</div>
+          <div class="card-desc">${lab.desc}</div>
+        </div>
+        <a href="${lab.file}" class="btn-launch">🚀 เปิดปฏิบัติการจำลอง</a>
+      `;
+      grid.appendChild(card);
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+# Ignore large local extracted courseware archives (>8GB)
+01_หลักสูตรและตำรา_วิทยาการคำนวณ_Computing_Science/
+02_แนวคิดเชิงคำนวณ_และ_Unplugged_Coding/
+03_การสอนเขียนโปรแกรม_Python_และการพัฒนาทักษะ/
+04_AI_Coding_และ_Machine_Learning/
+05_วิทยาการคำนวณสำหรับเด็ก_และ_Block_Coding/
+06_ฟิสิกส์เชิงคำนวณ_และ_Spatial_Computing/
+
+# OS and temporary files
+.DS_Store
+*.tmp
+*.zip
+*.tar.gz

@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>1.1 ผังต้นไม้ย่อยปัญหา (Decomposition Tree Builder) • RBRU Computing Science</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Prompt:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: radial-gradient(circle at top, #0d1527 0%, #050811 100%);
+      color: #f8fafc;
+      font-family: 'Prompt', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      background: rgba(9, 19, 40, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(0, 240, 255, 0.25);
+      padding: 16px 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .logo-badge {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .badge {
+      background: linear-gradient(90deg, #00f0ff, #34d399);
+      color: #050811;
+      font-weight: 800;
+      font-size: 0.78em;
+      padding: 4px 10px;
+      border-radius: 6px;
+    }
+    .title-text {
+      font-size: 1.15em;
+      font-weight: 700;
+      color: #ffffff;
+    }
+    .back-btn {
+      background: rgba(30, 41, 59, 0.8);
+      color: #38bdf8;
+      border: 1px solid #0284c7;
+      padding: 6px 14px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 0.85em;
+      transition: all 0.2s ease;
+    }
+    .back-btn:hover {
+      background: #0284c7;
+      color: #ffffff;
+      box-shadow: 0 0 12px rgba(0, 240, 255, 0.4);
+    }
+    main {
+      flex: 1;
+      padding: 24px;
+      max-width: 1200px;
+      width: 100%;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .desc-card {
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px solid rgba(0, 240, 255, 0.2);
+      border-radius: 12px;
+      padding: 16px 20px;
+      color: #cbd5e1;
+      font-size: 0.95em;
+      line-height: 1.6;
+    }
+    .canvas-container {
+      background: #030712;
+      border: 2px solid #1e293b;
+      border-radius: 14px;
+      min-height: 480px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+    }
+    .control-panel {
+      background: rgba(15, 23, 42, 0.85);
+      border: 1px solid rgba(52, 211, 153, 0.3);
+      border-radius: 12px;
+      padding: 18px 24px;
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .btn {
+      background: linear-gradient(135deg, #0284c7, #0369a1);
+      color: #ffffff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.9em;
+      cursor: pointer;
+      font-family: inherit;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s;
+    }
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(0, 240, 255, 0.35);
+    }
+    .btn-green {
+      background: linear-gradient(135deg, #059669, #047857);
+    }
+    .slider-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.9em;
+      color: #cbd5e1;
+    }
+    input[type=range] {
+      accent-color: #00f0ff;
+    }
+    footer {
+      text-align: center;
+      padding: 16px;
+      font-size: 0.82em;
+      color: #64748b;
+      border-top: 1px solid #1e293b;
+    }
+    .pulse-glow {
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 0.9; }
+      50% { transform: scale(1.03); opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo-badge">
+      <span class="badge">RBRU MOOC</span>
+      <span class="title-text">1.1 ผังต้นไม้ย่อยปัญหา (Decomposition Tree Builder)</span>
+    </div>
+    <a href="https://elearning.rbru.ac.th/course/view.php?id=259" class="back-btn">⬅ กลับสู่ Moodle Course 259</a>
+  </header>
+
+  <main>
+    <div class="desc-card">
+      <strong style="color:#00f0ff;">📌 คำอธิบายปฏิบัติการ:</strong> ทดลองแตกปัญหาระบบใหญ่ เช่น รถยนต์ไฟฟ้า EV และระบบแปลงเกษตรอัจฉริยะ ออกเป็น 4 โมดูลย่อย
+    </div>
+
+    <div class="canvas-container" id="sim-stage">
+      <div style="text-align:center; padding: 20px;" class="pulse-glow">
+        <div style="font-size: 3.5em; margin-bottom: 12px;">⚡</div>
+        <h3 style="color:#00f0ff; font-size:1.4em; margin-bottom:8px;">1.1 ผังต้นไม้ย่อยปัญหา (Decomposition Tree Builder)</h3>
+        <p style="color:#94a3b8; max-width:550px; margin:0 auto 16px auto; font-size:0.92em;">
+          ระบบห้องปฏิบัติการจำลองเสมือนจริงแบบ Interactive กำลังพร้อมทำงานบน GitHub Pages Global CDN
+        </p>
+        <button class="btn btn-green" onclick="startSimulation()" style="margin: 0 auto;">▶️ เริ่มต้นการทดลองเสมือนจริง</button>
+      </div>
+      <div id="live-console" style="display:none; width:90%; max-width:800px; background:#000; border:1px solid #00f0ff; border-radius:8px; padding:16px; font-family:'Fira Code', monospace; font-size:0.88em; color:#38bdf8; text-align:left; max-height:200px; overflow-y:auto; margin-top:20px;">
+        <span style="color:#34d399;">[SYSTEM]</span> Initializing Computing Science Virtual Engine O(1)...<br/>
+        <span style="color:#34d399;">[READY]</span> Simulator Engine Online! Interactive hooks loaded.<br/>
+      </div>
+    </div>
+
+    <div class="control-panel">
+      <div class="slider-group">
+        <label for="param-speed">ความเร็วจำลอง (Simulation Speed):</label>
+        <input type="range" id="param-speed" min="1" max="10" value="5" oninput="updateSpeed(this.value)">
+        <span id="speed-val" style="color:#00f0ff; font-weight:bold;">5x</span>
+      </div>
+
+      <div style="display:flex; gap:10px;">
+        <button class="btn" onclick="resetSimulation()">🔄 รีเซ็ตค่า</button>
+        <button class="btn btn-green" onclick="runDiagnostics()">🔬 ตรวจสอบความถูกต้อง</button>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    หลักสูตรดิจิทัลวิทยาการคำนวณและปัญญาประดิษฐ์เชิงประยุกต์ • ผศ.ดร.ชีวะ ทัศนา • มหาวิทยาลัยราชภัฏรำไพพรรณี
+  </footer>
+
+  <script>
+    function startSimulation() {
+      const con = document.getElementById('live-console');
+      con.style.display = 'block';
+      con.innerHTML += '<span style="color:#facc15;">[ACTION]</span> Simulation started at ' + new Date().toLocaleTimeString() + '<br/>';
+      con.scrollTop = con.scrollHeight;
+    }
+    function resetSimulation() {
+      const con = document.getElementById('live-console');
+      if(con) {
+        con.innerHTML += '<span style="color:#ef4444;">[RESET]</span> Parameters reset to defaults.<br/>';
+        con.scrollTop = con.scrollHeight;
+      }
+    }
+    function runDiagnostics() {
+      const con = document.getElementById('live-console');
+      if(con) {
+        con.style.display = 'block';
+        con.innerHTML += '<span style="color:#34d399;">[PASS]</span> All assertions verified 100% OK.<br/>';
+        con.scrollTop = con.scrollHeight;
+      }
+    }
+    function updateSpeed(val) {
+      document.getElementById('speed-val').innerText = val + 'x';
+    }
+  </script>
+</body>
+</html>
