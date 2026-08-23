@@ -124,41 +124,26 @@
 ### 1. โครงสร้างแบบเรียงลำดับ
 การประมวลผลคำสั่งทีละบรรทัดจากบนลงล่าง โดยไม่มีการข้ามขั้นตอนหรือวนซ้ำ
 
-```mermaid
-graph TD
-    A["START"] --> B["INPUT base, height"]
-    B --> C["COMPUTE area = 0.5 * base * height"]
-    C --> D["OUTPUT area"]
-    D --> E["END"]
-```
+<div align="center" style="margin: 22px 0;">
+  <img src="../assets/diagrams/ch02_fig04_sequential_flowchart.svg" alt="ผังงานโครงสร้างแบบเรียงลำดับ" style="max-width: 100%; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.06);" />
+  <p style="color: #64748b; font-size: 0.88em; margin-top: 6px;"><em>ภาพที่ 2.4 ผังงานโครงสร้างแบบเรียงลำดับ การคำนวณพื้นที่รูปสามเหลี่ยม</em></p>
+</div>
 
 ### 2. โครงสร้างแบบทางเลือกและการตัดสินใจ
 การแตกแขนงเส้นทางการทำงานตามผลลัพธ์ของเงื่อนไขตรรกะ (True หรือ False):
 
-```mermaid
-graph TD
-    A["INPUT temperature"] --> B{"temperature >= 100 ?"}
-    B -->|True (จริง)| C["OUTPUT 'สสารมีสถานะเป็นก๊าซ (Steam)'"]
-    B -->|False (เท็จ)| D{"temperature <= 0 ?"}
-    D -->|True (จริง)| E["OUTPUT 'สสารมีสถานะเป็นของแข็ง (Ice)'"]
-    D -->|False (เท็จ)| F["OUTPUT 'สสารมีสถานะเป็นของเหลว (Water)'"]
-    C --> G["END"]
-    E --> G
-    F --> G
-```
+<div align="center" style="margin: 22px 0;">
+  <img src="../assets/diagrams/ch02_fig05_selection_states_of_matter_flowchart.svg" alt="ผังงานโครงสร้างแบบทางเลือกหลายเงื่อนไข" style="max-width: 100%; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.06);" />
+  <p style="color: #64748b; font-size: 0.88em; margin-top: 6px;"><em>ภาพที่ 2.5 ผังงานโครงสร้างแบบทางเลือก การจำแนกสถานะของสสารตามอุณหภูมิ</em></p>
+</div>
 
 ### 3. โครงสร้างแบบวนซ้ำ
 การทำงานซ้ำกลุ่มคำสั่งเดิมจนกว่าเงื่อนไขที่กำหนดจะเปลี่ยนเป็นเท็จ (While Loop) หรือครบจำนวนรอบที่กำหนด (For Loop):
 
-```mermaid
-graph TD
-    A["SET count = 1, sum = 0"] --> B{"count <= 5 ?"}
-    B -->|True (วนรอบต่อ)| C["COMPUTE sum = sum + count"]
-    C --> D["COMPUTE count = count + 1"]
-    D --> B
-    B -->|False (จบลูป)| E["OUTPUT 'ผลรวม = ', sum"]
-    E --> F["END"]
-```
+<div align="center" style="margin: 22px 0;">
+  <img src="../assets/diagrams/ch02_fig06_iteration_sum_flowchart.svg" alt="ผังงานโครงสร้างแบบวนซ้ำ" style="max-width: 100%; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.06);" />
+  <p style="color: #64748b; font-size: 0.88em; margin-top: 6px;"><em>ภาพที่ 2.6 ผังงานโครงสร้างแบบวนซ้ำ การคำนวณผลรวมอนุกรมเลขคณิต 1 ถึง 5</em></p>
+</div>
 
 ---
 
@@ -286,15 +271,10 @@ if __name__ == "__main__":
 
 เพื่อส่งเสริมการจัดการเรียนรู้เชิงรุก (Active Learning) ผู้เรียนสามารถเข้าสู่ชุดปฏิบัติการจำลองเสมือนจริงทั้งในรูปแบบ **2D Interactive Canvas** และ **3D AR MediaPipe Spatial View** ผ่านเว็บเบราว์เซอร์บน Global CDN โดยไม่ต้องติดตั้งโปรแกรมใดๆ เพิ่มเติม โดยมีคู่มือปฏิบัติการฉบับสมบูรณ์ที่ [lab_manual_chapter02_ar_mediapipe.md](file:///Applications/XAMPP/xamppfiles/htdocs/rbrumooc/cs2026_series/book1_chapters/lab_manual_chapter02_ar_mediapipe.md):
 
-```mermaid
-graph TD
-    LAB["ชุด 5 ห้องปฏิบัติการเสมือนจริง 2D/3D AR MediaPipe Hands ประจำบทที่ 2"]
-    LAB --> L1["2.0 Mars Unit Converter & Flow\n• chapter02_visual_flowchart_intro.html\n• จำลองวิถียาน Mars ป้องกันบั๊กหน่วยวัดด้วยผังงาน ISO 5807"]
-    LAB --> L2["2.1 Pseudocode AST Linter\n• chapter02_pseudocode_linter.html\n• ตัวตรวจจับข้อผิดพลาดไวยากรณ์และต้นไม้ 3D AST"]
-    LAB --> L3["2.2 Flowchart Builder Studio\n• chapter02_flowchart_builder.html\n• สตูดิโอประกอบบล็อกผังงานและปล่อยเลเซอร์ทดสอบ"]
-    LAB --> L4["2.3 Multi-Branch Decision Gates\n• chapter02_decision_branching.html\n• ระบบตัดสินใจหลายเงื่อนไขควบคุมโรงเรือนเกษตรอัจฉริยะ"]
-    LAB --> L5["2.4 Animated Trace Table Runner\n• chapter02_trace_table_runner.html\n• ตารางไล่ค่าตัวแปรหาผลรวมอนุกรม พร้อมลูกบาศก์หน่วยความจำ 3D"]
-```
+<div align="center" style="margin: 22px 0;">
+  <img src="../assets/diagrams/ch02_fig07_chapter02_5labs_flowchart.svg" alt="แผนผังชุด 5 ห้องปฏิบัติการเสมือนจริงประจำบทที่ 2" style="max-width: 100%; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.06);" />
+  <p style="color: #64748b; font-size: 0.88em; margin-top: 6px;"><em>ภาพที่ 2.7 แผนผังสถาปัตยกรรมชุด 5 ห้องปฏิบัติการเสมือนจริง 2D/3D AR MediaPipe Hands ประจำบทที่ 2</em></p>
+</div>
 
 ### 📋 ตารางสรุป 5 ปฏิบัติการเสมือนจริงและสาระสำคัญประจำบทที่ 2
 

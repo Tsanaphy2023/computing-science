@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 480" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgLabs" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0c2340"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    <filter id="dropLabs" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-opacity="0.15"/>
+    </filter>
+  </defs>
+
+  <rect x="10" y="10" width="830" height="460" rx="16" fill="url(#bgLabs)" stroke="#334155" stroke-width="2"/>
+  <text x="425" y="46" text-anchor="middle" font-family="'Kanit', sans-serif" font-weight="700" font-size="18" fill="#38bdf8">ชุด 5 ห้องปฏิบัติการเสมือนจริง 2D/3D AR MediaPipe Hands ประจำบทที่ 2</text>
+
+  <!-- Lab 2.0 -->
+  <g transform="translate(35, 80)">
+    <rect x="0" y="0" width="760" height="65" rx="10" fill="#0f172a" stroke="#0ea5e9" stroke-width="1.5" filter="url(#dropLabs)"/>
+    <circle cx="35" cy="32" r="18" fill="#0284c7"/>
+    <text x="35" y="38" text-anchor="middle" font-family="'Kanit', sans-serif" font-weight="700" font-size="13" fill="#ffffff">2.0</text>
+    <text x="70" y="28" font-family="'Kanit', sans-serif" font-weight="600" font-size="13" fill="#38bdf8">Mars Unit Converter &amp; Flow (จำลองวิถียาน Mars Climate Orbiter)</text>
+    <text x="70" y="50" font-family="'Sarabun', sans-serif" font-size="11" fill="#94a3b8">ป้องกันบั๊กแปลงหน่วยวัด lbf·s สู่ N·s ด้วยผังงาน ISO 5807 พร้อมกราฟิก 3D Trajectory</text>
+  </g>
+
+  <!-- Lab 2.1 -->
+  <g transform="translate(35, 155)">
+    <rect x="0" y="0" width="760" height="65" rx="10" fill="#0f172a" stroke="#10b981" stroke-width="1.5" filter="url(#dropLabs)"/>
+    <circle cx="35" cy="32" r="18" fill="#059669"/>
+    <text x="35" y="38" text-anchor="middle" font-family="'Kanit', sans-serif" font-weight="700" font-size="13" fill="#ffffff">2.1</text>
+    <text x="70" y="28" font-family="'Kanit', sans-serif" font-weight="600" font-size="13" fill="#34d399">Pseudocode AST Linter &amp; Tree Visualizer</text>
+    <text x="70" y="50" font-family="'Sarabun', sans-serif" font-size="11" fill="#94a3b8">ระบบตรวจจับข้อผิดพลาดไวยากรณ์รหัสลำลอง และเรนเดอร์โครงสร้างต้นไม้ 3D AST ในอากาศ</text>
+  </g>
+
+  <!-- Lab 2.2 -->
+  <g transform="translate(35, 230)">
+    <rect x="0" y="0" width="760" height="65" rx="10" fill="#0f172a" stroke="#8b5cf6" stroke-width="1.5" filter="url(#dropLabs)"/>
+    <circle cx="35" cy="32" r="18" fill="#7c3aed"/>
+    <text x="35" y="38" text-anchor="middle" font-family="'Kanit', sans-serif" font-weight="700" font-size="13" fill="#ffffff">2.2</text>
+    <text x="70" y="28" font-family="'Kanit', sans-serif" font-weight="600" font-size="13" fill="#a78bfa">Interactive Flowchart Builder Studio</text>
+    <text x="70" y="50" font-family="'Sarabun', sans-serif" font-size="11" fill="#94a3b8">สตูดิโอประกอบบล็อกผังงานมาตรฐาน ISO 5807 และปล่อยลำแสงเลเซอร์ทดสอบการไหลของข้อมูล</text>
+  </g>
+
+  <!-- Lab 2.3 -->
+  <g transform="translate(35, 305)">
+    <rect x="0" y="0" width="760" height="65" rx="10" fill="#0f172a" stroke="#f59e0b" stroke-width="1.5" filter="url(#dropLabs)"/>
+    <circle cx="35" cy="32" r="18" fill="#d97706"/>
+    <text x="35" y="38" text-anchor="middle" font-family="'Kanit', sans-serif" font-weight="700" font-size="13" fill="#ffffff">2.3</text>
+    <text x="70" y="28" font-family="'Kanit', sans-serif" font-weight="600" font-size="13" fill="#fbbf24">Multi-Branch Decision Gates (โรงเรือนเกษตรอัจฉริยะ)</text>
+    <text x="70" y="50" font-family="'Sarabun', sans-serif" font-size="11" fill="#94a3b8">ระบบตัดสินใจหลายเงื่อนไขควบคุมอุณหภูมิและความชื้น พร้อมระบบควบคุมไร้สัมผัส MediaPipe</text>
+  </g>
+
+  <!-- Lab 2.4 -->
+  <g transform="translate(35, 380)">
+    <rect x="0" y="0" width="760" height="65" rx="10" fill="#0f172a" stroke="#ec4899" stroke-width="1.5" filter="url(#dropLabs)"/>
+    <circle cx="35" cy="32" r="18" fill="#db2777"/>
+    <text x="35" y="38" text-anchor="middle" font-family="'Kanit', sans-serif" font-weight="700" font-size="13" fill="#ffffff">2.4</text>
+    <text x="70" y="28" font-family="'Kanit', sans-serif" font-weight="600" font-size="13" fill="#f472b6">Animated Trace Table Runner</text>
+    <text x="70" y="50" font-family="'Sarabun', sans-serif" font-size="11" fill="#94a3b8">ตารางไล่ค่าตัวแปร (Dry Run) แบบสด ควบคู่กับการแสดงสถานะลูกบาศก์หน่วยความจำ RAM 3D</text>
+  </g>
+</svg>
