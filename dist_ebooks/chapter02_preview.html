@@ -23,40 +23,98 @@
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 
 <style>
+/* ==========================================================================
+   PAGE SETUP & MARGINS (ตามข้อกำหนดกองบรรณาธิการ)
+   - กั้นซ้าย (Gutter/Inside): 1.5 in (38.1mm)
+   - ขอบบน: 1.0 in (25.4mm)
+   - ขอบล่าง: 1.0 in (25.4mm)
+   - ขอบขวา: 1.0 in (25.4mm)
+   ========================================================================== */
+
 @page {
     size: A4 portrait;
-    margin: 22mm 18mm 22mm 18mm;
+    margin-top: 1.0in;
+    margin-bottom: 1.0in;
+    margin-left: 1.5in;
+    margin-right: 1.0in;
+
+    @bottom-right {
+        content: counter(page);
+        font-family: 'Kanit', sans-serif;
+        font-size: 10pt;
+        font-weight: 600;
+        color: #0369a1;
+        padding-right: 0;
+    }
+}
+
+/* หน้าคู่ (Left Pages - หน้าเลขคู่) */
+@page :left {
+    margin-left: 1.0in;
+    margin-right: 1.5in;
     @top-left {
-        content: "วิทยาการคำนวณ 1: รากฐานแนวคิดเชิงคำนวณ";
+        content: "วิทยาการคำนวณ 1 รากฐานแนวคิดเชิงคำนวณ";
         font-family: 'Sarabun', sans-serif;
         font-size: 8.5pt;
         color: #64748b;
+        border-bottom: 0.5pt solid #cbd5e1;
+        padding-bottom: 4px;
     }
+    @bottom-right {
+        content: counter(page);
+        font-family: 'Kanit', sans-serif;
+        font-size: 10pt;
+        font-weight: 600;
+        color: #0369a1;
+    }
+}
+
+/* หน้าคี่ (Right Pages - หน้าเลขคี่) */
+@page :right {
+    margin-left: 1.5in;
+    margin-right: 1.0in;
     @top-right {
         content: "บทที่ 2 การออกแบบขั้นตอนวิธีและผังงานมาตรฐาน";
         font-family: 'Sarabun', sans-serif;
         font-size: 8.5pt;
         color: #64748b;
-    }
-    @bottom-left {
-        content: "สาขาวิชาฟิสิกส์ คณะวิทยาศาสตร์และเทคโนโลยี มหาวิทยาลัยราชภัฏรำไพพรรณี";
-        font-family: 'Sarabun', sans-serif;
-        font-size: 8pt;
-        color: #94a3b8;
+        border-bottom: 0.5pt solid #cbd5e1;
+        padding-bottom: 4px;
     }
     @bottom-right {
         content: counter(page);
         font-family: 'Kanit', sans-serif;
-        font-size: 9pt;
-        font-weight: bold;
-        color: #0284c7;
+        font-size: 10pt;
+        font-weight: 600;
+        color: #0369a1;
     }
 }
+
+/* หน้าแรกของบท (Chapter Opener Page) */
+@page chapter-start {
+    margin-top: 1.0in;
+    margin-bottom: 1.0in;
+    margin-left: 1.5in;
+    margin-right: 1.0in;
+    @top-left { content: none; }
+    @top-right { content: none; }
+    @bottom-right {
+        content: counter(page);
+        font-family: 'Kanit', sans-serif;
+        font-size: 10pt;
+        font-weight: 600;
+        color: #0369a1;
+    }
+}
+
+/* ==========================================================================
+   GLOBAL TYPOGRAPHY & BESTSELLER STYLING
+   ========================================================================== */
 
 body {
     font-family: 'Sarabun', -apple-system, BlinkMacSystemFont, 'Leelawadee UI', sans-serif;
     font-size: 11pt;
-    line-height: 1.85;
+    line-height: 1.8;
     color: #1e293b;
     background: #ffffff;
     margin: 0;
@@ -65,134 +123,172 @@ body {
     text-justify: inter-word;
 }
 
-/* Typography */
+/* บังคับให้บทใหม่เริ่มที่หน้าเลขคี่เสมอ */
+.chapter-container {
+    page: chapter-start;
+    break-before: right;
+    page-break-before: right;
+}
+
+/* รูปแบบหน้าเปิดบทแบบ Bestseller (Hero Chapter Opener) */
+.chapter-hero {
+    background: linear-gradient(135deg, #091328 0%, #1e293b 100%);
+    border-radius: 16px;
+    padding: 32px 28px;
+    color: #ffffff;
+    margin-bottom: 30px;
+    box-shadow: 0 12px 35px rgba(0,0,0,0.18);
+    border-left: 8px solid #0ea5e9;
+    page-break-inside: avoid;
+}
+
+.chapter-badge {
+    display: inline-block;
+    background: rgba(14, 165, 233, 0.25);
+    color: #38bdf8;
+    border: 1px solid rgba(56, 189, 248, 0.4);
+    padding: 4px 16px;
+    border-radius: 20px;
+    font-family: 'Kanit', sans-serif;
+    font-size: 11pt;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+}
+
+.chapter-title {
+    font-family: 'Kanit', sans-serif;
+    font-size: 22pt;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0 0 12px 0;
+    line-height: 1.3;
+}
+
+.chapter-author {
+    color: #94a3b8;
+    font-size: 10pt;
+    margin: 0;
+    line-height: 1.6;
+}
+
+/* Headings */
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Kanit', 'Sarabun', sans-serif;
     color: #0f172a;
-    margin-top: 1.5em;
-    margin-bottom: 0.5em;
+    margin-top: 1.8em;
+    margin-bottom: 0.6em;
     line-height: 1.35;
     page-break-after: avoid;
 }
 
 h1 {
-    font-size: 20pt;
+    font-size: 18pt;
     font-weight: 700;
     color: #0369a1;
-    border-bottom: 2.5px solid #0284c7;
-    padding-bottom: 8px;
-    margin-top: 0;
 }
 
 h2 {
-    font-size: 15pt;
+    font-size: 14pt;
     font-weight: 600;
     color: #0f172a;
-    border-left: 5px solid #0ea5e9;
+    border-left: 5px solid #0284c7;
     padding-left: 12px;
-    margin-top: 2em;
+    margin-top: 2.2em;
     background: linear-gradient(90deg, #f0f9ff 0%, transparent 100%);
     padding-top: 4px;
     padding-bottom: 4px;
     border-radius: 0 6px 6px 0;
+    page-break-after: avoid;
 }
 
 h3 {
-    font-size: 12.5pt;
+    font-size: 12pt;
     font-weight: 600;
     color: #0369a1;
+    page-break-after: avoid;
 }
 
 p {
     margin: 0.8em 0;
-    text-indent: 1.8em;
+    text-indent: 2.0em;
 }
 
-/* Header Meta Box */
-.header-card {
-    background: linear-gradient(135deg, #091328 0%, #1e293b 100%);
-    border-radius: 14px;
-    padding: 24px;
-    color: #ffffff;
-    margin-bottom: 25px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-}
-
-.header-card h1 {
-    color: #38bdf8;
-    border-bottom: 1px solid rgba(255,255,255,0.2);
-    font-size: 18pt;
-}
-
-.header-card p {
-    text-indent: 0;
-    color: #cbd5e1;
-    font-size: 10pt;
-    margin: 4px 0;
-}
-
-/* Callouts & Alert Boxes */
-.alert-box {
-    background: #f8fafc;
-    border-left: 5px solid #3b82f6;
-    border-radius: 0 10px 10px 0;
-    padding: 16px 20px;
-    margin: 20px 0;
+/* กล่องเคสกรณีศึกษาและไฮไลต์ (Callouts) */
+.alert-box, blockquote {
+    border-left: 5px solid #0284c7;
+    background: #f0f9ff;
+    padding: 16px 22px;
+    margin: 22px 0;
+    color: #0c4a6e;
+    border-radius: 0 12px 12px 0;
+    page-break-inside: avoid;
     box-shadow: 0 4px 15px rgba(0,0,0,0.03);
 }
 
-.alert-box p {
+.alert-box p, blockquote p {
     text-indent: 0;
-    margin: 0;
+    margin: 0 0 8px 0;
+}
+.alert-box p:last-child, blockquote p:last-child {
+    margin-bottom: 0;
 }
 
-/* Tables */
+/* ตารางแบบสำนักพิมพ์สากล (Springer/Cambridge Clean Style) */
 table {
     width: 100%;
     border-collapse: collapse;
-    margin: 20px 0;
+    margin: 24px 0;
     font-size: 9.5pt;
     page-break-inside: avoid;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+    border-radius: 8px;
+    overflow: hidden;
 }
 
 th, td {
-    border: 1px solid #cbd5e1;
-    padding: 8px 12px;
+    border-top: 1px solid #e2e8f0;
+    border-bottom: 1px solid #e2e8f0;
+    padding: 10px 14px;
     text-align: left;
 }
 
 th {
     background-color: #f1f5f9;
     color: #0f172a;
-    font-weight: 600;
+    font-weight: 700;
+    font-family: 'Kanit', sans-serif;
+    border-top: 2px solid #cbd5e1;
+    border-bottom: 2px solid #cbd5e1;
 }
 
-tr:nth-child(even) {
+tr:nth-child(even) td {
     background-color: #f8fafc;
 }
 
-/* Code Blocks */
+/* กล่องแสดงโค้ดคอมพิวเตอร์ (Code Blocks) */
 pre {
     font-family: 'Fira Code', 'Courier New', monospace;
-    font-size: 9pt;
+    font-size: 8.8pt;
     background: #0f172a;
     color: #f8fafc;
-    padding: 14px 18px;
-    border-radius: 8px;
+    padding: 16px 20px;
+    border-radius: 10px;
     overflow-x: auto;
     line-height: 1.55;
-    margin: 16px 0;
+    margin: 20px 0;
     border: 1px solid #334155;
     page-break-inside: avoid;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
 }
 
 code {
     font-family: 'Fira Code', monospace;
     background: #e0f2fe;
     color: #0369a1;
-    padding: 1px 5px;
+    padding: 1px 6px;
     border-radius: 4px;
-    font-size: 9.5pt;
+    font-size: 9.2pt;
     font-weight: 500;
 }
 
@@ -202,42 +298,51 @@ pre code {
     padding: 0;
 }
 
-/* Blockquotes */
-blockquote {
-    border-left: 4px solid #0284c7;
-    background: #f0f9ff;
-    padding: 12px 18px;
-    margin: 18px 0;
-    color: #0369a1;
-    font-style: italic;
-    border-radius: 0 8px 8px 0;
-}
-
-blockquote p {
-    text-indent: 0;
-    margin: 0;
+/* รูปภาพและแผนผังเวกเตอร์ (Figures & SVGs) */
+.figure, div[align="center"] {
+    page-break-inside: avoid;
+    margin: 24px 0;
 }
 
 img {
     max-width: 100%;
-    height: auto;
-    border-radius: 10px;
+    max-height: 480px;
+    object-fit: contain;
+    border-radius: 12px;
     display: block;
     margin: 16px auto;
-    box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+    box-shadow: 0 6px 25px rgba(0,0,0,0.08);
 }
 
-.page-break {
-    page-break-before: always;
+p em {
+    display: block;
+    text-align: center;
+    text-indent: 0;
+    font-size: 8.8pt;
+    color: #64748b;
+    margin-top: 6px;
 }
 </style>
 </head>
 <body>
 
-<div id="content"></div>
+<div class="chapter-container">
+    <!-- Distinctive Chapter Opener Header -->
+    <div class="chapter-hero">
+        <div class="chapter-badge">CHAPTER 02 • วิทยาการคำนวณ 1</div>
+        <h1 class="chapter-title">บทที่ 2 การออกแบบขั้นตอนวิธี รหัสลำลอง และผังงานมาตรฐานสากล</h1>
+        <p class="chapter-author">
+            <strong>ผู้เขียน:</strong> ผู้ช่วยศาสตราจารย์ ดร.ชีวะ ทัศนา • สาขาวิชาฟิสิกส์ คณะวิทยาศาสตร์และเทคโนโลยี มหาวิทยาลัยราชภัฏรำไพพรรณี<br>
+            <strong>เอกสารประกอบรายวิชา:</strong> 4122104 วิทยาการคำนวณสำหรับการสอนวิทยาศาสตร์
+        </p>
+    </div>
+
+    <!-- Parsed Content Body -->
+    <div id="content"></div>
+</div>
 
 <script>
-const markdownContent = `# วิทยาการคำนวณ 1 รากฐานแนวคิดเชิงคำนวณและการแก้ปัญหาอย่างเป็นระบบ
+let markdownRaw = `# วิทยาการคำนวณ 1 รากฐานแนวคิดเชิงคำนวณและการแก้ปัญหาอย่างเป็นระบบ
 ## บทที่ 2 การออกแบบขั้นตอนวิธี รหัสลำลอง และผังงานมาตรฐานสากล
 **ผู้เขียน** ผู้ช่วยศาสตราจารย์ ดร.ชีวะ ทัศนา  
 **สังกัด** สาขาวิชาฟิสิกส์ คณะวิทยาศาสตร์และเทคโนโลยี มหาวิทยาลัยราชภัฏรำไพพรรณี  
@@ -594,9 +699,25 @@ graph TD
 5. Thassana, C. (2026). *Computational Thinking and Applied Artificial Intelligence for Science Education*. Rambhai Barni Rajabhat University Press.
 `;
 
-document.getElementById('content').innerHTML = marked.parse(markdownContent);
+// Strip redundant first 7 lines of markdown header since we have .chapter-hero
+const lines = markdownRaw.split('\n');
+if (lines[0].startsWith('# ')) {
+    // Skip title and metadata at top
+    let startIdx = 0;
+    for (let i = 0; i < 15; i++) {
+        if (lines[i] && lines[i].trim() === '---') {
+            startIdx = i + 1;
+            break;
+        }
+    }
+    if (startIdx > 0) {
+        markdownRaw = lines.slice(startIdx).join('\n');
+    }
+}
 
-// Trigger KaTeX rendering
+document.getElementById('content').innerHTML = marked.parse(markdownRaw);
+
+// Render KaTeX Math
 document.addEventListener("DOMContentLoaded", function() {
     renderMathInElement(document.body, {
         delimiters: [
