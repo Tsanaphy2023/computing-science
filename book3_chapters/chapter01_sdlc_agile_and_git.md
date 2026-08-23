@@ -48,6 +48,12 @@
 
 ## 📐 1.1 ทฤษฎีและรากฐานทางวิชาการเชิงลึก
 
+<div align="center" style="margin: 24px 0;">
+  <img src="../assets/book3_images/fig_01_git_sdlc_architecture.png" alt="ภาพที่ 1.1 สถาปัตยกรรม Git และโครงสร้างโปรเจกต์" style="max-width: 100%; border-radius: 12px; box-shadow: 0 8px 30px rgba(0,0,0,0.2);" />
+  <p style="color: #64748b; font-size: 0.88em; margin-top: 8px;"><em>ภาพที่ 1.1 สถาปัตยกรรมโครงสร้างโปรเจกต์วิศวกรรมซอฟต์แวร์และการควบคุมเวอร์ชันด้วย Git</em></p>
+</div>
+
+
 ### สถาปัตยกรรมสถานะทั้ง 4 ของ Git (4 Git Areas)
 Git จัดการไฟล์ผ่าน 4 สถานะที่เชื่อมโยงกันอย่างเป็นระบบ:
 1. **Working Directory:** โฟลเดอร์ทำงานที่มีไฟล์จริง

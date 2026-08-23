@@ -46,6 +46,12 @@
 
 ## 📐 2.1 ทฤษฎีและรากฐานทางคณิตศาสตร์เชิงลึก
 
+<div align="center" style="margin: 24px 0;">
+  <img src="../assets/book2_images/fig_01_oop_pillars.png" alt="ภาพที่ 2.1 เสาหลักการเขียนโปรแกรมเชิงวัตถุ" style="max-width: 100%; border-radius: 12px; box-shadow: 0 8px 30px rgba(0,0,0,0.2);" />
+  <p style="color: #64748b; font-size: 0.88em; margin-top: 8px;"><em>ภาพที่ 2.1 เสาหลักการเขียนโปรแกรมเชิงวัตถุ (Encapsulation, Abstraction, Inheritance, Polymorphism)</em></p>
+</div>
+
+
 ### กฎขอบเขตตัวแปร LEGB (LEGB Rule)
 เมื่อมีการอ้างถึงตัวแปร Python จะค้นหาตามลำดับ 4 ชั้น:
 1. **L (Local):** ภายในฟังก์ชันปัจจุบัน

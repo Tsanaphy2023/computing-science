@@ -46,6 +46,12 @@
 
 ## 📐 4.1 ทฤษฎีและรากฐานทางวิชาการเชิงลึก
 
+<div align="center" style="margin: 24px 0;">
+  <img src="../assets/book3_images/fig_07_mediapipe_hand_classifier.png" alt="ภาพที่ 4.1 การตรวจจับท่าทางมือด้วย MediaPipe" style="max-width: 100%; border-radius: 12px; box-shadow: 0 8px 30px rgba(0,0,0,0.2);" />
+  <p style="color: #64748b; font-size: 0.88em; margin-top: 8px;"><em>ภาพที่ 4.1 ระบบคอมพิวเตอร์วิทัศน์จำแนกท่าทางมือแบบเรียลไทม์ด้วย Google MediaPipe และ KNN Classifier</em></p>
+</div>
+
+
 ### คณิตศาสตร์การตรวจจับท่าจีบนิ้ว (Pinch Gesture Math)
 ท่าจีบนิ้ว (Pinch Gesture) ตรวจจับได้จากการวัดระยะห่างยุคลิดสามมิติระหว่างปลายนิ้วโป้ง (Landmark 4) และปลายนิ้วชี้ (Landmark 8):
 

@@ -6,6 +6,16 @@
 
 ---
 
+<div align="center" style="margin: 20px 0;">
+  <img src="assets/book2_images/fig_banner_book2.jpg" alt="วิทยาการคำนวณ 2 Panoramic Banner" style="width: 100%; max-height: 280px; object-fit: cover; border-radius: 14px; box-shadow: 0 10px 30px rgba(0,0,0,0.25);" />
+</div>
+
+<div align="center" style="margin: 20px 0;">
+  <img src="assets/book2_images/fig_cover_book2.jpg" alt="ปกหนังสือ วิทยาการคำนวณ 2" style="max-width: 480px; border-radius: 16px; box-shadow: 0 12px 40px rgba(0,0,0,0.35);" />
+  <p style="color: #64748b; font-size: 0.9em; margin-top: 8px;"><em>ภาพที่ 1 ปกหนังสือวิชาการ วิทยาการคำนวณ 2 การออกแบบขั้นตอนวิธี โครงสร้างข้อมูล และการแก้ปัญหาด้วย Python</em></p>
+</div>
+
+
 ## 🏛️ ข้อมูลทางบรรณานุกรมและกองบรรณาธิการ (Publication Metadata)
 
 * **ชื่อเรื่อง:** วิทยาการคำนวณ 2 การออกแบบขั้นตอนวิธี โครงสร้างข้อมูล และการแก้ปัญหาด้วย Python
