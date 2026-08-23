@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 420" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgIso" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#091328"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    <filter id="glow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="4" stdDeviation="5" flood-color="#00f0ff" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+
+  <rect x="10" y="10" width="830" height="400" rx="16" fill="url(#bgIso)" stroke="#334155" stroke-width="2"/>
+  
+  <text x="425" y="45" text-anchor="middle" font-family="'Kanit', 'Sarabun', sans-serif" font-weight="700" font-size="18" fill="#38bdf8">สัญลักษณ์ผังงานมาตรฐานสากล (ISO 5807 / ANSI Standard)</text>
+
+  <!-- Row 1 -->
+  <!-- 1. Terminator -->
+  <g transform="translate(40, 80)">
+    <rect x="0" y="0" width="220" height="120" rx="12" fill="#0f172a" stroke="#38bdf8" stroke-width="1.5"/>
+    <rect x="35" y="20" width="150" height="38" rx="19" fill="#0284c7" stroke="#38bdf8" stroke-width="2"/>
+    <text x="110" y="44" text-anchor="middle" font-family="'Sarabun', sans-serif" font-weight="700" font-size="13" fill="#ffffff">START / END</text>
+    <text x="110" y="85" text-anchor="middle" font-family="'Sarabun', sans-serif" font-weight="600" font-size="13" fill="#38bdf8">1. จุดเริ่มต้น / สิ้นสุด</text>
+    <text x="110" y="105" text-anchor="middle" font-family="'Sarabun', sans-serif" font-size="11" fill="#94a3b8">Terminator (วงรี/มุมมน)</text>
+  </g>
+
+  <!-- 2. Process -->
+  <g transform="translate(315, 80)">
+    <rect x="0" y="0" width="220" height="120" rx="12" fill="#0f172a" stroke="#34d399" stroke-width="1.5"/>
+    <rect x="35" y="20" width="150" height="38" rx="4" fill="#059669" stroke="#34d399" stroke-width="2"/>
+    <text x="110" y="44" text-anchor="middle" font-family="'Sarabun', sans-serif" font-weight="700" font-size="13" fill="#ffffff">COMPUTE / SET</text>
+    <text x="110" y="85" text-anchor="middle" font-family="'Sarabun', sans-serif" font-weight="600" font-size="13" fill="#34d399">2. การประมวลผล</text>
+    <text x="110" y="105" text-anchor="middle" font-family="'Sarabun', sans-serif" font-size="11" fill="#94a3b8">Process (สี่เหลี่ยมผืนผ้า)</text>
+  </g>
+
+  <!-- 3. Input/Output -->
+  <g transform="translate(590, 80)">
+    <rect x="0" y="0" width="220" height="120" rx="12" fill="#0f172a" stroke="#facc15" stroke-width="1.5"/>
+    <polygon points="45,58 175,58 195,20 65,20" fill="#d97706" stroke="#facc15" stroke-width="2"/>
+    <text x="120" y="44" text-anchor="middle" font-family="'Sarabun', sans-serif" font-weight="700" font-size="13" fill="#ffffff">INPUT / OUTPUT</text>
+    <text x="110" y="85" text-anchor="middle" font-family="'Sarabun', sans-serif" font-weight="600" font-size="13" fill="#facc15">3. รับเข้า / ส่งออกข้อมูล</text>
+    <text x="110" y="105" text-anchor="middle" font-family="'Sarabun', sans-serif" font-size="11" fill="#94a3b8">I/O (สี่เหลี่ยมด้านขนาน)</text>
+  </g>
+
+  <!-- Row 2 -->
+  <!-- 4. Decision -->
+  <g transform="translate(40, 230)">
+    <rect x="0" y="0" width="220" height="135" rx="12" fill="#0f172a" stroke="#ec4899" stroke-width="1.5"/>
+    <polygon points="110,15 175,45 110,75 45,45" fill="#be185d" stroke="#ec4899" stroke-width="2"/>
+    <text x="110" y="49" text-anchor="middle" font-family="'Sarabun', sans-serif" font-weight="700" font-size="12" fill="#ffffff">Condition ?</text>
+    <text x="110" y="100" text-anchor="middle" font-family="'Sarabun', sans-serif" font-weight="600" font-size="13" fill="#ec4899">4. การตัดสินใจเชิงตรรกะ</text>
+    <text x="110" y="120" text-anchor="middle" font-family="'Sarabun', sans-serif" font-size="11" fill="#94a3b8">Decision (ข้าวหลามตัด)</text>
+  </g>
+
+  <!-- 5. Connector -->
+  <g transform="translate(315, 230)">
+    <rect x="0" y="0" width="220" height="135" rx="12" fill="#0f172a" stroke="#a855f7" stroke-width="1.5"/>
+    <circle cx="110" cy="45" r="24" fill="#7e22ce" stroke="#a855f7" stroke-width="2"/>
+    <text x="110" y="50" text-anchor="middle" font-family="'Sarabun', sans-serif" font-weight="700" font-size="13" fill="#ffffff">A</text>
+    <text x="110" y="100" text-anchor="middle" font-family="'Sarabun', sans-serif" font-weight="600" font-size="13" fill="#a855f7">5. จุดเชื่อมต่อภายในหน้า</text>
+    <text x="110" y="120" text-anchor="middle" font-family="'Sarabun', sans-serif" font-size="11" fill="#94a3b8">Connector (วงกลม)</text>
+  </g>
+
+  <!-- 6. Flowline -->
+  <g transform="translate(590, 230)">
+    <rect x="0" y="0" width="220" height="135" rx="12" fill="#0f172a" stroke="#38bdf8" stroke-width="1.5"/>
+    <line x1="45" y1="45" x2="165" y2="45" stroke="#38bdf8" stroke-width="3" stroke-dasharray="6,4"/>
+    <polygon points="175,45 160,38 160,52" fill="#38bdf8"/>
+    <text x="110" y="100" text-anchor="middle" font-family="'Sarabun', sans-serif" font-weight="600" font-size="13" fill="#38bdf8">6. เส้นแสดงทิศทาง</text>
+    <text x="110" y="120" text-anchor="middle" font-family="'Sarabun', sans-serif" font-size="11" fill="#94a3b8">Flowlines (ลูกศรทิศทาง)</text>
+  </g>
+</svg>

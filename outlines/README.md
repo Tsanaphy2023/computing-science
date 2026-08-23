@@ -1,20 +1,20 @@
-# 📚 ชุดตำราและสื่อการเรียนรู้วิทยาการคำนวณ 4 เล่ม 4 ระดับ (Computing Science 4-Volume Series)
-### มหาวิทยาลัยราชภัฏรำไพพรรณี (RBRU) • คณะวิทยาศาสตร์และเทคโนโลยี
-**ผู้ประพันธ์และพัฒนาหลักสูตร:** ผู้ช่วยศาสตราจารย์ ดร.ชีวะ ทัศนา
+# 📚 ชุดตำราและสื่อการเรียนรู้วิทยาการคำนวณ 4 เล่ม 4 ระดับ
+### มหาวิทยาลัยราชภัฏรำไพพรรณี • คณะวิทยาศาสตร์และเทคโนโลยี
+**ผู้ประพันธ์และพัฒนาหลักสูตร** ผู้ช่วยศาสตราจารย์ ดร.ชีวะ ทัศนา
 
 ---
 
-## 🏛️ ภาพรวมชุดตำราและสื่อการเรียนรู้ (Curriculum Architecture)
+## 🏛️ ภาพรวมชุดตำราและสื่อการเรียนรู้
 
 ชุดตำราและสื่อการเรียนรู้ **"วิทยาการคำนวณ (Computing Science Series)"** ได้รับการออกแบบเชิงระบบตามกรอบมาตรฐานการศึกษา OBE (Outcome-Based Education) และ Bloom's Taxonomy โดยแบ่งออกเป็น **3 เล่ม 3 ระดับความลึกทางวิชาการ** และ **เล่มที่ 4 สำหรับสื่อดิจิทัลบนระบบ MOOC**:
 
-## 🎨 ภาพปก (3:4) และ แบนเนอร์ (16:9) ประจำชุดตำราทั้ง 4 เล่ม
+## 🎨 ภาพปก และ แบนเนอร์ ประจำชุดตำราทั้ง 4 เล่ม
 
 | เล่มที่ | ระดับ | ภาพปกตำรา (3:4 Cover) | ภาพแบนเนอร์ (16:9 Banner) |
 | :---: | :--- | :---: | :---: |
-| **เล่ม 1** | **ระดับเริ่มต้น (Foundations)** | `assets/images/cover_book1.jpg` | `assets/images/banner_book1.jpg` |
-| **เล่ม 2** | **ระดับกลาง (Intermediate)** | `assets/images/cover_book2.jpg` | `assets/images/banner_book2.jpg` |
-| **เล่ม 3** | **ระดับขั้นสูง (Advanced)** | `assets/images/cover_book3.jpg` | `assets/images/banner_book3.jpg` |
+| **เล่ม 1** | **ระดับเริ่มต้น ** | `assets/images/cover_book1.jpg` | `assets/images/banner_book1.jpg` |
+| **เล่ม 2** | **ระดับกลาง ** | `assets/images/cover_book2.jpg` | `assets/images/banner_book2.jpg` |
+| **เล่ม 3** | **ระดับขั้นสูง ** | `assets/images/cover_book3.jpg` | `assets/images/banner_book3.jpg` |
 | **เล่ม 4** | **สื่อดิจิทัล MOOC (Courseware)** | `assets/images/cover_book4.jpg` | `assets/images/banner_book4.jpg` |
 
 ---

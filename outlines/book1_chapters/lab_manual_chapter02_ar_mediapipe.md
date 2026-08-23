@@ -1,7 +1,7 @@
 # 🔬 คู่มือปฏิบัติการเสมือนจริง 3D AR/XR MediaPipe Hands ประจำบทที่ 2
-## ชุดห้องปฏิบัติการออกแบบขั้นตอนวิธี รหัสลำลอง และผังงานมาตรฐานสากล (Touchless Flowchart Labs)
-### รายวิชา: 4122104 วิทยาการคำนวณสำหรับการสอนวิทยาศาสตร์ (CS2026)
-**ผู้ออกแบบและพัฒนาสื่อ:** ผู้ช่วยศาสตราจารย์ ดร.ชีวะ ทัศนา • คณะวิทยาศาสตร์และเทคโนโลยี มหาวิทยาลัยราชภัฏรำไพพรรณี
+## ชุดห้องปฏิบัติการออกแบบขั้นตอนวิธี รหัสลำลอง และผังงานมาตรฐานสากล
+### รายวิชา 4122104 วิทยาการคำนวณสำหรับการสอนวิทยาศาสตร์
+**ผู้ออกแบบและพัฒนาสื่อ** ผู้ช่วยศาสตราจารย์ ดร.ชีวะ ทัศนา • คณะวิทยาศาสตร์และเทคโนโลยี มหาวิทยาลัยราชภัฏรำไพพรรณี
 
 ---
 
@@ -23,59 +23,59 @@ graph TD
 
 ---
 
-### 🧪 ปฏิบัติการที่ 2.0: โปรแกรมจำลองการทำงานของผังงานมาตรฐาน (Visual Flowchart 3D AR)
-* **รหัสโมดูล:** `2.0`
-* **ลิงก์เข้าสู่ห้องปฏิบัติการ:** [https://tsanaphy2023.github.io/computing-science/simulators/chapter02_visual_flowchart_intro.html](https://tsanaphy2023.github.io/computing-science/simulators/chapter02_visual_flowchart_intro.html)
-* **เป้าหมาย:** สังเกตทิศทางการไหลของกระแสข้อมูลผ่านสัญลักษณ์ Terminator, Process, และ Decision
+### 🧪 ปฏิบัติการที่ 2.0 โปรแกรมจำลองการทำงานของผังงานมาตรฐาน
+* **รหัสโมดูล** `2.0`
+* **ลิงก์เข้าสู่ห้องปฏิบัติการ** [https://tsanaphy2023.github.io/computing-science/simulators/chapter02_visual_flowchart_intro.html](https://tsanaphy2023.github.io/computing-science/simulators/chapter02_visual_flowchart_intro.html)
+* **เป้าหมาย** สังเกตทิศทางการไหลของกระแสข้อมูลผ่านสัญลักษณ์ Terminator, Process, และ Decision
 * **การสั่งการ AR:** 
   * ใช้มือชี้ไปที่โหนดผังงานเพื่อดูคำอธิบาย (Hover Tooltip)
   * ทำท่า **🤏 จีบนิ้ว (Pinch)** เพื่อปล่อยกระแสอนุภาคข้อมูลจำลองการรันผังงานจากจุด `START` ไปยัง `END`
 
 ---
 
-### 🧪 ปฏิบัติการที่ 2.1: เครื่องมือตรวจสอบรหัสลำลองและโครงสร้างไวยากรณ์ (AR Pseudocode Linter)
-* **รหัสโมดูล:** `2.1`
-* **ลิงก์เข้าสู่ห้องปฏิบัติการ:** [https://tsanaphy2023.github.io/computing-science/simulators/chapter02_pseudocode_linter.html](https://tsanaphy2023.github.io/computing-science/simulators/chapter02_pseudocode_linter.html)
-* **เป้าหมาย:** ตรวจสอบความถูกต้องของคำสำคัญสากล (`INPUT`, `OUTPUT`, `SET`, `IF-THEN`, `WHILE`)
+### 🧪 ปฏิบัติการที่ 2.1 เครื่องมือตรวจสอบรหัสลำลองและโครงสร้างไวยากรณ์
+* **รหัสโมดูล** `2.1`
+* **ลิงก์เข้าสู่ห้องปฏิบัติการ** [https://tsanaphy2023.github.io/computing-science/simulators/chapter02_pseudocode_linter.html](https://tsanaphy2023.github.io/computing-science/simulators/chapter02_pseudocode_linter.html)
+* **เป้าหมาย** ตรวจสอบความถูกต้องของคำสำคัญสากล (`INPUT`, `OUTPUT`, `SET`, `IF-THEN`, `WHILE`)
 * **การสั่งการ AR:**
   * ป้อนชุดคำสั่งรหัสลำลองลงในช่องข้อความ
   * ใช้มือ AR หมุนดูแบบจำลองโครงสร้างต้นไม้ไวยากรณ์ (AST Tree) 3 มิติ พร้อมฟังเสียง Synth ตรวจสอบไวยากรณ์
 
 ---
 
-### 🧪 ปฏิบัติการที่ 2.2: เครื่องมือต่อบล็อกผังงาน 2 มิติและ 3 มิติ (Flowchart Block Builder AR)
-* **รหัสโมดูล:** `2.2`
-* **ลิงก์เข้าสู่ห้องปฏิบัติการ:** [https://tsanaphy2023.github.io/computing-science/simulators/chapter02_flowchart_builder.html](https://tsanaphy2023.github.io/computing-science/simulators/chapter02_flowchart_builder.html)
-* **เป้าหมาย:** ฝึกทักษะการประกอบสัญลักษณ์ผังงานตามโครงสร้างแบบเรียงลำดับ (Sequential Flow)
+### 🧪 ปฏิบัติการที่ 2.2 เครื่องมือต่อบล็อกผังงาน 2 มิติและ 3 มิติ
+* **รหัสโมดูล** `2.2`
+* **ลิงก์เข้าสู่ห้องปฏิบัติการ** [https://tsanaphy2023.github.io/computing-science/simulators/chapter02_flowchart_builder.html](https://tsanaphy2023.github.io/computing-science/simulators/chapter02_flowchart_builder.html)
+* **เป้าหมาย** ฝึกทักษะการประกอบสัญลักษณ์ผังงานตามโครงสร้างแบบเรียงลำดับ (Sequential Flow)
 * **การสั่งการ AR:**
   * ใช้มือจีบนิ้วหยิบบล็อก Terminator, Process, และ Input/Output จากพาเล็ตมาวางเรียงบนแกนกลาง
   * ลากเส้น Flowline เชื่อมต่อกัน เมื่อเชื่อมถูกต้องระบบจะเปล่งแสงสีเขียวมรกตและมีเสียง Chime
 
 ---
 
-### 🧪 ปฏิบัติการที่ 2.3: เครื่องมือจำลองการแตกแขนงเงื่อนไขด้วยเลเซอร์ (Decision Branching Laser Lab)
-* **รหัสโมดูล:** `2.3`
-* **ลิงก์เข้าสู่ห้องปฏิบัติการ:** [https://tsanaphy2023.github.io/computing-science/simulators/chapter02_decision_branching.html](https://tsanaphy2023.github.io/computing-science/simulators/chapter02_decision_branching.html)
-* **เป้าหมาย:** ศึกษาการแตกแขนงตรรกะแบบ If-Else คู่และ If-Elif-Else หลายชั้น
+### 🧪 ปฏิบัติการที่ 2.3 เครื่องมือจำลองการแตกแขนงเงื่อนไขด้วยเลเซอร์
+* **รหัสโมดูล** `2.3`
+* **ลิงก์เข้าสู่ห้องปฏิบัติการ** [https://tsanaphy2023.github.io/computing-science/simulators/chapter02_decision_branching.html](https://tsanaphy2023.github.io/computing-science/simulators/chapter02_decision_branching.html)
+* **เป้าหมาย** ศึกษาการแตกแขนงตรรกะแบบ If-Else คู่และ If-Elif-Else หลายชั้น
 * **การสั่งการ AR:**
   * ใช้มือเลื่อนปรับค่าตัวแปรอุณหภูมิ $Temp$ (ตั้งแต่ $-10^\circ\text{C}$ ถึง $150^\circ\text{C}$)
   * สังเกตลำแสงเลเซอร์เปลี่ยนทิศทางวิ่งไปยังแขนง Solid (น้ำแข็ง), Liquid (น้ำ), หรือ Gas (ไอน้ำ) พร้อมเสียง Synth Harmonic Sweep
 
 ---
 
-### 🧪 ปฏิบัติการที่ 2.4: เครื่องมือทดสอบตารางดรายรันทีละสเต็ป (Interactive Trace Table Step Runner)
-* **รหัสโมดูล:** `2.4`
-* **ลิงก์เข้าสู่ห้องปฏิบัติการ:** [https://tsanaphy2023.github.io/computing-science/simulators/chapter02_trace_table_runner.html](https://tsanaphy2023.github.io/computing-science/simulators/chapter02_trace_table_runner.html)
-* **เป้าหมาย:** ติดตามค่าตัวแปรในหน่วยความจำและฝึกทักษะการดีบัก (Debugging) ด้วยอัลกอริทึมของยูคลิด
+### 🧪 ปฏิบัติการที่ 2.4 เครื่องมือทดสอบตารางดรายรันทีละสเต็ป
+* **รหัสโมดูล** `2.4`
+* **ลิงก์เข้าสู่ห้องปฏิบัติการ** [https://tsanaphy2023.github.io/computing-science/simulators/chapter02_trace_table_runner.html](https://tsanaphy2023.github.io/computing-science/simulators/chapter02_trace_table_runner.html)
+* **เป้าหมาย** ติดตามค่าตัวแปรในหน่วยความจำและฝึกทักษะการดีบัก (Debugging) ด้วยอัลกอริทึมของยูคลิด
 * **การสั่งการ AR:**
   * ใช้มือแตะปุ่ม **"Step Forward"** ในอากาศเพื่อสั่งให้โปรแกรมทำงานทีละบรรทัด
   * บันทึกค่า $A, B, \text{remainder}$ ลงในตาราง Trace Table และฟังเสียง Synth Tick บอกตำแหน่งบรรทัด
 
 ---
 
-## 📋 3. ตารางบันทึกผลการทดลองตารางดรายรัน (Lab 2.4 Trace Table Worksheet)
+## 📋 3. ตารางบันทึกผลการทดลองตารางดรายรัน
 
-ให้นักเรียนป้อนค่าตัวเลข $A = 56$ และ $B = 24$ แล้วบันทึกผลการจำลองทีละรอบ:
+ให้นักเรียนป้อนค่าตัวเลข $A = 56$ และ $B = 24$ แล้วบันทึกผลการจำลองทีละรอบ
 
 | รอบที่ (Step) | ค่าตัวแปร $A$ | ค่าตัวแปร $B$ | เงื่อนไข ($B \neq 0$) | เศษเหลือ ($A \pmod B$) | ค่า $A$ รอบถัดไป | ค่า $B$ รอบถัดไป |
 | :---: | :---: | :---: | :---: | :---: | :---: | :---: |

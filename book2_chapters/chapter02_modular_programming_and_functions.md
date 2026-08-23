@@ -1,5 +1,5 @@
 # วิทยาการคำนวณ 2 การออกแบบขั้นตอนวิธี โครงสร้างข้อมูล และการแก้ปัญหาด้วย Python
-## บทที่ 2 การเขียนโปรแกรมเชิงโมดูลและฟังก์ชันขั้นสูง (Modular Programming & Advanced Functions)
+## บทที่ 2 การเขียนโปรแกรมเชิงโมดูลและฟังก์ชันขั้นสูง
 **ผู้เขียน** ผู้ช่วยศาสตราจารย์ ดร.ชีวะ ทัศนา • สาขาวิชาฟิสิกส์ คณะวิทยาศาสตร์และเทคโนโลยี มหาวิทยาลัยราชภัฏรำไพพรรณี
 
 ---
@@ -47,13 +47,13 @@
 ## 📐 2.1 ทฤษฎีและรากฐานทางคณิตศาสตร์เชิงลึก
 
 <div align="center" style="margin: 24px 0;">
-  <img src="../assets/book2_images/fig_01_oop_pillars.png" alt="ภาพที่ 2.1 เสาหลักการเขียนโปรแกรมเชิงวัตถุ" style="max-width: 100%; border-radius: 12px; box-shadow: 0 8px 30px rgba(0,0,0,0.2);" />
+  <img src="../assets/book2_images/fig_01_oop_pillars.png" alt=ภาพที่ 2.1 เสาหลักการเขียนโปรแกรมเชิงวัตถุ style="max-width: 100%; border-radius: 12px; box-shadow: 0 8px 30px rgba(0,0,0,0.2);" />
   <p style="color: #64748b; font-size: 0.88em; margin-top: 8px;"><em>ภาพที่ 2.1 เสาหลักการเขียนโปรแกรมเชิงวัตถุ (Encapsulation, Abstraction, Inheritance, Polymorphism)</em></p>
 </div>
 
 
-### กฎขอบเขตตัวแปร LEGB (LEGB Rule)
-เมื่อมีการอ้างถึงตัวแปร Python จะค้นหาตามลำดับ 4 ชั้น:
+### กฎขอบเขตตัวแปร LEGB
+เมื่อมีการอ้างถึงตัวแปร Python จะค้นหาตามลำดับ 4 ชั้น
 1. **L (Local):** ภายในฟังก์ชันปัจจุบัน
 2. **E (Enclosing):** ภายในฟังก์ชันครอบ (สำหรับ Nested Functions/Closures)
 3. **G (Global):** ระดับไฟล์สคริปต์
@@ -70,10 +70,10 @@ graph TD
 
 ---
 
-## 🧮 2.2 ตัวอย่างการวิเคราะห์และการคำนวณเชิงขั้นตอน (Worked Examples)
+## 🧮 2.2 ตัวอย่างการวิเคราะห์และการคำนวณเชิงขั้นตอน
 
 #### ตัวอย่างที่ 2.1 การทำงานของ Decorator เพื่อวัดเวลาทำงาน
-จงสร้าง Decorator `@timer_decorator` เพื่อวัดเวลาประมวลผลของฟังก์ชันใดๆ โดยไม่ต้องแก้ไขโค้ดภายในฟังก์ชันเดิม:
+จงสร้าง Decorator `@timer_decorator` เพื่อวัดเวลาประมวลผลของฟังก์ชันใดๆ โดยไม่ต้องแก้ไขโค้ดภายในฟังก์ชันเดิม
 
 ```python
 import time
@@ -119,21 +119,21 @@ if __name__ == "__main__":
 
 ---
 
-## 💡 2.5 สรุปสารัตถะสำคัญประจำบท (Chapter Summary)
+## 💡 2.5 สรุปสารัตถะสำคัญประจำบท
 
 1. การแบ่งโมดูลช่วยลดความซับซ้อนและเพิ่ม Cohesion
 2. Python ปฏิบัติต่อฟังก์ชันเป็น First-Class Object ทำให้สามารถส่งเป็นอาร์กิวเมนต์และคืนค่าได้
 
 ---
 
-## ❓ 2.6 แบบฝึกหัดและคำถามท้ายบทเพื่อการประเมินผล (3-Tier Assessment)
+## ❓ 2.6 แบบฝึกหัดและคำถามท้ายบทเพื่อการประเมินผล
 
 1. จงอธิบายความแตกต่างระหว่าง Parameter และ Argument
 2. ให้นักเรียนเขียน Closure Function เพื่อสร้างตัวนับจำนวน (Counter)
 
 ---
 
-## 📚 เอกสารอ้างอิงประจำบท (APA 7th Edition References)
+## 📚 เอกสารอ้างอิงประจำบท
 
 * Parnas, D. L. (1972). On the criteria to be used in decomposing systems into modules. *Communications of the ACM*, 15(12), 1053-1058.
 * Lutz, M. (2013). *Learning Python* (5th ed.). O'Reilly Media.
