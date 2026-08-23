@@ -311,24 +311,29 @@ if __name__ == "__main__":
 
 ---
 
-## 🔬 1.6 คู่มือใบงานห้องปฏิบัติการเสมือนจริง 3D AR MediaPipe Hands (บทที่ 1)
+## 🔬 1.6 คู่มือใบงานห้องปฏิบัติการเสมือนจริง 2D/3D AR MediaPipe Hands (บทที่ 1)
 
-ผู้เรียนสามารถเข้าสู่ชุดปฏิบัติการจำลองเสมือนจริง 3 มิติผ่านเว็บเบราว์เซอร์บน Global CDN โดยไม่ต้องติดตั้งโปรแกรมใดๆ เพิ่มเติม:
+เพื่อส่งเสริมการจัดการเรียนรู้เชิงรุก (Active Learning) ผู้เรียนสามารถเข้าสู่ชุดปฏิบัติการจำลองเสมือนจริงทั้งในรูปแบบ **2D Interactive Canvas** และ **3D AR MediaPipe Spatial View** ผ่านเว็บเบราว์เซอร์บน Global CDN โดยไม่ต้องติดตั้งโปรแกรมใดๆ เพิ่มเติม โดยมีคู่มือปฏิบัติการฉบับสมบูรณ์ที่ [lab_manual_chapter01_ar_mediapipe.md](file:///Applications/XAMPP/xamppfiles/htdocs/rbrumooc/cs2026_series/book1_chapters/lab_manual_chapter01_ar_mediapipe.md):
 
 ```mermaid
 graph TD
-    LAB["ชุด 5 ห้องปฏิบัติการ AR MediaPipe Hands ประจำบทที่ 1"]
-    LAB --> L1["1.0 River Crossing State Transition\n• chapter01_river_crossing.html\n• ทดสอบการพายเรือข้ามฝั่งและ State Safety Engine"]
-    LAB --> L2["1.1 Decomposition Tree Builder\n• chapter01_decomposition_tree.html\n• ใช้มือ AR แยกชิ้นส่วนระบบ EV และสมาร์ตฟาร์ม"]
-    LAB --> L3["1.2 Waveform & Pattern Explorer\n• chapter01_pattern_recognition.html\n• หมุนปรับคาบความถี่คลื่นคณิตศาสตร์ 3D"]
-    LAB --> L4["1.3 3D Point-Mass Abstraction\n• chapter01_abstraction_sandbox.html\n• ปรับสเกลระดับนามธรรมเปลี่ยนรถยนต์เป็นมวลจุด"]
-    LAB --> L5["1.4 Robot Grid Navigator 5x5\n• chapter01_robot_grid_navigator.html\n• วางบล็อกคำสั่งนำทางหุ่นยนต์หลบสิ่งกีดขวาง"]
+    LAB["ชุด 5 ห้องปฏิบัติการเสมือนจริง 2D/3D AR MediaPipe Hands ประจำบทที่ 1"]
+    LAB --> L1["1.0 River Crossing State Transition\n• chapter01_river_crossing.html\n• จำลอง State Space Search และตารางทดสอบ 7 ขั้นตอนวิธี"]
+    LAB --> L2["1.1 Decomposition Tree Builder\n• chapter01_decomposition_tree.html\n• ผังต้นไม้ 2D/3D และ Fault Injection ทดสอบอิสระของโมดูล"]
+    LAB --> L3["1.2 Waveform & Pattern Explorer\n• chapter01_pattern_recognition.html\n• ค้นหาอัตราส่วนทองคำ φ = 1.618 และความถี่เรโซแนนซ์ 3D"]
+    LAB --> L4["1.3 3D Point-Mass Abstraction\n• chapter01_abstraction_sandbox.html\n• เปรียบเทียบ Abstraction Level 0-3 ลดภาระประมวลผล 840 เท่า"]
+    LAB --> L5["1.4 Robot Grid Navigator 5x5\n• chapter01_robot_grid_navigator.html\n• เปรียบเทียบ 4 กลยุทธ์อัลกอริทึมพาหุ่นยนต์หลบหินสู่เป้าหมาย"]
 ```
 
-### 📋 ขั้นตอนการปฏิบัติการสำหรับผู้เรียน:
-1. **การเปิดใช้งานกล้อง (Camera Permission):** เปิดหน้าเว็บแล็บบน Google Chrome หรือ Safari และกดปุ่ม **"Allow"** เพื่อให้ระบบ MediaPipe เข้าถึงกล้องเว็บแคม
-2. **การสอบเทียบท่าทางมือ (Hand Calibration):** ยกมือขึ้นหน้ากล้องในระยะ 0.5–1.0 เมตร สังเกตจุดพิกัดสีฟ้า 21 จุดปรากฏขึ้นบนมือ
-3. **การจับยึดวัตถุ 3 มิติ (Pinch Interaction):** นำปลายนิ้วชี้แตะชิดกับปลายนิ้วหัวแม่มือ (**ท่าจีบนิ้ว 🤏**) เพื่อจับยึดอุปกรณ์ เคลื่อนย้ายตำแหน่ง และฟังเสียง Synth Chime ตอบสนองแบบ Real-time
+### 📋 ตารางสรุป 5 ปฏิบัติการเสมือนจริงและสาระสำคัญประจำบทที่ 1
+
+| รหัสแล็บ | ชื่อการทดลอง (Experiment Title) | วัตถุประสงค์เชิงพฤติกรรม | รูปแบบการจำลอง | ตัวแปรและข้อมูลที่บันทึก | ผลสรุปทางวิทยาการคำนวณ |
+| :---: | :--- | :--- | :---: | :--- | :--- |
+| **LAB 1.0** | **ปริศนาข้ามแม่น้ำเชิงตรรกะ** | ค้นหาเส้นทางปลอดภัยใน State Space | 2D/3D AR | ลำดับการข้าม 7 สเต็ป, ค่าบูลีนความปลอดภัย | พิสูจน์ว่าต้องใช้การถอยกลับ (Backtracking) ในเที่ยวที่ 4 |
+| **LAB 1.1** | **ผังต้นไม้ย่อยปัญหาระบบ EV** | ออกแบบโครงสร้างระบบเชิงโมดูล | 2D/3D AR | สถานะโมดูลเมื่อตัดการทำงาน (Fault Injection) | สถาปัตยกรรม Low Coupling ช่วยป้องกันระบบหลักล่มสลาย |
+| **LAB 1.2** | **การค้นหารูปแบบลำดับและคลื่น** | ค้นหาความถี่ซ้ำและอัตราส่วน $\phi$ | 2D/3D AR | ลำดับฟีโบนัชชี $F_n$, ความถี่เรโซแนนซ์ | อัตราส่วนลู่เข้าสู่ $\phi = 1.618$ เกิดเสียงคอร์ดประสาน |
+| **LAB 1.3** | **แบบจำลองมวลจุดเชิงนามธรรม** | วัดประสิทธิภาพการลดทอนความซับซ้อน | 2D/3D AR | Polygons, RAM (MB), Frame Time, % Error | แบบจำลองมวลจุดคงความแม่นยำ 100% แต่เร็วขึ้น 840 เท่า |
+| **LAB 1.4** | **การนำทางหุ่นยนต์บนตารางกริด** | ออกแบบอัลกอริทึมที่สั้นและปลอดภัยที่สุด | 2D/3D AR | จำนวนคำสั่ง, ก้าวเดินจริง, เวลา, การชน | กลยุทธ์ Optimal Path ใช้ 8 ก้าว เลี้ยว 3 ครั้ง ประหยัดเวลาสูงสุด |
 
 ---
 
