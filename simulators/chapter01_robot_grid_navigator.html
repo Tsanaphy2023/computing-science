@@ -3,36 +3,51 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>1.4 สนามฝึกนำทางหุ่นยนต์บนตารางกริด (Unplugged Robot Grid AR) — AR MediaPipe Lab • RBRU MOOC</title>
+  <title>LAB 1.4: การนำทางหุ่นยนต์บนตารางกริดและการออกแบบขั้นตอนวิธี (Robot Grid 5x5) (Hybrid 2D/3D AR)</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;600;700&family=JetBrains+Mono:wght@400;700&family=Prompt:wght@300;400;600;700&display=swap" rel="stylesheet">
   
-  <!-- A-Frame 3D & MediaPipe Hands CDN -->
   <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js" crossorigin="anonymous"></script>
 
   <style>
     :root {
-      --theme-color: #00f0ff;
-      --theme-emerald: #34d399;
-      --theme-dark: #030712;
+      --primary: #00f0ff;
+      --success: #10b981;
+      --danger: #ef4444;
+      --warning: #facc15;
+      --dark-bg: #030712;
+      --card-bg: rgba(8, 15, 30, 0.94);
     }
     * { box-sizing: border-box; margin: 0; padding: 0; user-select: none; }
     body {
-      background: var(--theme-dark);
+      background: var(--dark-bg);
       color: #f8fafc;
       font-family: 'Prompt', sans-serif;
       overflow: hidden;
       height: 100vh;
       width: 100vw;
     }
-    #scene-container {
+    #scene-container { position: absolute; inset: 0; z-index: 1; }
+    
+    #canvas-2d-container {
       position: absolute;
       inset: 0;
-      z-index: 1;
+      z-index: 2;
+      display: none;
+      background: radial-gradient(circle at center, #0f172a, #020617);
+      padding: 90px 20px 80px 20px;
     }
+    #interactive-canvas-2d {
+      width: 100%;
+      height: 100%;
+      border-radius: 16px;
+      border: 1px solid rgba(0,240,255,0.3);
+      box-shadow: 0 0 40px rgba(0,0,0,0.8);
+    }
+
     .cam-box {
       position: absolute;
       bottom: 20px;
@@ -40,46 +55,32 @@
       width: 240px;
       height: 180px;
       border-radius: 16px;
-      border: 2px solid var(--theme-color);
+      border: 2px solid var(--primary);
       overflow: hidden;
       z-index: 10;
       box-shadow: 0 10px 35px rgba(0,0,0,0.85);
       background: #000;
     }
-    #camera-feed {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transform: scaleX(-1);
-    }
-    #tracking-canvas {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 11;
-      pointer-events: none;
-      transform: scaleX(-1);
-    }
+    #camera-feed { width: 100%; height: 100%; object-fit: cover; transform: scaleX(-1); }
+    #tracking-canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 11; pointer-events: none; transform: scaleX(-1); }
+
     .ui-overlay {
       position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
+      top: 0; left: 0; right: 0;
       z-index: 20;
-      padding: 18px 24px;
+      padding: 16px 20px;
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
       pointer-events: none;
     }
     .header-card {
-      background: rgba(8, 15, 30, 0.94);
+      background: var(--card-bg);
       backdrop-filter: blur(16px);
       border: 1px solid rgba(255,255,255,0.15);
-      border-left: 6px solid var(--theme-color);
-      padding: 16px 22px;
-      border-radius: 16px;
+      border-left: 6px solid var(--primary);
+      padding: 14px 20px;
+      border-radius: 14px;
       max-width: 620px;
       pointer-events: auto;
       box-shadow: 0 12px 40px rgba(0,0,0,0.75);
@@ -87,118 +88,157 @@
     .header-card h1 {
       font-size: 1.15em;
       font-weight: 700;
-      color: var(--theme-color);
+      color: var(--primary);
       margin-bottom: 4px;
       display: flex;
       align-items: center;
       gap: 10px;
       font-family: 'Chakra Petch', sans-serif;
     }
-    .header-card p {
-      font-size: 0.85em;
-      color: #cbd5e1;
-      line-height: 1.55;
-    }
+    .header-card p { font-size: 0.84em; color: #cbd5e1; line-height: 1.5; }
+    
     .status-badge {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      margin-top: 8px;
-      font-size: 0.80em;
-      color: var(--theme-emerald);
+      margin-top: 6px;
+      font-size: 0.78em;
+      color: #34d399;
       font-weight: 600;
       background: rgba(6, 78, 59, 0.6);
-      padding: 4px 14px;
+      padding: 3px 12px;
       border-radius: 20px;
       border: 1px solid #10b981;
     }
     .dot-pulse {
-      width: 8px;
-      height: 8px;
-      background: var(--theme-emerald);
+      width: 8px; height: 8px;
+      background: #34d399;
       border-radius: 50%;
-      box-shadow: 0 0 10px var(--theme-emerald);
+      box-shadow: 0 0 10px #34d399;
       animation: pulse 1.5s infinite;
     }
-    .hud-bar {
-      position: absolute;
-      bottom: 20px;
-      left: 24px;
-      z-index: 20;
-      background: rgba(8, 15, 30, 0.94);
-      backdrop-filter: blur(16px);
-      border: 1px solid rgba(255,255,255,0.15);
-      border-radius: 16px;
-      padding: 14px 24px;
-      display: flex;
-      gap: 22px;
-      box-shadow: 0 12px 40px rgba(0,0,0,0.75);
-    }
-    .hud-item {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-    }
-    .hud-label {
-      font-size: 0.70em;
-      color: #94a3b8;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-    .hud-val {
-      font-size: 1.1em;
-      color: #facc15;
-      font-weight: 700;
-      font-family: 'JetBrains Mono', monospace;
-    }
+
     .control-panel {
-      background: rgba(8, 15, 30, 0.94);
+      background: var(--card-bg);
       backdrop-filter: blur(16px);
       border: 1px solid rgba(255,255,255,0.15);
-      padding: 12px 18px;
-      border-radius: 16px;
+      padding: 10px 16px;
+      border-radius: 14px;
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 6px;
       pointer-events: auto;
     }
     .btn-action {
-      background: linear-gradient(135deg, #0284c7, var(--theme-color));
+      background: linear-gradient(135deg, #0284c7, var(--primary));
       color: #020617;
       font-weight: 700;
       border: none;
-      padding: 9px 18px;
-      border-radius: 10px;
+      padding: 8px 16px;
+      border-radius: 8px;
       cursor: pointer;
-      font-size: 0.84em;
+      font-size: 0.82em;
       transition: all 0.2s;
       font-family: inherit;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      justify-content: center;
     }
-    .btn-action:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 18px var(--theme-color);
-    }
-    .gesture-guide {
+    .btn-action:hover { transform: scale(1.04); box-shadow: 0 0 16px var(--primary); }
+
+    .hud-bar {
       position: absolute;
-      top: 110px;
-      right: 24px;
-      background: rgba(8, 15, 30, 0.90);
-      backdrop-filter: blur(14px);
-      border: 1px solid rgba(250, 204, 21, 0.4);
-      padding: 14px 18px;
-      border-radius: 14px;
-      font-size: 0.82em;
-      color: #fef08a;
+      bottom: 20px;
+      left: 20px;
       z-index: 20;
-      max-width: 260px;
-      line-height: 1.6;
+      background: var(--card-bg);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 14px;
+      padding: 12px 20px;
+      display: flex;
+      gap: 20px;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.75);
     }
-    @keyframes pulse {
-      0% { opacity: 1; }
-      50% { opacity: 0.3; }
-      100% { opacity: 1; }
+    .hud-item { display: flex; flex-direction: column; gap: 2px; }
+    .hud-label { font-size: 0.68em; color: #94a3b8; font-weight: 600; text-transform: uppercase; }
+    .hud-val { font-size: 1.05em; color: var(--warning); font-weight: 700; font-family: 'JetBrains Mono', monospace; }
+
+    #data-modal {
+      position: absolute;
+      inset: 0;
+      z-index: 50;
+      background: rgba(3, 7, 18, 0.85);
+      backdrop-filter: blur(12px);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
     }
+    .modal-content {
+      background: #0b1329;
+      border: 2px solid var(--primary);
+      border-radius: 16px;
+      padding: 24px 28px;
+      max-width: 900px;
+      width: 100%;
+      max-height: 85vh;
+      overflow-y: auto;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.9);
+    }
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #1e293b;
+      padding-bottom: 12px;
+      margin-bottom: 16px;
+    }
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88em;
+      margin-bottom: 16px;
+    }
+    .data-table th, .data-table td {
+      padding: 10px 12px;
+      border: 1px solid #1e293b;
+      text-align: center;
+    }
+    .data-table th { background: #132247; color: var(--primary); font-weight: 700; }
+    .data-table tr:nth-child(even) { background: rgba(255,255,255,0.02); }
+
+    .entity-control-bar {
+      position: absolute;
+      top: 100px;
+      left: 20px;
+      z-index: 20;
+      background: var(--card-bg);
+      border: 1px solid rgba(255,255,255,0.15);
+      padding: 12px 16px;
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .entity-btn {
+      background: #1e293b;
+      border: 1px solid #334155;
+      color: #e2e8f0;
+      padding: 8px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.82em;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .entity-btn:hover { background: #0284c7; color: #fff; }
+    .entity-btn.selected { background: var(--primary); color: #020617; font-weight: 700; }
+
+    @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
   </style>
 </head>
 <body>
@@ -206,37 +246,44 @@
   <!-- UI Header & Controls -->
   <div class="ui-overlay">
     <div class="header-card">
-      <h1>⚡ 1.4 สนามฝึกนำทางหุ่นยนต์บนตารางกริด (Unplugged Robot Grid AR)</h1>
-      <p>นำทางหุ่นยนต์บนตารางกริด 5x5 ด้วยท่าทางมือ หลบสิ่งกีดขวางสู่เป้าหมายปลายทาง</p>
+      <h1>⚡ LAB 1.4: การนำทางหุ่นยนต์บนตารางกริดและการออกแบบขั้นตอนวิธี (Robot Grid 5x5)</h1>
+      <p>เปรียบเทียบประสิทธิภาพของขั้นตอนวิธีพาหุ่นยนต์จาก (1,1) ไปยังเป้าหมาย (5,5) โดยไม่ชนสิ่งกีดขวาง</p>
       <div class="status-badge">
         <span class="dot-pulse"></span>
-        <span id="status-text">กำลังตรวจจับท่าทางมือ (MediaPipe Hand Tracking)...</span>
+        <span id="status-text">โหมด 3D AR MediaPipe Hands (พร้อมตรวจจับท่าทาง 21 ข้อต่อ)</span>
       </div>
     </div>
     <div class="control-panel">
-      <button class="btn-action" onclick="resetExperiment()">🔄 รีเซ็ตการทดลอง</button>
-      <button class="btn-action" style="background:linear-gradient(135deg, #10b981, #059669); color:#fff;" onclick="playSynthChime()">🔊 ทดสอบเสียง Synth</button>
+      <button class="btn-action" onclick="toggleViewMode()" id="mode-btn">🔄 สลับเป็นโหมด 2D Canvas</button>
+      <button class="btn-action" style="background:linear-gradient(135deg, #10b981, #059669); color:#fff;" onclick="openDataModal()">📋 ใบงาน & ตารางบันทึกผล</button>
+      <button class="btn-action" style="background:#ef4444; color:#fff;" onclick="resetSimulation()">🔄 รีเซ็ตการทดลอง</button>
       <button class="btn-action" style="background:#334155; color:#fff;" onclick="location.href='https://elearning.rbru.ac.th/course/view.php?id=259'">⬅ กลับสู่ MOOC</button>
     </div>
   </div>
 
-  <!-- Gesture Guidance Panel -->
-  <div class="gesture-guide">
-    <strong>🖐️ การสั่งการด้วยมือ (AR Gestures):</strong><br>
-    • <strong>เลื่อนมือ:</strong> เคลื่อนย้ายตำแหน่งวัตถุ 3D<br>
-    • <strong>🤏 จีบนิ้ว (Pinch):</strong> จับยึด ควบคุม และสั่งการระบบ<br>
-    • <strong>🔊 Synth Feedback:</strong> มีเสียงตอบรับสดผ่าน Web Audio
+  <!-- Interactive Control Bar -->
+  <div class="entity-control-bar">
+    
+      <div style="font-size:0.75em; color:#94a3b8; font-weight:700; text-transform:uppercase;">เลือกกลยุทธ์อัลกอริทึม:</div>
+      <button class="entity-btn" onclick="runStrategy('naive')">❌ 1. เดินตรง (Naive: ชนหิน)</button>
+      <button class="entity-btn" onclick="runStrategy('perimeter')">🔄 2. เลียบขอบ (Perimeter: 8 ก้าว)</button>
+      <button class="entity-btn selected" onclick="runStrategy('optimal')">🏆 3. ลัดเลาะเหมาะสม (Optimal: 8 ก้าว เลี้ยว 3)</button>
+    
   </div>
 
   <!-- HUD Telemetry Bar -->
   <div class="hud-bar">
-    <div class="hud-item"><span class="hud-label">พิกัดหุ่นยนต์</span><span class="hud-val">(X: 1, Y: 1)</span></div><div class="hud-item"><span class="hud-label">เป้าหมาย (Goal)</span><span class="hud-val">(X: 5, Y: 5)</span></div><div class="hud-item"><span class="hud-label">จำนวนคำสั่ง</span><span class="hud-val">6 Steps</span></div><div class="hud-item"><span class="hud-label">สถานะการชน</span><span class="hud-val">NO COLLISION</span></div>
+    
+      <div class="hud-item"><span class="hud-label">พิกัดหุ่นยนต์</span><span class="hud-val" id="hud-pos">(1, 1)</span></div>
+      <div class="hud-item"><span class="hud-label">เป้าหมาย</span><span class="hud-val">(5, 5) GOAL</span></div>
+      <div class="hud-item"><span class="hud-label">จำนวนก้าว</span><span class="hud-val" id="hud-steps">0 / 8 ก้าว</span></div>
+      <div class="hud-item"><span class="hud-label">สถานะการชน</span><span class="hud-val" id="hud-col" style="color:#10b981;">✅ ปลอดภัย</span></div>
+    
   </div>
 
-  <!-- MediaPipe Camera & Tracking Overlay -->
-  <div class="cam-box">
-    <video id="camera-feed" autoplay playsinline></video>
-    <canvas id="tracking-canvas"></canvas>
+  <!-- 2D Interactive Canvas View -->
+  <div id="canvas-2d-container">
+    <canvas id="interactive-canvas-2d"></canvas>
   </div>
 
   <!-- 3D WebGL / A-Frame Scene -->
@@ -246,157 +293,224 @@
       <a-light type="ambient" color="#1e293b" intensity="1.5"></a-light>
       <a-light type="directional" color="#00f0ff" intensity="2" position="-1 3 2"></a-light>
 
-      <!-- Interactive 3D Hand Pointer Node -->
       <a-sphere id="hand-pointer" radius="0.08" color="#00f0ff" material="emissive: #00f0ff; emissiveIntensity: 0.8;" position="0 1.5 -2">
         <a-ring radius-inner="0.12" radius-outer="0.15" color="#facc15"></a-ring>
       </a-sphere>
 
-      <!-- Interactive 3D Apparatus Geometry -->
-      <a-entity id="target-interactive" position="0 0 0">
-        
-          <a-entity position="0 0.5 -3" rotation="-30 0 0">
-            <a-grid width="4" height="4" color="#00f0ff" opacity="0.3"></a-grid>
-            <a-box id="robot-agent" position="-1.5 0.2 1.5" width="0.4" height="0.4" depth="0.4" color="#22c55e"></a-box>
-            <a-cylinder id="goal-flag" position="1.5 0.4 -1.5" radius="0.2" height="0.8" color="#facc15"></a-cylinder>
-            <a-box position="0 0.3 0" width="0.5" height="0.6" depth="0.5" color="#ef4444"></a-box>
-          </a-entity>
-        
+      
+      <a-entity position="0 0.8 -3.5" rotation="-30 0 0">
+        <a-box id="robot-agent-3d" position="-1.5 0.3 1.5" width="0.4" height="0.4" depth="0.4" color="#10b981"></a-box>
+        <a-box position="0 0.3 0" width="0.5" height="0.5" depth="0.5" color="#ef4444"></a-box>
+        <a-cylinder position="1.5 0.4 -1.5" radius="0.2" height="0.8" color="#facc15"></a-cylinder>
       </a-entity>
+    
 
       <a-sky color="#030712"></a-sky>
     </a-scene>
   </div>
 
-  <!-- Web Audio Synthesizer & MediaPipe Scripts -->
+  <!-- MediaPipe Camera Box -->
+  <div class="cam-box" id="cam-box-wrapper">
+    <video id="camera-feed" autoplay playsinline></video>
+    <canvas id="tracking-canvas"></canvas>
+  </div>
+
+  <!-- Built-in Live Data Sheet Modal -->
+  <div id="data-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 style="color:var(--primary); font-size:1.3em; font-weight:700;">📋 ใบงานและตารางบันทึกผลการทดลอง LAB 1.4</h2>
+        <button onclick="closeDataModal()" style="background:#ef4444; color:#fff; border:none; padding:6px 12px; border-radius:6px; cursor:pointer; font-weight:700;">✕ ปิด</button>
+      </div>
+      
+      <table class="data-table">
+        <thead><tr><th>กลยุทธ์</th><th>ชุดคำสั่ง</th><th>จำนวนก้าว</th><th>ผลการชน</th><th>เวลาที่ใช้</th></tr></thead>
+        <tbody>
+          <tr><td>เดินตรง</td><td>FORWARD x3</td><td>2 ก้าว</td><td>❌ ชนหินที่ (3,3)</td><td>1.2 s (ล้มเหลว)</td></tr>
+          <tr><td>เลียบขอบ</td><td>R, F4, L, F4</td><td>8 ก้าว</td><td>✅ ปลอดภัย</td><td>4.8 s</td></tr>
+          <tr><td>ลัดเลาะเหมาะสม</td><td>F2, R, F2, L, F2, R, F2</td><td>8 ก้าว</td><td>✅ ปลอดภัย</td><td>4.0 s (ชนะเลิศ)</td></tr>
+        </tbody>
+      </table>
+    
+      <div style="display:flex; justify-content:flex-end; gap:10px; margin-top:14px;">
+        <button class="btn-action" onclick="window.print()">🖨️ พิมพ์ใบงาน</button>
+        <button class="btn-action" style="background:#10b981; color:#000;" onclick="closeDataModal()">ตกลง</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Simulation Logic & Audio Synthesizer -->
   <script>
-    // 1. Web Audio API Real-Time Synthesizer
     const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    function playSynthTone(freq, type = 'sine', duration = 0.15) {
+    function playTone(freq, type='sine', dur=0.15) {
       try {
         if (audioCtx.state === 'suspended') audioCtx.resume();
         const osc = audioCtx.createOscillator();
         const gain = audioCtx.createGain();
         osc.type = type;
         osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
-        gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+        gain.gain.setValueAtTime(0.12, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + dur);
         osc.connect(gain);
         gain.connect(audioCtx.destination);
         osc.start();
-        osc.stop(audioCtx.currentTime + duration);
-      } catch (e) {}
+        osc.stop(audioCtx.currentTime + dur);
+      } catch(e) {}
     }
 
-    function playSynthChime() {
-      playSynthTone(523.25, 'sine', 0.1);
-      setTimeout(() => playSynthTone(659.25, 'sine', 0.1), 80);
-      setTimeout(() => playSynthTone(783.99, 'sine', 0.2), 160);
+    let is2DMode = false;
+    function toggleViewMode() {
+      is2DMode = !is2DMode;
+      const c2d = document.getElementById('canvas-2d-container');
+      const s3d = document.getElementById('scene-container');
+      const camBox = document.getElementById('cam-box-wrapper');
+      const btn = document.getElementById('mode-btn');
+
+      if (is2DMode) {
+        c2d.style.display = 'block';
+        s3d.style.display = 'none';
+        camBox.style.display = 'none';
+        btn.innerText = '🔄 สลับเป็นโหมด 3D AR';
+        document.getElementById('status-text').innerText = 'โหมด 2D Canvas Interactive (คลิกเมาส์/สัมผัสจอ)';
+        init2DCanvas();
+        draw2D();
+      } else {
+        c2d.style.display = 'none';
+        s3d.style.display = 'block';
+        camBox.style.display = 'block';
+        btn.innerText = '🔄 สลับเป็นโหมด 2D Canvas';
+        document.getElementById('status-text').innerText = 'โหมด 3D AR MediaPipe Hands (พร้อมตรวจจับท่าทาง 21 ข้อต่อ)';
+      }
     }
 
-    // 2. DOM Elements & 3D Interactive Target
-    const targetObj = document.getElementById('target-interactive');
-    const handPointer = document.getElementById('hand-pointer');
+    function openDataModal() { document.getElementById('data-modal').style.display = 'flex'; }
+    function closeDataModal() { document.getElementById('data-modal').style.display = 'none'; }
+
+    function init2DCanvas() {
+      const cvs = document.getElementById('interactive-canvas-2d');
+      cvs.width = cvs.parentElement.clientWidth;
+      cvs.height = cvs.parentElement.clientHeight;
+    }
+
+    
+      function draw2D() {
+        const cvs = document.getElementById('interactive-canvas-2d');
+        if (!cvs) return;
+        const ctx = cvs.getContext('2d');
+        const w = cvs.width, h = cvs.height;
+        ctx.clearRect(0, 0, w, h);
+
+        const gridSize = 5;
+        const cellSize = Math.min(w, h) * 0.14;
+        const startX = (w - cellSize * gridSize) * 0.5;
+        const startY = (h - cellSize * gridSize) * 0.5;
+
+        for (let r = 0; r < gridSize; r++) {
+          for (let c = 0; c < gridSize; c++) {
+            ctx.strokeStyle = '#334155';
+            ctx.strokeRect(startX + c * cellSize, startY + r * cellSize, cellSize, cellSize);
+          }
+        }
+
+        ctx.fillStyle = '#ef4444';
+        ctx.fillRect(startX + 2 * cellSize + 5, startY + 2 * cellSize + 5, cellSize - 10, cellSize - 10);
+        ctx.fillStyle = '#fff';
+        ctx.fillText('หิน', startX + 2.5 * cellSize, startY + 2.5 * cellSize + 5);
+
+        ctx.fillStyle = '#facc15';
+        ctx.fillRect(startX + 4 * cellSize + 5, startY + 4 * cellSize + 5, cellSize - 10, cellSize - 10);
+
+        ctx.fillStyle = '#10b981';
+        ctx.beginPath();
+        ctx.arc(startX + (robX - 0.5) * cellSize, startY + (robY - 0.5) * cellSize, cellSize * 0.35, 0, 2*Math.PI);
+        ctx.fill();
+      }
+    
+
+    
+      let robX = 1, robY = 1;
+      function runStrategy(st) {
+        if (st === 'naive') {
+          robX = 3; robY = 3;
+          document.getElementById('hud-pos').innerText = '(3, 3) ชนหิน!';
+          document.getElementById('hud-col').innerText = '❌ COLLISION!';
+          document.getElementById('hud-col').style.color = '#ef4444';
+          playTone(180, 'sawtooth', 0.3);
+        } else if (st === 'optimal') {
+          robX = 5; robY = 5;
+          document.getElementById('hud-pos').innerText = '(5, 5) GOAL!';
+          document.getElementById('hud-steps').innerText = '8 / 8 ก้าว';
+          document.getElementById('hud-col').innerText = '🏆 ชนะเลิศ (Optimal)';
+          document.getElementById('hud-col').style.color = '#10b981';
+          playTone(523, 'sine', 0.1);
+          setTimeout(() => playTone(659, 'sine', 0.1), 100);
+          setTimeout(() => playTone(783, 'sine', 0.2), 200);
+        } else {
+          robX = 5; robY = 5;
+          document.getElementById('hud-pos').innerText = '(5, 5)';
+          document.getElementById('hud-steps').innerText = '8 / 8 ก้าว';
+          document.getElementById('hud-col').innerText = '✅ ปลอดภัย';
+          playTone(440, 'sine', 0.15);
+        }
+        if (is2DMode) draw2D();
+      }
+      function resetSimulation() {
+        robX = 1; robY = 1;
+        document.getElementById('hud-pos').innerText = '(1, 1)';
+        document.getElementById('hud-steps').innerText = '0 / 8 ก้าว';
+        document.getElementById('hud-col').innerText = '✅ ปลอดภัย';
+        document.getElementById('hud-col').style.color = '#10b981';
+        if (is2DMode) draw2D();
+        playTone(440, 'sine', 0.1);
+      }
+    
+
+    // MediaPipe Hands Tracking
     const videoElement = document.getElementById('camera-feed');
     const canvasElement = document.getElementById('tracking-canvas');
     const canvasCtx = canvasElement.getContext('2d');
-    const statusText = document.getElementById('status-text');
-
-    let smoothX = 0, smoothY = 1.4, smoothZ = -2.5;
-    let smoothRotY = 0;
-
-    function resetExperiment() {
-      smoothX = 0; smoothY = 1.4; smoothRotY = 0;
-      if (targetObj) targetObj.setAttribute('position', '0 0 0');
-      playSynthTone(440, 'triangle', 0.2);
-    }
-
-    // 3. MediaPipe Hands Integration Loop
-    function onHandResults(results) {
-      canvasElement.width = videoElement.videoWidth || 240;
-      canvasElement.height = videoElement.videoHeight || 180;
-      canvasCtx.save();
-      canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
-
-      if (results.multiHandLandmarks && results.multiHandLandmarks.length > 0) {
-        const landmarks = results.multiHandLandmarks[0];
-
-        // Draw 21-joint skeleton
-        canvasCtx.fillStyle = '#00f0ff';
-        canvasCtx.strokeStyle = '#34d399';
-        canvasCtx.lineWidth = 2;
-
-        for (let i = 0; i < landmarks.length; i++) {
-          const pt = landmarks[i];
-          const x = pt.x * canvasElement.width;
-          const y = pt.y * canvasElement.height;
-          canvasCtx.beginPath();
-          canvasCtx.arc(x, y, 3, 0, 2 * Math.PI);
-          canvasCtx.fill();
-        }
-
-        // Index Finger Tip (Landmark 8) & Thumb Tip (Landmark 4)
-        const indexTip = landmarks[8];
-        const thumbTip = landmarks[4];
-
-        // 3D Spatial Translation
-        const targetX = (indexTip.x - 0.5) * 4.0;
-        const targetY = (1.0 - indexTip.y) * 2.5 + 0.4;
-        smoothX += (targetX - smoothX) * 0.2;
-        smoothY += (targetY - smoothY) * 0.2;
-
-        if (handPointer) {
-          handPointer.setAttribute('position', `${smoothX} ${smoothY} -2`);
-        }
-
-        // Pinch Detection
-        const dx = (indexTip.x - thumbTip.x);
-        const dy = (indexTip.y - thumbTip.y);
-        const pinchDist = Math.sqrt(dx * dx + dy * dy);
-
-        if (pinchDist < 0.08) {
-          statusText.innerText = '🤏 กำลังจับยึด (Pinch Gesture Active)';
-          statusText.parentElement.style.background = 'rgba(234, 179, 8, 0.4)';
-          if (targetObj) {
-            targetObj.setAttribute('position', `${smoothX * 0.6} ${smoothY * 0.6 - 0.5} 0`);
-          }
-          playSynthTone(880, 'sine', 0.05);
-        } else {
-          statusText.innerText = '🖐️ ตรวจพบมือ (Tracking Locked 60 FPS)';
-          statusText.parentElement.style.background = 'rgba(6, 78, 59, 0.6)';
-        }
-      } else {
-        statusText.innerText = 'กำลังตรวจจับท่าทางมือ (MediaPipe Hand Tracking)...';
-        statusText.parentElement.style.background = 'rgba(6, 78, 59, 0.4)';
-      }
-      canvasCtx.restore();
-    }
 
     const hands = new Hands({
       locateFile: (file) => `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}`
     });
-
     hands.setOptions({
       maxNumHands: 1,
       modelComplexity: 1,
-      minDetectionConfidence: 0.5,
-      minTrackingConfidence: 0.5
+      minDetectionConfidence: 0.6,
+      minTrackingConfidence: 0.6
     });
 
-    hands.onResults(onHandResults);
+    hands.onResults((results) => {
+      canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
+      if (results.multiHandLandmarks && results.multiHandLandmarks.length > 0) {
+        const lm = results.multiHandLandmarks[0];
+        for (let i = 0; i < lm.length; i++) {
+          canvasCtx.fillStyle = '#00f0ff';
+          canvasCtx.beginPath();
+          canvasCtx.arc(lm[i].x * canvasElement.width, lm[i].y * canvasElement.height, 3, 0, 2*Math.PI);
+          canvasCtx.fill();
+        }
+        const dx = lm[8].x - lm[4].x;
+        const dy = lm[8].y - lm[4].y;
+        const dist = Math.sqrt(dx*dx + dy*dy);
+        if (dist < 0.08) {
+          canvasCtx.strokeStyle = '#10b981';
+          canvasCtx.lineWidth = 3;
+          canvasCtx.beginPath();
+          canvasCtx.moveTo(lm[4].x * canvasElement.width, lm[4].y * canvasElement.height);
+          canvasCtx.lineTo(lm[8].x * canvasElement.width, lm[8].y * canvasElement.height);
+          canvasCtx.stroke();
+        }
+      }
+    });
 
-    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-      const camera = new Camera(videoElement, {
-        onFrame: async () => {
-          await hands.send({ image: videoElement });
-        },
-        width: 320,
-        height: 240
-      });
-      camera.start().catch((err) => {
-        console.warn('Webcam not active:', err);
-        statusText.innerText = '⚠️ กรุณาอนุญาตให้ใช้กล้องเพื่อเปิดระบบ AR Hand Tracking';
-      });
-    }
+    const camera = new Camera(videoElement, {
+      onFrame: async () => { await hands.send({ image: videoElement }); },
+      width: 320, height: 240
+    });
+    camera.start().catch(() => {
+      document.getElementById('status-text').innerText = 'กล้องไม่พร้อมใช้งาน • สลับเป็นโหมด 2D Canvas หรือคลิกปุ่มควบคุมได้ตามปกติ';
+    });
   </script>
 </body>
 </html>
