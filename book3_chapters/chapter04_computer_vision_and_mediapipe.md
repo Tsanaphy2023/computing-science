@@ -1,167 +1,135 @@
-# วิทยาการคำนวณ 3: การพัฒนาโครงงานบูรณาการ ปัญญาประดิษฐ์ และนวัตกรรมการจัดการเรียนรู้วิทยาศาสตร์
-## บทที่ 4 คอมพิวเตอร์วิทัศน์และการตรวจจับท่าทางมือ 3 มิติ (Computer Vision & MediaPipe Hands)
-**ผู้เขียน:** ผู้ช่วยศาสตราจารย์ ดร.ชีวะ ทัศนา • สาขาวิชาฟิสิกส์ คณะวิทยาศาสตร์และเทคโนโลยี มหาวิทยาลัยราชภัฏรำไพพรรณี
+# วิทยาการคำนวณ 3 วิศวกรรมซอฟต์แวร์ ปัญญาประดิษฐ์ประยุกต์ และการพัฒนาโครงงานนวัตกรรม
+## บทที่ 4 คอมพิวเตอร์วิทัศน์และการรู้จำท่าทาง 3 มิติด้วย MediaPipe (Computer Vision & MediaPipe)
+**ผู้เขียน** ผู้ช่วยศาสตราจารย์ ดร.ชีวะ ทัศนา • สาขาวิชาฟิสิกส์ คณะวิทยาศาสตร์และเทคโนโลยี มหาวิทยาลัยราชภัฏรำไพพรรณี
 
 ---
 
-## 🎯 ผลลัพธ์การเรียนรู้ประจำบท (Behavioral Learning Outcomes)
-เมื่อศึกษาบทเรียนนี้จบแล้ว ผู้เรียนสามารถ:
-1. **อธิบาย (Explain)** หลักการพื้นฐานของการประมวลผลภาพดิจิทัล (Digital Image Processing), ระบบปริภูมิสี (RGB, BGR, Grayscale, HSV), และการตรวจจับขอบภาพ (Edge Detection)
-2. **วิเคราะห์ (Analyze)** โครงสร้างพิกัด 21 จุดของโมเดลโครงร่างมือ 3 มิติ (21 3D Hand Landmarks) ของ Google MediaPipe Hands
-3. **คำนวณและสร้างอัลกอริทึม (Compute & Formulate Algorithms)** สำหรับการตรวจจับท่าทางมือ (Gesture Recognition) เช่น การจีบนิ้ว (Pinch Gesture) และการนับนิ้วมือ
-4. **พัฒนาแอปพลิเคชัน (Develop Vision Apps)** ด้วย OpenCV และ MediaPipe เพื่อควบคุมการทดลองฟิสิกส์เสมือนจริงแบบไร้การสัมผัส (Touchless HCI)
+## 📋 แผนบริหารการสอนประจำบทที่ 4
+
+### หัวข้อเนื้อหาประจำบท
+1. พื้นฐานการประมวลผลภาพดิจิทัล (Digital Image Processing & RGB/HSV Color Space)
+2. อัลกอริทึมตรวจจับใบหน้าและมือ (Haar Cascades, Single Shot Detector)
+3. สถาปัตยกรรมเครือข่ายประสาทเทียม Google MediaPipe Hands (Palm Detector & Hand Landmark Model)
+4. การคำนวณเรขาคณิต 3 มิติ: Euclidean Distance, Pinch Gesture Math, และ Euler Angles
+5. การเชื่อมโยงคอมพิวเตอร์วิทัศน์เข้ากับ Three.js และ A-Frame WebGL
+
+### วัตถุประสงค์เชิงพฤติกรรม
+เมื่อศึกษาบทเรียนนี้จบแล้ว ผู้เรียนสามารถ
+1. อธิบายหลักการประมวลผลภาพดิจิทัลและการทำงานของโมเดล Google MediaPipe Hands ได้
+2. คำนวณระยะห่างยุคลิด (Euclidean Distance) ระหว่างปลายนิ้วเพื่อจำแนกท่าทางมือแบบ Real-time ได้
+3. พัฒนาเว็บแอปพลิเคชันที่มีการควบคุมด้วยท่าทางมือ 3 มิติไร้สัมผัส (Touchless AR Interaction) ได้
+4. บูรณาการคอมพิวเตอร์วิทัศน์เข้ากับการจัดการเรียนรู้วิทยาศาสตร์เชิงรุกได้อย่างมีประสิทธิภาพ
+
+### กิจกรรมการเรียนการสอน
+1. การบรรยายเชิงวิชาการด้านวิศวกรรมซอฟต์แวร์ ปัญญาประดิษฐ์ และนวัตกรรมดิจิทัล
+2. การวิเคราะห์กรณีศึกษาและการจำลองสถานการณ์จริง (Case Studies & Project Simulations)
+3. การฝึกปฏิบัติการจำลองเสมือนจริง 2D/3D AR MediaPipe Hands และ AI Vision
+4. การพัฒนาชิ้นงานโครงงานนวัตกรรมและการทดสอบซอฟต์แวร์ตามมาตรฐานสากล
+
+### สื่อการเรียนการสอน
+1. ตำราเรียนวิชาการ "วิทยาการคำนวณ 3 วิศวกรรมซอฟต์แวร์ ปัญญาประดิษฐ์ประยุกต์ และการพัฒนาโครงงานนวัตกรรม"
+2. ชุดห้องปฏิบัติการเสมือนจริง Hybrid 2D/3D และ AI Computer Vision บนระบบ RBRU MOOC
+3. สไลด์บรรยายอิเล็กทรอนิกส์และเอกสารมาตรฐาน IEEE/ISO
+
+### การวัดและประเมินผล
+1. การประเมินผลการทำใบงานและโครงงานนวัตกรรมปฏิบัติการ (40%)
+2. การประเมินผลงานการเขียนโค้ดและสถาปัตยกรรมระบบ (30%)
+3. การทดสอบวัดผลสัมฤทธิ์ทางการเรียนและการนำเสนอผลงาน (30%)
 
 ---
 
-## 🌌 4.0 เรื่องเล่าเปิดบทเรียน: คอมพิวเตอร์ที่มองเห็นและเข้าใจภาษากายมนุษย์
+## 🌌 4.0 เรื่องเล่าเปิดบทเรียนและบริบททางประวัติศาสตร์
 
-ในห้องผ่าตัดปลอดเชื้อของศัลยแพทย์ การสัมผัสหน้าจอคอมพิวเตอร์หรือเมาส์อาจก่อให้เกิดความเสี่ยงต่อการติดเชื้อ แต่ด้วย **เทคโนโลยีคอมพิวเตอร์วิทัศน์ (Computer Vision) และระบบตรวจจับท่าทางมือ 3 มิติ** ศัลยแพทย์สามารถใช้เพียงการ "โบกมือกลางอากาศ" หรือ "จีบนิ้ว" เพื่อหมุนดูภาพสแกนสมอง 3 มิติแบบไร้การสัมผัส (Touchless Interaction) ได้อย่างแม่นยำ
-
-```mermaid
-graph LR
-    Webcam["กล้องเว็บแคม 2D ทั่วไป\n(RGB Video Stream 30-60 FPS)"] --> AI["Google MediaPipe Hands\n(Deep Convolutional Neural Network)"]
-    AI --> Skeleton["พิกัดโครงกระดูกมือ 3 มิติ 21 จุด\n(x, y, z Landmarks)"]
-    Skeleton --> Gesture["ตรวจจับท่าทาง: จีบนิ้ว, หมุนปุ่ม, ลากวัตถุ\nควบคุมแล็บฟิสิกส์เสมือนจริง"]
-```
-
-เทคโนโลยีนี้ได้เปิดประตูสู่ยุคใหม่ของ **การปฏิสัมพันธ์ระหว่างมนุษย์และคอมพิวเตอร์ (Human-Computer Interaction - HCI)** และห้องปฏิบัติการเสมือนจริงแบบ AR
+ในคริสต์ศักราช 2019 ทีมวิจัยของ Google Research นำโดย ฟ่าน จาง (Fan Zhang) และคณะ ได้เปิดตัวโมเดล **MediaPipe Hands** ซึ่งสร้างปรากฏการณ์ใหม่ให้แก่วงการปัญญาประดิษฐ์ ด้วยการสามารถตรวจจับและประมาณตำแหน่งข้อต่อของมือมนุษย์ได้ถึง **21 จุด (21 3D Landmarks)** พร้อมพิกัดแกน $X, Y, Z$ แบบเรียลไทม์บนสมาร์ตโฟนและเว็บเบราว์เซอร์ทั่วไป โดยไม่ต้องพึ่งพาเซนเซอร์วัดระยะลึกราคาแพง (Depth Cameras)
 
 ---
 
-## 👁️ 4.1 การประมวลผลภาพดิจิทัลด้วย OpenCV
+## 📐 4.1 ทฤษฎีและรากฐานทางวิชาการเชิงลึก
 
-ภาพดิจิทัลคือ **แมทริกซ์ของตัวเลข (Matrix of Pixel Intensities)** ขนาด $H \times W \times C$:
-* **Grayscale:** ภาพระดับสีเทา 1 ช่องสัญญาณ ($0-255$)
-* **BGR / RGB:** ภาพสี 3 ช่องสัญญาณ (Blue, Green, Red)
-* **HSV:** ปริภูมิสีที่แยกค่า Hue (เนื้อสี $0-179$), Saturation (ความอิ่มตัว $0-255$), Value (ความสว่าง $0-255$) เหมาะอย่างยิ่งสำหรับการตรวจจับสีของวัตถุ
+### คณิตศาสตร์การตรวจจับท่าจีบนิ้ว (Pinch Gesture Math)
+ท่าจีบนิ้ว (Pinch Gesture) ตรวจจับได้จากการวัดระยะห่างยุคลิดสามมิติระหว่างปลายนิ้วโป้ง (Landmark 4) และปลายนิ้วชี้ (Landmark 8):
 
----
+$$d_{	ext{pinch}} = \sqrt{(x_8 - x_4)^2 + (y_8 - y_4)^2 + (z_8 - z_4)^2}$$
 
-## 🖐️ 4.2 สถาปัตยกรรมโครงร่างมือ 21 จุด 3 มิติ (MediaPipe 21 Hand Landmarks)
+$$\text{Action} = \begin{cases} \text{SELECT (จีบนิ้วสั่งการ)}, & d_{	ext{pinch}} < \text{Threshold} \ (0.08) \\ \text{HOVER (ปล่อยมือปกติ)}, & d_{	ext{pinch}} \ge \text{Threshold} \end{cases}$$
 
 ```mermaid
 graph TD
-    subgraph Hand21["โครงกระดูกมือ 21 จุดพิกัด (x, y, z)"]
-        Wrist["0: ข้อมือ (WRIST)"]
-        Thumb["1-4: นิ้วหัวแม่มือ (THUMB_TIP: 4)"]
-        Index["5-8: นิ้วชี้ (INDEX_FINGER_TIP: 8)"]
-        Middle["9-12: นิ้วกลาง (MIDDLE_FINGER_TIP: 12)"]
-        Ring["13-16: นิ้วนาง (RING_FINGER_TIP: 16)"]
-        Pinky["17-20: นิ้วก้อย (PINKY_TIP: 20)"]
-    end
+    Cam["1. Web Camera Video Feed"] --> Det["2. Palm Detector (ระบุตำแหน่งฝ่ามือ)"]
+    Det --> LM["3. Hand Landmark Model (สกัด 21 ข้อต่อ 3 มิติ)"]
+    LM --> Math["4. Geometry Math (คำนวณ Pinch / Angles)"]
+    Math --> UI["5. 3D WebGL / Audio Trigger (สั่งการเสมือนจริง)"]
 ```
-
-<div style="background: linear-gradient(135deg, #eff6ff, #dbeafe); border-left: 5px solid #2563eb; border-radius: 12px; padding: 18px 22px; margin: 20px 0; color: #1e3a8a;">
-  <h4 style="color: #1d4ed8; margin-top: 0;">📐 การคำนวณระยะห่างการจีบนิ้ว (Pinch Gesture Formula)</h4>
-  <p style="margin: 0; line-height: 1.8;">
-    ระยะห่างแบบยุคลิด (Euclidean Distance) ระหว่างปลายนิ้วหัวแม่มือ (Landmark 4) และปลายนิ้วชี้ (Landmark 8):
-    $$d = \sqrt{(x_4 - x_8)^2 + (y_4 - y_8)^2 + (z_4 - z_8)^2}$$
-    หากระยะห่าง $d < 0.05$ (หน่วย Normalization) แสดงว่าผู้ใช้กำลัง <strong>"จีบนิ้วเพื่อหยิบจับวัตถุ (Pinching / Grabbing)"</strong>
-  </p>
-</div>
 
 ---
 
-## 💻 4.3 โค้ดคอมพิวเตอร์: ระบบตรวจจับท่าทางมือควบคุมสเกลาร์ฟิสิกส์
+## 🧮 4.2 ตัวอย่างการวิเคราะห์และการประยุกต์ใช้จริง (Worked Examples)
+
+#### ตัวอย่างที่ 4.1 การคำนวณระยะ Pinch จากพิกัด Normalization
+กำหนดให้พิกัดปลายนิ้วโป้งคือ $P_4 = (0.45, 0.60, -0.02)$ และปลายนิ้วชี้คือ $P_8 = (0.47, 0.62, -0.01)$ จงคำนวณระยะ $d$ และวินิจฉัยว่าเป็นการจีบนิ้วหรือไม่ (Threshold $= 0.08$):
+
+**วิธีทำ:**
+1. แทนค่าพิกัดลงในสมการระยะห่างยุคลิด:
+   $$d = \sqrt{(0.47 - 0.45)^2 + (0.62 - 0.60)^2 + (-0.01 - (-0.02))^2}$$
+   $$d = \sqrt{(0.02)^2 + (0.02)^2 + (0.01)^2} = \sqrt{0.0004 + 0.0004 + 0.0001} = \sqrt{0.0009} = 0.03$$
+2. เปรียบเทียบกับเกณฑ์: เนื่องจาก $d = 0.03 < 0.08$
+3. **สรุป:** ระบบตรวจพบท่าทาง **"Pinch Gesture (จีบนิ้วสั่งการ)"** อย่างสมบูรณ์
+
+---
+
+## 💻 4.3 การเขียนโปรแกรมและการพัฒนาซอฟต์แวร์ด้วย Python 3.11
 
 ```python
-# mediapipe_gesture_controller.py
-# โปรแกรมตรวจจับท่าทางมือและจำลองการควบคุมพารามิเตอร์ฟิสิกส์แบบไร้สัมผัส
-# ผู้เขียน: ผศ.ดร.ชีวะ ทัศนา (มรภ.รำไพพรรณี)
-
+# mediapipe_gesture_detector.py
+# โปรแกรมจำแนกท่าทางมือด้วย MediaPipe และ OpenCV ใน Python 3.11
 import math
+from typing import Tuple, Optional
 
-class HandLandmarkSimulator:
-    """จำลองการคำนวณท่าทางมือจากชุดพิกัด 21 จุด"""
-    
-    @staticmethod
-    def calculate_distance(p1: dict, p2: dict) -> float:
-        """คำนวณระยะห่างแบบยุคลิดระหว่าง 2 จุดพิกัด"""
-        dx = p1['x'] - p2['x']
-        dy = p1['y'] - p2['y']
-        dz = p1.get('z', 0.0) - p2.get('z', 0.0)
-        return math.sqrt(dx**2 + dy**2 + dz**2)
-        
-    @staticmethod
-    def detect_pinch(landmarks: dict) -> bool:
-        """ตรวจสอบว่าผู้ใช้จีบนิ้วโป้งกับนิ้วชี้หรือไม่ (Landmark 4 และ 8)"""
-        thumb_tip = landmarks[4]
-        index_tip = landmarks[8]
-        dist = HandLandmarkSimulator.calculate_distance(thumb_tip, index_tip)
-        return dist < 0.06 # Threshold จีบนิ้ว
+def compute_pinch_distance(thumb_tip: Tuple[float, float, float], index_tip: Tuple[float, float, float]) -> float:
+    """คำนวณระยะห่าง 3 มิติระหว่างนิ้วโป้งและนิ้วชี้"""
+    dx = index_tip[0] - thumb_tip[0]
+    dy = index_tip[1] - thumb_tip[1]
+    dz = index_tip[2] - thumb_tip[2]
+    return math.sqrt(dx*dx + dy*dy + dz*dz)
 
-    @staticmethod
-    def count_raised_fingers(landmarks: dict) -> int:
-        """นับจำนวนนิ้วที่ยกขึ้น โดยตรวจสอบว่า Tip อยู่สูงกว่า PIP Joint หรือไม่"""
-        tips = [8, 12, 16, 20] # ชี้ กลาง นาง ก้อย
-        pips = [6, 10, 14, 18]
-        raised = 0
-        
-        # ในพิกัดภาพ y=0 อยู่ด้านบนสุด ดังนั้น y ของปลายนิ้วต้องน้อยกว่าข้อนิ้ว
-        for tip, pip in zip(tips, pips):
-            if landmarks[tip]['y'] < landmarks[pip]['y']:
-                raised += 1
-                
-        # ตรวจสอบนิ้วโป้ง (แกน x)
-        if landmarks[4]['x'] < landmarks[3]['x']: # มือขวา
-            raised += 1
-            
-        return raised
-
-def main():
-    print("=" * 65)
-    print("🖐️ ระบบจำลองการประมวลผลท่าทางมือ 3 มิติ (MediaPipe Gesture Lab)")
-    print("=" * 65)
-    
-    # พิกัดจำลองของมือ (Normalized 0.0 - 1.0)
-    mock_landmarks_pinching = {
-        0: {'x': 0.5, 'y': 0.8, 'z': 0.0},
-        3: {'x': 0.42, 'y': 0.55, 'z': 0.0},
-        4: {'x': 0.46, 'y': 0.42, 'z': 0.0}, # โป้ง
-        6: {'x': 0.48, 'y': 0.50, 'z': 0.0},
-        8: {'x': 0.47, 'y': 0.43, 'z': 0.0}, # ชี้ (อยู่ชิดโป้ง -> Pinching)
-        10: {'x': 0.52, 'y': 0.50, 'z': 0.0},
-        12: {'x': 0.52, 'y': 0.35, 'z': 0.0}, # กลาง (ยกขึ้น)
-        14: {'x': 0.55, 'y': 0.52, 'z': 0.0},
-        16: {'x': 0.55, 'y': 0.60, 'z': 0.0}, # นาง (พับลง)
-        18: {'x': 0.58, 'y': 0.55, 'z': 0.0},
-        20: {'x': 0.58, 'y': 0.65, 'z': 0.0}, # ก้อย (พับลง)
-    }
-    
-    is_pinch = HandLandmarkSimulator.detect_pinch(mock_landmarks_pinching)
-    num_fingers = HandLandmarkSimulator.count_raised_fingers(mock_landmarks_pinching)
-    
-    print(f"📌 ผลการวิเคราะห์ท่าทางมือ:")
-    print(f"   • สถานะการจีบนิ้ว (Pinch Gesture): [{'✅ PINCHING (GRAB)' if is_pinch else '❌ OPEN'}]")
-    print(f"   • จำนวนนิ้วที่กางออก:             {num_fingers} นิ้ว")
-    print("=" * 65)
+def classify_gesture(thumb_tip: Tuple[float, float, float], index_tip: Tuple[float, float, float], threshold: float = 0.08) -> str:
+    dist = compute_pinch_distance(thumb_tip, index_tip)
+    if dist < threshold:
+        return f"PINCH_ACTIVE (d={dist:.4f})"
+    return f"HAND_OPEN (d={dist:.4f})"
 
 if __name__ == "__main__":
-    main()
+    t4 = (0.45, 0.60, -0.02)
+    t8 = (0.47, 0.62, -0.01)
+    status = classify_gesture(t4, t8)
+    print("ผลการจำแนกท่าทาง:", status)
+    assert "PINCH_ACTIVE" in status, "ต้องจำแนกเป็น Pinch"
+    print("✅ ระบบตรวจสอบการคำนวณ Pinch Gesture สำเร็จ 100%!")
 ```
 
 ---
 
-## 💡 4.4 สรุปใจความสำคัญและแบบฝึกหัดท้ายบทที่ 4
+## 🔬 4.4 คู่มือห้องปฏิบัติการเสมือนจริง 2D/3D AR MediaPipe Hands
 
-### 📌 สรุปประเด็นสำคัญ
-1. **OpenCV** คือเครื่องมือมาตรฐานในการจัดการภาพและวิดีโอสตรีมระดับพิกเซล
-2. **Google MediaPipe Hands** แปลงข้อมูลภาพ 2D ให้กลายเป็นพิกัดโครงกระดูกมือ 3 มิติ 21 จุดได้แบบ Real-time บนเว็บเบราว์เซอร์และ Python
-3. การตรวจจับท่าทางอาศัยเรขาคณิตวิเคราะห์และระยะห่างแบบยุคลิดระหว่างจุดต่อ (Joints)
+ผู้เรียนสามารถเข้าสู่ชุดจำลองเสมือนจริง 2D/3D เพื่อทดลองตรวจจับมือจริงผ่านเว็บแคมได้ที่ [chapter09_mediapipe_vision.html](https://tsanaphy2023.github.io/computing-science/simulators/chapter09_mediapipe_vision.html)
 
 ---
 
-### 📝 แบบฝึกหัดทบทวน 3 ระดับ (Exercises)
+## 💡 4.5 สรุปสารัตถะสำคัญประจำบท (Chapter Summary)
 
-#### ระดับที่ 1: ความรู้ความเข้าใจพื้นฐาน (Basic Knowledge)
-1. จงระบุหมายเลข Landmark ของจุดต่อไปนี้ในโมเดล MediaPipe Hands:
-   * (A) ข้อมือ (Wrist)
-   * (B) ปลายนิ้วชี้ (Index Finger Tip)
-   * (C) ปลายนิ้วหัวแม่มือ (Thumb Tip)
-2. เพราะเหตุใดในระบบพิกัดภาพดิจิทัล (Computer Vision Coordinates) ค่า $y=0$ จึงอยู่ที่ขอบบนสุดของภาพ
+1. MediaPipe Hands ใช้อัลกอริทึม Machine Learning สองระดับ (Palm Detection $\rightarrow$ Landmark Regression)
+2. ระยะห่างยุคลิดระหว่างข้อต่อสามารถนำมาแปลงเป็นท่าทางสั่งการ (Gesture Control) ในระบบ Web AR ได้อย่างแม่นยำ
 
-#### ระดับที่ 2: การวิเคราะห์และประยุกต์ใช้ (Analytical Application)
-3. จงเขียนสมการทางคณิตศาสตร์และเงื่อนไขภาษา Python สำหรับตรวจจับท่าทาง **"ชู 2 นิ้วสัญลักษณ์สู้ตาย (Peace Sign: ✌️)"** โดยนิ้วชี้และนิ้วกลางต้องกางออก แต่นิ้วนางและนิ้วก้อยต้องพับเก็บ
+---
 
-#### ระดับที่ 3: การคิดขั้นสูงและบูรณาการ (Advanced Synthesis)
-4. จงออกแบบโครงสร้างระบบ Virtual Physics Lab ที่ให้ผู้เรียนใช้มือหมุนลูกบิดปรับค่าความต้านทานไฟฟ้า ($R$) หรือปรับความยาวเชือกลูกตุ้ม ($L$) ในอากาศ โดยระบุชุดคำนวณทางคณิตศาสตร์และโฟลว์การทำงาน
+## ❓ 4.6 แบบฝึกหัดและคำถามท้ายบทเพื่อการประเมินผล (3-Tier Assessment)
+
+1. เหตุใด MediaPipe จึงต้องแบ่งโมเดลออกเป็น Palm Detector และ Landmark Model แทนที่จะตรวจจับข้อต่อโดยตรงทั้งภาพ?
+2. ให้นักเรียนออกแบบอัลกอริทึมในการจำแนกท่าทาง "ชูสองนิ้ว (Peace Sign)" จากพิกัด 21 จุด
+
+---
+
+## 📚 เอกสารอ้างอิงประจำบท (APA 7th Edition References)
+
+* Zhang, F. et al. (2020). MediaPipe Hands: On-device Real-time Hand Tracking. *arXiv preprint arXiv:2006.10214*.
+* Szeliski, R. (2022). *Computer Vision: Algorithms and Applications* (2nd ed.). Springer.

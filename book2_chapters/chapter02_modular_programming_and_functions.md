@@ -1,148 +1,133 @@
-# วิทยาการคำนวณ 2: การออกแบบขั้นตอนวิธี โครงสร้างข้อมูล และการแก้ปัญหาด้วย Python
-## บทที่ 2 การเขียนโปรแกรมเชิงโมดูลและฟังก์ชันขั้นสูง
-**ผู้เขียน:** ผู้ช่วยศาสตราจารย์ ดร.ชีวะ ทัศนา • สาขาวิชาฟิสิกส์ คณะวิทยาศาสตร์และเทคโนโลยี มหาวิทยาลัยราชภัฏรำไพพรรณี
+# วิทยาการคำนวณ 2 การออกแบบขั้นตอนวิธี โครงสร้างข้อมูล และการแก้ปัญหาด้วย Python
+## บทที่ 2 การเขียนโปรแกรมเชิงโมดูลและฟังก์ชันขั้นสูง (Modular Programming & Advanced Functions)
+**ผู้เขียน** ผู้ช่วยศาสตราจารย์ ดร.ชีวะ ทัศนา • สาขาวิชาฟิสิกส์ คณะวิทยาศาสตร์และเทคโนโลยี มหาวิทยาลัยราชภัฏรำไพพรรณี
 
 ---
 
-## 🎯 ผลลัพธ์การเรียนรู้ประจำบท (Behavioral Learning Outcomes)
-เมื่อศึกษาบทเรียนนี้จบแล้ว ผู้เรียนสามารถ:
-1. **อธิบาย (Explain)** หลักการออกแบบโปรแกรมเชิงโมดูล (Modular Design), สถาปัตยกรรมโค้ดที่สะอาด (Clean Architecture), และกฎของขอบเขตตัวแปร (LEGB Scope Rule)
-2. **ออกแบบและเขียน (Design & Implement)** ฟังก์ชันขั้นสูงที่มีพารามิเตอร์แบบค่าเริ่มต้น (Default Arguments), ตัวแปรไม่จำกัดจำนวน (`*args`, `**kwargs`), และฟังก์ชันนิรนาม (Lambda Functions)
-3. **ประยุกต์ใช้ (Apply)** ฟังก์ชันอันดับสูง (Higher-Order Functions: `map`, `filter`, `reduce`) ในการประมวลผลชุดข้อมูลทางวิทยาศาสตร์
-4. **สร้างและจัดโครงสร้าง (Package & Build)** ไลบรารี/โมดูลภาษา Python ของตนเองเพื่อการนำกลับมาใช้ซ้ำ (Code Reusability)
+## 📋 แผนบริหารการสอนประจำบทที่ 2
+
+### หัวข้อเนื้อหาประจำบท
+1. ปรัชญาการออกแบบเชิงโมดูล (Modularity & DRY Principle)
+2. กฎขอบเขตตัวแปร LEGB (Local, Enclosing, Global, Built-in)
+3. กลไก Call Stack และ Activation Record
+4. First-Class Functions, Higher-Order Functions และ Lambda Expressions
+5. การสร้างและนำเข้าโมดูล (Modules & Packages)
+
+### วัตถุประสงค์เชิงพฤติกรรม
+เมื่อศึกษาบทเรียนนี้จบแล้ว ผู้เรียนสามารถ
+1. อธิบายสถาปัตยกรรมการทำงานของ Call Stack และขอบเขตตัวแปร LEGB ใน Python ได้
+2. ออกแบบฟังก์ชันที่มีคุณสมบัติ Pure Function และลดผลข้างเคียง (Side Effects) ได้
+3. ประยุกต์ใช้ Higher-Order Functions (`map`, `filter`, `reduce`) และ Decorators ในการแก้ปัญหาได้
+4. จัดโครงสร้างโปรเจกต์ขนาดใหญ่ให้อยู่ในรูป Packages และ Modules ที่นำกลับมาใช้ซ้ำได้
+
+### กิจกรรมการเรียนการสอน
+1. การบรรยายเชิงวิชาการและการเชื่อมโยงบริบทประวัติศาสตร์วิทยาการคำนวณ
+2. การสาธิตการวิเคราะห์คณิตศาสตร์และการทำงานของหน่วยความจำ
+3. การฝึกปฏิบัติการจำลองเสมือนจริง 2D Canvas และ 3D AR MediaPipe Hands
+4. การเขียนโค้ดคอมพิวเตอร์ภาษา Python 3.11 และการวัดประสิทธิภาพเชิงประจักษ์ (Benchmarking)
+
+### สื่อการเรียนการสอน
+1. ตำราเรียนวิชาการ "วิทยาการคำนวณ 2 การออกแบบขั้นตอนวิธี โครงสร้างข้อมูล และการแก้ปัญหาด้วย Python"
+2. ชุดห้องปฏิบัติการเสมือนจริง Hybrid 2D/3D บนระบบ RBRU MOOC
+3. สไลด์บรรยายอิเล็กทรอนิกส์และแผนภาพเวกเตอร์มัลติมีเดีย
+
+### การวัดและประเมินผล
+1. การประเมินผลการทำใบงานและตารางบันทึกผลการทดลองเสมือนจริง (40%)
+2. การประเมินผลงานการเขียนโค้ดภาษา Python และ Unit Test Assertions (30%)
+3. การทดสอบวัดผลสัมฤทธิ์ทางการเรียนท้ายบท 3 ระดับ (30%)
 
 ---
 
-## 🌌 2.0 เรื่องเล่าเปิดบทเรียน: ปรัชญา UNIX กับซอฟต์แวร์ควบคุมยานสำรวจอวกาศ
+## 🌌 2.0 เรื่องเล่าเปิดบทเรียนและบริบททางประวัติศาสตร์
 
-ปรัชญาของระบบปฏิบัติการ UNIX และวิศวกรรมการบินอวกาศมีกฎเหล็กข้อหนึ่งที่ระบุไว้ว่า: **"จงสร้างแต่ละฟังก์ชันให้ทำหน้าที่เพียงอย่างเดียว และทำหน้าที่นั้นให้ยอดเยี่ยมที่สุด (Do One Thing and Do It Well)"**
+ในคริสต์ทศวรรษ 1970 เดวิด พาร์นาส (David Lorge Parnas, 1941—ปัจจุบัน) นักวิทยาการคอมพิวเตอร์ชาวอเมริกัน ได้เสนอบทความวิชาการคลาสสิกเรื่อง *On the Criteria to Be Used in Decomposing Systems into Modules* ซึ่งวางรากฐานแนวคิด Information Hiding และ Modular Decomposition ทำให้เกิดการปฏิวัติแนวคิดการเขียนโค้ดจากการเขียนโปรแกรมตามแนวยาว (Spaghetti Code) มาเป็นการแบ่งโปรแกรมออกเป็นโมดูลย่อยที่ทำงานอิสระต่อกัน (High Cohesion, Low Coupling)
+
+---
+
+## 📐 2.1 ทฤษฎีและรากฐานทางคณิตศาสตร์เชิงลึก
+
+### กฎขอบเขตตัวแปร LEGB (LEGB Rule)
+เมื่อมีการอ้างถึงตัวแปร Python จะค้นหาตามลำดับ 4 ชั้น:
+1. **L (Local):** ภายในฟังก์ชันปัจจุบัน
+2. **E (Enclosing):** ภายในฟังก์ชันครอบ (สำหรับ Nested Functions/Closures)
+3. **G (Global):** ระดับไฟล์สคริปต์
+4. **B (Built-in):** คำสงวนของระบบ (`len`, `range`, `print`)
 
 ```mermaid
 graph TD
-    Monolith["❌ โปรแกรมแบบก้อนหินก้อนเดียว (Monolithic Spaghetti Code)\n• โค้ดยาว 5,000 บรรทัดติดกัน\n• แก้ยาก บั๊กกระจายตัว หาจุดผิดลำบาก"]
-    Modular["✅ สถาปัตยกรรมแบบโมดูลาร์ (Modular Architecture)\n• แยกเป็นฟังก์ชันเล็กๆ อิสระ (Pure Functions)\n• ทดสอบง่าย นำกลับมาใช้ซ้ำได้ 100%"]
+    LEGB["ลำดับการค้นหาตัวแปร LEGB Rule"]
+    LEGB --> L["1. Local (ในฟังก์ชัน)"]
+    L --> E["2. Enclosing (ฟังก์ชันชั้นนอก)"]
+    E --> G["3. Global (ระดับไฟล์)"]
+    G --> B["4. Built-in (ระบบ Python)"]
 ```
-
-การเขียนโปรแกรมเชิงโมดูลช่วยเปลี่ยนจากโค้ดที่ยุ่งเหยิงให้กลายเป็น **"บล็อกตัวต่อเลโก้ (Building Blocks)"** ที่มีความยืดหยุ่นสูง พร้อมสำหรับการสร้างระบบขนาดใหญ่ในโลกอุตสาหกรรม
 
 ---
 
-## 🏛️ 2.1 ขอบเขตของตัวแปรและกฎ LEGB (Scope Resolution)
+## 🧮 2.2 ตัวอย่างการวิเคราะห์และการคำนวณเชิงขั้นตอน (Worked Examples)
 
-ในภาษา Python เมื่อเราเรียกใช้ชื่อตัวแปรหนึ่งๆ โปรแกรมจะค้นหาตัวแปรตามลำดับ **4 ชั้นของกฎ LEGB** เสมอ:
-
-```mermaid
-graph TD
-    L["1. Local (L): ตัวแปรภายในฟังก์ชันปัจจุบัน"] --> E["2. Enclosing (E): ตัวแปรในฟังก์ชันชั้นนอกที่ครอบอยู่"]
-    E --> G["3. Global (G): ตัวแปรระดับโมดูล/ไฟล์"]
-    G --> B["4. Built-in (B): ฟังก์ชันและคีย์เวิร์ดมาตรฐาน (เช่น len, print, sum)"]
-```
-
-<div style="background: linear-gradient(135deg, #fef2f2, #fee2e2); border-left: 5px solid #ef4444; border-radius: 12px; padding: 18px 22px; margin: 20px 0; color: #7f1d1d;">
-  <h4 style="color: #991b1b; margin-top: 0;">⚠️ หลีกเลี่ยงการใช้คำสั่ง <code>global</code> ในฟังก์ชัน!</h4>
-  <p style="margin: 0; line-height: 1.75;">
-    การใช้คำสั่ง <code>global</code> เพื่อแก้ไขตัวแปรภายนอกจากภายในฟังก์ชัน จะสร้าง <strong>ผลข้างเคียง (Side Effects)</strong> ที่ทำให้การติดตามข้อผิดพลาดทำได้ยากยิ่ง ควรส่งค่าเข้าทาง Parameters และส่งผลลัพธ์ออกทาง <code>return</code> เสมอ (Pure Function)
-  </p>
-</div>
-
----
-
-## ⚙️ 2.2 ฟังก์ชันขั้นสูง: `*args`, `**kwargs` และ Lambda Expressions
-
-### 1. การรับพารามิเตอร์แบบยืดหยุ่น (`*args` และ `**kwargs`)
-* `*args` (Arbitrary Positional Arguments): รับค่าอาร์กิวเมนต์แบบตำแหน่งได้ไม่จำกัดจำนวน (รวมเป็น `tuple`)
-* `**kwargs` (Arbitrary Keyword Arguments): รับค่าอาร์กิวเมนต์แบบคู่คีย์-ค่าได้ไม่จำกัด (รวมเป็น `dict`)
+#### ตัวอย่างที่ 2.1 การทำงานของ Decorator เพื่อวัดเวลาทำงาน
+จงสร้าง Decorator `@timer_decorator` เพื่อวัดเวลาประมวลผลของฟังก์ชันใดๆ โดยไม่ต้องแก้ไขโค้ดภายในฟังก์ชันเดิม:
 
 ```python
-def log_experiment(experiment_name, *measurements, **metadata):
-    print(f"🔬 การทดลอง: {experiment_name}")
-    print(f"   • ข้อมูลการวัด: {measurements}")
-    print(f"   • ข้อมูลแวดล้อม: {metadata}")
+import time
+from functools import wraps
 
-# ตัวอย่างการเรียกใช้
-log_experiment("การหักเหของแสง", 1.33, 1.35, 1.34, lab="Optics 101", temp_c=25.0)
+def timer_decorator(func):
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        t0 = time.perf_counter()
+        result = func(*args, **kwargs)
+        elapsed = time.perf_counter() - t0
+        print(f"⏱️ ฟังก์ชัน {func.__name__} ใช้เวลา: {elapsed:.6f} วินาที")
+        return result
+    return wrapper
 ```
 
 ---
 
-### 2. ฟังก์ชันนิรนาม (Lambda Functions) และ Higher-Order Functions
-ฟังก์ชันขนาดสั้นบรรทัดเดียว มักใช้ร่วมกับ `map()` และ `filter()`:
+## 💻 2.3 การเขียนโปรแกรมและการนำไปใช้จริงด้วย Python 3.11
 
 ```python
-# คัดกรองเฉพาะอุณหภูมิที่เกิน 37.5 องศาเซลเซียส
-temperatures = [36.5, 37.8, 36.9, 38.5, 37.1, 39.0]
-fever_cases = list(filter(lambda t: t > 37.5, temperatures))
-print("ผู้ป่วยที่มีไข้:", fever_cases) # [37.8, 38.5, 39.0]
-```
+# modular_math_engine.py
+from typing import Callable, List
 
----
-
-## 💻 2.3 โค้ดคอมพิวเตอร์: โมดูลคำนวณเวกเตอร์และฟิสิกส์ (`physics_vectors.py`)
-
-```python
-# physics_vectors.py
-# โมดูลฟังก์ชันคำนวณเวกเตอร์และกลศาสตร์สำหรับงานวิทยาศาสตร์
-# ผู้เขียน: ผศ.ดร.ชีวะ ทัศนา (มรภ.รำไพพรรณี)
-
-import math
-
-def vector_magnitude(vx: float, vy: float, vz: float = 0.0) -> float:
-    """คำนวณขนาดของเวกเตอร์ 2 มิติ หรือ 3 มิติ |v| = sqrt(vx^2 + vy^2 + vz^2)"""
-    return math.sqrt(vx**2 + vy**2 + vz**2)
-
-def vector_dot_product(v1: tuple, v2: tuple) -> float:
-    """คำนวณผลคูณสเกลาร์ (Dot Product) ระหว่าง 2 เวกเตอร์"""
-    if len(v1) != len(v2):
-        raise ValueError("มิติของเวกเตอร์ต้องเท่ากัน")
-    return sum(a * b for a, b in zip(v1, v2))
-
-def vector_normalize(v: tuple) -> tuple:
-    """แปลงเวกเตอร์ให้เป็นเวกเตอร์หนึ่งหน่วย (Unit Vector)"""
-    mag = vector_magnitude(*v)
-    if mag == 0:
-        raise ZeroDivisionError("ไม่สามารถแปลงเวกเตอร์ศูนย์เป็น Unit Vector ได้")
-    return tuple(round(x / mag, 4) for x in v)
-
-def main():
-    print("=" * 65)
-    print("🧭 ชุดทดสอบโมดูลเวกเตอร์ฟิสิกส์ (Physics Vector Suite)")
-    print("=" * 65)
-    
-    vec_a = (3.0, 4.0, 0.0)
-    vec_b = (1.0, 2.0, 2.0)
-    
-    mag_a = vector_magnitude(*vec_a)
-    unit_a = vector_normalize(vec_a)
-    dot_ab = vector_dot_product(vec_a, vec_b)
-    
-    print(f"📌 เวกเตอร์ A: {vec_a} -> ขนาด |A| = {mag_a:.2f}")
-    print(f"📌 เวกเตอร์หนึ่งหน่วยของ A: {unit_a}")
-    print(f"📌 ผลคูณ Dot Product (A · B): {dot_ab:.2f}")
-    print("=" * 65)
+def apply_transform(data: List[float], op: Callable[[float], float]) -> List[float]:
+    """Higher-Order Function: ประยุกต์ฟังก์ชัน op กับสมาชิกทุกตัวใน data"""
+    return [op(x) for x in data]
 
 if __name__ == "__main__":
-    main()
+    raw_temps = [25.0, 30.5, 36.2, 40.0]
+    # แปลง Celsius เป็น Fahrenheit ด้วย Lambda
+    to_f = lambda c: (c * 9/5) + 32
+    f_temps = apply_transform(raw_temps, to_f)
+    print("อุณหภูมิฟาเรนไฮต์:", f_temps)
+    assert abs(f_temps[0] - 77.0) < 1e-4, "Test Passed!"
 ```
 
 ---
 
-## 💡 2.4 สรุปใจความสำคัญและแบบฝึกหัดท้ายบทที่ 2
+## 🔬 2.4 คู่มือห้องปฏิบัติการเสมือนจริง 2D/3D AR MediaPipe Hands
 
-### 📌 สรุปประเด็นสำคัญ
-1. **Modular Programming** ช่วยแบ่งโค้ดเป็นส่วนย่อยที่อ่านง่าย ทดสอบง่าย และนำกลับมาใช้ซ้ำได้
-2. **Pure Functions** ไม่สร้าง Side Effects ทำให้โปรแกรมเสถียรและปลอดภัย
-3. **Lambda และ Higher-Order Functions** ช่วยให้การประมวลผลข้อมูลขนาดใหญ่มีความกระชับและมีประสิทธิภาพสูง
+ผู้เรียนสามารถเข้าสู่ชุดจำลองเสมือนจริง 2D/3D เพื่อทดลองประกอบโมดูลฟังก์ชันและจำลอง Call Stack ในอากาศได้ที่ [chapter01_decomposition_tree.html](https://tsanaphy2023.github.io/computing-science/simulators/chapter01_decomposition_tree.html)
 
 ---
 
-### 📝 แบบฝึกหัดทบทวน 3 ระดับ (Exercises)
+## 💡 2.5 สรุปสารัตถะสำคัญประจำบท (Chapter Summary)
 
-#### ระดับที่ 1: ความรู้ความเข้าใจพื้นฐาน (Basic Knowledge)
-1. จงอธิบายความแตกต่างระหว่าง `*args` และ `**kwargs` พร้อมยกตัวอย่างโค้ดสั้นๆ
-2. ตัวแปรที่ประกาศในบรรทัดนอกสุดของไฟล์ `.py` จัดอยู่ในขอบเขตใดตามกฎ LEGB
+1. การแบ่งโมดูลช่วยลดความซับซ้อนและเพิ่ม Cohesion
+2. Python ปฏิบัติต่อฟังก์ชันเป็น First-Class Object ทำให้สามารถส่งเป็นอาร์กิวเมนต์และคืนค่าได้
 
-#### ระดับที่ 2: การวิเคราะห์และประยุกต์ใช้ (Analytical Application)
-3. จงเขียนฟังก์ชัน `calculate_stats(*numbers)` ที่รับชุดตัวเลขจำนวนเท่าใดก็ได้ แล้วคืนค่าเป็น `dict` ที่ประกอบด้วย: ค่าเฉลี่ย (Mean), ค่าสูงสุด (Max), ค่าต่ำสุด (Min), และจำนวนสมาชิกทั้งหมด
+---
 
-#### ระดับที่ 3: การคิดขั้นสูงและบูรณาการ (Advanced Synthesis)
-4. จงใช้ฟังก์ชัน `map()` และ `filter()` ร่วมกับ `lambda` เพื่อแปลงชุดข้อมูลอุณหภูมิในหน่วยเซลเซียส `c_temps = [0, 25, 37, 100, -10]` ให้เป็นหน่วยเคลวิน ($K = C + 273.15$) โดยคัดกรองเฉพาะอุณหภูมิที่มากกว่า $290\text{ K}$
+## ❓ 2.6 แบบฝึกหัดและคำถามท้ายบทเพื่อการประเมินผล (3-Tier Assessment)
+
+1. จงอธิบายความแตกต่างระหว่าง Parameter และ Argument
+2. ให้นักเรียนเขียน Closure Function เพื่อสร้างตัวนับจำนวน (Counter)
+
+---
+
+## 📚 เอกสารอ้างอิงประจำบท (APA 7th Edition References)
+
+* Parnas, D. L. (1972). On the criteria to be used in decomposing systems into modules. *Communications of the ACM*, 15(12), 1053-1058.
+* Lutz, M. (2013). *Learning Python* (5th ed.). O'Reilly Media.
