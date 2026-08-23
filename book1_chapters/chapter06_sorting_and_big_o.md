@@ -1,140 +1,155 @@
-# วิทยาการคำนวณ 1: รากฐานแนวคิดเชิงคำนวณและการแก้ปัญหาอย่างเป็นระบบ
-## บทที่ 6 อัลกอริทึมการจัดเรียงข้อมูลและการวิเคราะห์ความซับซ้อน Big-O
-### (Sorting Algorithms, Divide & Conquer, Merge Sort & Big-O Complexity Analysis)
-**ผู้เขียน:** ผู้ช่วยศาสตราจารย์ ดร.ชีวะ ทัศนา  
-**สังกัด:** สาขาวิชาฟิสิกส์ คณะวิทยาศาสตร์และเทคโนโลยี มหาวิทยาลัยราชภัฏรำไพพรรณี  
-**เอกสารประกอบรายวิชา:** 4122104 วิทยาการคำนวณและการแก้ปัญหาเชิงคำนวณ / การสอนวิทยาการคำนวณ
+# วิทยาการคำนวณ 1 รากฐานการคิดเชิงคำนวณและการแก้ปัญหาเชิงตรรกะ
+## บทที่ 6 ขั้นตอนวิธีการจัดเรียงข้อมูลและการวิเคราะห์ความซับซ้อน (Sorting & Big-O Complexity)
+**ผู้เขียน** ผู้ช่วยศาสตราจารย์ ดร.ชีวะ ทัศนา • สาขาวิชาฟิสิกส์ คณะวิทยาศาสตร์และเทคโนโลยี มหาวิทยาลัยราชภัฏรำไพพรรณี
 
 ---
 
 ## 📋 แผนบริหารการสอนประจำบทที่ 6
 
-### 1. หัวข้อเนื้อหาประจำบท
-1. **เรื่องเล่าเปิดบทเรียนและพลังงานในการจัดเรียงข้อมูล:** พลังงานไฟฟ้าของดาต้าเซ็นเตอร์ระดับโลกและการจัดเรียงข้อมูลอย่างมีประสิทธิภาพ
-2. **การวิเคราะห์ความซับซ้อนเชิงเวลาและพื้นที่ (Asymptotic Time & Space Complexity):** สัญกรณ์ Big-O ($O(1), O(\log N), O(N), O(N \log N), O(N^2), O(2^N)$)
-3. **อัลกอริทึมการจัดเรียงพื้นฐาน (Elementary Sorting):** Bubble Sort, Selection Sort, Insertion Sort (ความซับซ้อน $O(N^2)$)
-4. **อัลกอริทึมการจัดเรียงขั้นสูงแบบแบ่งแยกเพื่อพิชิต (Advanced Divide & Conquer):** Merge Sort, Quick Sort (ความซับซ้อน $O(N \log N)$)
-5. **การวิเคราะห์เสถียรภาพและหน่วยความจำ (Stability & In-Place Sorting):** การเปรียบเทียบข้อดี-ข้อเสียของแต่ละอัลกอริทึม
-6. **โค้ดคอมพิวเตอร์ภาษา Python 3.11 แบบสมบูรณ์:** โปรแกรมจับเวลาและนับจำนวนรอบเปรียบเทียบของ Bubble Sort vs Merge Sort
-7. **คู่มือห้องปฏิบัติการเสมือนจริง 3D AR MediaPipe:** การจำลองการสลับตำแหน่งแท่งข้อมูล 3 มิติ และต้นไม้แบ่งแยก Merge Tree
+### หัวข้อเนื้อหาประจำบท
+1. ความสำคัญของการจัดเรียงข้อมูลในระบบคอมพิวเตอร์
+2. อัลกอริทึมพื้นฐาน: Bubble Sort, Selection Sort, Insertion Sort ($O(n^2)$)
+3. อัลกอริทึมขั้นสูง: Merge Sort, Quick Sort ($O(n \log n)$)
+4. การพิสูจน์ขอบเขตล่างของการจัดเรียงแบบเปรียบเทียบ $\Omega(n \log n)$
+5. ความเสถียรของการจัดเรียง (Sorting Stability) และการใช้หน่วยความจำในที่เดิม (In-place Sorting)
 
-### 2. วัตถุประสงค์เชิงพฤติกรรม (Behavioral Learning Outcomes)
-เมื่อศึกษาบทเรียนนี้จบแล้ว ผู้เรียนสามารถ:
-1. **อธิบาย (Explain)** นิยามและประโยชน์ของสัญกรณ์ Big-O ในการประเมินประสิทธิภาพของขั้นตอนวิธีได้อย่างถูกต้อง
-2. **จำแนกและเขียน (Classify & Construct)** อัลกอริทึมการจัดเรียง Bubble Sort, Selection Sort, Insertion Sort และ Merge Sort ได้
-3. **วิเคราะห์ (Analyze)** ความซับซ้อนในกรณีดีที่สุด (Best Case), เฉลี่ย (Average Case), และแย่ที่สุด (Worst Case) ได้
-4. **สร้างสรรค์ (Create)** โปรแกรมภาษา Python 3.11 ในการจัดเรียงชุดข้อมูลขนาดใหญ่ได้อย่างมีประสิทธิภาพ
-5. **ปฏิบัติการ (Operate)** การทดลองเสมือนจริง 3D AR MediaPipe Hands เพื่อควบคุมและสังเกตการจัดเรียงข้อมูลแบบ 3 มิติได้
+### วัตถุประสงค์เชิงพฤติกรรม
+เมื่อศึกษาบทเรียนนี้จบแล้ว ผู้เรียนสามารถ
+1. อธิบายและจำลองขั้นตอนการทำงานของ Bubble, Insertion, Merge, และ Quick Sort ได้
+2. เปรียบเทียบความซับซ้อนเชิงเวลาใน Best, Average, และ Worst Cases ของแต่ละอัลกอริทึมได้
+3. เขียนโปรแกรมภาษา Python เพื่อจัดเรียงข้อมูลและวัดประสิทธิภาพเชิงประจักษ์ได้
+4. เลือกใช้อัลกอริทึมการจัดเรียงที่เหมาะสมกับขนาดและลักษณะของข้อมูลได้
+
+### กิจกรรมการเรียนการสอน
+1. การบรรยายเชิงวิชาการและการเชื่อมโยงบริบทประวัติศาสตร์วิทยาการคำนวณ
+2. การสาธิตการวิเคราะห์คณิตศาสตร์ การจัดสรรหน่วยความจำ และโครงสร้างข้อมูล
+3. การฝึกปฏิบัติการจำลองเสมือนจริง 2D Canvas และ 3D AR MediaPipe Hands
+4. การเขียนโปรแกรมภาษา Python 3.11 และการทดสอบ Assertion Tests เชิงประจักษ์
+
+### สื่อการเรียนการสอน
+1. ตำราเรียนวิชาการ "วิทยาการคำนวณ 1 รากฐานการคิดเชิงคำนวณและการแก้ปัญหาเชิงตรรกะ"
+2. ชุดห้องปฏิบัติการเสมือนจริง Hybrid 2D/3D บนระบบ RBRU MOOC
+3. สไลด์บรรยายอิเล็กทรอนิกส์และแผนภาพเวกเตอร์มัลติมีเดีย
+
+### การวัดและประเมินผล
+1. การประเมินผลการทำใบงานและตารางบันทึกผลการทดลองเสมือนจริง (40%)
+2. การประเมินผลงานการเขียนโค้ดภาษา Python และ Unit Test Assertions (30%)
+3. การทดสอบวัดผลสัมฤทธิ์ทางการเรียนท้ายบท 3 ระดับ (30%)
 
 ---
 
-## ⚡ 6.0 สัญกรณ์ Big-O และกราฟเปรียบเทียบประสิทธิภาพ (Big-O Complexity Chart)
+## 🌌 6.0 เรื่องเล่าเปิดบทเรียนและบริบททางประวัติศาสตร์
+
+ในคริสต์ศักราช 1945 จอห์น ฟอน นอยมันน์ ได้คิดค้นขั้นตอนวิธี **Merge Sort** ซึ่งเป็นอัลกอริทึมการจัดเรียงข้อมูลแบบแบ่งแยกและเอาชนะตัวแรกของโลก ต่อมาในปี 1959 เซอร์ โทนี ฮอร์ (Sir Charles Antony Richard Hoare, 1934—ปัจจุบัน) นักวิทยาการคอมพิวเตอร์ชาวอังกฤษ ได้คิดค้น **Quick Sort** ซึ่งเป็นอัลกอริทึมการจัดเรียงที่ได้รับความนิยมสูงสุดในระบบปฏิบัติการและไลบรารีมาตรฐานทั่วโลกตราบจนปัจจุบัน
+
+---
+
+## 📐 6.1 ทฤษฎีและรากฐานทางคณิตศาสตร์เชิงลึก
+
+### การพิสูจน์ขอบเขตล่างของการจัดเรียงแบบเปรียบเทียบ (Comparison Sort Lower Bound)
+การจัดเรียงข้อมูล $n$ ตัว สามารถมองเป็นต้นไม้การตัดสินใจ (Decision Tree) ที่มีใบไม้แทนการเรียงสับเปลี่ยนที่เป็นไปได้ทั้งหมด $n!$ แบบ:
+ความสูงของต้นไม้การตัดสินใจ $h$ คือจำนวนครั้งการเปรียบเทียบที่น้อยที่สุดในกรณีแย่ที่สุด:
+$$2^h \ge n! \implies h \ge \log_2(n!)$$
+
+จากสูตรการประมาณค่าของสเตอร์ลิง (Stirling's Approximation): $\ln(n!) \approx n \ln n - n$
+$$\log_2(n!) = \Theta(n \log n)$$
+ดังนั้น ไม่มีอัลกอริทึมการจัดเรียงแบบเปรียบเทียบใดๆ ในโลกที่ทำได้เร็วกว่า $\Omega(n \log n)$ ในกรณีแย่ที่สุด!
 
 ```mermaid
-graph LR
-    O1["O(1)\nคงที่ตลอดกาล (Constant)"] --> OLOGN["O(log N)\nลอการิทึม (Logarithmic)\n• Binary Search"]
-    OLOGN --> ON["O(N)\nเชิงเส้น (Linear)\n• Linear Search"]
-    ON --> ONLOGN["O(N log N)\nลิเนียริทึมิก (Linearithmic)\n• Merge Sort / Timsort"]
-    ONLOGN --> ON2["O(N²)\nกำลังสอง (Quadratic)\n• Bubble / Selection Sort"]
-    ON2 --> O2N["O(2ⁿ)\nเลขชี้กำลัง (Exponential)\n• ห้ามใช้ใน Big Data!"]
+graph TD
+    Sort["การจำแนกประเภท Sorting Algorithms"]
+    Sort --> Quad["กลุ่ม O(n²) : พื้นฐาน ข้อมูลขนาดเล็ก
+• Bubble Sort, Selection Sort, Insertion Sort"]
+    Sort --> NLogN["กลุ่ม O(n log n) : ประสิทธิภาพสูง ข้อมูลขนาดใหญ่
+• Merge Sort (Stable), Quick Sort (In-place)"]
 ```
 
 ---
 
-## 💻 6.1 โค้ดคอมพิวเตอร์ภาษา Python 3.11: Merge Sort vs Bubble Sort Benchmark
+## 🧮 6.2 ตัวอย่างการวิเคราะห์และการคำนวณเชิงขั้นตอน (Worked Examples)
+
+#### ตัวอย่างที่ 6.1 การจำลองขั้นตอนของ Insertion Sort
+กำหนดให้อาเรย์ $A = [5, 2, 4, 6, 1, 3]$ จงแสดงสถานะของอาเรย์หลังจบรอบที่ $i = 1, 2, 3$:
+
+**วิธีทำ:**
+* **เริ่มต้น:** $[5, 2, 4, 6, 1, 3]$
+* **รอบที่ 1 ($key=2$):** แทรก 2 หน้า 5 $\implies [2, 5, 4, 6, 1, 3]$
+* **รอบที่ 2 ($key=4$):** แทรก 4 ระหว่าง 2 และ 5 $\implies [2, 4, 5, 6, 1, 3]$
+* **รอบที่ 3 ($key=6$):** 6 มากกว่า 5 อยู่ตำแหน่งเดิม $\implies [2, 4, 5, 6, 1, 3]$
+* **รอบที่ 4 ($key=1$):** แทรก 1 หน้าสุด $\implies [1, 2, 4, 5, 6, 3]$
+* **รอบที่ 5 ($key=3$):** แทรก 3 ระหว่าง 2 และ 4 $\implies [1, 2, 3, 4, 5, 6]$ **(จัดเรียงสมบูรณ์)**
+
+---
+
+## 💻 6.3 การเขียนโปรแกรมและการนำไปใช้จริงด้วย Python 3.11
 
 ```python
-# ==============================================================================
 # sorting_algorithms_benchmark.py
-# โปรแกรมเปรียบเทียบประสิทธิภาพ Bubble Sort O(N^2) vs Merge Sort O(N log N)
-# ผู้เขียน: ผู้ช่วยศาสตราจารย์ ดร.ชีวะ ทัศนา (มหาวิทยาลัยราชภัฏรำไพพรรณี)
-# มาตรฐาน: Python 3.11+ • PEP 8 Compliant • Pure Standard Library
-# ==============================================================================
-
+import time, random
 from typing import List
-import random
-import time
 
-def bubble_sort(arr: List[int]) -> Tuple[List[int], int]:
-    """Bubble Sort O(N^2)"""
-    data = list(arr)
-    n = len(data)
-    comparisons = 0
+def quick_sort(arr: List[int]) -> List[int]:
+    """Quick Sort O(N log N) Implementation"""
+    if len(arr) <= 1:
+        return arr
+    pivot = arr[len(arr) // 2]
+    left = [x for x in arr if x < pivot]
+    middle = [x for x in arr if x == pivot]
+    right = [x for x in arr if x > pivot]
+    return quick_sort(left) + middle + quick_sort(right)
+
+def bubble_sort(arr: List[int]) -> List[int]:
+    """Bubble Sort O(N^2) Implementation"""
+    a = arr.copy()
+    n = len(a)
     for i in range(n):
         swapped = False
         for j in range(0, n - i - 1):
-            comparisons += 1
-            if data[j] > data[j + 1]:
-                data[j], data[j + 1] = data[j + 1], data[j]
+            if a[j] > a[j+1]:
+                a[j], a[j+1] = a[j+1], a[j]
                 swapped = True
         if not swapped:
             break
-    return data, comparisons
-
-def merge_sort(arr: List[int]) -> Tuple[List[int], int]:
-    """Merge Sort O(N log N)"""
-    comparisons = [0]
-    
-    def _sort(sub_arr: List[int]) -> List[int]:
-        if len(sub_arr) <= 1:
-            return sub_arr
-        mid = len(sub_arr) // 2
-        left = _sort(sub_arr[:mid])
-        right = _sort(sub_arr[mid:])
-        
-        merged = []
-        i = j = 0
-        while i < len(left) and j < len(right):
-            comparisons[0] += 1
-            if left[i] <= right[j]:
-                merged.append(left[i])
-                i += 1
-            else:
-                merged.append(right[j])
-                j += 1
-        merged.extend(left[i:])
-        merged.extend(right[j:])
-        return merged
-        
-    sorted_res = _sort(arr)
-    return sorted_res, comparisons[0]
+    return a
 
 if __name__ == "__main__":
-    test_size = 5000
-    raw_data = [random.randint(1, 100000) for _ in range(test_size)]
-    
-    # 1. รัน Bubble Sort
+    test_data = [random.randint(1, 1000) for _ in range(1000)]
     t0 = time.perf_counter()
-    _, comp_bubble = bubble_sort(raw_data)
-    time_bubble = time.perf_counter() - t0
+    _ = quick_sort(test_data)
+    t_quick = time.perf_counter() - t0
     
-    # 2. รัน Merge Sort
     t0 = time.perf_counter()
-    sorted_merge, comp_merge = merge_sort(raw_data)
-    time_merge = time.perf_counter() - t0
+    _ = bubble_sort(test_data)
+    t_bubble = time.perf_counter() - t0
     
-    print("\n" + "=" * 78)
-    print(f"📊 ผลการทดสอบประสิทธิภาพการจัดเรียงข้อมูล {test_size:,} สมาชิก")
-    print("=" * 78)
-    print(f"• Bubble Sort (O(N^2))    : เวลา {time_bubble:6.4f} วินาที | เปรียบเทียบ: {comp_bubble:,} ครั้ง")
-    print(f"• Merge Sort  (O(N log N)): เวลา {time_merge:6.4f} วินาที | เปรียบเทียบ: {comp_merge:,} ครั้ง")
-    print(f"⚡ Merge Sort เร็วกว่า Bubble Sort: {time_bubble / time_merge:,.1f} เท่า!")
-    print("=" * 78 + "\n")
+    print(f"Quick Sort (1000 items): {t_quick:.6f} s")
+    print(f"Bubble Sort (1000 items): {t_bubble:.6f} s (ช้ากว่า {(t_bubble/t_quick):.1f} เท่า)")
+    assert quick_sort([3, 1, 2]) == [1, 2, 3], "Test Passed!"
 ```
 
 ---
 
-## 🔬 6.2 คู่มือห้องปฏิบัติการเสมือนจริง 3D AR MediaPipe Hands (บทที่ 6)
+## 🔬 6.4 คู่มือห้องปฏิบัติการเสมือนจริง 2D/3D AR MediaPipe Hands
 
-* **6.0 Data Center Sorting Energy:** [`chapter06_data_center_sorting.html`](https://tsanaphy2023.github.io/computing-science/simulators/chapter06_data_center_sorting.html)
-* **6.1 Big-O Curve Comparator:** [`chapter06_big_o_curve_comparator.html`](https://tsanaphy2023.github.io/computing-science/simulators/chapter06_big_o_curve_comparator.html)
-* **6.2 Bubble & Selection Sorting 3D:** [`chapter06_bubble_selection_3d.html`](https://tsanaphy2023.github.io/computing-science/simulators/chapter06_bubble_selection_3d.html)
-* **6.3 Card Insertion Playground:** [`chapter06_card_insertion_playground.html`](https://tsanaphy2023.github.io/computing-science/simulators/chapter06_card_insertion_playground.html)
-* **6.4 Divide & Conquer Merge Tree:** [`chapter06_divide_conquer_merge_tree.html`](https://tsanaphy2023.github.io/computing-science/simulators/chapter06_divide_conquer_merge_tree.html)
+ผู้เรียนสามารถเข้าสู่ชุดจำลองเสมือนจริง 2D/3D เพื่อทดลองประลองความเร็วของอัลกอริทึมจัดเรียงได้ที่ [chapter06_sorting_arena.html](https://tsanaphy2023.github.io/computing-science/simulators/chapter06_sorting_arena.html)
 
 ---
 
-## 📚 เอกสารอ้างอิงประจำบท (References)
-1. Knuth, D. E. (1998). *The Art of Computer Programming, Volume 3: Sorting and Searching* (2nd ed.). Addison-Wesley.
-2. Cormen, T. H., et al. (2022). *Introduction to Algorithms* (4th ed.). MIT Press.
-3. Thassana, C. (2026). *Computational Thinking and Applied Artificial Intelligence for Science Education*. Rambhai Barni Rajabhat University Press.
+## 💡 6.5 สรุปสารัตถะสำคัญประจำบท (Chapter Summary)
+
+1. อัลกอริทึม $O(n^2)$ เหมาะกับข้อมูลขนาดเล็กและโค้ดที่ต้องการความเรียบง่าย
+2. Merge Sort และ Quick Sort เป็นตัวเลือกหลักในการประมวลผลข้อมูลขนาดใหญ่ด้วยประสิทธิภาพ $O(n \log n)$
+
+---
+
+## ❓ 6.6 แบบฝึกหัดและคำถามท้ายบทเพื่อการประเมินผล (3-Tier Assessment)
+
+1. จงอธิบายความหมายของ "Stable Sorting" และเหตุใดจึงสำคัญในการจัดเรียงฐานข้อมูลหลายคอลัมน์
+2. ให้นักเรียนวิเคราะห์ Worst Case ของ Quick Sort ว่าเกิดขึ้นเมื่อใด และมีวิธีป้องกันอย่างไร?
+
+---
+
+## 📚 เอกสารอ้างอิงประจำบท (APA 7th Edition References)
+
+* Hoare, C. A. R. (1962). Quicksort. *The Computer Journal*, 5(1), 10-15.
+* Sedgewick, R. (1978). Implementing Quicksort programs. *Communications of the ACM*, 21(10), 847-857.

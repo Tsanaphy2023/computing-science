@@ -1,153 +1,166 @@
-# วิทยาการคำนวณ 1: รากฐานแนวคิดเชิงคำนวณและการแก้ปัญหาอย่างเป็นระบบ
-## บทที่ 5 โครงสร้างข้อมูลและอัลกอริทึมการค้นหาข้อมูลทางวิทยาศาสตร์
-### (Data Structures, Sequential Lists, Hash Dictionaries, Linear & Binary Search)
-**ผู้เขียน:** ผู้ช่วยศาสตราจารย์ ดร.ชีวะ ทัศนา  
-**สังกัด:** สาขาวิชาฟิสิกส์ คณะวิทยาศาสตร์และเทคโนโลยี มหาวิทยาลัยราชภัฏรำไพพรรณี  
-**เอกสารประกอบรายวิชา:** 4122104 วิทยาการคำนวณและการแก้ปัญหาเชิงคำนวณ / การสอนวิทยาการคำนวณ
+# วิทยาการคำนวณ 1 รากฐานการคิดเชิงคำนวณและการแก้ปัญหาเชิงตรรกะ
+## บทที่ 5 โครงสร้างข้อมูลพื้นฐานและขั้นตอนวิธีการค้นหา (Data Structures & Searching)
+**ผู้เขียน** ผู้ช่วยศาสตราจารย์ ดร.ชีวะ ทัศนา • สาขาวิชาฟิสิกส์ คณะวิทยาศาสตร์และเทคโนโลยี มหาวิทยาลัยราชภัฏรำไพพรรณี
 
 ---
 
 ## 📋 แผนบริหารการสอนประจำบทที่ 5
 
-### 1. หัวข้อเนื้อหาประจำบท
-1. **เรื่องเล่าเปิดบทเรียนและสถาปัตยกรรมการจัดเก็บข้อมูล:** การค้นหาข้อมูลในคลังข้อมูลวิทยาศาสตร์ขนาดใหญ่ (Big Data) และพลังของโครงสร้างข้อมูล
-2. **โครงสร้างข้อมูลแบบลำดับ (Sequential Data Structures):** รายการ (`list`), ทูเพิล (`tuple`), เมธอดการจัดการข้อมูล (`append`, `pop`, `insert`, `remove`)
-3. **โครงสร้างข้อมูลแบบคู่กุญแจ-ค่าและตารางแฮช (Hash Tables & Dictionaries):** พจนานุกรม (`dict`), เซต (`set`), ประสิทธิภาพการเข้าถึงข้อมูล $O(1)$
-4. **อัลกอริทึมการค้นหาแบบเชิงเส้น (Linear Search):** หลักการทำงาน, การค้นหาในข้อมูลที่ไม่ได้เรียงลำดับ, ประสิทธิภาพเชิงเวลา $O(N)$
-5. **อัลกอริทึมการค้นหาแบบทวิภาค (Binary Search):** กลไกแบ่งครึ่งช่วงข้อมูล (Divide & Conquer), การค้นหาในข้อมูลที่เรียงลำดับแล้ว, ประสิทธิภาพ $O(\log N)$
-6. **การวิเคราะห์เปรียบเทียบประสิทธิภาพการค้นหา (Search Performance Benchmarking):** การทดสอบความเร็วในชุดข้อมูล 1,000,000 สมาชิก
-7. **โค้ดคอมพิวเตอร์ภาษา Python 3.11 แบบสมบูรณ์:** โปรแกรมเปรียบเทียบความเร็ว Linear vs Binary Search และการจัดการข้อมูลนักวิจัย
-8. **คู่มือห้องปฏิบัติการเสมือนจริง 3D AR MediaPipe:** การจำลอง Dynamic List Visualizer และการแข่งขันความเร็ว Binary Search ในอวกาศ 3 มิติ
+### หัวข้อเนื้อหาประจำบท
+1. โครงสร้างข้อมูลเชิงเส้น (Linear Data Structures: Arrays, Stacks, Queues)
+2. หลักการทำงานของ Stack (LIFO) และ Queue (FIFO)
+3. สถาปัตยกรรมหน่วยความจำแบบต่อเนื่อง (Contiguous Memory Allocation)
+4. ขั้นตอนวิธีการค้นหาแบบเชิงเส้น (Linear Search) และการค้นหาแบบทวิภาค (Binary Search)
+5. การวิเคราะห์ความซับซ้อนเชิงเวลา Big-O ของการค้นหาข้อมูล
 
-### 2. วัตถุประสงค์เชิงพฤติกรรม (Behavioral Learning Outcomes)
-เมื่อศึกษาบทเรียนนี้จบแล้ว ผู้เรียนสามารถ:
-1. **อธิบาย (Explain)** ความแตกต่างระหว่างโครงสร้างข้อมูล List, Tuple, Dictionary, และ Set ในภาษา Python ได้อย่างถูกต้อง
-2. **เลือกใช้ (Select & Apply)** โครงสร้างข้อมูลที่เหมาะสมกับชนิดและพฤติกรรมของข้อมูลในการทดลองทางวิทยาศาสตร์ได้
-3. **ออกแบบและเขียน (Design & Construct)** อัลกอริทึมการค้นหาแบบ Linear Search และ Binary Search ได้อย่างถูกต้อง
-4. **วิเคราะห์และเปรียบเทียบ (Analyze & Compare)** ประสิทธิภาพเชิงเวลา (Time Complexity) ระหว่าง $O(N)$ และ $O(\log N)$ ได้
-5. **สร้างสรรค์ (Create)** โปรแกรมภาษา Python 3.11 ในการค้นหาและกรองข้อมูลขนาดใหญ่ได้อย่างมีประสิทธิภาพ
-6. **ปฏิบัติการ (Operate)** การทดลองเสมือนจริง 3D AR MediaPipe Hands เพื่อควบคุมโครงสร้างข้อมูลแบบไร้สัมผัสได้
+### วัตถุประสงค์เชิงพฤติกรรม
+เมื่อศึกษาบทเรียนนี้จบแล้ว ผู้เรียนสามารถ
+1. อธิบายความแตกต่างของโครงสร้างข้อมูล Stack, Queue, และ Array ได้อย่างถูกต้อง
+2. คำนวณจำนวนรอบการค้นหาของ Binary Search บนชุดข้อมูลขนาดใหญ่ได้
+3. เขียนโปรแกรมภาษา Python จำลองการทำงานของ Stack, Queue, และ Binary Search ได้
+4. เลือกใช้โครงสร้างข้อมูลและอัลกอริทึมการค้นหาที่เหมาะสมกับโจทย์ปัญหาจริงได้
+
+### กิจกรรมการเรียนการสอน
+1. การบรรยายเชิงวิชาการและการเชื่อมโยงบริบทประวัติศาสตร์วิทยาการคำนวณ
+2. การสาธิตการวิเคราะห์คณิตศาสตร์ การจัดสรรหน่วยความจำ และโครงสร้างข้อมูล
+3. การฝึกปฏิบัติการจำลองเสมือนจริง 2D Canvas และ 3D AR MediaPipe Hands
+4. การเขียนโปรแกรมภาษา Python 3.11 และการทดสอบ Assertion Tests เชิงประจักษ์
+
+### สื่อการเรียนการสอน
+1. ตำราเรียนวิชาการ "วิทยาการคำนวณ 1 รากฐานการคิดเชิงคำนวณและการแก้ปัญหาเชิงตรรกะ"
+2. ชุดห้องปฏิบัติการเสมือนจริง Hybrid 2D/3D บนระบบ RBRU MOOC
+3. สไลด์บรรยายอิเล็กทรอนิกส์และแผนภาพเวกเตอร์มัลติมีเดีย
+
+### การวัดและประเมินผล
+1. การประเมินผลการทำใบงานและตารางบันทึกผลการทดลองเสมือนจริง (40%)
+2. การประเมินผลงานการเขียนโค้ดภาษา Python และ Unit Test Assertions (30%)
+3. การทดสอบวัดผลสัมฤทธิ์ทางการเรียนท้ายบท 3 ระดับ (30%)
 
 ---
 
-## 🏛️ 5.0 เรื่องเล่าเปิดบทเรียน: พลังแห่งการจัดระเบียบข้อมูลจากห้องสมุดสู่ Big Data
+## 🌌 5.0 เรื่องเล่าเปิดบทเรียนและบริบททางประวัติศาสตร์
 
-ลองจินตนาการว่าท่านกำลังเดินเข้าไปใน **หอสมุดแห่งชาติที่มีหนังสือ 1,000,000 เล่ม** หากหนังสือเหล่านั้นถูกวางกองสุมกันอย่างไร้ระเบียบบนพื้น และท่านต้องการหาหนังสือฟิสิกส์เพียง 1 เล่ม ท่านอาจต้องเดินเปิดดูทีละเล่มตั้งแต่เล่มแรกจนถึงเล่มที่ 1,000,000 ซึ่งอาจใช้เวลาทั้งชีวิต! (นี่คือ **Linear Search**)
+ในคริสต์ทศวรรษ 1940 จอห์น ฟอน นอยมันน์ (John von Neumann, 1903—1957) นักคณิตศาสตร์ชาวอเมริกันเชื้อสายฮังการี ได้วางรากฐานสถาปัตยกรรมคอมพิวเตอร์แบบเก็บโปรแกรม (Von Neumann Architecture) ซึ่งกำหนดให้หน่วยความจำหลัก (RAM) ทำหน้าที่เก็บทั้งคำสั่งและข้อมูลในรูปแถวลำดับที่ต่อเนื่องกัน
 
-แต่หากหนังสือถูกจัดเรียงตามลำดับตัวอักษรของชื่อเรื่องบนชั้นวาง ท่านสามารถเดินตรงไปยังกึ่งกลางของหอสมุด เปิดดูหมวดตัวอักษร หากตัวอักษรที่ต้องการอยู่ครึ่งหลัง ท่านก็สามารถ **"ตัดทิ้งหนังสือ 500,000 เล่มในครึ่งแรกออกไปได้ในการตรวจสอบเพียงครั้งเดียว!"** (นี่คือ **Binary Search**)
+เมื่อข้อมูลถูกจัดเรียงตามลำดับอย่างเป็นระเบียบ มนุษย์สามารถใช้หลักการ "แบ่งแยกและเอาชนะ (Divide and Conquer)" ในการค้นหาข้อมูล เช่น การเปิดหาคำศัพท์ในพจนานุกรมเล่มหนา 1,000 หน้า โดยการเปิดที่กึ่งกลางเสมอ ซึ่งทำให้เราค้นหาคำที่ต้องการเจอได้ภายในไม่เกิน 10 ครั้ง ($2^{10} = 1024$) แทนที่จะต้องไล่ทีละหน้าตั้งแต่หน้าแรกถึง 1,000 หน้า
+
+---
+
+## 📐 5.1 ทฤษฎีและรากฐานทางคณิตศาสตร์เชิงลึก
+
+### คณิตศาสตร์ของการค้นหาแบบทวิภาค (Binary Search Derivation)
+กำหนดให้อาเรย์ $A$ มีสมาชิก $n$ ตัวที่เรียงลำดับแล้ว ในแต่ละขั้นตอนของการค้นหา ช่วงการค้นหาจะลดลงครึ่งหนึ่งเสมอ:
+* รอบที่ 0: ขนาดช่วง $= n$
+* รอบที่ 1: ขนาดช่วง $= \frac{n}{2}$
+* รอบที่ 2: ขนาดช่วง $= \frac{n}{4} = \frac{n}{2^2}$
+* รอบที่ $k$: ขนาดช่วง $= \frac{n}{2^k}$
+
+การค้นหาจะสิ้นสุดลงเมื่อช่วงการค้นหาเหลือสมาชิกเพียง 1 ตัว นั่นคือ $\frac{n}{2^k} = 1 \implies 2^k = n$
+ทำการใส่ฟังก์ชันลอการิทึมฐาน 2 ทั้งสองข้าง:
+$$k = \log_2 n$$
+
+นั่นคือ ความซับซ้อนเชิงเวลาในกรณีแย่ที่สุด (Worst-Case Time Complexity) ของ Binary Search คือ:
+$$T(n) = O(\log n)$$
 
 ```mermaid
 graph TD
-    subgraph LIN["Linear Search (ค้นหาทีละรายการ)"]
-        L1["ตรวจเล่มที่ 1"] --> L2["ตรวจเล่มที่ 2"]
-        L2 --> L3["..."]
-        L3 --> LN["ตรวจเล่มที่ N (ใช้เวลาสูงสุด N รอบ)"]
-    end
-    subgraph BIN["Binary Search (แบ่งครึ่งช่วงข้อมูล)"]
-        B1["ตรวจเล่มกึ่งกลาง (N/2)"] --> B2["ตัดข้อมูลครึ่งหนึ่งทิ้งทันที 50%"]
-        B2 --> B3["ตรวจกึ่งกลางของส่วนที่เหลือ (N/4)"]
-        B3 --> BN["พบเป้าหมายในเวลาเพียง log2(N) รอบ!"]
-    end
+    Root["Binary Search Interval: [0 .. n-1]"]
+    Root -->|Target < Mid| Left["Left Half: [0 .. Mid-1] (ตัดครึ่งขวาทิ้ง)"]
+    Root -->|Target == Mid| Found["Found Target! 🎉 (จบการค้นหา)"]
+    Root -->|Target > Mid| Right["Right Half: [Mid+1 .. n-1] (ตัดครึ่งซ้ายทิ้ง)"]
 ```
 
-ในชุดข้อมูลขนาด **1,000,000 รายการ**:
-* **Linear Search** อาจต้องค้นหามากถึง **1,000,000 รอบ**
-* **Binary Search** ใช้การเปรียบเทียบไม่เกิน **20 รอบเท่านั้น!** ($\log_2(1,000,000) \approx 19.93$)
+---
+
+## 🧮 5.2 ตัวอย่างการวิเคราะห์และการคำนวณเชิงขั้นตอน (Worked Examples)
+
+#### ตัวอย่างที่ 5.1 การค้นหาค่าในลิสต์ด้วย Binary Search
+กำหนดลิสต์ $A = [12, 25, 33, 47, 56, 68, 79, 84, 91, 99]$ ขนาด $n = 10$ จงแสดงขั้นตอนการค้นหาค่า $Target = 79$:
+
+**วิธีทำ:**
+1. **รอบที่ 1:** $L = 0, R = 9 \implies Mid = \lfloor (0+9)/2 \rfloor = 4$  
+   ค่าที่ $A[4] = 56$  
+   เนื่องจาก $79 > 56$ ดังนั้นค้นหาในครึ่งขวา: กำหนด $L = Mid + 1 = 5$
+2. **รอบที่ 2:** $L = 5, R = 9 \implies Mid = \lfloor (5+9)/2 \rfloor = 7$  
+   ค่าที่ $A[7] = 84$  
+   เนื่องจาก $79 < 84$ ดังนั้นค้นหาในครึ่งซ้าย: กำหนด $R = Mid - 1 = 6$
+3. **รอบที่ 3:** $L = 5, R = 6 \implies Mid = \lfloor (5+6)/2 \rfloor = 5$  
+   ค่าที่ $A[5] = 68$  
+   เนื่องจาก $79 > 68$ ดังนั้นค้นหาในครึ่งขวา: กำหนด $L = Mid + 1 = 6$
+4. **รอบที่ 4:** $L = 6, R = 6 \implies Mid = 6$  
+   ค่าที่ $A[6] = 79$  
+   เนื่องจาก $A[6] == Target$ **(พบข้อมูลที่ดัชนี 6 ใน 4 ขั้นตอน!)**
 
 ---
 
-## 🗃️ 5.1 โครงสร้างข้อมูลพื้นฐาน: List, Tuple, Dictionary และ Set
-
-| โครงสร้างข้อมูล | สัญลักษณ์ไวยากรณ์ | คุณสมบัติการเปลี่ยนแปลงค่า (Mutability) | ลำดับสมาชิก (Ordered) | ความเร็วการค้นหา |
-| :---: | :---: | :---: | :---: | :---: |
-| **List (รายการ)** | `[1, 2, 3]` | **Mutable** (แก้ไข เพิ่ม ลบได้) | มีลำดับแน่นอน (Indexed) | $O(N)$ |
-| **Tuple (ทูเพิล)** | `(1, 2, 3)` | **Immutable** (แก้ไขไม่ได้ ปลอดภัยสูง) | มีลำดับแน่นอน (Indexed) | $O(N)$ |
-| **Dictionary (พจนานุกรม)** | `{"key": "val"}` | **Mutable** (กุญแจห้ามซ้ำ) | เรียงตามลำดับการใส่ (Python 3.7+) | **$O(1)$ (เร็วที่สุด)** |
-| **Set (เซต)** | `{1, 2, 3}` | **Mutable** (สมาชิกไม่ซ้ำกัน) | ไม่มีลำดับ (Unordered) | **$O(1)$ (เร็วที่สุด)** |
-
----
-
-## 💻 5.2 โค้ดคอมพิวเตอร์ภาษา Python 3.11: การค้นหาข้อมูล Linear vs Binary Search
+## 💻 5.3 การเขียนโปรแกรมและการนำไปใช้จริงด้วย Python 3.11
 
 ```python
-# ==============================================================================
-# search_algorithms_benchmark.py
-# โปรแกรมเปรียบเทียบประสิทธิภาพการค้นหา Linear Search vs Binary Search
-# ผู้เขียน: ผู้ช่วยศาสตราจารย์ ดร.ชีวะ ทัศนา (มหาวิทยาลัยราชภัฏรำไพพรรณี)
-# มาตรฐาน: Python 3.11+ • PEP 8 Compliant • Pure Standard Library
-# ==============================================================================
+# binary_search_engine.py
+# การค้นหาแบบทวิภาคพร้อมบันทึกประวัติการทำงานและ Unit Test
+from typing import List, Tuple, Optional
 
-from typing import List, Optional, Tuple
-import time
-
-def linear_search(data: List[int], target: int) -> Tuple[Optional[int], int]:
-    """การค้นหาแบบเชิงเส้น (Linear Search) คืนค่า (ดัชนีที่พบ, จำนวนรอบที่เปรียบเทียบ)"""
-    comparisons = 0
-    for index, value in enumerate(data):
-        comparisons += 1
-        if value == target:
-            return index, comparisons
-    return None, comparisons
-
-def binary_search(sorted_data: List[int], target: int) -> Tuple[Optional[int], int]:
-    """การค้นหาแบบทวิภาค (Binary Search) คืนค่า (ดัชนีที่พบ, จำนวนรอบที่เปรียบเทียบ)"""
+def binary_search_trace(arr: List[int], target: int) -> Tuple[Optional[int], List[dict]]:
+    """ค้นหา target ใน arr ที่เรียงลำดับแล้ว และคืนค่าดัชนีพร้อมประวัติการค้นหา"""
     left = 0
-    right = len(sorted_data) - 1
-    comparisons = 0
+    right = len(arr) - 1
+    history = []
+    step = 1
     
     while left <= right:
-        comparisons += 1
         mid = (left + right) // 2
-        mid_val = sorted_data[mid]
+        val = arr[mid]
         
-        if mid_val == target:
-            return mid, comparisons
-        elif mid_val < target:
+        history.append({
+            "step": step, "left": left, "right": right,
+            "mid": mid, "val": val, "match": val == target
+        })
+        
+        if val == target:
+            return mid, history
+        elif val < target:
             left = mid + 1
         else:
             right = mid - 1
-            
-    return None, comparisons
+        step += 1
+        
+    return None, history
 
 if __name__ == "__main__":
-    # สร้างชุดข้อมูลขนาด 1,000,000 สมาชิก
-    dataset_size = 1_000_000
-    sorted_dataset = list(range(1, dataset_size + 1))
-    target_value = 999_999  # ค้นหาค่าที่อยู่ท้ายสุด
-    
-    # 1. ทดสอบ Linear Search
-    idx_lin, comp_lin = linear_search(sorted_dataset, target_value)
-    
-    # 2. ทดสอบ Binary Search
-    idx_bin, comp_bin = binary_search(sorted_dataset, target_value)
-    
-    print("\n" + "=" * 76)
-    print(f"🔬 ผลการทดสอบประสิทธิภาพการค้นหาข้อมูลขนาด {dataset_size:,} สมาชิก")
-    print("=" * 76)
-    print(f"🎯 ค่าเป้าหมายที่ค้นหา : {target_value:,}")
-    print(f"• Linear Search : ดัชนี {idx_lin} | จำนวนรอบเปรียบเทียบ: {comp_lin:,} รอบ")
-    print(f"• Binary Search : ดัชนี {idx_bin} | จำนวนรอบเปรียบเทียบ: {comp_bin:,} รอบ")
-    print(f"⚡ อัตราความเร็วเหนือกว่า: Binary Search เร็วกว่า {comp_lin / comp_bin:,.1f} เท่า!")
-    print("=" * 76 + "\n")
-    
-    assert idx_lin == idx_bin == 999_998
-    assert comp_bin <= 20
-    print("✅ ระบบผ่านการตรวจสอบความถูกต้องของ Assertion Tests 100% OK!\n")
+    dataset = [12, 25, 33, 47, 56, 68, 79, 84, 91, 99]
+    target_val = 79
+    idx, log = binary_search_trace(dataset, target_val)
+    print(f"ผลการค้นหา {target_val}: พบที่ดัชนี {idx} ใน {len(log)} รอบ")
+    assert idx == 6, f"Expected index 6, got {idx}"
+    assert len(log) == 4, f"Expected 4 steps, got {len(log)}"
+    print("✅ Unit Assertion Tests Passed 100%!")
 ```
 
 ---
 
-## 🔬 5.3 คู่มือห้องปฏิบัติการเสมือนจริง 3D AR MediaPipe Hands (บทที่ 5)
+## 🔬 5.4 คู่มือห้องปฏิบัติการเสมือนจริง 2D/3D AR MediaPipe Hands
 
-* **5.0 Data Storage Architecture:** [`chapter05_data_storage_arch.html`](https://tsanaphy2023.github.io/computing-science/simulators/chapter05_data_storage_arch.html)
-* **5.1 Dynamic List Visualizer:** [`chapter05_dynamic_list_visualizer.html`](https://tsanaphy2023.github.io/computing-science/simulators/chapter05_dynamic_list_visualizer.html)
-* **5.2 Hash Table Dictionary Sandbox:** [`chapter05_hash_table_sandbox.html`](https://tsanaphy2023.github.io/computing-science/simulators/chapter05_hash_table_sandbox.html)
-* **5.3 Linear Search Visualizer:** [`chapter05_linear_search_visualizer.html`](https://tsanaphy2023.github.io/computing-science/simulators/chapter05_linear_search_visualizer.html)
-* **5.4 Binary vs Linear Speed Race:** [`chapter05_binary_search_race.html`](https://tsanaphy2023.github.io/computing-science/simulators/chapter05_binary_search_race.html)
+ผู้เรียนสามารถเข้าสู่ห้องปฏิบัติการเสมือนจริง 2D/3D เพื่อทดลองค้นหาข้อมูล $N = 1,000,000$ รายการได้ที่ [chapter05_binary_search.html](https://tsanaphy2023.github.io/computing-science/simulators/chapter05_binary_search.html)
+* **ฟังก์ชันในระบบ:** แอนิเมชันช่วงการค้นหา 2D Slicing Ribbon $\leftrightarrow$ 3D Binary Tree Search Node พร้อมเสียง Web Audio Synth
 
 ---
 
-## 📚 เอกสารอ้างอิงประจำบท (References)
-1. Cormen, T. H., Leiserson, C. E., Rivest, R. L., & Stein, C. (2022). *Introduction to Algorithms* (4th ed.). MIT Press.
-2. Hetland, M. L. (2017). *Beginning Python: From Novice to Professional* (3rd ed.). Apress.
-3. Thassana, C. (2026). *Computational Thinking and Applied Artificial Intelligence for Science Education*. Rambhai Barni Rajabhat University Press.
+## 💡 5.5 สรุปสารัตถะสำคัญประจำบท (Chapter Summary)
+
+1. โครงสร้างข้อมูลเชิงเส้น (Array, Stack, Queue) มีข้อดีข้อเสียแตกต่างกันตามลักษณะการใช้งาน
+2. Binary Search มีประสิทธิภาพ $O(\log n)$ ซึ่งเร็วกว่า Linear Search $O(n)$ อย่างมหาศาลเมื่อข้อมูลมีขนาดใหญ่
+
+---
+
+## ❓ 5.6 แบบฝึกหัดและคำถามท้ายบทเพื่อการประเมินผล (3-Tier Assessment)
+
+1. จงอธิบายหลักการทำงานของ Stack (LIFO) และ Queue (FIFO) พร้อมยกตัวอย่างการใช้งานในระบบปฏิบัติการ
+2. หากมีข้อมูลขนาด $n = 1,048,576$ ตัว ในกรณีแย่ที่สุด Binary Search จะใช้การเปรียบเทียบกี่ครั้ง?
+3. ให้นักเรียนเขียนคลาส Stack ในภาษา Python โดยใช้ลิสต์ พร้อมเมธอด `push()`, `pop()`, และ `peek()`
+
+---
+
+## 📚 เอกสารอ้างอิงประจำบท (APA 7th Edition References)
+
+* Cormen, T. H. et al. (2022). *Introduction to Algorithms* (4th ed.). MIT Press.
+* Knuth, D. E. (1997). *The Art of Computer Programming: Fundamental Algorithms* (Vol. 1). Addison-Wesley.

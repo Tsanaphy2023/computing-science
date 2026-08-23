@@ -1,139 +1,134 @@
-# วิทยาการคำนวณ 1: รากฐานแนวคิดเชิงคำนวณและการแก้ปัญหาอย่างเป็นระบบ
-## บทที่ 10 การพัฒนาโครงงานนวัตกรรมและการประมวลความรู้ทางวิทยาการคำนวณ
-### (Capstone Project Engineering, Agile Methodology, Code Quality & Academic Thesis Synthesis)
-**ผู้เขียน:** ผู้ช่วยศาสตราจารย์ ดร.ชีวะ ทัศนา  
-**สังกัด:** สาขาวิชาฟิสิกส์ คณะวิทยาศาสตร์และเทคโนโลยี มหาวิทยาลัยราชภัฏรำไพพรรณี  
-**เอกสารประกอบรายวิชา:** 4122104 วิทยาการคำนวณและการแก้ปัญหาเชิงคำนวณ / การสอนวิทยาการคำนวณ
+# วิทยาการคำนวณ 1 รากฐานการคิดเชิงคำนวณและการแก้ปัญหาเชิงตรรกะ
+## บทที่ 10 การพัฒนาโครงงานนวัตกรรมและการประมวลความรู้ (Capstone Project & Synthesis)
+**ผู้เขียน** ผู้ช่วยศาสตราจารย์ ดร.ชีวะ ทัศนา • สาขาวิชาฟิสิกส์ คณะวิทยาศาสตร์และเทคโนโลยี มหาวิทยาลัยราชภัฏรำไพพรรณี
+
+---
+
+<div align="center" style="margin: 20px 0;">
+  <img src="../assets/book3_images/fig_01_git_sdlc_architecture.png" alt="ภาพที่ 10.1 สถาปัตยกรรมโครงงานนวัตกรรมและวิศวกรรมซอฟต์แวร์" style="max-width: 100%; border-radius: 12px; box-shadow: 0 8px 30px rgba(0,0,0,0.2);" />
+  <p style="color: #64748b; font-size: 0.88em; margin-top: 8px;"><em>ภาพที่ 10.1 สถาปัตยกรรมโครงงานนวัตกรรมแบบ Full-Stack และการควบคุมเวอร์ชันด้วย Git</em></p>
+</div>
 
 ---
 
 ## 📋 แผนบริหารการสอนประจำบทที่ 10
 
-### 1. หัวข้อเนื้อหาประจำบท
-1. **เรื่องเล่าเปิดบทเรียนและพลังแห่งนวัตกรรม:** จากแนวคิดสู่ซอฟต์แวร์นวัตกรรมที่เปลี่ยนโลก (From Ideation to Global Impact)
-2. **วงจรชีวิตการพัฒนาโครงงานซอฟต์แวร์ (Software Development Life Cycle - SDLC):** กระบวนการ Agile, Scrum, การจัดการงานด้วยกระดาน Kanban
-3. **การประกันคุณภาพและการทดสอบซอฟต์แวร์ (Software Quality & Testing):** การทดสอบ Unit Test (`pytest`), การสแกนความปลอดภัยของโค้ด และ Clean Code Standard
-4. **การจัดทำรายงานเชิงวิชาการตามมาตรฐานสากล APA 7th Edition:** โครงสร้าง 5 บทของโครงงานวิทยาการคำนวณ การเขียนบทคัดย่อ และการอ้างอิงที่ถูกต้อง
-5. **การนำเสนอผลงานและโปสเตอร์นวัตกรรมอัตราส่วน 16:9:** เทคนิคการ Pitching ใน 3 นาที และการออกแบบ Infographic สื่อสารผลกระทบเชิงประจักษ์
-6. **โค้ดคอมพิวเตอร์ภาษา Python 3.11 แบบสมบูรณ์:** ระบบตรวจสอบคุณภาพโค้ดอัตโนมัติ (Automated Code Quality & Linter Scanner)
-7. **คู่มือห้องปฏิบัติการเสมือนจริง 3D AR MediaPipe:** หอศิลป์แสดงนวัตกรรม 3 มิติ (Innovation Showcase Gallery) และแบบทดสอบประมวลผลความรู้ MOOC
+### หัวข้อเนื้อหาประจำบท
+1. กระบวนการสังเคราะห์องค์ความรู้วิทยาการคำนวณสู่การสร้างสรรค์โครงงานนวัตกรรม
+2. การนิยามปัญหา การศึกษาความเป็นไปได้ และการจัดทำข้อเสนอโครงงาน (Project Proposal)
+3. การออกแบบสถาปัตยกรรมระบบแบบบูรณาการ (System Architecture & Component Diagram)
+4. การประกันคุณภาพและการทดสอบซอฟต์แวร์แบบอัตโนมัติ (Automated Unit & Integration Testing)
+5. การเขียนรายงานวิชาการ การจัดทำคู่มือผู้ใช้ และการนำเสนอผลงานตามมาตรฐานสากล
+6. จริยธรรมดิจิทัล กฎหมายคุ้มครองข้อมูลส่วนบุคคล (PDPA) และลิขสิทธิ์ซอฟต์แวร์
 
-### 2. วัตถุประสงค์เชิงพฤติกรรม (Behavioral Learning Outcomes)
-เมื่อศึกษาบทเรียนนี้จบแล้ว ผู้เรียนสามารถ:
-1. **ประมวลผลและบูรณาการ (Synthesize & Integrate)** องค์ความรู้ทั้ง 9 บทเพื่อวางแผนและพัฒนาโครงงานวิทยาการคำนวณอย่างเป็นระบบได้
-2. **บริหารจัดการโครงงาน (Manage)** ตามกรอบแนวคิด Agile / Kanban และควบคุมความเสี่ยงในกระบวนการพัฒนาได้
-3. **เขียนชุดทดสอบ (Write Unit Tests)** เพื่อประกันคุณภาพและความปลอดภัยของซอฟต์แวร์ได้อย่างครอบคลุม
-4. **จัดทำเอกสารและรายงานทางวิชาการ (Document)** ตามมาตรฐานของมหาวิทยาลัยราชภัฏรำไพพรรณีและเกณฑ์ APA 7th ได้อย่างถูกต้อง
-5. **นำเสนอ (Present & Pitch)** นวัตกรรมผ่านสื่อดิจิทัลและโปสเตอร์ 16:9 ได้อย่างน่าประทับใจ
-6. **ปฏิบัติการ (Operate)** การทดลองเสมือนจริง 3D AR MediaPipe Hands ในการนำเสนอนวัตกรรมบนแกลเลอรี 3 มิติได้
+### วัตถุประสงค์เชิงพฤติกรรม
+เมื่อศึกษาบทเรียนนี้จบแล้ว ผู้เรียนสามารถ
+1. สังเคราะห์ความรู้ด้าน Computational Thinking, Algorithms, Python, และ AI มารวมเป็นโครงงานเดียวได้
+2. จัดทำเอกสารข้อเสนอโครงงานและรายงานวิชาการที่มีความสมบูรณ์ตามเกณฑ์มาตรฐานได้
+3. พัฒนาระบบต้นแบบที่มีการเขียนชุดทดสอบ Unit Tests ครอบคลุมฟังก์ชันการทำงานหลักได้
+4. นำเสนอผลงานนวัตกรรมต่อสาธารณะพร้อมทั้งปฏิบัติตามหลักจริยธรรมดิจิทัลและกฎหมาย PDPA ได้
 
 ---
 
-## 🚀 10.0 วงจรชีวิตการพัฒนาโครงงานนวัตกรรม (Agile Project Lifecycle)
+## 🌌 10.0 เรื่องเล่าเปิดบทเรียนและบริบททางประวัติศาสตร์
+
+ในคริสต์ศักราช 1968 ในการประชุมวิชาการของ NATO ณ เมืองการ์มิช ประเทศเยอรมนี เหล่านักวิทยาการคอมพิวเตอร์ชั้นนำของโลกได้ร่วมกันประกาศนิยามของ **"วิศวกรรมซอฟต์แวร์ (Software Engineering)"** เพื่อแก้ปัญหาวิกฤตการณ์ซอฟต์แวร์ที่โปรเจกต์มักล้มเหลว ล่าช้า และงบประมาณบานปลาย
+
+การพัฒนาโครงงานนวัตกรรมในศตวรรษที่ 21 จึงมิได้เป็นเพียงการเขียนโค้ด แต่เป็นการผสานกระบวนการคิดเชิงวิศวกรรม สถาปัตยกรรมที่ยืดหยุ่น การทดสอบที่เข้มงวด และการสร้างคุณค่าที่แท้จริงให้แก่สังคม
+
+---
+
+## 📐 10.1 ทฤษฎีและรากฐานทางวิชาการเชิงลึก
+
+### แผนผังสถาปัตยกรรมระบบแบบบูรณาการ (Full-Stack Capstone Architecture)
 
 ```mermaid
 graph TD
-    P1["1. ระบุปัญหาและความต้องการ\n(Problem Identification & Ideation)"] --> P2["2. ออกแบบสถาปัตยกรรมและขั้นตอนวิธี\n(Architecture & Algorithm Design)"]
-    P2 --> P3["3. พัฒนาโค้ดและสร้างโมเดลจำลอง\n(Agile Sprints & Implementation)"]
-    P3 --> P4["4. ทดสอบความถูกต้องและความปลอดภัย\n(Automated Testing & QA Verification)"]
-    P4 --> P5["5. ติดตั้งและประเมินผลเชิงประจักษ์\n(Deployment & Empirical Evaluation)"]
-    P5 --> P6["6. เผยแพร่ผลงานวิชาการและนวัตกรรม\n(Academic Thesis & 16:9 Poster Pitch)"]
+    Client["1. ส่วนติดต่อผู้ใช้และสื่อเสมือนจริง (User Interface)
+• WebGL Canvas & 3D AR MediaPipe Hands"]
+    LogicEngine["2. ส่วนประมวลผลตรรกะและอัลกอริทึม (Core Logic)
+• Python 3.11 Engines, State Machines & Big-O Optimization"]
+    AIEngine["3. ส่วนปัญญาประดิษฐ์และการเรียนรู้ (AI & Vision)
+• Landmark Classification & Gesture Recognition"]
+    DataLayer["4. ส่วนจัดการข้อมูลและสถานะ (Data Persistence)
+• JSON / SQLite & Trace History Logging"]
+    IoTHub["5. ส่วนเชื่อมต่อกายภาพ (Physical IoT)
+• MQTT Protocol & Microcontroller Sensors"]
+    
+    Client <--> LogicEngine
+    LogicEngine <--> AIEngine
+    LogicEngine <--> DataLayer
+    LogicEngine <--> IoTHub
 ```
 
 ---
 
-## 💻 10.1 โค้ดคอมพิวเตอร์ภาษา Python 3.11: ระบบตรวจสอบคุณภาพและจัดรูปแบบรายงาน APA 7th
+## 💻 10.2 การเขียนโปรแกรมและการนำไปใช้จริงด้วย Python 3.11
 
 ```python
-# ==============================================================================
-# capstone_project_quality_scanner.py
-# โปรแกรมตรวจสอบคุณภาพโครงงานซอฟต์แวร์และจัดรูปแบบบรรณานุกรม APA 7th
-# ผู้เขียน: ผู้ช่วยศาสตราจารย์ ดร.ชีวะ ทัศนา (มหาวิทยาลัยราชภัฏรำไพพรรณี)
-# มาตรฐาน: Python 3.11+ • Pure Python Standard Library
-# ==============================================================================
-
+# capstone_release_validator.py
+"""
+ระบบตรวจสอบความสมบูรณ์และทดสอบบูรณาการโครงงานนวัตกรรม (Release Verification Suite)
+"""
 from typing import Dict, List
 
-class CapstoneQualityScanner:
-    """ระบบตรวจประเมินคุณภาพโครงงานนวัตกรรมวิทยาการคำนวณ"""
-    
-    @staticmethod
-    def evaluate_project(project_data: Dict[str, any]) -> Dict[str, any]:
-        """ประเมินระดับความพร้อมของโครงงานตามเกณฑ์ 5 มิติ"""
-        score = 0
-        feedback = []
+class CapstoneReleaseAuditor:
+    def __init__(self, project_name: str):
+        self.project_name = project_name
+        self.checks: Dict[str, bool] = {}
         
-        # 1. ตรวจสอบสถาปัตยกรรม 4 เสาหลัก CT
-        if project_data.get("has_ct_pillars", False):
-            score += 20
-            feedback.append("✅ บูรณาการ 4 เสาหลักแนวคิดเชิงคำนวณครบถ้วน")
-            
-        # 2. ตรวจสอบการมี Unit Test
-        if project_data.get("unit_test_coverage", 0) >= 80:
-            score += 20
-            feedback.append(f"✅ ความครอบคลุมของการทดสอบ Unit Test สูง ({project_data['unit_test_coverage']}%)")
-            
-        # 3. ตรวจสอบการจัดการโค้ดและ Clean Code
-        if project_data.get("pep8_compliant", False):
-            score += 20
-            feedback.append("✅ โค้ดสะอาดและถูกต้องตามมาตรฐาน PEP 8")
-            
-        # 4. ตรวจสอบสื่อเสมือนจริง 3D AR MediaPipe
-        if project_data.get("has_ar_lab", False):
-            score += 20
-            feedback.append("✅ มีห้องปฏิบัติการเสมือนจริง 3D AR MediaPipe")
-            
-        # 5. ตรวจสอบเอกสารรายงานมาตรฐาน
-        if project_data.get("apa_documentation", False):
-            score += 20
-            feedback.append("✅ เอกสารรายงานและบรรณานุกรมถูกต้องตามเกณฑ์ APA 7th")
-            
-        return {
-            "total_score": score,
-            "grade": "EXCELLENT (A)" if score >= 85 else "GOOD (B)",
-            "feedback": feedback
-        }
+    def audit_module(self, module_name: str, test_passed: bool) -> None:
+        self.checks[module_name] = test_passed
+        status = "✅ PASS" if test_passed else "❌ FAIL"
+        print(f"  • ตรวจสอบโมดูล [{module_name:<20}]: {status}")
+        
+    def generate_release_report(self) -> bool:
+        total = len(self.checks)
+        passed = sum(1 for v in self.checks.values() if v)
+        score = (passed / total) * 100 if total > 0 else 0
+        print(f"\n📊 รายงานผลการประเมินโครงงาน {self.project_name}:")
+        print(f"  • ผ่านการทดสอบ: {passed}/{total} โมดูล ({score:.1f}%)")
+        return score == 100.0
 
 if __name__ == "__main__":
-    my_capstone = {
-        "title": "Autonomous Agricultural Drone with AI Computer Vision",
-        "has_ct_pillars": True,
-        "unit_test_coverage": 95,
-        "pep8_compliant": True,
-        "has_ar_lab": True,
-        "apa_documentation": True
-    }
+    auditor = CapstoneReleaseAuditor("Smart Interactive AR Science Lab 2026")
+    auditor.audit_module("Core Algorithm Engine", True)
+    auditor.audit_module("Python Data Layer", True)
+    auditor.audit_module("MediaPipe AI Vision", True)
+    auditor.audit_module("MQTT IoT Bridge", True)
+    auditor.audit_module("Automated Unit Tests", True)
     
-    audit_report = CapstoneQualityScanner.evaluate_project(my_capstone)
-    
-    print("\n" + "=" * 74)
-    print(f"🏆 รายงานผลการประเมินคุณภาพโครงงานนวัตกรรม: {my_capstone['title']}")
-    print("=" * 74)
-    print(f"• คะแนนประเมินรวม (Total Score) : {audit_report['total_score']} / 100 คะแนน")
-    print(f"• ระดับคุณภาพที่ได้รับ (Rating)   : {audit_report['grade']}")
-    print("-" * 74)
-    print("📋 รายการผลการตรวจสอบเกณฑ์:")
-    for item in audit_report["feedback"]:
-        print(f"  {item}")
-    print("=" * 74 + "\n")
-    
-    assert audit_report["total_score"] == 100
-    print("✅ โครงงานผ่านการตรวจสอบคุณภาพระดับดีเยี่ยม 100% OK!\n")
+    is_ready = auditor.generate_release_report()
+    assert is_ready == True, "Project is not ready for release"
+    print("🎉 โครงงานผ่านการตรวจสอบมาตรฐานวิศวกรรมซอฟต์แวร์ระดับ Masterclass 100%!")
 ```
 
 ---
 
-## 🔬 10.2 คู่มือห้องปฏิบัติการเสมือนจริง 3D AR MediaPipe Hands (บทที่ 10)
+## 🔬 10.3 คู่มือห้องปฏิบัติการเสมือนจริง 2D/3D AR MediaPipe Hands
 
-* **10.0 Innovation Showcase Gallery:** [`chapter10_innovation_gallery.html`](https://tsanaphy2023.github.io/computing-science/simulators/chapter10_innovation_gallery.html)
-* **10.1 Project Roadmap & Kanban:** [`chapter10_project_roadmap.html`](https://tsanaphy2023.github.io/computing-science/simulators/chapter10_project_roadmap.html)
-* **10.2 Code Security Scanner:** [`chapter10_code_security_scanner.html`](https://tsanaphy2023.github.io/computing-science/simulators/chapter10_code_security_scanner.html)
-* **10.3 Thesis Formatter APA 7th:** [`chapter10_thesis_formatter.html`](https://tsanaphy2023.github.io/computing-science/simulators/chapter10_thesis_formatter.html)
-* **10.4 16:9 Poster Pitch & MOOC Exam:** [`chapter10_poster_pitch_exam.html`](https://tsanaphy2023.github.io/computing-science/simulators/chapter10_poster_pitch_exam.html)
+ผู้เรียนสามารถเข้าสู่ชุดห้องปฏิบัติการเสมือนจริงประจำบทที่ 10 ได้ที่:
+* **[LAB 10.0 การประมวลความรู้และสถาปัตยกรรมโครงงาน 2D/3D Capstone Synthesizer](https://tsanaphy2023.github.io/computing-science/simulators/chapter10_capstone_synthesizer.html)**
 
 ---
 
-## 📚 เอกสารอ้างอิงประจำบท (References)
-1. American Psychological Association. (2020). *Publication Manual of the American Psychological Association* (7th ed.).
-2. Beck, K., et al. (2001). *Manifesto for Agile Software Development*.
-3. Thassana, C. (2026). *Computational Thinking and Applied Artificial Intelligence for Science Education*. Rambhai Barni Rajabhat University Press.
+## 💡 10.4 สรุปสารัตถะสำคัญประจำบท (Chapter Summary)
+
+1. โครงงานนวัตกรรมเป็นยอดมงกุฎของการเรียนรู้วิทยาการคำนวณที่สะท้อนทักษะการคิดขั้นสูง (Creating)
+2. การออกแบบที่มีสถาปัตยกรรมแยกส่วนชัดเจนช่วยให้ระบบมีความทนทานและสามารถขยายขนาดได้ในอนาคต
+3. การปฏิบัติตามกฎหมาย PDPA และจริยธรรม AI เป็นคุณลักษณะสำคัญของนักพัฒนาซอฟต์แวร์มืออาชีพ
+
+---
+
+## ❓ 10.5 แบบฝึกหัดและคำถามท้ายบทเพื่อการประเมินผล (3-Tier Assessment)
+
+1. ให้นักเรียนจัดทำเอกสารข้อเสนอโครงงาน (Project Proposal) ความยาว 3 หน้า ตามแบบฟอร์มมาตรฐาน
+2. จงออกแบบแผนภาพสถาปัตยกรรมระบบ (Component Architecture Diagram) ของโครงงานที่ตนเองพัฒนา
+3. ให้อภิปรายประเด็นจริยธรรมและความเป็นส่วนตัวของข้อมูลผู้เรียนในระบบห้องเรียนอัจฉริยะ
+
+---
+
+## 📚 เอกสารอ้างอิงประจำบท (APA 7th Edition References)
+
+* Pressman, R. S., & Maxim, B. R. (2020). *Software Engineering: A Practitioner's Approach* (9th ed.). McGraw-Hill.
+* Sommerville, I. (2016). *Software Engineering* (10th ed.). Pearson.
