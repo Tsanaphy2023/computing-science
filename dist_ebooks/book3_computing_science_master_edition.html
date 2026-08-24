@@ -28,18 +28,22 @@
    ========================================================================== */
 
 @page {
-    size: 210mm 297mm;
+    size: A4 portrait;
     margin: 0 !important;
+}
+
+* {
+    box-sizing: border-box !important;
 }
 
 html, body {
     margin: 0 !important;
     padding: 0 !important;
-    width: 210mm;
+    width: 100% !important;
     background: #ffffff;
     font-family: 'Sarabun', -apple-system, BlinkMacSystemFont, 'Leelawadee UI', sans-serif;
-    font-size: 10.5pt;
-    line-height: 1.85;
+    font-size: 11.5pt;
+    line-height: 1.9;
     color: #1e293b;
     text-align: justify;
     text-justify: inter-word;
@@ -47,14 +51,12 @@ html, body {
 
 /* 1. ปกหน้าเต็มแผ่น A4 100% ไร้ขอบขาว (Full-bleed Cover) */
 .book-cover {
-    width: 210mm !important;
-    height: 297mm !important;
-    max-width: 210mm !important;
-    max-height: 297mm !important;
+    width: 100vw !important;
+    height: 100vh !important;
     margin: 0 !important;
     padding: 0 !important;
     page-break-after: always;
-    break-after: always;
+    break-after: page;
     position: relative;
     overflow: hidden;
     background: #000000;
@@ -62,18 +64,18 @@ html, body {
 }
 
 .book-cover img.bg-cover {
-    width: 210mm !important;
-    height: 297mm !important;
-    max-width: 210mm !important;
-    max-height: 297mm !important;
-    min-width: 210mm !important;
-    min-height: 297mm !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    max-width: none !important;
+    max-height: none !important;
+    min-width: 100vw !important;
+    min-height: 100vh !important;
     margin: 0 !important;
     padding: 0 !important;
     border: none !important;
     border-radius: 0 !important;
     box-shadow: none !important;
-    object-fit: fill !important;
+    object-fit: cover !important;
     display: block !important;
 }
 
@@ -86,29 +88,29 @@ html, body {
     padding-right: 1.0in !important;
     padding-top: 1.0in !important;
     padding-bottom: 1.0in !important;
-    box-sizing: border-box;
-    width: 210mm;
+    box-sizing: border-box !important;
+    width: 100% !important;
 }
 
 .front-matter-section {
     page-break-before: always;
-    break-before: always;
-    min-height: 297mm;
+    break-before: page;
+    min-height: 100vh;
 }
 
 .half-title-page {
     text-align: center;
-    padding-top: 2.0in !important;
+    padding-top: 1.2in !important;
 }
 
 .featured-scientist-card {
-    margin: 20px auto;
-    width: 150px;
-    height: 150px;
+    margin: 15px auto 25px auto;
+    width: 170px;
+    height: 170px;
     border-radius: 50%;
     overflow: hidden;
     border: 4px solid #7c3aed;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.14);
 }
 
 .featured-scientist-card img {
@@ -121,17 +123,17 @@ html, body {
 .quartet-gallery {
     display: flex;
     justify-content: center;
-    gap: 16px;
-    margin: 30px 0 10px 0;
+    gap: 18px;
+    margin: 35px 0 15px 0;
 }
 
 .quartet-item {
-    width: 60px;
-    height: 60px;
+    width: 68px;
+    height: 68px;
     border-radius: 50%;
     overflow: hidden;
-    border: 2px solid #cbd5e1;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+    border: 2.5px solid #cbd5e1;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
 }
 
 .quartet-item img {
@@ -143,7 +145,7 @@ html, body {
 
 .half-title-page h1 {
     font-family: 'Kanit', sans-serif;
-    font-size: 26pt;
+    font-size: 30pt;
     font-weight: 700;
     color: #7c3aed;
     margin-bottom: 8px;
@@ -151,13 +153,13 @@ html, body {
 
 .half-title-page h2 {
     font-family: 'Kanit', sans-serif;
-    font-size: 13.5pt;
+    font-size: 15pt;
     font-weight: 500;
-    color: #64748b;
+    color: #475569;
     border: none;
     background: none;
     padding: 0;
-    margin-bottom: 15px;
+    margin-bottom: 18px;
 }
 
 .copyright-page {
