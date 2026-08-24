@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<title>วิทยาการคำนวณ 4 แผนบริหารหลักสูตรและคู่มือพัฒนาบทเรียน MOOC - ผศ.ดร.ชีวะ ทัศนา</title>
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;600;700&family=Sarabun:wght@300;400;500;600;700&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<style>
+@page {
+    size: A4 portrait;
+    margin-top: 1.0in;
+    margin-bottom: 1.0in;
+    margin-left: 1.5in;
+    margin-right: 1.0in;
+    @bottom-right {
+        content: counter(page);
+        font-family: 'Kanit', sans-serif;
+        font-size: 10pt;
+        font-weight: 600;
+        color: #d97706;
+    }
+}
+@page :left {
+    margin-left: 1.0in;
+    margin-right: 1.5in;
+    @top-left {
+        content: "วิทยาการคำนวณ 4 แผนบริหารหลักสูตรและคู่มือพัฒนาบทเรียน MOOC";
+        font-family: 'Sarabun', sans-serif;
+        font-size: 8.5pt;
+        color: #64748b;
+        border-bottom: 0.5pt solid #cbd5e1;
+        padding-bottom: 4px;
+    }
+    @bottom-right {
+        content: counter(page);
+        font-family: 'Kanit', sans-serif;
+        font-size: 10pt;
+        font-weight: 600;
+        color: #d97706;
+    }
+}
+@page :right {
+    margin-left: 1.5in;
+    margin-right: 1.0in;
+    @top-right {
+        content: "ผศ.ดร.ชีวะ ทัศนา // มหาวิทยาลัยราชภัฏรำไพพรรณี";
+        font-family: 'Sarabun', sans-serif;
+        font-size: 8.5pt;
+        color: #64748b;
+        border-bottom: 0.5pt solid #cbd5e1;
+        padding-bottom: 4px;
+    }
+    @bottom-right {
+        content: counter(page);
+        font-family: 'Kanit', sans-serif;
+        font-size: 10pt;
+        font-weight: 600;
+        color: #d97706;
+    }
+}
+@page cover-page {
+    margin: 0;
+    @top-left { content: none; }
+    @top-right { content: none; }
+    @bottom-right { content: none; }
+}
+@page front-matter {
+    margin-top: 1.0in;
+    margin-bottom: 1.0in;
+    margin-left: 1.5in;
+    margin-right: 1.0in;
+    @top-left { content: none; }
+    @top-right { content: none; }
+    @bottom-right {
+        content: counter(page, lower-roman);
+        font-family: 'Kanit', sans-serif;
+        font-size: 9.5pt;
+        color: #64748b;
+    }
+}
+body {
+    font-family: 'Sarabun', sans-serif;
+    font-size: 10.5pt;
+    line-height: 1.85;
+    color: #1e293b;
+    background: #ffffff;
+    margin: 0;
+    padding: 0;
+    text-align: justify;
+}
+.book-cover {
+    page: cover-page;
+    break-after: always;
+    page-break-after: always;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #78350f;
+}
+.book-cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.front-matter-section {
+    page: front-matter;
+    break-before: right;
+    page-break-before: right;
+    padding: 10px 0;
+}
+h1, h2, h3, h4 {
+    font-family: 'Kanit', sans-serif;
+    color: #0f172a;
+    page-break-after: avoid;
+}
+h1 { font-size: 17pt; font-weight: 700; color: #d97706; }
+h2 { font-size: 13.5pt; font-weight: 600; border-left: 5px solid #d97706; padding-left: 12px; margin-top: 2.2em; background: linear-gradient(90deg, #fffbeb 0%, transparent 100%); padding-top: 4px; padding-bottom: 4px; border-radius: 0 6px 6px 0; }
+h3 { font-size: 11.5pt; font-weight: 600; color: #b45309; }
+p { margin: 0.75em 0; text-indent: 2.0em; }
+table { width: 100%; border-collapse: collapse; margin: 24px 0; font-size: 9.2pt; page-break-inside: avoid; }
+th, td { border-top: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 9px 13px; }
+th { background-color: #fffbeb; color: #92400e; font-weight: 700; border-top: 2px solid #fcd34d; border-bottom: 2px solid #fcd34d; text-align: left; }
+pre { font-family: 'Fira Code', monospace; font-size: 8.5pt; background: #0f172a; color: #f8fafc; padding: 16px 20px; border-radius: 10px; margin: 20px 0; line-height: 1.55; page-break-inside: avoid; }
+img { max-width: 100%; max-height: 460px; object-fit: contain; border-radius: 12px; display: block; margin: 16px auto; }
+</style>
+</head>
+<body>
+<!-- ปกหน้า -->
+<div class="book-cover">
+    <img src="../assets/images/cover_book4.jpg" alt="ปกหนังสือ วิทยาการคำนวณ 4">
+</div>
+<!-- ใบรองปก -->
+<div class="front-matter-section" style="text-align:center; padding-top:140px; break-after:always;">
+    <h1 style="font-size:24pt; color:#d97706;">วิทยาการคำนวณ 4</h1>
+    <h2 style="font-size:14pt; color:#64748b; font-weight:500; border:none; background:none;">แผนบริหารหลักสูตรและคู่มือพัฒนาบทเรียน MOOC วิทยาการคำนวณ</h2>
+    <div style="margin-top: 100px; font-family: 'Kanit', sans-serif; color: #475569;">
+        <p style="text-indent:0; font-size: 13.5pt; font-weight: 600; color: #0f172a;">ผู้ช่วยศาสตราจารย์ ดร.ชีวะ ทัศนา</p>
+        <p style="text-indent:0; font-size: 10.5pt; color: #64748b;">สาขาวิชาฟิสิกส์ คณะวิทยาศาสตร์และเทคโนโลยี มหาวิทยาลัยราชภัฏรำไพพรรณี</p>
+    </div>
+    <div style="margin-top: 140px; font-size: 10pt; color: #94a3b8;">
+        สำนักพิมพ์มหาวิทยาลัยราชภัฏรำไพพรรณี (RBRU Press)
+    </div>
+</div>
+<!-- หน้าลิขสิทธิ์ -->
+<div class="front-matter-section" style="padding-top:160px; break-after:always;">
+    <div style="border:1px solid #94a3b8; padding:16px 20px; background:#f8fafc; font-size:9pt; line-height:1.7;">
+        <strong>ข้อมูลทางบรรณานุกรมของสำนักหอสมุดแห่งชาติ (CIP)</strong><br><br>
+        ชีวะ ทัศนา.<br>
+        <strong>วิทยาการคำนวณ 4 แผนบริหารหลักสูตรและคู่มือพัฒนาบทเรียน MOOC วิทยาการคำนวณ.</strong> -- จันทบุรี : สำนักพิมพ์มหาวิทยาลัยราชภัฏรำไพพรรณี, 2569.<br>
+        240 หน้า.<br><br>
+        1. การพัฒนาหลักสูตร. 2. สื่อการสอนออนไลน์ (MOOC). 3. วิทยาการคำนวณ. I. ชื่อเรื่อง.<br>
+        <strong>ISBN 978-616-XXXX-04-2 (ฉบับพิมพ์สมบูรณ์)</strong>
+    </div>
+</div>
+<!-- เนื้อหา -->
+<div id="content"></div>
+<script>
+let raw = `# วิทยาการคำนวณ 4 สื่อการเรียนรู้ดิจิทัลและคู่มือปฏิบัติการเสมือนจริงบนระบบ MOOC
+## หมวดหมู่ที่ 0 ข้อมูลและข้อตกลงรายวิชา
+**ผู้พัฒนาหลักสูตร** ผู้ช่วยศาสตราจารย์ ดร.ชีวะ ทัศนา • สาขาวิชาฟิสิกส์ คณะวิทยาศาสตร์และเทคโนโลยี มหาวิทยาลัยราชภัฏรำไพพรรณี  
+**ระบบเผยแพร่** RBRU MOOC (elearning.rbru.ac.th) & GitHub Pages Global CDN
+
+---
+
+## 🏛️ 0.1 ปฐมนิเทศและคำอธิบายรายวิชา
+
+### รหัสและชื่อรายวิชา
+* **ชื่อภาษาไทย** สื่อการเรียนรู้ดิจิทัลและคู่มือปฏิบัติการเสมือนจริงวิทยาการคำนวณและปัญญาประดิษฐ์
+* **ชื่อภาษาอังกฤษ** Digital Learning Media & Virtual Interactive Labs for Computing Science and AI
+* **จำนวนหน่วยกิต** 3 หน่วยกิต (3-0-6)
+* **แพลตฟอร์มการเรียนรู้** RBRU MOOC Platform • 100% Online Lifelong Learning
+
+### คำอธิบายรายวิชา
+ศึกษาและฝึกปฏิบัติการเสมือนจริงเกี่ยวกับแนวคิดเชิงคำนวณ การใช้เหตุผลเชิงตรรกะ การเขียนรหัสลำลองและผังงานมาตรฐานสากล การพัฒนาโปรแกรมด้วยภาษา Python โครงสร้างข้อมูลเชิงเส้นและตารางแฮช อัลกอริทึมการค้นหาและการจัดเรียงข้อมูล การวิเคราะห์ความซับซ้อน Big-O สถาปัตยกรรมโปรแกรมเชิงโมดูลและการจัดการไฟล์ การสร้างแบบจำลองทางฟิสิกส์และคณิตศาสตร์ การประยุกต์ใช้ปัญญาประดิษฐ์ (AI) การเรียนรู้ของเครื่อง (Machine Learning) คอมพิวเตอร์วิทัศน์ตรวจจับท่าทางมือ 3 มิติ (MediaPipe Hands) และอินเทอร์เน็ตของสรรพสิ่ง (IoT) ผ่านชุดสื่อจำลองสถานการณ์เสมือนจริง 50 ปฏิบัติการบนระบบคลาวด์ระดับโลก
+
+---
+
+## 🎯 0.2 แผนผังผลลัพธ์การเรียนรู้ประจำรายวิชา
+
+\`\`\`mermaid
+graph TD
+    CLO1["CLO 1: อธิบายหลักการแนวคิดเชิงคำนวณ ตรรกศาสตร์ อัลกอริทึม และ AI ได้อย่างถูกต้อง (Cognitive Domain - Bloom 2)"]
+    CLO2["CLO 2: ออกแบบผังงานและเขียนโปรแกรมภาษา Python จัดการโครงสร้างข้อมูลเชิงลึกได้ (Psychomotor Domain - Bloom 3)"]
+    CLO3["CLO 3: วิเคราะห์และวัดประสิทธิภาพขั้นตอนวิธีด้วยสัญกรณ์ Big-O และการทำนายข้อมูลด้วย ML ได้ (Analytical Domain - Bloom 4)"]
+    CLO4["CLO 4: พัฒนาและบูรณาการโครงงานร่วมกับเซนเซอร์ IoT และระบบคอมพิวเตอร์วิทัศน์ 3 มิติได้ (Creation Domain - Bloom 6)"]
+    CLO5["CLO 5: แสดงออกถึงจริยธรรม ความปลอดภัยสารสนเทศ และการปฏิบัติตามกฎหมาย PDPA (Affective Domain - Bloom 3)"]
+\`\`\`
+
+---
+
+## 🌐 0.3 สถาปัตยกรรม 50 ปฏิบัติการเสมือนจริง
+
+หลักสูตรดิจิทัลนี้ถูกออกแบบด้วยเทคโนโลยี **WebAssembly (Pyodide), Three.js PBR Physical Shaders, MediaPipe AI, และ GitHub Pages CDN** ทำให้ผู้เรียนสามารถรันโค้ดและทดลองฟิสิกส์ 3D ได้ทันทีบนเว็บเบราว์เซอร์ทุกอุปกรณ์โดยไม่ต้องติดตั้งโปรแกรมใดๆ
+
+\`\`\`mermaid
+graph TD
+    User["ผู้เรียน (Web Browser / Mobile / iPad)"] --> Moodle["RBRU MOOC Portal\n(elearning.rbru.ac.th)"]
+    Moodle --> CDN["GitHub Pages Global CDN\n(tsanaphy2023.github.io/computing-science/)"]
+    CDN --> Engine1["1. Pyodide In-Browser Python Sandbox (Execution O(1))"]
+    CDN --> Engine2["2. Three.js PBR Shaders & 3D Interactive Mechanics"]
+    CDN --> Engine3["3. MediaPipe 21 Hand Landmarks 3D Tracking"]
+    CDN --> Engine4["4. Web Audio API Acoustic Synthesizer & Oscilloscope"]
+\`\`\`
+
+---
+
+## 📊 0.4 แผนผัง 10 หมวดหมู่วิชาหลัก (Sections 1 ถึง 10 รวม 50 โมดูลบทเรียน)
+
+| หมวดที่ | หัวข้อหลักสูตรดิจิทัลบน MOOC | จำนวนตอนย่อย | ชุดจำลองเสมือนจริงที่ฝังในระบบ |
+| :---: | :--- | :---: | :--- |
+| **Section 1** | **ตรรกะและกระบวนการคิดเชิงคำนวณ** | 5 โมดูล | Logic Truth Table Simulator, River Crossing Game |
+| **Section 2** | **การออกแบบขั้นตอนวิธีและผังงานมาตรฐาน** | 5 โมดูล | Interactive Flowchart Engine, Trace Table Runner |
+| **Section 3** | **พื้นฐานการเขียนโปรแกรมและการจัดการข้อมูล** | 5 โมดูล | In-browser Python Sandbox, Kinetic Energy Calc |
+| **Section 4** | **โครงสร้างควบคุม เงื่อนไข และการทำซ้ำ** | 5 โมดูล | Greenhouse IoT Climate Controller Simulator |
+| **Section 5** | **โครงสร้างข้อมูลและอัลกอริทึมการค้นหา** | 5 โมดูล | Linear vs Binary Search Live Race (10M Items) |
+| **Section 6** | **อัลกอริทึมการจัดเรียงและการวิเคราะห์ Big-O** | 5 โมดูล | 4-Algorithm Sorting Visualizer & Master Theorem |
+| **Section 7** | **การเขียนโปรแกรมเชิงโมดูลและฟังก์ชันเรียกซ้ำ** | 5 โมดูล | Tower of Hanoi 3D Sim, Vector Math Module |
+| **Section 8** | **วิทยาศาสตร์เชิงคำนวณและแบบจำลองฟิสิกส์** | 5 โมดูล | Projectile Motion \$\Delta t\$ Sim, Spring Oscillator |
+| **Section 9** | **ปัญญาประดิษฐ์ คอมพิวเตอร์วิทัศน์ และ IoT** | 5 โมดูล | MediaPipe 3D Hand Tracking, Scikit-learn Classifier |
+| **Section 10** | **การพัฒนาโครงงานบูรณาการและการเผยแพร่** | 5 โมดูล | Gantt & Kanban CLI, 5-Chapter Thesis Template |
+
+---
+
+## 🎓 0.5 เกณฑ์การประเมินผลและการรับใบประกาศนียบัตร
+* **แบบทดสอบท้ายโมดูล (Formative Quizzes 50 ชุด):** ร้อยละ 40
+* **ใบงานปฏิบัติการเสมือนจริง ** ร้อยละ 30
+* **แบบทดสอบประมวลความรู้ปลายภาค ** ร้อยละ 30
+* **เกณฑ์การสำเร็จการศึกษา** ได้คะแนนรวมไม่ต่ำกว่า **ร้อยละ 70 (\$\ge 70\%\$)** จะได้รับใบประกาศนียบัตรดิจิทัล (Digital Certificate with Verification QR Code) จากมหาวิทยาลัยราชภัฏรำไพพรรณี
+
+
+<!-- SECTION BREAK -->
+
+# วิทยาการคำนวณ 4 สื่อการเรียนรู้ดิจิทัลและคู่มือปฏิบัติการเสมือนจริงบนระบบ MOOC
+## หมวดหมู่ที่ 1 ตรรกะและกระบวนการคิดเชิงคำนวณ
+**ผู้พัฒนาหลักสูตร** ผู้ช่วยศาสตราจารย์ ดร.ชีวะ ทัศนา • สาขาวิชาฟิสิกส์ คณะวิทยาศาสตร์และเทคโนโลยี มหาวิทยาลัยราชภัฏรำไพพรรณี
+
+---
+
+## 🎯 ผลลัพธ์การเรียนรู้ประจำหมวดที่ 1
+1. เข้าใจและจำแนกการใช้เหตุผลเชิงตรรกะแบบนิรนัย (Deductive) และอุปนัย (Inductive) ผ่านระบบจำลองสถานการณ์เสมือนจริง
+2. ประยุกต์ใช้ 4 เสาหลักของแนวคิดเชิงคำนวณ (Decomposition, Pattern Recognition, Abstraction, Algorithm Design) ในการแก้ปัญหาทางวิทยาศาสตร์
+3. ปฏิบัติการทดลองเสมือนจริง 2D Canvas และ 3D AR MediaPipe Hands พร้อมบันทึกตารางผลและสรุปผลตามกระบวนการสืบเสาะ
+
+---
+
+## 📚 รายละเอียด 5 โมดูลบทเรียนดิจิทัลและชุดปฏิบัติการเสมือนจริง 2D/3D
+
+\`\`\`mermaid
+graph TD
+    M1["หมวดหมู่ที่ 1: ตรรกะและกระบวนการคิดเชิงคำนวณ (5 โมดูลดิจิทัล)"]
+    M1 --> M10["1.0 River Crossing State Transition\n• ปริศนาข้ามแม่น้ำ & ตารางค้นหาปริภูมิสถานะ 7 สเต็ป"]
+    M1 --> M11["1.1 Decomposition Tree Builder\n• ผังต้นไม้ย่อยปัญหาระบบ EV & Fault Injection"]
+    M1 --> M12["1.2 Waveform & Pattern Explorer\n• ลำดับฟีโบนัชชีลู่เข้าสู่ φ = 1.618 & เสียงเรโซแนนซ์ 3D"]
+    M1 --> M13["1.3 Point-Mass Abstraction Sandbox\n• แบบจำลองมวลจุด ลดภาระคำนวณ 840 เท่า"]
+    M1 --> M14["1.4 Robot Grid Navigator 5x5\n• เปรียบเทียบ 4 อัลกอริทึมพาหุ่นยนต์หลบหินสู่เป้าหมาย"]
+\`\`\`
+
+---
+
+### 🔹 โมดูล 1.0 เรื่องเล่าเปิดบทเรียนและทำไมการคิดอย่างเป็นระบบจึงเปลี่ยนโลก
+* **เนื้อหาสื่อการสอน** ปริศนาข้ามแม่น้ำ (Wolf, Sheep, Cabbage Puzzle) กับทฤษฎีการเปลี่ยนสถานะในปริภูมิสถานะ (State Space Transitions)
+* **สมการเงื่อนไขตรรกะความปลอดภัย**
+  \$\$\text{Danger} = (W \land S_h \land \neg M) \lor (S_h \land C \land \neg M)\$\$
+* **ชุดปฏิบัติการเสมือนจริง 2D/3D:**
+  * **ชื่อแล็บ** \`LAB 1.0\` ปริศนาข้ามแม่น้ำเชิงตรรกะและการสำรวจปริภูมิสถานะ (AR River Crossing State Space Explorer)
+  * **วัตถุประสงค์** ค้นหาเส้นทางปลอดภัยและพิสูจน์อัลกอริทึม 7 เที่ยวเรือ
+  * **ขั้นตอนการทดลอง** เปิดระบบกล้อง MediaPipe \$\rightarrow\$ ใช้ท่าทาง Pinch 🤏 หยิบตัวละครลงเรือ \$\rightarrow\$ พายข้ามฝั่ง \$\rightarrow\$ ดึงแกะกลับในเที่ยวที่ 4 \$\rightarrow\$ บันทึกผล
+  * **ตารางบันทึกผล** ตาราง 7 เที่ยวเรือ + การทดสอบกรณีผิดพลาด (หมาป่ากินแกะ / แกะกินผัก)
+  * **สรุปผล** ค้นพบว่าต้องใช้กลยุทธ์ State Backtracking ในขั้นตอนที่ 4 จึงจะผ่านเงื่อนไขปลอดภัย 100%
+  * **ลิงก์จำลองเสมือนจริง** [\`chapter01_river_crossing.html\`](https://tsanaphy2023.github.io/computing-science/simulators/chapter01_river_crossing.html)
+
+---
+
+### 🔹 โมดูล 1.1 เสาหลักที่ 1 การแยกส่วนประกอบและการย่อยปัญหา
+* **เนื้อหาสื่อการสอน** การแตกปัญหาซับซ้อนออกเป็นระบบย่อยอิสระตามสถาปัตยกรรม High Cohesion, Low Coupling
+* **กรณีศึกษา** การย่อยระบบรถยนต์ไฟฟ้า EV (BMS, Powertrain, AI Perception, Chassis)
+* **ชุดปฏิบัติการเสมือนจริง 2D/3D:**
+  * **ชื่อแล็บ** \`LAB 1.1\` ผังต้นไม้ย่อยปัญหาและสถาปัตยกรรมเชิงโมดูล (Decomposition Tree Builder)
+  * **วัตถุประสงค์** ฝึกทักษะการแยกโมดูลย่อยและทดสอบความทนทานต่อข้อผิดพลาด (Fault Tolerance)
+  * **ขั้นตอนการทดลอง** กางมือ ✋ สั่ง Exploded View \$\rightarrow\$ ลากเส้นเชื่อม Tree Nodes \$\rightarrow\$ ฉีดข้อผิดพลาด (Fault Injection) \$\rightarrow\$ สังเกตระบบ
+  * **ตารางบันทึกผล** ตารางจำแนก 4 โมดูลและผลกระทบเมื่อเกิดความผิดพลาด
+  * **สรุปผล** สถาปัตยกรรม Low Coupling ช่วยให้เมื่อกล้อง AI ขัดข้อง ระบบขับเคลื่อนและเบรกยังคงปลอดภัย
+  * **ลิงก์จำลองเสมือนจริง** [\`chapter01_decomposition_tree.html\`](https://tsanaphy2023.github.io/computing-science/simulators/chapter01_decomposition_tree.html)
+
+---
+
+### 🔹 โมดูล 1.2 เสาหลักที่ 2 การหารูปแบบและความเหมือน
+* **เนื้อหาสื่อการสอน** การค้นหาความถี่ซ้ำ ความสัมพันธ์เชิงฟังก์ชัน และแนวโน้มของข้อมูล
+* **สูตรคณิตศาสตร์แห่งรูปแบบ**
+  \$\$\lim_{n \to \infty} \frac{F_{n+1}}{F_n} = \phi = \frac{1+\sqrt{5}}{2} \approx 1.6180339887...\$\$
+* **ชุดปฏิบัติการเสมือนจริง 2D/3D:**
+  * **ชื่อแล็บ** \`LAB 1.2\` การค้นหารูปแบบลำดับและคลื่นคณิตศาสตร์ (Pattern Recognition & Harmonics)
+  * **วัตถุประสงค์** ศึกษาการลู่เข้าของอัตราส่วนฟีโบนัชชีสู่ \$\phi\$ และความถี่เรโซแนนซ์
+  * **ขั้นตอนการทดลอง** ปรับความถี่คลื่นด้วยมือ AR \$\rightarrow\$ ป้อนค่า \$n=1..10\$ \$\rightarrow\$ หมุน 3D Torus \$\rightarrow\$ ฟังเสียง Synth Resonance
+  * **ตารางบันทึกผล** ตารางคำนวณ \$F_n, \frac{F_{n+1}}{F_n}\$, % Error, และการเกิดคอร์ดประสาน
+  * **สรุปผล** เมื่อ \$n \ge 8\$ ค่าอัตราส่วนคลาดเคลื่อนต่ำกว่า \$0.06\%\$ ส่งผลให้โครงสร้าง 3D Torus สมมาตรสมบูรณ์ (\$R^2 = 0.999\$)
+  * **ลิงก์จำลองเสมือนจริง** [\`chapter01_pattern_recognition.html\`](https://tsanaphy2023.github.io/computing-science/simulators/chapter01_pattern_recognition.html)
+
+---
+
+### 🔹 โมดูล 1.3 เสาหลักที่ 3 การคิดเชิงนามธรรม
+* **เนื้อหาสื่อการสอน** การคัดกรองเฉพาะสาระสำคัญและละทิ้งสิ่งไม่จำเป็นออกเพื่อสร้างแบบจำลอง (Modeling)
+* **กรณีศึกษา** แผนที่รถไฟฟ้าลอนดอน (Topology) และแบบจำลองมวลจุด (Point Mass Model \$\vec{F} = m\vec{a}\$)
+* **ชุดปฏิบัติการเสมือนจริง 2D/3D:**
+  * **ชื่อแล็บ** \`LAB 1.3\` แบบจำลองมวลจุดเชิงนามธรรมและการลดทอนความซับซ้อน (Point-Mass Dynamics)
+  * **วัตถุประสงค์** เปรียบเทียบประสิทธิภาพ Frame Time และ RAM ในแต่ละระดับนามธรรม Level 0 ถึง 3
+  * **ขั้นตอนการทดลอง** ทดสอบรถยนต์จริง Level 0 \$\rightarrow\$ ปรับสไลเดอร์สู่ Level 1-3 \$\rightarrow\$ ปล่อยแรงขับเคลื่อน \$\rightarrow\$ วัดเวลาประมวลผล
+  * **ตารางบันทึกผล** ตารางเปรียบเทียบ Polygons, Frame Time (ms), RAM (MB), และความคลาดเคลื่อนทางฟิสิกส์
+  * **สรุปผล** แบบจำลองมวลจุด Level 3 ประมวลผลเร็วขึ้น 840 เท่า และประหยัดแรม 99.5% โดยคงความแม่นยำทางฟิสิกส์ 100%
+  * **ลิงก์จำลองเสมือนจริง** [\`chapter01_abstraction_sandbox.html\`](https://tsanaphy2023.github.io/computing-science/simulators/chapter01_abstraction_sandbox.html)
+
+---
+
+### 🔹 โมดูล 1.4 เสาหลักที่ 4 การออกแบบขั้นตอนวิธีและ Unplugged Coding
+* **เนื้อหาสื่อการสอน** การเขียนชุดคำสั่งทีละขั้นที่ไม่กำกวมและมีจุดสิ้นสุดที่แน่นอน (Deterministic Algorithms)
+* **ชุดปฏิบัติการเสมือนจริง 2D/3D:**
+  * **ชื่อแล็บ** \`LAB 1.4\` การนำทางหุ่นยนต์บนตารางกริดและการออกแบบขั้นตอนวิธี (Robot Grid Navigation 5x5)
+  * **วัตถุประสงค์** ออกแบบขั้นตอนวิธีที่สั้นและปลอดภัยที่สุด พาหุ่นยนต์จาก \$(1,1)\$ ไปยัง \$(5,5)\$
+  * **ขั้นตอนการทดลอง** สำรวจตำแหน่งเริ่มต้นและสิ่งกีดขวาง \$\rightarrow\$ ทดสอบ 4 กลยุทธ์การเดิน \$\rightarrow\$ บันทึกจำนวนก้าวและเวลา
+  * **ตารางบันทึกผล** ตารางเปรียบเทียบ 4 กลยุทธ์ (เดินตรง, เลียบขอบ, ซิกแซก, ลัดเลาะเหมาะสมที่สุด)
+  * **สรุปผล** กลยุทธ์ Optimal Path ใช้ 8 ก้าว เลี้ยว 3 ครั้ง ประหยัดเวลาสูงสุดเพียง \$4.0\text{ s}\$
+  * **ลิงก์จำลองเสมือนจริง** [\`chapter01_robot_grid_navigator.html\`](https://tsanaphy2023.github.io/computing-science/simulators/chapter01_robot_grid_navigator.html)
+
+
+<!-- SECTION BREAK -->
+
+# วิทยาการคำนวณ 4 สื่อการเรียนรู้ดิจิทัลและคู่มือปฏิบัติการเสมือนจริงบนระบบ MOOC
+## หมวดหมู่ที่ 2 การออกแบบขั้นตอนวิธีและผังงานมาตรฐาน
+### รายวิชา 4122104 วิทยาการคำนวณสำหรับการสอนวิทยาศาสตร์
+**ผู้พัฒนาหลักสูตร** ผู้ช่วยศาสตราจารย์ ดร.ชีวะ ทัศนา • สาขาวิชาฟิสิกส์ คณะวิทยาศาสตร์และเทคโนโลยี มหาวิทยาลัยราชภัฏรำไพพรรณี
+
+---
+
+## 🎯 ผลลัพธ์การเรียนรู้ประจำหมวดที่ 2
+1. **CLO 1:** เขียนรหัสลำลอง ตามมาตรฐานสากลที่มีโครงสร้างชัดเจนและปราศจากความกำกวม
+2. **CLO 2:** ออกแบบและวาดผังงาน ตามมาตรฐาน ISO 5807 ด้วยโครงสร้างควบคุม 3 รูปแบบ (ลำดับ ทางเลือก วนซ้ำ)
+3. **CLO 3:** ดำเนินการตรวจสอบและกำจัดข้อผิดพลาดของขั้นตอนวิธีด้วยตารางไล่ค่าตัวแปร (Trace Table) ผ่านชุดห้องปฏิบัติการเสมือนจริง 2D/3D AR MediaPipe Hands
+
+---
+
+## 📚 รายละเอียด 5 โมดูลบทเรียนดิจิทัลและห้องปฏิบัติการเสมือนจริง
+
+\`\`\`mermaid
+graph TD
+    MOOC2["MOOC หมวดที่ 2: ผังงานและขั้นตอนวิธีมาตรฐาน"]
+    MOOC2 --> M20["โมดูล 2.0: Mars Trajectory Unit Converter (Lab 2.0)"]
+    MOOC2 --> M21["โมดูล 2.1: Pseudocode AST Linter (Lab 2.1)"]
+    MOOC2 --> M22["โมดูล 2.2: ISO 5807 Flowchart Builder (Lab 2.2)"]
+    MOOC2 --> M23["โมดูล 2.3: Multi-Branch Decision Gates (Lab 2.3)"]
+    MOOC2 --> M24["โมดูล 2.4: Animated Trace Table Runner (Lab 2.4)"]
+\`\`\`
+
+---
+
+### 🔹 โมดูล 2.0 ปฐมบทขั้นตอนวิธี บทเรียนยานอวกาศ Mars กับมาตรฐานการสื่อสาร
+* **เนื้อหาสื่อการสอน** วิเคราะห์กรณีศึกษาความผิดพลาดมูลค่า 327 ล้านดอลลาร์ของยาน Mars Climate Orbiter จากการไม่แปลงหน่วยแรงขับดัน (\$lbf \cdot s\$ vs \$N \cdot s\$)
+* **ชุดปฏิบัติการเสมือนจริงประจำโมดูล**
+  * **ชื่อแล็บ** \`LAB 2.0 แบบจำลองการแปลงหน่วยวิถียานอวกาศดาวอังคาร\`
+  * **โหมดจำลอง** 2D Planetary Canvas \$\leftrightarrow\$ 3D AR MediaPipe Hands Spatial Orbiter
+  * **ฟังก์ชันในตัว** ตารางบันทึกค่าแรงขับดัน, ระดับความสูงวงโคจร (\$h\$), สังเคราะห์เสียงไซเรนเตือนภัย / เสียง Chime สำเร็จ
+  * **ลิงก์จำลองเสมือนจริง** [\`chapter02_visual_flowchart_intro.html\`](https://tsanaphy2023.github.io/computing-science/simulators/chapter02_visual_flowchart_intro.html)
+
+---
+
+### 🔹 โมดูล 2.1 การเขียนรหัสลำลองตามหลักสากลและการสร้างต้นไม้ไวยากรณ์
+* **เนื้อหาสื่อการสอน** กฎไวยากรณ์สากล 5 ประการ, คำสงวนมาตรฐาน (\`INPUT\`, \`OUTPUT\`, \`IF-THEN-ELSE-ENDIF\`, \`WHILE-ENDWHILE\`), และการเยื้องวรรค (Indentation)
+* **ชุดปฏิบัติการเสมือนจริงประจำโมดูล**
+  * **ชื่อแล็บ** \`LAB 2.1 ตัววิเคราะห์รหัสลำลองและต้นไม้ไวยากรณ์ 3D (Pseudocode AST Linter)\`
+  * **โหมดจำลอง** 2D Syntax Highlighter \$\leftrightarrow\$ 3D Glowing Abstract Syntax Tree
+  * **ฟังก์ชันในตัว** ตรวจจับข้อผิดพลาด Missing Block Closure, แจ้งเตือนคำศัพท์เฉพาะทาง, และเรนเดอร์กิ่งไม้ 3 มิติ
+  * **ลิงก์จำลองเสมือนจริง** [\`chapter02_pseudocode_linter.html\`](https://tsanaphy2023.github.io/computing-science/simulators/chapter02_pseudocode_linter.html)
+
+---
+
+### 🔹 โมดูล 2.2 สัญลักษณ์ผังงานมาตรฐาน ISO 5807 และโครงสร้างลำดับ
+* **เนื้อหาสื่อการสอน** สัญลักษณ์ 5 รูปทรงเรขาคณิต (Terminator, Process, I/O, Decision, Connector) และการลากเส้น Flowline
+* **ชุดปฏิบัติการเสมือนจริงประจำโมดูล**
+  * **ชื่อแล็บ** \`LAB 2.2 สตูดิโอประกอบผังงานมาตรฐานและทดสอบเลเซอร์ (Flowchart Builder Studio)\`
+  * **โหมดจำลอง** 2D Drag-and-Drop Canvas \$\leftrightarrow\$ 3D AR Spatial Flowchart Grid
+  * **ฟังก์ชันในตัว** ลากเส้นเชื่อมโยงบล็อก, ปล่อยลำแสงเลเซอร์แสดงการไหลของข้อมูล, และทดสอบคะแนนสอบ (\$Score \ge 50\$)
+  * **ลิงก์จำลองเสมือนจริง** [\`chapter02_flowchart_builder.html\`](https://tsanaphy2023.github.io/computing-science/simulators/chapter02_flowchart_builder.html)
+
+---
+
+### 🔹 โมดูล 2.3 โครงสร้างทางเลือกและการตัดสินใจหลายเงื่อนไข
+* **เนื้อหาสื่อการสอน** โครงสร้าง Nested IF, ตรรกะบูลีนผสม (\`AND\`, \`OR\`, \`NOT\`), และการควบคุมระบบอัตโนมัติในโรงเรือนอัจฉริยะ (Smart Greenhouse)
+* **ชุดปฏิบัติการเสมือนจริงประจำโมดูล**
+  * **ชื่อแล็บ** \`LAB 2.3 ประตูตรรกะและการตัดสินใจหลายเงื่อนไข Smart Farm\`
+  * **โหมดจำลอง** 2D Sensor Logic Schematic \$\leftrightarrow\$ 3D Holographic Greenhouse
+  * **ฟังก์ชันในตัว** ปรับค่าอุณหภูมิ, ความชื้น, ระดับน้ำ, ทดสอบระบบพ่นหมอกอัตโนมัติ พร้อม Safety Lock
+  * **ลิงก์จำลองเสมือนจริง** [\`chapter02_decision_branching.html\`](https://tsanaphy2023.github.io/computing-science/simulators/chapter02_decision_branching.html)
+
+---
+
+### 🔹 โมดูล 2.4 โครงสร้างวนซ้ำและการไล่ค่าตัวแปรด้วยตารางดรายรัน
+* **เนื้อหาสื่อการสอน** กลไกการทำงานของลูป (\`WHILE\`, \`FOR\`), การคำนวณผลรวมอนุกรม \$\sum_{i=1}^{n} i\$, และการสร้างตาราง Trace Table
+* **ชุดปฏิบัติการเสมือนจริงประจำโมดูล**
+  * **ชื่อแล็บ** \`LAB 2.4 ตารางไล่ค่าตัวแปรอนิเมชัน (Animated Trace Table Runner)\`
+  * **โหมดจำลอง** 2D Interactive Trace Grid \$\leftrightarrow\$ 3D Variable Memory Cubes
+  * **ฟังก์ชันในตัว** ก้าวข้ามคำสั่งทีละบรรทัด (\`STEP FORWARD\`), อัปเดตค่า \$i\$ และ \$Sum\$ แบบสด, บันทึกตารางและพิมพ์ใบงาน
+  * **ลิงก์จำลองเสมือนจริง** [\`chapter02_trace_table_runner.html\`](https://tsanaphy2023.github.io/computing-science/simulators/chapter02_trace_table_runner.html)
+
+---
+
+## 📋 ตารางสรุป 5 ปฏิบัติการเสมือนจริงประจำหมวดที่ 2 บนระบบ MOOC
+
+| รหัสแล็บ | ชื่อการทดลอง | รูปแบบ | สาระสำคัญ | ลิงก์ตรงบน CDN |
+| :---: | :--- | :---: | :--- | :--- |
+| **LAB 2.0** | แบบจำลองการแปลงหน่วยยาน Mars | 2D/3D AR | ป้องกันบั๊กการคำนวณแรงขับดัน | [เข้าสู่ห้องทดลอง 2.0](https://tsanaphy2023.github.io/computing-science/simulators/chapter02_visual_flowchart_intro.html) |
+| **LAB 2.1** | ตัววิเคราะห์รหัสลำลองและ AST | 2D/3D AR | ตรวจสอบกฎไวยากรณ์และบล็อกปิด | [เข้าสู่ห้องทดลอง 2.1](https://tsanaphy2023.github.io/computing-science/simulators/chapter02_pseudocode_linter.html) |
+| **LAB 2.2** | สตูดิโอสร้างผังงานมาตรฐาน ISO | 2D/3D AR | ประกอบบล็อกเรขาคณิตและรันเลเซอร์ | [เข้าสู่ห้องทดลอง 2.2](https://tsanaphy2023.github.io/computing-science/simulators/chapter02_flowchart_builder.html) |
+| **LAB 2.3** | ประตูตรรกะหลายเงื่อนไข Smart Farm | 2D/3D AR | ระบบควบคุมโรงเรือนเกษตรอัจฉริยะ | [เข้าสู่ห้องทดลอง 2.3](https://tsanaphy2023.github.io/computing-science/simulators/chapter02_decision_branching.html) |
+| **LAB 2.4** | ตารางไล่ค่าตัวแปรอนิเมชัน | 2D/3D AR | ตรวจสอบลูปและหาผลรวมอนุกรม | [เข้าสู่ห้องทดลอง 2.4](https://tsanaphy2023.github.io/computing-science/simulators/chapter02_trace_table_runner.html) |
+
+---
+
+
+<!-- SECTION BREAK -->
+
+# วิทยาการคำนวณ 4 สื่อการเรียนรู้ดิจิทัลและคู่มือปฏิบัติการเสมือนจริงบนระบบ MOOC
+## หมวดหมู่ที่ 3 พื้นฐานการเขียนโปรแกรมและการจัดการข้อมูล
+**ผู้พัฒนาหลักสูตร** ผู้ช่วยศาสตราจารย์ ดร.ชีวะ ทัศนา • สาขาวิชาฟิสิกส์ คณะวิทยาศาสตร์และเทคโนโลยี มหาวิทยาลัยราชภัฏรำไพพรรณี
+
+---
+
+## 🎯 ผลลัพธ์การเรียนรู้ประจำหมวดที่ 3
+1. เข้าใจสถาปัตยกรรมตัวแปรในหน่วยความจำ RAM และกฎการตั้งชื่อมาตรฐานสากล
+2. แปลงชนิดข้อมูล \`int\`, \`float\`, \`str\`, \`bool\` และจัดการนิพจน์คณิตศาสตร์ตามลำดับ PEMDAS
+3. พัฒนาโปรแกรมรับข้อมูลและแสดงผลลัพธ์ผ่านเว็บเบราว์เซอร์ด้วย Pyodide WebAssembly Sandbox
+
+---
+
+## 📚 รายละเอียด 5 โมดูลบทเรียนดิจิทัล
+
+### 🔹 โมดูล 3.0 เรื่องเล่าเปิดบทเรียนและก้าวแรกสู่โลกแห่งภาษา Python
+* **เนื้อหาสื่อการสอน** วิวัฒนาการของภาษา Python ในงานฟิสิกส์ วิทยาศาสตร์ข้อมูล และ AI
+* **ชุดจำลองเสมือนจริงในระบบ**
+  * Embedded Pyodide Python 3.11 In-Browser Terminal
+
+---
+
+### 🔹 โมดูล 3.1 ตัวแปร กฎการตั้งชื่อ และตัวระบุสากล
+* **เนื้อหาสื่อการสอน** กลไก Dynamic Typing, Memory Allocation, PEP 8 Naming Guidelines
+* **ชุดจำลองเสมือนจริงในระบบ**
+  * Interactive RAM Memory Address Inspector
+
+---
+
+### 🔹 โมดูล 3.2 ชนิดข้อมูลพื้นฐานและการแปลงชนิด
+* **เนื้อหาสื่อการสอน** \`int\`, \`float\`, \`str\`, \`bool\` และฟังก์ชัน \`type()\`, \`int()\`, \`float()\`, \`str()\`
+* **ชุดจำลองเสมือนจริงในระบบ**
+  * Live Type Casting & Overflow Boundary Sandbox
+
+---
+
+### 🔹 โมดูล 3.3 ตัวดำเนินการทางคณิตศาสตร์ ลำดับ PEMDAS และนิพจน์สัมพันธ์
+* **เนื้อหาสื่อการสอน** \`+\`, \`-\`, \`*\`, \`/\`, \`//\`, \`%\`, \`**\` และลำดับความสำคัญของวงเล็บ
+* **ชุดจำลองเสมือนจริงในระบบ**
+  * PEMDAS Expression Evaluator with Step-by-Step Tree Reduction
+
+---
+
+### 🔹 โมดูล 3.4 การรับข้อมูลเข้าและการจัดรูปแบบการแสดงผล
+* **เนื้อหาสื่อการสอน** ฟังก์ชัน \`input()\`, \`print()\`, และ f-strings formatting (\`{val:,.2f}\`)
+* **โจทย์ปฏิบัติการ** โปรแกรมคำนวณพลังงานจลน์ \$E_k = \frac{1}{2}mv^2\$
+* **ชุดจำลองเสมือนจริงในระบบ**
+  * Kinetic Energy EV Vehicle Interactive Calculator
+* **แบบทดสอบท้ายหมวดที่ 3 (Formative Quiz 5 ข้อ):** ประเมินผลการคำนวณนิพจน์และการแปลงชนิดข้อมูล
+
+
+<!-- SECTION BREAK -->
+
+# วิทยาการคำนวณ 4 สื่อการเรียนรู้ดิจิทัลและคู่มือปฏิบัติการเสมือนจริงบนระบบ MOOC
+## หมวดหมู่ที่ 4 โครงสร้างควบคุม เงื่อนไข และการทำซ้ำ
+**ผู้พัฒนาหลักสูตร** ผู้ช่วยศาสตราจารย์ ดร.ชีวะ ทัศนา • สาขาวิชาฟิสิกส์ คณะวิทยาศาสตร์และเทคโนโลยี มหาวิทยาลัยราชภัฏรำไพพรรณี
+
+---
+
+## 🎯 ผลลัพธ์การเรียนรู้ประจำหมวดที่ 4
+1. พัฒนาโค้ดโครงสร้างทางเลือก \`if\`, \`if-else\`, \`if-elif-else\` และเงื่อนไขซ้อนหลายชั้น
+2. ประยุกต์ใช้ \`for loop\`, \`while loop\`, \`range()\`, \`break\`, \`continue\` ในการแก้ปัญหาทางวิทยาศาสตร์
+3. ทดลองสร้างระบบจำลองสภาพแวดล้อมโรงเรือนเกษตรอัจฉริยะแบบโต้ตอบบนหน้าเว็บ
+
+---
+
+## 📚 รายละเอียด 5 โมดูลบทเรียนดิจิทัล
+
+### 🔹 โมดูล 4.0 เรื่องเล่าเปิดบทเรียนและการจำลองระบบตัดสินใจอัตโนมัติ
+* **เนื้อหาสื่อการสอน** เบื้องหลังสมองกลยานยนต์ไร้คนขับและการประเมินความปลอดภัยฉุกเฉิน
+* **ชุดจำลองเสมือนจริงในระบบ**
+  * Autonomous Vehicle Emergency Braking Simulator
+
+---
+
+### 🔹 โมดูล 4.1 โครงสร้างทางเลือก if, if-else และการประเมินตรรกะ
+* **เนื้อหาสื่อการสอน** ตัวดำเนินการเปรียบเทียบ \`==\`, \`!=\`, \`>\`, \`<\`, \`>=\`, \`<=\` และตัวดำเนินการตรรกะ \`and\`, \`or\`, \`not\`
+* **ชุดจำลองเสมือนจริงในระบบ**
+  * Interactive Logic Condition Gate Visualizer
+
+---
+
+### 🔹 โมดูล 4.2 โครงสร้างเงื่อนไขหลายชั้น if-elif-else และ Nested Conditions
+* **เนื้อหาสื่อการสอน** การจัดลำดับเงื่อนไขที่มีประสิทธิภาพและการตัดเส้นทางด่วน (Guard Clauses)
+* **กรณีศึกษา** ระบบประเมินและสั่งการโรงเรือนเกษตรอัจฉริยะ (Smart Greenhouse)
+* **ชุดจำลองเสมือนจริงในระบบ**
+  * Smart Greenhouse Climate Controller Dashboard (ปรับ Slider อุณหภูมิและความชื้นแบบ Real-time)
+
+---
+
+### 🔹 โมดูล 4.3 การวนซ้ำด้วย for loop และฟังก์ชัน range()
+* **เนื้อหาสื่อการสอน** Definite Loops, \`range(start, stop, step)\`, การคำนวณผลรวมอนุกรมคณิตศาสตร์ \$\sum_{i=1}^n i\$
+* **ชุดจำลองเสมือนจริงในระบบ**
+  * Mathematical Series Accumulator & Visual Step Counter
+
+---
+
+### 🔹 โมดูล 4.4 การวนซ้ำด้วย while loop และคำสั่งควบคุม break / continue
+* **เนื้อหาสื่อการสอน** Indefinite Loops, การป้องกัน Infinite Loop, กลไกของ \`break\` และ \`continue\`
+* **ชุดจำลองเสมือนจริงในระบบ**
+  * Interactive Number Guessing Game & Prime Number Scanner
+* **แบบทดสอบท้ายหมวดที่ 4 (Formative Quiz 5 ข้อ):** ประเมินทักษะการวิเคราะห์ลูปและเงื่อนไข
+
+
+<!-- SECTION BREAK -->
+
+# วิทยาการคำนวณ 4 สื่อการเรียนรู้ดิจิทัลและคู่มือปฏิบัติการเสมือนจริงบนระบบ MOOC
+## หมวดหมู่ที่ 5 โครงสร้างข้อมูลและอัลกอริทึมการค้นหา
+**ผู้พัฒนาหลักสูตร** ผู้ช่วยศาสตราจารย์ ดร.ชีวะ ทัศนา • สาขาวิชาฟิสิกส์ คณะวิทยาศาสตร์และเทคโนโลยี มหาวิทยาลัยราชภัฏรำไพพรรณี
+
+---
+
+## 🎯 ผลลัพธ์การเรียนรู้ประจำหมวดที่ 5
+1. ใช้งานโครงสร้างข้อมูล List, Tuple, Set, Dictionary ได้อย่างถูกต้องตรงตามลักษณะงาน
+2. สร้างและประมวลผลแมทริกซ์ 2 มิติด้วย List Comprehension
+3. เปรียบเทียบประสิทธิภาพ Linear Search \$O(n)\$ กับ Binary Search \$O(\log n)\$ ผ่านชุดทดลองเสมือนจริง 10,000,000 ข้อมูล
+
+---
+
+## 📚 รายละเอียด 5 โมดูลบทเรียนดิจิทัล
+
+### 🔹 โมดูล 5.0 เรื่องเล่าเปิดบทเรียนและศิลปะการจัดเก็บข้อมูลให้ค้นหาง่าย
+* **เนื้อหาสื่อการสอน** เบื้องหลังระบบค้นหาของเสิร์ชเอนจิน และการค้นหาอนุภาคฮิกส์โบซอนในข้อมูลเพตะไบต์ที่ CERN
+* **ชุดจำลองเสมือนจริงในระบบ**
+  * High-Energy Physics Data Query Simulator
+
+---
+
+### 🔹 โมดูล 5.1 รายการแบบไดนามิก List และ List Comprehension
+* **เนื้อหาสื่อการสอน** กลไก Dynamic Array ใน RAM, Slicing \`[::-1]\`, 2D Matrices, List Comprehension
+* **ชุดจำลองเสมือนจริงในระบบ**
+  * 2D Matrix Visualizer & Interactive Transpose Tool
+
+---
+
+### 🔹 โมดูล 5.2 โครงสร้าง Tuple, Set และ Dictionary
+* **เนื้อหาสื่อการสอน** Immutable Tuples, ทฤษฎีเซต (\$\cup, \cap, -\$), กลไก Hash Table \$O(1)\$
+* **ชุดจำลองเสมือนจริงในระบบ**
+  * Interactive Periodic Table Hash Lookup Database
+
+---
+
+### 🔹 โมดูล 5.3 อัลกอริทึมการค้นหาแบบเชิงเส้น
+* **เนื้อหาสื่อการสอน** การสแกนข้อมูลทีละสมาชิก \$O(n)\$, กรณีดีที่สุด vs กรณีแย่ที่สุด
+* **ชุดจำลองเสมือนจริงในระบบ**
+  * Linear Search Animation & Step-by-Step Pointer Tracker
+
+---
+
+### 🔹 โมดูล 5.4 อัลกอริทึมการค้นหาแบบทวิภาค
+* **เนื้อหาสื่อการสอน** เงื่อนไขการเรียงลำดับ, การแบ่งครึ่งช่วงทีละ 2 (\$O(\log n)\$), การคำนวณ \`mid\`
+* **ชุดจำลองเสมือนจริงในระบบ**
+  * Live Search Race: Linear vs Binary Search on 10M Items
+* **แบบทดสอบท้ายหมวดที่ 5 (Formative Quiz 5 ข้อ):** ประเมินผลความเข้าใจโครงสร้างข้อมูลและการค้นหา
+
+
+<!-- SECTION BREAK -->
+
+# วิทยาการคำนวณ 4 สื่อการเรียนรู้ดิจิทัลและคู่มือปฏิบัติการเสมือนจริงบนระบบ MOOC
+## หมวดหมู่ที่ 6 อัลกอริทึมการจัดเรียงและการวิเคราะห์ Big-O
+**ผู้พัฒนาหลักสูตร** ผู้ช่วยศาสตราจารย์ ดร.ชีวะ ทัศนา • สาขาวิชาฟิสิกส์ คณะวิทยาศาสตร์และเทคโนโลยี มหาวิทยาลัยราชภัฏรำไพพรรณี
+
+---
+
+## 🎯 ผลลัพธ์การเรียนรู้ประจำหมวดที่ 6
+1. วิเคราะห์ความซับซ้อนเชิงเวลา และเชิงพื้นที่ (Space Complexity) ด้วยสัญกรณ์ Big-O
+2. เข้าใจและจำแนกความแตกต่างระหว่าง Bubble, Selection, Insertion Sort (\$O(n^2)\$) กับ Merge Sort (\$O(n \log n)\$)
+3. สังเกตการทำงานของขั้นตอนวิธีจัดเรียงข้อมูลผ่านแอนิเมชันกราฟิกแบบเรียลไทม์
+
+---
+
+## 📚 รายละเอียด 5 โมดูลบทเรียนดิจิทัล
+
+### 🔹 โมดูล 6.0 เรื่องเล่าเปิดบทเรียนและการประลองความเร็วของอัลกอริทึม
+* **เนื้อหาสื่อการสอน** ศูนย์ข้อมูล Data Centers ทั่วโลกกับการใช้พลังงาน 25% ในการจัดเรียงข้อมูล
+* **ชุดจำลองเสมือนจริงในระบบ**
+  * Global Data Center Sorting Energy Impact Simulator
+
+---
+
+### 🔹 โมดูล 6.1 การวิเคราะห์สัญกรณ์โอใหญ่
+* **เนื้อหาสื่อการสอน** \$O(1), O(\log n), O(n), O(n \log n), O(n^2), O(2^n)\$ และ 3 กฎการตัดพจน์
+* **ชุดจำลองเสมือนจริงในระบบ**
+  * Interactive Big-O Growth Curve Comparator (\$N=1\$ ถึง \$N=1,000,000\$)
+
+---
+
+### 🔹 โมดูล 6.2 บับเบิลซอร์ต และซีเลกชันซอร์ต
+* **เนื้อหาสื่อการสอน** การเปรียบเทียบทีละคู่ (Adjacent Swapping) และการค้นหาค่าต่ำสุด (Find Minimum)
+* **ชุดจำลองเสมือนจริงในระบบ**
+  * 2D Bar Chart Sorting Visualizer (Bubble vs Selection Animation)
+
+---
+
+### 🔹 โมดูล 6.3 อินเซอร์ชันซอร์ต
+* **เนื้อหาสื่อการสอน** การจัดเรียงแบบแทรกข้อมูลในส่วนหน้าที่เรียงแล้ว และความเสถียร (Stability)
+* **ชุดจำลองเสมือนจริงในระบบ**
+  * Card Hand Sorting Interactive Playground
+
+---
+
+### 🔹 โมดูล 6.4 เมิร์จซอร์ต และการแบ่งแยกเพื่อพิชิต
+* **เนื้อหาสื่อการสอน** กลไก Divide & Conquer, การแบ่งครึ่งย่อย, และการ Merge ลิสต์ย่อยในเวลา \$O(n \log n)\$
+* **ชุดจำลองเสมือนจริงในระบบ**
+  * Interactive Divide & Conquer Tree Visualizer
+* **แบบทดสอบท้ายหมวดที่ 6 (Formative Quiz 5 ข้อ):** ประเมินทักษะการคำนวณ Big-O และลำดับการสลับค่า
+
+
+<!-- SECTION BREAK -->
+
+# วิทยาการคำนวณ 4 สื่อการเรียนรู้ดิจิทัลและคู่มือปฏิบัติการเสมือนจริงบนระบบ MOOC
+## หมวดหมู่ที่ 7 การเขียนโปรแกรมเชิงโมดูลและฟังก์ชันเรียกซ้ำ
+**ผู้พัฒนาหลักสูตร** ผู้ช่วยศาสตราจารย์ ดร.ชีวะ ทัศนา • สาขาวิชาฟิสิกส์ คณะวิทยาศาสตร์และเทคโนโลยี มหาวิทยาลัยราชภัฏรำไพพรรณี
+
+---
+
+## 🎯 ผลลัพธ์การเรียนรู้ประจำหมวดที่ 7
+1. ออกแบบฟังก์ชันตามหลักการ Pure Functions, กฎขอบเขตตัวแปร LEGB, และ \`*args\`, \`**kwargs\`
+2. จัดการไฟล์ข้อมูล CSV / JSON ด้วย Context Manager ปลอดภัย 100%
+3. ทำความเข้าใจฟังก์ชันเรียกซ้ำ และแก้ปัญหาหอคอยฮานอยผ่านแอนิเมชัน 3 มิติ
+
+---
+
+## 📚 รายละเอียด 5 โมดูลบทเรียนดิจิทัล
+
+### 🔹 โมดูล 7.0 เรื่องเล่าเปิดบทเรียนและสถาปัตยกรรมโค้ดที่สะอาดและยั่งยืน
+* **เนื้อหาสื่อการสอน** ปรัชญา UNIX "Do One Thing and Do It Well" และการป้องกัน Monolithic Spaghetti Code
+* **ชุดจำลองเสมือนจริงในระบบ**
+  * Interactive Code Refactoring & Complexity Visualizer
+
+---
+
+### 🔹 โมดูล 7.1 การออกแบบฟังก์ชัน พารามิเตอร์ และค่าคืนกลับ
+* **เนื้อหาสื่อการสอน** Positional vs Keyword Args, Default Parameters, \`*args\`, \`**kwargs\`, Lambda Expressions
+* **ชุดจำลองเสมือนจริงในระบบ**
+  * Function Parameter Scope & LEGB Stack Frame Simulator
+
+---
+
+### 🔹 โมดูล 7.2 การสร้างโมดูลและการใช้งานไลบรารีมาตรฐาน
+* **เนื้อหาสื่อการสอน** การสร้างโมดูล \`.py\` นำกลับมาใช้ซ้ำ, โมดูลมาตรฐาน \`math\`, \`random\`, \`time\`
+* **ชุดจำลองเสมือนจริงในระบบ**
+  * Physics Vector Math Module Test Runner
+
+---
+
+### 🔹 โมดูล 7.3 การอ่านเขียนไฟล์และการจัดการข้อมูล CSV / JSON
+* **เนื้อหาสื่อการสอน** \`with open(..., encoding='utf-8')\`, \`csv.DictReader\`, \`json.dump()\`, Data Aggregation
+* **ชุดจำลองเสมือนจริงในระบบ**
+  * Interactive CSV/JSON File Parser & Live Stats Generator
+
+---
+
+### 🔹 โมดูล 7.4 ฟังก์ชันเรียกซ้ำ และปริศนาหอคอยฮานอย
+* **เนื้อหาสื่อการสอน** Base Case, Recursive Step, Call Stack Frame, ปริศนาหอคอยฮานอย (\$2^n - 1\$)
+* **ชุดจำลองเสมือนจริงในระบบ**
+  * 3D Animated Tower of Hanoi Recursive Solver
+* **แบบทดสอบท้ายหมวดที่ 7 (Formative Quiz 5 ข้อ):** ประเมินทักษะการคำนวณ Call Stack และการจัดการไฟล์
+
+
+<!-- SECTION BREAK -->
+
+# วิทยาการคำนวณ 4 สื่อการเรียนรู้ดิจิทัลและคู่มือปฏิบัติการเสมือนจริงบนระบบ MOOC
+## หมวดหมู่ที่ 8 วิทยาศาสตร์เชิงคำนวณและแบบจำลองฟิสิกส์
+**ผู้พัฒนาหลักสูตร** ผู้ช่วยศาสตราจารย์ ดร.ชีวะ ทัศนา • สาขาวิชาฟิสิกส์ คณะวิทยาศาสตร์และเทคโนโลยี มหาวิทยาลัยราชภัฏรำไพพรรณี
+
+---
+
+## 🎯 ผลลัพธ์การเรียนรู้ประจำหมวดที่ 8
+1. เข้าใจกระบวนทัศน์ของวิทยาศาสตร์เชิงคำนวณ (Computational Science) และระเบียบวิธีเชิงตัวเลข \$\Delta t\$
+2. จำลองวิถีการเคลื่อนที่แบบโพรเจกไทล์และการสลายตัวของสารกัมมันตรังสีด้วย Python
+3. ใช้งานแบบจำลอง 3D Three.js PBR Physical Shaders ในการทดลองฟิสิกส์เสมือนจริง
+
+---
+
+## 📚 รายละเอียด 5 โมดูลบทเรียนดิจิทัล
+
+### 🔹 โมดูล 8.0 เรื่องเล่าเปิดบทเรียนและการค้นพบทางวิทยาศาสตร์ผ่านการจำลอง
+* **เนื้อหาสื่อการสอน** 3 เสาหลักของการค้นพบทางวิทยาศาสตร์ (ทฤษฎี, การทดลองจริง, การจำลองเชิงคำนวณ)
+* **ชุดจำลองเสมือนจริงในระบบ**
+  * Interactive Multi-Scale Physics Universe Simulator
+
+---
+
+### 🔹 โมดูล 8.1 การคำนวณเชิงเวกเตอร์และเมทริกซ์ด้วย NumPy
+* **เนื้อหาสื่อการสอน** อาเรย์แบบ N มิติ (ndarray), การกระจายการคำนวณ (Vectorized Operations), Dot Product
+* **ชุดจำลองเสมือนจริงในระบบ**
+  * NumPy Vector & Matrix Acceleration Sandbox
+
+---
+
+### 🔹 โมดูล 8.2 การแสดงผลข้อมูลเชิงวิชาการด้วย Matplotlib
+* **เนื้อหาสื่อการสอน** การพล็อตเส้นทาง กราฟความสัมพันธ์ \$s-t, v-t, a-t\$, การปรับแต่งแกนและคำอธิบายแผนภูมิ
+* **ชุดจำลองเสมือนจริงในระบบ**
+  * Interactive 2D Scientific Chart Plotter
+
+---
+
+### 🔹 โมดูล 8.3 แบบจำลองการเคลื่อนที่แบบโพรเจกไทล์
+* **เนื้อหาสื่อการสอน** สมการการเคลื่อนที่ 2 มิติ, การคำนวณระยะตกไกลสุด (\$R\$), ความสูงสูงสุด (\$H\$), แรงต้านอากาศ
+* **ชุดจำลองเสมือนจริงในระบบ**
+  * 3D Physics Projectile Cannon Simulator (ปรับมุมยิงและความเร็วต้นแบบ Interactive)
+
+---
+
+### 🔹 โมดูล 8.4 แบบจำลองการสั่นฮาร์มอนิกอย่างง่ายและคลื่น
+* **เนื้อหาสื่อการสอน** การสั่นของมวลติดสปริง (\$m\ddot{x} + kx = 0\$) ด้วยระเบียบวิธี Euler-Cromer (\$\Delta t\$)
+* **ชุดจำลองเสมือนจริงในระบบ**
+  * Three.js 3D Spring-Mass Harmonic Oscillator & Live Waveform Oscilloscope
+* **แบบทดสอบท้ายหมวดที่ 8 (Formative Quiz 5 ข้อ):** ประเมินทักษะการสร้างแบบจำลองและการคำนวณทางฟิสิกส์
+
+
+<!-- SECTION BREAK -->
+
+# วิทยาการคำนวณ 4 สื่อการเรียนรู้ดิจิทัลและคู่มือปฏิบัติการเสมือนจริงบนระบบ MOOC
+## หมวดหมู่ที่ 9 ปัญญาประดิษฐ์ คอมพิวเตอร์วิทัศน์ และ IoT
+**ผู้พัฒนาหลักสูตร** ผู้ช่วยศาสตราจารย์ ดร.ชีวะ ทัศนา • สาขาวิชาฟิสิกส์ คณะวิทยาศาสตร์และเทคโนโลยี มหาวิทยาลัยราชภัฏรำไพพรรณี
+
+---
+
+## 🎯 ผลลัพธ์การเรียนรู้ประจำหมวดที่ 9
+1. สร้างและประเมินประสิทธิภาพโมเดล Machine Learning ด้วย Scikit-learn
+2. พัฒนาระบบประมวลผลภาพและตรวจจับสีของวัตถุด้วย OpenCV
+3. เชื่อมต่อระบบตรวจจับท่าทางมือ 3 มิติ Google MediaPipe Hands และระบบส่งข้อมูลเซนเซอร์ IoT เข้าสู่คลาวด์
+
+---
+
+## 📚 รายละเอียด 5 โมดูลบทเรียนดิจิทัล
+
+### 🔹 โมดูล 9.0 เรื่องเล่าเปิดบทเรียนและยุคสมัยแห่งปัญญาประดิษฐ์และเซนเซอร์รอบตัว
+* **เนื้อหาสื่อการสอน** ปฏิวัติอุตสาหกรรม 4.0, ระบบอัตโนมัติ และการผสาน AI เข้ากับงานวิทยาศาสตร์กายภาพ
+* **ชุดจำลองเสมือนจริงในระบบ**
+  * Industry 4.0 Smart Factory & Agro-Physics Interactive Map
+
+---
+
+### 🔹 โมดูล 9.1 แมชชีนเลิร์นนิงเชิงประยุกต์ด้วย Scikit-learn
+* **เนื้อหาสื่อการสอน** ML Pipeline, การแบ่ง Train/Test Split, การเทรนโมเดล Random Forest / KNN, Confusion Matrix
+* **ชุดจำลองเสมือนจริงในระบบ**
+  * In-Browser Machine Learning Classifier Sandbox (Iris & Sensor Data)
+
+---
+
+### 🔹 โมดูล 9.2 การประมวลผลภาพดิจิทัลและตรวจจับสีด้วย OpenCV
+* **เนื้อหาสื่อการสอน** ปริภูมิสี HSV, Color Segmentation, Image Filtering, Canny Edge Detection
+* **ชุดจำลองเสมือนจริงในระบบ**
+  * Real-Time WebCam Color Detection & Object Tracker
+
+---
+
+### 🔹 โมดูล 9.3 คอมพิวเตอร์วิทัศน์และการตรวจจับท่าทางมือ 3 มิติ MediaPipe
+* **เนื้อหาสื่อการสอน** โครงกระดูกมือ 21 จุด 3D, การคำนวณระยะห่างการจีบนิ้ว Pinch Formula, การนับจำนวนนิ้ว
+* **ชุดจำลองเสมือนจริงในระบบ**
+  * 3D Cyber Skeleton Hand Tracking AR Simulator (MediaPipe WebAssembly)
+
+---
+
+### 🔹 โมดูล 9.4 อินเทอร์เน็ตของสรรพสิ่ง และระบบฟาร์มเกษตรอัจฉริยะ
+* **เนื้อหาสื่อการสอน** สถาปัตยกรรม ESP32, ADC 12-bit, MQTT Publish/Subscribe Broker, JSON Telemetry
+* **ชุดจำลองเสมือนจริงในระบบ**
+  * Cloud IoT Telemetry Dashboard & Smart Sprinkler Actuator
+* **แบบทดสอบท้ายหมวดที่ 9 (Formative Quiz 5 ข้อ):** ประเมินผลความเข้าใจด้าน AI, Computer Vision และ IoT
+
+
+<!-- SECTION BREAK -->
+
+# วิทยาการคำนวณ 4 สื่อการเรียนรู้ดิจิทัลและคู่มือปฏิบัติการเสมือนจริงบนระบบ MOOC
+## หมวดหมู่ที่ 10 การพัฒนาโครงงานบูรณาการและการเผยแพร่
+**ผู้พัฒนาหลักสูตร** ผู้ช่วยศาสตราจารย์ ดร.ชีวะ ทัศนา • สาขาวิชาฟิสิกส์ คณะวิทยาศาสตร์และเทคโนโลยี มหาวิทยาลัยราชภัฏรำไพพรรณี
+
+---
+
+## 🎯 ผลลัพธ์การเรียนรู้ประจำหมวดที่ 10
+1. วางแผนและดำเนินงานโครงงานนวัตกรรมคอมพิวเตอร์ตามกระบวนการ SDLC และ Design Thinking
+2. ดำเนินการทดสอบระบบ (QA), ประเมินความมั่นคงปลอดภัย, และเขียนรายงาน 5 บทตามมาตรฐาน RBRU
+3. ผ่านการประเมินแบบทดสอบประมวลความรู้ปลายภาค (Comprehensive MOOC Post-test) เพื่อขอรับใบประกาศนียบัตรดิจิทัล
+
+---
+
+## 📚 รายละเอียด 5 โมดูลบทเรียนดิจิทัล
+
+### 🔹 โมดูล 10.0 เรื่องเล่าเปิดบทเรียนและจากไอเดียสู่โครงงานนวัตกรรมจริง
+* **เนื้อหาสื่อการสอน** ถอดบทเรียนโครงงานวิทยาการคำนวณและ AI ที่ได้รับรางวัลระดับชาติและระดับนานาชาติ
+* **ชุดจำลองเสมือนจริงในระบบ**
+  * National Capstone Innovation Showcase Gallery
+
+---
+
+### 🔹 โมดูล 10.1 วงจรการพัฒนาโครงงาน SDLC และกระบวนการคิดเชิงออกแบบ
+* **เนื้อหาสื่อการสอน** 5 ขั้นตอน Design Thinking, การวางแผน WBS, Gantt Chart, การทำงานเป็นทีมด้วย Git & GitHub
+* **ชุดจำลองเสมือนจริงในระบบ**
+  * Interactive Project Roadmap & WBS Generator
+
+---
+
+### 🔹 โมดูล 10.2 การทดสอบระบบ การดีบัก และความปลอดภัยสารสนเทศ
+* **เนื้อหาสื่อการสอน** Automated Unit Testing ด้วย \`unittest\`, การวิเคราะห์ค่าขอบเขต BVA, กฎหมาย PDPA และจริยธรรม AI
+* **ชุดจำลองเสมือนจริงในระบบ**
+  * Automated Code Quality & Vulnerability Scanner
+
+---
+
+### 🔹 โมดูล 10.3 การเขียนรายงานโครงงาน 5 บทตามมาตรฐานวิชาการ
+* **เนื้อหาสื่อการสอน** โครงสร้างรายงาน 5 บท (บทนำ, วรรณกรรม, ระเบียบวิธี, ผลและการอภิปราย, สรุปผล), การอ้างอิง APA 7th
+* **ชุดจำลองเสมือนจริงในระบบ**
+  * Interactive Thesis Template & APA Reference Formatter
+
+---
+
+### 🔹 โมดูล 10.4 การจัดทำโปสเตอร์ 16 9 การนำเสนอแบบมืออาชีพ และแบบทดสอบประมวลความรู้ MOOC
+* **เนื้อหาสื่อการสอน** ศิลปะการจัดวางโปสเตอร์ 16:9, เทคนิคการ Pitching 3 นาที, และแนวข้อสอบประมวลผลสัมฤทธิ์ปลายภาค
+* **ชุดจำลองเสมือนจริงในระบบ**
+  * 16:9 High-Contrast Poster Layout Previewer
+* **แบบทดสอบประมวลความรู้ปลายภาค (Comprehensive MOOC Post-test 30 ข้อ):**
+  * ครอบคลุมเนื้อหาทั้ง 10 หมวดหมู่ เกณฑ์ผ่าน \$\ge 70\%\$ เพื่อรับใบประกาศนียบัตรดิจิทัล
+`;
+document.getElementById('content').innerHTML = marked.parse(raw);
+document.addEventListener("DOMContentLoaded", function() {
+    renderMathInElement(document.body, {
+        delimiters: [
+            {left: "$$", right: "$$", display: true},
+            {left: "$", right: "$", display: false}
+        ]
+    });
+    hljs.highlightAll();
+});
+</script>
+</body>
+</html>

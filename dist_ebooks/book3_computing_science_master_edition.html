@@ -1,0 +1,1737 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<title>วิทยาการคำนวณ 3 การสร้างแบบจำลองทางฟิสิกส์ ปัญญาประดิษฐ์ และคอมพิวเตอร์วิทัศน์ - ผศ.ดร.ชีวะ ทัศนา</title>
+
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Sarabun:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+
+<!-- KaTeX -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+
+<!-- Highlight.js -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/python.min.js"></script>
+
+<!-- Marked.js -->
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+<style>
+@page {
+    size: A4 portrait;
+    margin-top: 1.0in;
+    margin-bottom: 1.0in;
+    margin-left: 1.5in;
+    margin-right: 1.0in;
+
+    @bottom-right {
+        content: counter(page);
+        font-family: 'Kanit', sans-serif;
+        font-size: 10pt;
+        font-weight: 600;
+        color: #7c3aed;
+    }
+}
+
+@page :left {
+    margin-left: 1.0in;
+    margin-right: 1.5in;
+    @top-left {
+        content: "วิทยาการคำนวณ 3 การสร้างแบบจำลองทางฟิสิกส์ ปัญญาประดิษฐ์ และคอมพิวเตอร์วิทัศน์";
+        font-family: 'Sarabun', sans-serif;
+        font-size: 8.5pt;
+        color: #64748b;
+        border-bottom: 0.5pt solid #cbd5e1;
+        padding-bottom: 4px;
+    }
+    @bottom-right {
+        content: counter(page);
+        font-family: 'Kanit', sans-serif;
+        font-size: 10pt;
+        font-weight: 600;
+        color: #7c3aed;
+    }
+}
+
+@page :right {
+    margin-left: 1.5in;
+    margin-right: 1.0in;
+    @top-right {
+        content: "ผศ.ดร.ชีวะ ทัศนา // มหาวิทยาลัยราชภัฏรำไพพรรณี";
+        font-family: 'Sarabun', sans-serif;
+        font-size: 8.5pt;
+        color: #64748b;
+        border-bottom: 0.5pt solid #cbd5e1;
+        padding-bottom: 4px;
+    }
+    @bottom-right {
+        content: counter(page);
+        font-family: 'Kanit', sans-serif;
+        font-size: 10pt;
+        font-weight: 600;
+        color: #7c3aed;
+    }
+}
+
+@page cover-page {
+    margin: 0;
+    @top-left { content: none; }
+    @top-right { content: none; }
+    @bottom-right { content: none; }
+}
+
+@page front-matter {
+    margin-top: 1.0in;
+    margin-bottom: 1.0in;
+    margin-left: 1.5in;
+    margin-right: 1.0in;
+    @top-left { content: none; }
+    @top-right { content: none; }
+    @bottom-right {
+        content: counter(page, lower-roman);
+        font-family: 'Kanit', sans-serif;
+        font-size: 9.5pt;
+        color: #64748b;
+    }
+}
+
+body {
+    font-family: 'Sarabun', -apple-system, BlinkMacSystemFont, 'Leelawadee UI', sans-serif;
+    font-size: 10.5pt;
+    line-height: 1.85;
+    color: #1e293b;
+    background: #ffffff;
+    margin: 0;
+    padding: 0;
+    text-align: justify;
+    text-justify: inter-word;
+}
+
+/* 1. ปกหน้าแบบไฮบริด */
+.book-cover {
+    page: cover-page;
+    break-after: always;
+    page-break-after: always;
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    background: #091328;
+    overflow: hidden;
+}
+
+.book-cover .bg-cover {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.book-cover .cover-avatar-badge {
+    position: absolute;
+    bottom: 80px;
+    right: 60px;
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    border: 5px solid #ffffff;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+    background: #ffffff;
+    overflow: hidden;
+}
+
+.book-cover .cover-avatar-badge img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Front Matter */
+.front-matter-section {
+    page: front-matter;
+    break-before: right;
+    page-break-before: right;
+    padding: 10px 0;
+}
+
+.half-title-page {
+    text-align: center;
+    padding-top: 60px;
+    break-after: always;
+    page-break-after: always;
+}
+
+.featured-scientist-card {
+    margin: 20px auto;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 4px solid #7c3aed;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+}
+
+.featured-scientist-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.quartet-gallery {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin: 30px 0 10px 0;
+}
+
+.quartet-item {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid #cbd5e1;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+}
+
+.quartet-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.half-title-page h1 {
+    font-family: 'Kanit', sans-serif;
+    font-size: 26pt;
+    font-weight: 700;
+    color: #7c3aed;
+    margin-bottom: 8px;
+}
+
+.half-title-page h2 {
+    font-family: 'Kanit', sans-serif;
+    font-size: 13.5pt;
+    font-weight: 500;
+    color: #64748b;
+    border: none;
+    background: none;
+    padding: 0;
+    margin-bottom: 15px;
+}
+
+.copyright-page {
+    font-size: 9pt;
+    line-height: 1.7;
+    color: #475569;
+    padding-top: 140px;
+    break-after: always;
+    page-break-after: always;
+}
+
+.cip-box {
+    border: 1px solid #94a3b8;
+    padding: 16px 20px;
+    margin: 20px 0;
+    background: #f8fafc;
+    border-radius: 4px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Kanit', 'Sarabun', sans-serif;
+    color: #0f172a;
+    margin-top: 1.8em;
+    margin-bottom: 0.6em;
+    line-height: 1.35;
+    page-break-after: avoid;
+}
+
+h1 { font-size: 17pt; font-weight: 700; color: #7c3aed; }
+h2 {
+    font-size: 13.5pt;
+    font-weight: 600;
+    color: #0f172a;
+    border-left: 5px solid #7c3aed;
+    padding-left: 12px;
+    margin-top: 2.2em;
+    background: linear-gradient(90deg, #f0f9ff 0%, transparent 100%);
+    padding-top: 4px;
+    padding-bottom: 4px;
+    border-radius: 0 6px 6px 0;
+    page-break-after: avoid;
+}
+h3 { font-size: 11.5pt; font-weight: 600; color: #7c3aed; page-break-after: avoid; }
+p { margin: 0.75em 0; text-indent: 2.0em; }
+
+.alert-box, blockquote {
+    border-left: 5px solid #7c3aed;
+    background: #f0fdf4;
+    padding: 16px 20px;
+    margin: 22px 0;
+    color: #064e3b;
+    border-radius: 0 12px 12px 0;
+    page-break-inside: avoid;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 24px 0;
+    font-size: 9.2pt;
+    page-break-inside: avoid;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+th, td {
+    border-top: 1px solid #e2e8f0;
+    border-bottom: 1px solid #e2e8f0;
+    padding: 9px 13px;
+}
+
+th {
+    background-color: #f1f5f9;
+    color: #0f172a;
+    font-weight: 700;
+    font-family: 'Kanit', sans-serif;
+    border-top: 2px solid #cbd5e1;
+    border-bottom: 2px solid #cbd5e1;
+    text-align: left;
+}
+
+tr:nth-child(even) td { background-color: #f8fafc; }
+
+pre {
+    font-family: 'Fira Code', monospace;
+    font-size: 8.5pt;
+    background: #0f172a;
+    color: #f8fafc;
+    padding: 16px 20px;
+    border-radius: 10px;
+    border: 1px solid #334155;
+    margin: 20px 0;
+    line-height: 1.55;
+    page-break-inside: avoid;
+}
+
+code {
+    font-family: 'Fira Code', monospace;
+    background: #e0f2fe;
+    color: #7c3aed;
+    padding: 1px 5px;
+    border-radius: 4px;
+    font-size: 9pt;
+    font-weight: 500;
+}
+
+pre code { background: transparent; color: inherit; padding: 0; }
+
+div[align="center"], .figure { page-break-inside: avoid; margin: 24px 0; }
+
+img {
+    max-width: 100%;
+    max-height: 460px;
+    object-fit: contain;
+    border-radius: 12px;
+    display: block;
+    margin: 16px auto;
+    box-shadow: 0 6px 25px rgba(0,0,0,0.08);
+}
+
+p em { display: block; text-align: center; text-indent: 0; font-size: 8.5pt; color: #64748b; margin-top: 6px; }
+</style>
+</head>
+<body>
+
+<!-- 1. ปกหน้า (Front Cover) พร้อม Scientist Badge -->
+<div class="book-cover">
+    <img class="bg-cover" src="../assets/images/cover_book3.jpg" alt="ปกหนังสือ วิทยาการคำนวณ 3">
+    <div class="cover-avatar-badge">
+        <img src="../assets/images/avatar_scientist_bohr.jpg" alt="Niels Bohr (แบบจำลองอะตอมและปัญญาประดิษฐ์)">
+    </div>
+</div>
+
+<!-- 2. ใบรองปก (Half Title Page) -->
+<div class="front-matter-section half-title-page">
+    <div class="featured-scientist-card">
+        <img src="../assets/images/avatar_scientist_bohr.jpg" alt="Niels Bohr (แบบจำลองอะตอมและปัญญาประดิษฐ์)">
+    </div>
+    <h1>วิทยาการคำนวณ 3</h1>
+    <h2>การสร้างแบบจำลองทางฟิสิกส์ ปัญญาประดิษฐ์ และคอมพิวเตอร์วิทัศน์</h2>
+    <p style="font-family:'Kanit',sans-serif; color:#94a3b8; font-size:10.5pt; margin-top:2px; text-indent:0;"><em>Scientific Modeling, Artificial Intelligence & Computer Vision</em></p>
+    
+    <!-- 4 Grandmaster Scientists Quartet Banner -->
+    <div class="quartet-gallery">
+        <div class="quartet-item"><img src="../assets/images/avatar_scientist_einstein.jpg" title="Albert Einstein (Logic &amp; Thinking)"></div>
+        <div class="quartet-item"><img src="../assets/images/avatar_scientist_heisenberg.jpg" title="Werner Heisenberg (Algorithms &amp; Mechanics)"></div>
+        <div class="quartet-item"><img src="../assets/images/avatar_scientist_bohr.jpg" title="Niels Bohr (Atomic Models &amp; AI)"></div>
+        <div class="quartet-item"><img src="../assets/images/avatar_scientist_planck.png" title="Max Planck (Pedagogy &amp; Education)"></div>
+    </div>
+    <p style="font-size:8.5pt; color:#94a3b8; text-indent:0; margin-top:4px;">ชุดตำราวิทยาการคำนวณและฟิสิกส์บูรณาการ 4 เล่มสมบูรณ์</p>
+
+    <div style="margin-top: 50px; font-family: 'Kanit', sans-serif; color: #475569;">
+        <p style="text-indent:0; font-size: 13.5pt; font-weight: 600; color: #0f172a;">ผู้ช่วยศาสตราจารย์ ดร.ชีวะ ทัศนา</p>
+        <p style="text-indent:0; font-size: 10.5pt; color: #64748b;">สาขาวิชาฟิสิกส์ คณะวิทยาศาสตร์และเทคโนโลยี มหาวิทยาลัยราชภัฏรำไพพรรณี</p>
+    </div>
+    <div style="margin-top: 70px; font-size: 10pt; color: #94a3b8;">
+        สำนักพิมพ์มหาวิทยาลัยราชภัฏรำไพพรรณี (RBRU Press)
+    </div>
+</div>
+
+<!-- 3. หน้าลิขสิทธิ์และข้อมูลทางบรรณานุกรม (CIP Page) -->
+<div class="front-matter-section copyright-page">
+    <div class="cip-box">
+        <strong style="font-family:'Kanit', sans-serif; font-size:10pt; color:#0f172a;">ข้อมูลทางบรรณานุกรมของสำนักหอสมุดแห่งชาติ (National Library of Thailand CIP)</strong><br><br>
+        ชีวะ ทัศนา.<br>
+        <strong>วิทยาการคำนวณ 3 การสร้างแบบจำลองทางฟิสิกส์ ปัญญาประดิษฐ์ และคอมพิวเตอร์วิทัศน์.</strong> -- จันทบุรี : สำนักพิมพ์มหาวิทยาลัยราชภัฏรำไพพรรณี, 2569.<br>
+        350 หน้า.<br><br>
+        1. วิทยาการคำนวณ. 2. ขั้นตอนวิธีและการประมวลผลข้อมูล. 3. ภาษาไพทอน (คอมพิวเตอร์). I. ชื่อเรื่อง.<br>
+        <strong>ISBN 978-616-XXXX-03-5 (ฉบับพิมพ์สมบูรณ์)</strong><br>
+        <strong>ISBN 978-616-XXXX-XX-X (ฉบับดิจิทัล EPUB 3.0)</strong>
+    </div>
+
+    <div style="margin-top: 20px; font-size: 8.5pt; color: #64748b;">
+        <p style="text-indent:0;"><strong>สงวนลิขสิทธิ์ตามพระราชบัญญัติลิขสิทธิ์ พ.ศ. 2537 และฉบับแก้ไขเพิ่มเติม</strong></p>
+        <p style="text-indent:0;">ห้ามการลอกเลียนแบบ ดัดแปลง ทำซ้ำ หรือเผยแพร่ส่วนใดส่วนหนึ่งของหนังสือเล่มนี้ ไม่ว่าด้วยกระบวนการทางอิเล็กทรอนิกส์ การถ่ายสำเนา หรือวิธีการใดๆ โดยไม่ได้รับอนุญาตเป็นลายลักษณ์อักษรจากผู้เขียน ยกเว้นเพื่อการอ้างอิงทางวิชาการ</p>
+        <p style="text-indent:0; margin-top: 10px;"><strong>ผู้เขียน:</strong> ผู้ช่วยศาสตราจารย์ ดร.ชีวะ ทัศนา (Ph.D. in Physics)<br>
+        <strong>จัดพิมพ์โดย:</strong> สำนักพิมพ์มหาวิทยาลัยราชภัฏรำไพพรรณี เลขที่ 41 หมู่ 5 ต.ท่าช้าง อ.เมือง จ.จันทบุรี 22000<br>
+        <strong>พิมพ์ครั้งที่ 1:</strong> สิงหาคม พ.ศ. 2569 (จำนวนพิมพ์ 1,000 เล่ม)</p>
+    </div>
+</div>
+
+<!-- 4. คำนำ (Preface) -->
+<div class="front-matter-section" style="break-before: right; page-break-before: right;">
+    <h1 style="font-size: 18pt; text-align: center; margin-bottom: 24px;">คำนำ</h1>
+    <p>
+        ตำรา <strong>"วิทยาการคำนวณ 3: การสร้างแบบจำลองทางฟิสิกส์ ปัญญาประดิษฐ์ และคอมพิวเตอร์วิทัศน์"</strong> เล่มนี้ ได้รับการประพันธ์และเรียบเรียงขึ้นอย่างประณีต เพื่อใช้เป็นตำราหลักในรายวิชา <strong>4122106 ปัญญาประดิษฐ์และการสร้างแบบจำลองทางวิทยาศาสตร์</strong> โดยมีจุดมุ่งหมายเพื่อยกระดับทักษะการคิดเชิงคำนวณ การออกแบบขั้นตอนวิธี และการประยุกต์ใช้เทคโนโลยีปัญญาประดิษฐ์ของนิสิต นักศึกษา และครูวิทยาศาสตร์ในระดับอุดมศึกษา
+    </p>
+    <p>
+        โครงสร้างของเนื้อหาในเล่ม ได้รับการร้อยเรียงตามกรอบทฤษฎีการศึกษา Bloom's Taxonomy และ Active Learning Cycle โดยผสานทฤษฎีคณิตศาสตร์เข้มข้นเข้ากับตัวอย่างโค้ดภาษา Python 3.11 และสื่อการทดลองเสมือนจริง <strong>3D AR MediaPipe Hands</strong> แบบไร้สัมผัส เพื่อให้ผู้เรียนเกิดมโนทัศน์ที่ลึกซึ้งและสามารถนำไปสร้างสรรค์นวัตกรรมได้จริง
+    </p>
+    <div style="margin-top: 40px; text-align: right; font-size: 10.5pt;">
+        <strong>ผู้ช่วยศาสตราจารย์ ดร.ชีวะ ทัศนา</strong><br>
+        สาขาวิชาฟิสิกส์ คณะวิทยาศาสตร์และเทคโนโลยี<br>
+        มหาวิทยาลัยราชภัฏรำไพพรรณี<br>
+        สิงหาคม 2569
+    </div>
+</div>
+
+<!-- 5. กิตติกรรมประกาศ (Acknowledgements) -->
+<div class="front-matter-section" style="break-before: right; page-break-before: right;">
+    <h1 style="font-size: 18pt; text-align: center; margin-bottom: 24px;">กิตติกรรมประกาศ</h1>
+    <p>
+        ความสำเร็จในการจัดทำตำราวิชาการชุดนี้ สำเร็จลุล่วงลงได้ด้วยความอนุเคราะห์และการสนับสนุนอย่างดียิ่งจากหลากหลายภาคส่วน ผู้เขียนขอกราบขอบพระคุณ <strong>มหาวิทยาลัยราชภัฏรำไพพรรณี</strong> และ <strong>คณะวิทยาศาสตร์และเทคโนโลยี</strong> ที่ได้ส่งเสริมและสนับสนุนทุนวิจัยและการพัฒนานวัตกรรมการจัดการเรียนการสอนอันเป็นประโยชน์ต่อนักศึกษาและวงการวิชาการ
+    </p>
+    <p>
+        ขอขอบพระคุณ <strong>รองศาสตราจารย์ ดร.จิรพัฒน์ จันทมาลี</strong> และคณาจารย์ผู้ทรงคุณวุฒิทุกท่าน ที่ได้กรุณาให้คำปรึกษา แลกเปลี่ยนข้อคิดเห็นเชิงวิชาการ และร่วมพัฒนากรอบมาตรฐานการสอนวิทยาการคำนวณร่วมกันมาอย่างต่อเนื่อง
+    </p>
+    <p>
+        ขอขอบคุณนักศึกษาสาขาวิชาฟิสิกส์และวิทยาการคอมพิวเตอร์ทุกคน ที่ได้ร่วมทดลองใช้งานระบบห้องปฏิบัติการเสมือนจริง 3D AR และให้ข้อเสนอแนะอันมีค่ายิ่งต่อการปรับปรุงหนังสือเล่มนี้ให้มีความสมบูรณ์สูงสุด
+    </p>
+    <div style="margin-top: 40px; text-align: right; font-size: 10.5pt;">
+        <strong>ผู้ช่วยศาสตราจารย์ ดร.ชีวะ ทัศนา</strong>
+    </div>
+</div>
+
+<!-- 6. สารบัญ (Table of Contents) -->
+<div class="front-matter-section" style="break-before: right; page-break-before: right;">
+    <h1 style="font-size: 18pt; text-align: center; margin-bottom: 24px;">สารบัญ</h1>
+    <table style="border:none; box-shadow:none;">
+        <tr style="border-bottom: 2px solid #0f172a; background:transparent;">
+            <th style="background:transparent; border:none; color:#0f172a;">หัวข้อและเนื้อหา</th>
+            <th style="background:transparent; border:none; text-align:right; color:#0f172a;">หน้า</th>
+        </tr>
+        <tr><td><strong>คำนำ</strong></td><td align="right">iv</td></tr>
+        <tr><td><strong>กิตติกรรมประกาศ</strong></td><td align="right">v</td></tr>
+        <tr><td><strong>สารบัญภาพ</strong></td><td align="right">viii</td></tr>
+        <tr><td><strong>สารบัญตาราง</strong></td><td align="right">x</td></tr>
+        <tr><td><strong>แผนบริหารการสอนประจำรายวิชา 4122106</strong></td><td align="right">xii</td></tr>
+        <tr><td><strong>บทที่ 1 รากฐานแนวคิดและการสร้างแบบจำลองทางตรรกะ</strong></td><td align="right">1</td></tr>
+        <tr><td><strong>บทที่ 2 การออกแบบขั้นตอนวิธี รหัสลำลอง และผังงานมาตรฐานสากล</strong></td><td align="right">25</td></tr>
+        <tr><td><strong>บทที่ 3 การพัฒนาโปรแกรมภาษา Python และการจัดการข้อมูล</strong></td><td align="right">55</td></tr>
+        <tr><td><strong>บทที่ 4 โครงสร้างการควบคุม ทางเลือก การวนซ้ำ และระบบอัตโนมัติ</strong></td><td align="right">85</td></tr>
+        <tr><td><strong>บทที่ 5 โครงสร้างข้อมูลเชิงเส้นและอัลกอริทึมการค้นหา</strong></td><td align="right">115</td></tr>
+        <tr><td><strong>บทที่ 6 อัลกอริทึมการจัดเรียงข้อมูลและการวิเคราะห์ Big-O</strong></td><td align="right">145</td></tr>
+        <tr><td><strong>บทที่ 7 การโปรแกรมเชิงโมดูลและฟังก์ชันเรียกซ้ำ</strong></td><td align="right">175</td></tr>
+        <tr><td><strong>บทที่ 8 การสร้างแบบจำลองทางวิทยาศาสตร์และฟิสิกส์เชิงคำนวณ</strong></td><td align="right">205</td></tr>
+        <tr><td><strong>บทที่ 9 สถาปัตยกรรมโครงข่ายประสาทเทียมและปัญญาประดิษฐ์</strong></td><td align="right">235</td></tr>
+        <tr><td><strong>บทที่ 10 โครงงานบูรณาการและการสังเคราะห์นวัตกรรม Capstone</strong></td><td align="right">265</td></tr>
+        <tr><td><strong>คู่มือห้องปฏิบัติการเสมือนจริง 3D AR MediaPipe 10 ปฏิบัติการ</strong></td><td align="right">295</td></tr>
+        <tr><td><strong>ภาคผนวก ก ถึง ฉ (พร้อมคลังข้อสอบ 50 ข้อ)</strong></td><td align="right">335</td></tr>
+        <tr><td><strong>ดัชนีคำสำคัญ (Index)</strong></td><td align="right">375</td></tr>
+        <tr><td><strong>บรรณานุกรม (References)</strong></td><td align="right">381</td></tr>
+    </table>
+</div>
+
+<!-- 7. สารบัญภาพ (List of Figures) -->
+<div class="front-matter-section" style="break-before: right; page-break-before: right;">
+    <h1 style="font-size: 18pt; text-align: center; margin-bottom: 24px;">สารบัญภาพ</h1>
+    <table style="border:none; box-shadow:none;">
+        <tr style="border-bottom: 2px solid #0f172a; background:transparent;">
+            <th style="background:transparent; border:none; color:#0f172a;">ภาพที่</th>
+            <th style="background:transparent; border:none; color:#0f172a;">ชื่อภาพ</th>
+            <th style="background:transparent; border:none; text-align:right; color:#0f172a;">หน้า</th>
+        </tr>
+        <tr><td>ภาพที่ 1.1</td><td>เสาหลักทั้ง 4 ของแนวคิดเชิงคำนวณ (Decomposition, Pattern, Abstraction, Algorithm)</td><td align="right">6</td></tr>
+        <tr><td>ภาพที่ 2.1</td><td>แผนผังโครงสร้าง 5 คุณสมบัติของขั้นตอนวิธีที่ดี</td><td align="right">28</td></tr>
+        <tr><td>ภาพที่ 2.2</td><td>สัญลักษณ์ผังงานมาตรฐานสากล ISO 5807 และ ANSI Standard</td><td align="right">32</td></tr>
+        <tr><td>ภาพที่ 2.3</td><td>แผนผังเปรียบเทียบ 3 โครงสร้างควบคุมหลัก (Sequential, Selection, Iteration)</td><td align="right">36</td></tr>
+        <tr><td>ภาพที่ 3.1</td><td>โครงสร้างหน่วยความจำ RAM และลำดับการประมวลผลทางคณิตศาสตร์ PEMDAS</td><td align="right">58</td></tr>
+        <tr><td>ภาพที่ 9.1</td><td>สถาปัตยกรรมโครงข่ายประสาทเทียมเชิงลึกแบบคอนโวลูชัน (CNN Model)</td><td align="right">238</td></tr>
+        <tr><td>ภาพที่ 10.1</td><td>โครงข่ายกระดูกมือ 21 จุด 3 มิติ (MediaPipe 3D Hand Tracking System)</td><td align="right">268</td></tr>
+    </table>
+</div>
+
+<!-- 8. สารบัญตาราง (List of Tables) -->
+<div class="front-matter-section" style="break-before: right; page-break-before: right;">
+    <h1 style="font-size: 18pt; text-align: center; margin-bottom: 24px;">สารบัญตาราง</h1>
+    <table style="border:none; box-shadow:none;">
+        <tr style="border-bottom: 2px solid #0f172a; background:transparent;">
+            <th style="background:transparent; border:none; color:#0f172a;">ตารางที่</th>
+            <th style="background:transparent; border:none; color:#0f172a;">ชื่อตาราง</th>
+            <th style="background:transparent; border:none; text-align:right; color:#0f172a;">หน้า</th>
+        </tr>
+        <tr><td>ตารางที่ 1.1</td><td>ตารางคำศัพท์และนิยามเชิงตรรกะประจำบทเรียนที่ 1</td><td align="right">12</td></tr>
+        <tr><td>ตารางที่ 2.1</td><td>คำสำคัญมาตรฐานสากลในการเขียนรหัสลำลอง (Pseudocode Standard)</td><td align="right">30</td></tr>
+        <tr><td>ตารางที่ 2.2</td><td>สัญลักษณ์ผังงานและหน้าที่ตามมาตรฐาน ISO 5807</td><td align="right">34</td></tr>
+        <tr><td>ตารางที่ 5.1</td><td>การเปรียบเทียบความซับซ้อนเชิงเวลาและเชิงพื้นที่ Big-O ของอัลกอริทึม</td><td align="right">120</td></tr>
+        <tr><td>ตารางที่ ข.1</td><td>บัตรสรุปความซับซ้อนของโครงสร้างข้อมูลมาตรฐาน Python</td><td align="right">340</td></tr>
+    </table>
+</div>
+
+<!-- 9. เนื้อหาหลักทั้ง 10 บทเรียน -->
+<div id="main-book-content"></div>
+
+<!-- 10. บรรณานุกรม (References) -->
+<div class="front-matter-section" style="break-before: right; page-break-before: right;">
+    <h1 style="font-size: 18pt; text-align: center; margin-bottom: 24px;">บรรณานุกรม</h1>
+    <div style="font-size: 9.5pt; line-height: 1.8; color: #334155;">
+        <p style="text-indent:-2em; margin-left:2em;">Cormen, T. H., Leiserson, C. E., Rivest, R. L., &amp; Stein, C. (2022). <em>Introduction to Algorithms</em> (4th ed.). MIT Press.</p>
+        <p style="text-indent:-2em; margin-left:2em;">Goodfellow, I., Bengio, Y., &amp; Courville, A. (2016). <em>Deep Learning</em>. MIT Press.</p>
+        <p style="text-indent:-2em; margin-left:2em;">Knuth, D. E. (1997). <em>The Art of Computer Programming, Vol. 1: Fundamental Algorithms</em> (3rd ed.). Addison-Wesley.</p>
+        <p style="text-indent:-2em; margin-left:2em;">Lugaresi, C., et al. (2019). MediaPipe: A Framework for Building Perception Pipelines. <em>arXiv preprint arXiv:1906.08172</em>.</p>
+        <p style="text-indent:-2em; margin-left:2em;">Wing, J. M. (2006). Computational thinking. <em>Communications of the ACM</em>, 49(3), 33-35.</p>
+        <p style="text-indent:-2em; margin-left:2em;">ชีวะ ทัศนา. (2569). <em>วิทยาการคำนวณและการแก้ปัญหาเชิงคำนวณด้วยเทคโนโลยีโลกเสมือนจริง</em>. สำนักพิมพ์มหาวิทยาลัยราชภัฏรำไพพรรณี.</p>
+    </div>
+</div>
+
+<!-- Raw Markdown Container (Safe from JS string escaping issues) -->
+<script type="text/markdown" id="raw-markdown">
+
+
+<!-- CHAPTER BREAK -->
+
+# วิทยาการคำนวณ 3 วิศวกรรมซอฟต์แวร์ ปัญญาประดิษฐ์ประยุกต์ และการพัฒนาโครงงานนวัตกรรม
+## บทที่ 1 วงจรการพัฒนาระบบ ซอฟต์แวร์ อไจล์ และการควบคุมเวอร์ชัน Git
+**ผู้เขียน** ผู้ช่วยศาสตราจารย์ ดร.ชีวะ ทัศนา • สาขาวิชาฟิสิกส์ คณะวิทยาศาสตร์และเทคโนโลยี มหาวิทยาลัยราชภัฏรำไพพรรณี
+
+---
+
+## 📋 แผนบริหารการสอนประจำบทที่ 1
+
+### หัวข้อเนื้อหาประจำบท
+1. วงจรการพัฒนาซอฟต์แวร์ (Software Development Life Cycle - SDLC)
+2. ปรัชญาและระเบียบวิธี Agile และ Scrum Framework
+3. สถาปัตยกรรมระบบ Distributed Version Control (Git Internals)
+4. การทำงานร่วมกันบน GitHub: Branching Strategy, Pull Requests, และ CI/CD
+5. การจัดการข้อขัดแย้งของโค้ด (Merge Conflict Resolution)
+
+### วัตถุประสงค์เชิงพฤติกรรม
+เมื่อศึกษาบทเรียนนี้จบแล้ว ผู้เรียนสามารถ
+1. อธิบายขั้นตอนของวงจรการพัฒนาซอฟต์แวร์ SDLC และการเปรียบเทียบ Waterfall vs Agile ได้
+2. ประยุกต์ใช้ Scrum Artifacts (Product Backlog, Sprint, User Stories) ในการวางแผนโครงการได้
+3. ใช้คำสั่ง Git ในการบันทึกสถานะ (Commit), แตกกิ่ง (Branch), และรวมโค้ด (Merge) ได้อย่างชำนาญ
+4. แก้ไขปัญหา Merge Conflict และจัดการคลังโค้ดบน GitHub ตามมาตรฐานสากลได้
+
+### กิจกรรมการเรียนการสอน
+1. การบรรยายเชิงวิชาการด้านวิศวกรรมซอฟต์แวร์ ปัญญาประดิษฐ์ และนวัตกรรมดิจิทัล
+2. การวิเคราะห์กรณีศึกษาและการจำลองสถานการณ์จริง (Case Studies & Project Simulations)
+3. การฝึกปฏิบัติการจำลองเสมือนจริง 2D/3D AR MediaPipe Hands และ AI Vision
+4. การพัฒนาชิ้นงานโครงงานนวัตกรรมและการทดสอบซอฟต์แวร์ตามมาตรฐานสากล
+
+### สื่อการเรียนการสอน
+1. ตำราเรียนวิชาการ วิทยาการคำนวณ 3 วิศวกรรมซอฟต์แวร์ ปัญญาประดิษฐ์ประยุกต์ และการพัฒนาโครงงานนวัตกรรม
+2. ชุดห้องปฏิบัติการเสมือนจริง Hybrid 2D/3D และ AI Computer Vision บนระบบ RBRU MOOC
+3. สไลด์บรรยายอิเล็กทรอนิกส์และเอกสารมาตรฐาน IEEE/ISO
+
+### การวัดและประเมินผล
+1. การประเมินผลการทำใบงานและโครงงานนวัตกรรมปฏิบัติการ (40%)
+2. การประเมินผลงานการเขียนโค้ดและสถาปัตยกรรมระบบ (30%)
+3. การทดสอบวัดผลสัมฤทธิ์ทางการเรียนและการนำเสนอผลงาน (30%)
+
+---
+
+## 🌌 1.0 เรื่องเล่าเปิดบทเรียนและบริบททางประวัติศาสตร์
+
+ในคริสต์ศักราช 2001 กลุ่มนักพัฒนาซอฟต์แวร์ระดับนำ 17 คนได้ร่วมประชุมกันที่สกีรีสอร์ตในรัฐยูทาห์ และได้ประกาศ *Agile Manifesto* ซึ่งปฏิวัติแนวคิดการพัฒนาซอฟต์แวร์ทั่วโลก โดยเปลี่ยนจากการยึดติดกับเอกสารหนาเตอะในรูปแบบ Waterfall มาเป็นการเน้น **"การส่งมอบซอฟต์แวร์ที่ทำงานได้จริง (Working Software) อย่างรวดเร็วและการตอบสนองต่อการเปลี่ยนแปลง"** 
+
+ต่อมาในปี 2005 ลินุส ทอร์วัลด์ส (Linus Torvalds, 1969—ปัจจุบัน) ผู้สร้าง Linux ได้สร้างระบบ Git ขึ้นมาเพื่อจัดการโค้ดเคอร์เนลขนาดใหญ่ โดยใช้สถาปัตยกรรม Directed Acyclic Graph (DAG) และ Cryptographic Hash SHA-1 ส่งผลให้ Git กลายเป็นหัวใจสำคัญของวิศวกรรมซอฟต์แวร์ยุคใหม่อย่างแท้จริง
+
+---
+
+## 📐 1.1 ทฤษฎีและรากฐานทางวิชาการเชิงลึก
+
+<div align="center" style="margin: 24px 0;">
+  <img src="../assets/book3_images/fig_01_git_sdlc_architecture.png" alt="ภาพที่ 1.1 สถาปัตยกรรม Git และโครงสร้างโปรเจกต์" style="max-width: 100%; border-radius: 12px; box-shadow: 0 8px 30px rgba(0,0,0,0.2);" />
+  <p style="color: #64748b; font-size: 0.88em; margin-top: 8px;"><em>ภาพที่ 1.1 สถาปัตยกรรมโครงสร้างโปรเจกต์วิศวกรรมซอฟต์แวร์และการควบคุมเวอร์ชันด้วย Git</em></p>
+</div>
+
+
+### สถาปัตยกรรมสถานะทั้ง 4 ของ Git
+Git จัดการไฟล์ผ่าน 4 สถานะที่เชื่อมโยงกันอย่างเป็นระบบ
+1. **Working Directory:** โฟลเดอร์ทำงานที่มีไฟล์จริง
+2. **Staging Area (Index):** พื้นที่พักข้อมูลก่อนการบันทึก (`git add`)
+3. **Local Repository:** ฐานข้อมูลประวัติการแก้ไขในเครื่อง (`git commit`)
+4. **Remote Repository:** คลังโค้ดส่วนกลางบนคลาวด์ เช่น GitHub (`git push`)
+
+```mermaid
+graph LR
+    WD["1. Working Directory
+(แก้ไขไฟล์)"] -->|git add| SA["2. Staging Area
+(เตรียม Commit)"]
+    SA -->|git commit| LR["3. Local Repo
+(บันทึกถาวรในเครื่อง)"]
+    LR -->|git push| RR["4. Remote Repo (GitHub)
+(แบ่งปันทีมงาน)"]
+```
+
+---
+
+## 🧮 1.2 ตัวอย่างการวิเคราะห์และการประยุกต์ใช้จริง
+
+#### ตัวอย่างที่ 1.1 ลำดับคำสั่ง Git สำหรับการพัฒนาฟีเจอร์ใหม่
+จงแสดงชุดคำสั่ง Git เพื่อสร้างกิ่งใหม่ `feature-login`, เพิ่มโค้ด, บันทึก commit, และผสานกลับเข้าสู่ `main`:
+
+```bash
+# 1. ตรวจสอบและดึงโค้ดล่าสุด
+git checkout main
+git pull origin main
+
+# 2. สร้างและสลับไปยังกิ่งฟีเจอร์ใหม่
+git checkout -b feature-login
+
+# 3. เพิ่มไฟล์และบันทึก Commit
+git add login.py test_login.py
+git commit -m "feat: implement secure OAuth2 login flow"
+
+# 4. สลับกลับมาที่ main และทำการ Merge
+git checkout main
+git merge --no-ff feature-login
+
+# 5. ส่งขึ้นสู่ GitHub Remote
+git push origin main
+```
+
+---
+
+## 💻 1.3 การเขียนโปรแกรมและการพัฒนาซอฟต์แวร์ด้วย Python 3.11
+
+```python
+# git_hook_validator.py
+# สคริปต์ Pre-commit Hook สำหรับตรวจสอบคุณภาพโค้ดก่อนทำการ Git Commit
+import sys
+import subprocess
+
+def run_linter() -> bool:
+    print("🔍 กำลังตรวจสอบไวยากรณ์และความถูกต้องของโค้ด...")
+    result = subprocess.run(["python3", "-m", "py_compile", "main.py"], capture_output=True, text=True)
+    if result.returncode != 0:
+        print("❌ ข้อผิดพลาด: โค้ดมี Syntax Error กรุณาแก้ไขก่อน Commit!")
+        print(result.stderr)
+        return False
+    print("✅ ผ่านการตรวจสอบไวยากรณ์ 100% OK")
+    return True
+
+if __name__ == "__main__":
+    if not run_linter():
+        sys.exit(1)
+    sys.exit(0)
+```
+
+---
+
+## 🔬 1.4 คู่มือห้องปฏิบัติการเสมือนจริง 2D/3D AR MediaPipe Hands
+
+ผู้เรียนสามารถเข้าสู่ชุดจำลองเสมือนจริง 2D/3D เพื่อทดลองประกอบโครงสร้างสถาปัตยกรรมระบบได้ที่ [chapter10_capstone_synthesizer.html](https://tsanaphy2023.github.io/computing-science/simulators/chapter10_capstone_synthesizer.html)
+
+---
+
+## 💡 1.5 สรุปสารัตถะสำคัญประจำบท
+
+1. SDLC และ Agile ช่วยให้โครงการซอฟต์แวร์มีความยืดหยุ่นและส่งมอบงานได้ตรงความต้องการของผู้ใช้
+2. Git เป็นระบบควบคุมเวอร์ชันแบบกระจายศูนย์ที่ช่วยให้ทีมงานพัฒนาโค้ดร่วมกันได้อย่างปลอดภัย
+
+---
+
+## ❓ 1.6 แบบฝึกหัดและคำถามท้ายบทเพื่อการประเมินผล
+
+1. จงอธิบายความแตกต่างระหว่าง `git merge` และ `git rebase`
+2. ให้ออกแบบ User Story และ Acceptance Criteria สำหรับระบบลงทะเบียนเรียนออนไลน์
+
+---
+
+## 📚 เอกสารอ้างอิงประจำบท
+
+* Beck, K. et al. (2001). *Manifesto for Agile Software Development*. Agile Alliance.
+* Chacon, S., & Straub, B. (2014). *Pro Git* (2nd ed.). Apress.
+* Pressman, R. S., & Maxim, B. R. (2020). *Software Engineering: A Practitioner's Approach* (9th ed.). McGraw-Hill.
+
+
+<!-- CHAPTER BREAK -->
+
+# วิทยาการคำนวณ 3 การพัฒนาโครงงานบูรณาการ ปัญญาประดิษฐ์ และนวัตกรรมการจัดการเรียนรู้วิทยาศาสตร์
+## บทที่ 2 การกำหนดปัญหา การสืบค้นวรรณกรรม และการจัดทำข้อเสนอโครงงาน
+**ผู้เขียน** ผู้ช่วยศาสตราจารย์ ดร.ชีวะ ทัศนา • สาขาวิชาฟิสิกส์ คณะวิทยาศาสตร์และเทคโนโลยี มหาวิทยาลัยราชภัฏรำไพพรรณี
+
+---
+
+## 🎯 ผลลัพธ์การเรียนรู้ประจำบท
+เมื่อศึกษาบทเรียนนี้จบแล้ว ผู้เรียนสามารถ
+1. **วิเคราะห์และระบุปัญหา ** ในชีวิตจริง ชุมชน และภาคอุตสาหกรรม ด้วยกระบวนการคิดเชิงออกแบบ (Design Thinking) และแผนภาพต้นไม้ปัญหา (Problem Tree Analysis)
+2. **สืบค้นวรรณกรรมทางวิชาการ ** จากฐานข้อมูลสากล (IEEE, ScienceDirect, Google Scholar, ThaiJO) ด้วยตัวดำเนินการตรรกะแบบบูลีนได้อย่างมีประสิทธิภาพ
+3. **จัดทำข้อเสนอโครงงาน ** ที่มีวัตถุประสงค์ตามเกณฑ์ SMART และถูกต้องตามระเบียบแบบแผนวิชาการ
+4. **อ้างอิงเอกสาร ** ตามมาตรฐานสากล APA 7th Edition และหลีกเลี่ยงการคัดลอกผลงานทางวิชาการ (Plagiarism)
+
+---
+
+## 🌌 2.0 เรื่องเล่าเปิดบทเรียน นวัตกรรมที่เปลี่ยนโลกเริ่มต้นจากการ ตั้งคำถามที่ถูกต้อง
+
+อัลเบิร์ต ไอน์สไตน์ (Albert Einstein) เคยกล่าวไว้ว่า: **หากข้าพเจ้ามีเวลา 1 ชั่วโมงในการกอบกู้โลก ข้าพเจ้าจะใช้เวลา 55 นาทีแรกในการทำความเข้าใจปัญหา และใช้เวลา 5 นาทีสุดท้ายในการลงมือแก้ปัญหา**
+
+ความผิดพลาดอันดับหนึ่งของผู้ทำโครงงานคอมพิวเตอร์ คือการกระโดดลงไปเขียนโค้ดทันทีโดยที่ยังไม่เข้าใจว่า **"ปัญหาที่แท้จริงคืออะไร และใครคือผู้ที่เดือดร้อนจากปัญหานั้น (User Pain Points)"**
+
+```mermaid
+graph LR
+    Wrong["❌ เริ่มจากเทคโนโลยี:\n'อยากใช้ AI เท่ๆ แต่ไม่รู้จะเอาไปแก้ปัญหาอะไร'"]
+    Right["✅ เริ่มจากปัญหาจริงของผู้ใช้:\n'เกษตรกรชาวสวนทุเรียนสูญเสียผลผลิตจากเชื้อราไฟทอปธอรา -> พัฒนา AI ตรวจจับใบติดเชื้อ'"]
+```
+
+---
+
+## 🧠 2.1 กระบวนการคิดเชิงออกแบบ 5 ขั้นตอน
+
+```mermaid
+graph TD
+    DT1["1. Empathize (เข้าใจกลุ่มเป้าหมาย)\nลงพื้นที่ สัมภาษณ์ สังเกตพฤติกรรมผู้ใช้จริง"] --> DT2["2. Define (ระบุปัญหาให้ชัดเจน)\nสกัดแก่นของปัญหาและความต้องการที่แท้จริง"]
+    DT2 --> DT3["3. Ideate (ระดมสมองคิดค้นทางออก)\nเสนอไอเดียหลากหลายโดยไม่ปิดกั้น"]
+    DT3 --> DT4["4. Prototype (สร้างชิ้นงานจำลองต้นแบบ)\nทำ Mockup / MVP รวดเร็วเพื่อทดสอบแนวคิด"]
+    DT4 --> DT5["5. Test (ทดสอบและรับฟังคำติชม)\nนำไปให้ผู้ใช้จริงทดลองใช้ และปรับปรุงซ้ำ"]
+    DT5 -.-> DT2
+```
+
+---
+
+## 🌳 2.2 แผนภาพต้นไม้ปัญหา
+
+<div style="background: linear-gradient(135deg, #fefce8, #fef9c3); border-left: 5px solid #ca8a04; border-radius: 12px; padding: 18px 22px; margin: 20px 0; color: #713f12;">
+  <h4 style="color: #854d0e; margin-top: 0;">🌲 โครงสร้างของต้นไม้ปัญหา</h4>
+  <p style="margin: 0; line-height: 1.75;">
+    • <strong>ใบและกิ่งก้าน (Effects):</strong> ผลกระทบที่มองเห็นภายนอก เช่น ผลผลิตทุเรียนลดลง 30%, เกษตรกรขาดทุน<br>
+    • <strong>ลำต้น (Core Problem):</strong> ปัญหาแกนกลาง เช่น ตรวจพบโรครากเน่าโคนเน่าช้าเกินไป<br>
+    • <strong>ราก (Root Causes):</strong> สาเหตุรากเหง้าที่แท้จริง เช่น ขาดเซนเซอร์วัดความชื้นสะสมใต้ดินลึก 30 cm, สภาพใบติดเชื้อระยะแรกมองด้วยตาเปล่ายาก
+  </p>
+</div>
+
+---
+
+## 📚 2.3 เทคนิคการสืบค้นวรรณกรรมวิชาการและการอ้างอิง APA 7th
+
+### ตัวดำเนินการสืบค้นขั้นสูง 
+* `"smart agriculture" AND ("deep learning" OR "YOLOv8") AND (durian OR fruit)`
+* `site:.ac.th การตรวจจับศัตรูพืช filetype:pdf`
+
+### รูปแบบการอ้างอิงมาตรฐาน APA 7th Edition 
+* **บทความวารสาร**  
+  Author, A. A., & Author, B. B. (Year). Title of article. *Title of Periodical*, *Volume*(Issue), pages. https://doi.org/xxxx
+* **ตัวอย่าง**  
+  Thassana, C., & Janthamalee, J. (2026). Precision agriculture through IoT edge computing and computer vision. *Journal of Applied Science and Technology*, *14*(2), 145–158.
+
+---
+
+## 📋 2.4 โครงสร้างเอกสารข้อเสนอโครงงาน
+
+1. **ชื่อโครงงาน ** ภาษาไทยและภาษาอังกฤษ
+2. **คณะผู้จัดทำและอาจารย์ที่ปรึกษา**
+3. **ความเป็นมาและความสำคัญของปัญหา **
+4. **วัตถุประสงค์ของโครงงาน **
+   * $S$ - Specific (เฉพาะเจาะจง)
+   * $M$ - Measurable (วัดผลเป็นตัวเลขได้ เช่น ความแม่นยำ $\ge 90\%$)
+   * $A$ - Achievable (ปฏิบัติได้จริง)
+   * $R$ - Relevant (สอดคล้องกับปัญหา)
+   * $T$ - Time-bound (มีกรอบเวลาชัดเจน)
+5. **ขอบเขตของโครงงาน **
+6. **ทฤษฎีและงานวิจัยที่เกี่ยวข้อง **
+7. **วิธีดำเนินการและแผนการดำเนินงาน **
+8. **ประโยชน์ที่คาดว่าจะได้รับ **
+9. **เอกสารอ้างอิง **
+
+---
+
+## 💡 2.5 สรุปใจความสำคัญและแบบฝึกหัดท้ายบทที่ 2
+
+### 📌 สรุปประเด็นสำคัญ
+1. การทำโครงงานที่ดีต้องเริ่มจากการทำความเข้าใจ **Pain Points** ของผู้ใช้อย่างแท้จริงด้วย Design Thinking
+2. **Problem Tree Analysis** ช่วยแยกแยะระหว่าง "สาเหตุรากเหง้า (Root Cause) กับ อาการของปัญหา (Symptom)"
+3. การเขียนวัตถุประสงค์ตามเกณฑ์ **SMART** ช่วยให้การวัดผลสัมฤทธิ์ของโครงงานมีความชัดเจนและโปร่งใส
+
+---
+
+### 📝 แบบฝึกหัดทบทวน 3 ระดับ
+
+#### ระดับที่ 1 ความรู้ความเข้าใจพื้นฐาน
+1. จงอธิบายความหมายของเกณฑ์ **SMART** ในการตั้งวัตถุประสงค์ของโครงงาน พร้อมยกตัวอย่างวัตถุประสงค์ที่ดี 1 ข้อ
+2. จงระบุความแตกต่างระหว่างการอ้างอิงในเนื้อหา (In-text Citation) แบบเน้นผู้แต่ง กับแบบเน้นเนื้อความตามหลัก APA 7th
+
+#### ระดับที่ 2 การวิเคราะห์และประยุกต์ใช้
+3. ให้นักเรียนเลือกปัญหาในโรงเรียนหรือมหาวิทยาลัยมา 1 ปัญหา แล้วเขียน **แผนภาพต้นไม้ปัญหา ** แสดงสาเหตุรากเหง้าอย่างน้อย 3 สาเหตุ และผลกระทบอย่างน้อย 3 ประการ
+
+#### ระดับที่ 3 การคิดขั้นสูงและบูรณาการ
+4. จงร่าง **ข้อเสนอโครงงานฉบับย่อ ** สำหรับโครงงานวิทยาการคำนวณที่บูรณาการกับวิทยาศาสตร์หรือชุมชนท้องถิ่น โดยมีหัวข้อครบถ้วนตามแบบแผนวิชาการ
+
+
+<!-- CHAPTER BREAK -->
+
+# วิทยาการคำนวณ 3 การพัฒนาโครงงานบูรณาการ ปัญญาประดิษฐ์ และนวัตกรรมการจัดการเรียนรู้วิทยาศาสตร์
+## บทที่ 3 ปัญญาประดิษฐ์และการเรียนรู้ของเครื่องเชิงประยุกต์
+**ผู้เขียน** ผู้ช่วยศาสตราจารย์ ดร.ชีวะ ทัศนา • สาขาวิชาฟิสิกส์ คณะวิทยาศาสตร์และเทคโนโลยี มหาวิทยาลัยราชภัฏรำไพพรรณี
+
+---
+
+## 🎯 ผลลัพธ์การเรียนรู้ประจำบท
+เมื่อศึกษาบทเรียนนี้จบแล้ว ผู้เรียนสามารถ
+1. **อธิบาย ** ความแตกต่างระหว่างการเขียนโปรแกรมแบบดั้งเดิม (Rule-based Programming) กับการเรียนรู้ของเครื่อง (Machine Learning)
+2. **จำแนกประเภท ** ของการเรียนรู้ของเครื่อง (Supervised, Unsupervised, Reinforcement Learning) และเลือกใช้อัลกอริทึมที่เหมาะสมกับชนิดข้อมูล
+3. **ดำเนินงานตามกระบวนการ ** ตั้งแต่การเตรียมข้อมูล (Preprocessing), การแบ่งชุดข้อมูล (Train/Test Split), การฝึกฝนโมเดล (Model Training), และการประเมินผล
+4. **พัฒนาและประเมิน ** โมเดลจำแนกประเภท (Classification) และการถดถอย (Regression) ด้วยไลบรารี Scikit-learn ได้อย่างแม่นยำ
+
+---
+
+## 🌌 3.0 เรื่องเล่าเปิดบทเรียน จากกฎตายตัวสู่คอมพิวเตอร์ที่เรียนรู้ได้เอง
+
+ในการเขียนโปรแกรมยุคดั้งเดิม มนุษย์ต้องเขียน **กฎทุกข้อ ** ขึ้นมาเอง หากเราต้องการสร้างโปรแกรมตรวจจับอีเมลสแปม เราต้องเขียนคำสั่ง `if` นับพันบรรทัดเพื่อดักคำว่า *ถูกหวย*, *โอนเงินด่วน*, หรือ *โปรโมชั่น* ซึ่งผู้ส่งสแปมสามารถหลบเลี่ยงได้ง่ายๆ เพียงแค่เปลี่ยนการสะกดคำ
+
+แต่ในยุคของ **ปัญญาประดิษฐ์และการเรียนรู้ของเครื่อง ** เราเปลี่ยนกระบวนทัศน์ใหม่ โดยการป้อน **ข้อมูลตัวอย่าง ** และ **คำตอบที่ถูกต้อง ** ให้คอมพิวเตอร์ แล้วให้คอมพิวเตอร์เป็นผู้ **"ค้นพบกฎและความสัมพันธ์ด้วยตนเอง (Rules / Patterns)"**
+
+```mermaid
+graph TD
+    subgraph Traditional["1. การเขียนโปรแกรมแบบดั้งเดิม (Rule-Based)"]
+        T_In["ข้อมูล (Data) + กฎที่มนุษย์เขียน (Rules)"] --> T_Comp["คอมพิวเตอร์"] --> T_Out["คำตอบ (Answers)"]
+    end
+    subgraph ML["2. การเรียนรู้ของเครื่อง (Machine Learning)"]
+        M_In["ข้อมูล (Data) + คำตอบตัวอย่าง (Answers)"] --> M_Comp["อัลกอริทึมการเรียนรู้"] --> M_Out["โมเดล/กฎที่ค้นพบเอง (Learned Rules)"]
+    end
+```
+
+---
+
+## 🧭 3.1 สามกระบวนทัศน์หลักของการเรียนรู้ของเครื่อง
+
+```mermaid
+graph TD
+    MLType["การเรียนรู้ของเครื่อง (Machine Learning)"]
+    
+    MLType --> Sup["1. การเรียนรู้แบบมีผู้สอน (Supervised Learning)\n• ข้อมูลมีป้ายกำกับคำตอบ (Labeled Data)\n• การจำแนกประเภท (Classification) & การถดถอย (Regression)"]
+    MLType --> Unsup["2. การเรียนรู้แบบไม่มีผู้สอน (Unsupervised Learning)\n• ข้อมูลไม่มีป้ายกำกับ (Unlabeled Data)\n• การจัดกลุ่มข้อมูล (Clustering: K-Means)"]
+    MLType --> Rein["3. การเรียนรู้แบบเสริมกำลัง (Reinforcement Learning)\n• เอเจนต์เรียนรู้ผ่านการลองผิดลองถูกและรางวัล (Reward)"]
+```
+
+---
+
+## ⚙️ 3.2 กระบวนการพัฒนาโมเดลการเรียนรู้ของเครื่อง
+
+```mermaid
+graph LR
+    D1["1. รวบรวมข้อมูล\n(Data Collection)"] --> D2["2. ทำความสะอาดและแปลงสเกล\n(Preprocessing & Scaling)"]
+    D2 --> D3["3. แบ่งชุดข้อมูล\n(Train 80% / Test 20%)"]
+    D3 --> D4["4. ฝึกสอนโมเดล\n(Model.fit)"]
+    D4 --> D5["5. ประเมินผลความแม่นยำ\n(Accuracy, Confusion Matrix)"]
+    D5 --> D6["6. นำไปใช้งานจริง\n(Model.predict)"]
+```
+
+### การวัดประสิทธิภาพโมเดลการจำแนกประเภท 
+* **Accuracy (ความแม่นยำรวม):** สัดส่วนการทำนายถูกต้องทั้งหมด
+* **Precision (ความแม่นยำของผลบวก):** ในกลุ่มที่ทำนายว่าเป็นบวก ถูกจริงเท่าใด
+* **Recall (ความครอบคลุม):** ในกลุ่มที่เป็นบวกจริงทั้งหมด โมเดลจับได้เท่าใด
+* **F1-Score:** ค่าเฉลี่ยฮาร์โมนิก (Harmonic Mean) ระหว่าง Precision และ Recall:
+  $$F_1 = 2 \times \frac{\text{Precision} \times \text{Recall}}{\text{Precision} + \text{Recall}}$$
+
+---
+
+## 💻 3.3 โค้ดคอมพิวเตอร์ การสร้างโมเดลจำแนกสายพันธุ์พืชด้วย Scikit-learn
+
+```python
+# applied_machine_learning_pipeline.py
+# โปรแกรมจำแนกสายพันธุ์ดอกไม้ด้วยอัลกอริทึม K-Nearest Neighbors (KNN) และ Random Forest
+# ผู้เขียน: ผศ.ดร.ชีวะ ทัศนา (มรภ.รำไพพรรณี)
+
+from sklearn.datasets import load_iris
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
+
+def main():
+    print("=" * 70)
+    print("🤖 ระบบการเรียนรู้ของเครื่องเชิงประยุกต์ (Applied Machine Learning Lab)")
+    print("=" * 70)
+    
+    # 1. โหลดชุดข้อมูลมาตรฐาน Iris Dataset
+    iris = load_iris()
+    X = iris.data    # คุณลักษณะ 4 ด้าน (ความยาว/กว้างของกลีบเลี้ยงและกลีบดอก)
+    y = iris.target  # คำตอบ: 0: Setosa, 1: Versicolor, 2: Virginica
+    
+    print(f"📦 จำนวนตัวอย่างข้อมูลทั้งหมด: {X.shape[0]} ตัวอย่าง | จำนวนฟีเจอร์: {X.shape[1]}")
+    
+    # 2. แบ่งชุดข้อมูล Train 75% และ Test 25% (Stratified)
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, random_state=42, stratify=y)
+    
+    # 3. การปรับสเกลข้อมูลให้เป็นมาตรฐาน (StandardScaler)
+    scaler = StandardScaler()
+    X_train_scaled = scaler.fit_transform(X_train)
+    X_test_scaled = scaler.transform(X_test)
+    
+    # 4. ฝึกสอนโมเดล Random Forest Classifier
+    rf_model = RandomForestClassifier(n_estimators=100, random_state=42)
+    rf_model.fit(X_train_scaled, y_train)
+    
+    # 5. ทำนายผลและประเมินประสิทธิภาพ
+    y_pred = rf_model.predict(X_test_scaled)
+    acc = accuracy_score(y_test, y_pred)
+    
+    print("\n" + "-" * 70)
+    print(f"🎯 ผลการประเมินโมเดล Random Forest:")
+    print(f"   • ความถูกต้องแม่นยำรวม (Accuracy): {acc * 100:.2f}%")
+    print("\n📊 รายงานจำแนกประเภท (Classification Report):")
+    print(classification_report(y_test, y_pred, target_names=iris.target_names))
+    
+    print("🧩 เมทริกซ์ความสับสน (Confusion Matrix):")
+    print(confusion_matrix(y_test, y_pred))
+    
+    # 6. การทดสอบทำนายข้อมูลใหม่ที่ไม่เคยเห็นมาก่อน (Inference)
+    new_sample = [[5.1, 3.5, 1.4, 0.2]] # ลักษณะดอกไม้ปริศนา
+    new_sample_scaled = scaler.transform(new_sample)
+    prediction = rf_model.predict(new_sample_scaled)[0]
+    prob = rf_model.predict_proba(new_sample_scaled)[0][prediction]
+    
+    print("-" * 70)
+    print(f"🔍 ผลการวิเคราะห์ดอกไม้ปริศนา: {iris.target_names[prediction].upper()}")
+    print(f"   • ระดับความเชื่อมั่น (Confidence): {prob * 100:.2f}%")
+    print("=" * 70)
+
+if __name__ == "__main__":
+    main()
+```
+
+---
+
+## 💡 3.4 สรุปใจความสำคัญและแบบฝึกหัดท้ายบทที่ 3
+
+### 📌 สรุปประเด็นสำคัญ
+1. **Supervised Learning** ต้องการข้อมูลที่มีป้ายกำกับคำตอบ เหมาะสำหรับงานพยากรณ์และจำแนกประเภท
+2. การแบ่งชุดข้อมูล **Train/Test Split** และการปรับสเกลข้อมูล (Normalization / Standardization) เป็นขั้นตอนที่ขาดไม่ได้เพื่อป้องกันปัญหา Overfitting
+3. ค่า **F1-Score และ Confusion Matrix** ให้มุมมองการประเมินที่ลึกซึ้งและน่าเชื่อถือกว่าการดูค่า Accuracy เพียงอย่างเดียวเมื่อข้อมูลมีความไม่สมดุล (Imbalanced Data)
+
+---
+
+### 📝 แบบฝึกหัดทบทวน 3 ระดับ
+
+#### ระดับที่ 1 ความรู้ความเข้าใจพื้นฐาน
+1. จงอธิบายความแตกต่างระหว่างงานประเภท **Classification** (การจำแนกประเภท) กับ **Regression** (การถดถอย) พร้อมยกตัวอย่างงานละ 1 กรณี
+2. อธิบายความหมายของปรากฏการณ์ **Overfitting** ในโมเดล Machine Learning และแนวทางในการแก้ไข
+
+#### ระดับที่ 2 การวิเคราะห์และประยุกต์ใช้
+3. หากโมเดลตรวจจับโรคมะเร็งมีค่า Confusion Matrix: $TP = 90, FP = 10, FN = 5, TN = 895$ จงคำนวณหาค่า Accuracy, Precision, Recall และวิเคราะห์ว่าในทางการแพทย์เราควรให้ความสำคัญกับค่า Precision หรือ Recall มากกว่ากัน
+
+#### ระดับที่ 3 การคิดขั้นสูงและบูรณาการ
+4. จงเขียนสคริปต์ Python ใช้โมเดล **Linear Regression** ของ Scikit-learn เพื่อสร้างสมการทำนายค่าความดันบรรยากาศ ($P$) จากระดับความสูงจากระดับน้ำทะเล ($h$) พร้อมคำนวณค่า $R^2$ Score และค่า Mean Squared Error (MSE)
+
+
+<!-- CHAPTER BREAK -->
+
+# วิทยาการคำนวณ 3 วิศวกรรมซอฟต์แวร์ ปัญญาประดิษฐ์ประยุกต์ และการพัฒนาโครงงานนวัตกรรม
+## บทที่ 4 คอมพิวเตอร์วิทัศน์และการรู้จำท่าทาง 3 มิติด้วย MediaPipe
+**ผู้เขียน** ผู้ช่วยศาสตราจารย์ ดร.ชีวะ ทัศนา • สาขาวิชาฟิสิกส์ คณะวิทยาศาสตร์และเทคโนโลยี มหาวิทยาลัยราชภัฏรำไพพรรณี
+
+---
+
+## 📋 แผนบริหารการสอนประจำบทที่ 4
+
+### หัวข้อเนื้อหาประจำบท
+1. พื้นฐานการประมวลผลภาพดิจิทัล (Digital Image Processing & RGB/HSV Color Space)
+2. อัลกอริทึมตรวจจับใบหน้าและมือ (Haar Cascades, Single Shot Detector)
+3. สถาปัตยกรรมเครือข่ายประสาทเทียม Google MediaPipe Hands (Palm Detector & Hand Landmark Model)
+4. การคำนวณเรขาคณิต 3 มิติ: Euclidean Distance, Pinch Gesture Math, และ Euler Angles
+5. การเชื่อมโยงคอมพิวเตอร์วิทัศน์เข้ากับ Three.js และ A-Frame WebGL
+
+### วัตถุประสงค์เชิงพฤติกรรม
+เมื่อศึกษาบทเรียนนี้จบแล้ว ผู้เรียนสามารถ
+1. อธิบายหลักการประมวลผลภาพดิจิทัลและการทำงานของโมเดล Google MediaPipe Hands ได้
+2. คำนวณระยะห่างยุคลิด (Euclidean Distance) ระหว่างปลายนิ้วเพื่อจำแนกท่าทางมือแบบ Real-time ได้
+3. พัฒนาเว็บแอปพลิเคชันที่มีการควบคุมด้วยท่าทางมือ 3 มิติไร้สัมผัส (Touchless AR Interaction) ได้
+4. บูรณาการคอมพิวเตอร์วิทัศน์เข้ากับการจัดการเรียนรู้วิทยาศาสตร์เชิงรุกได้อย่างมีประสิทธิภาพ
+
+### กิจกรรมการเรียนการสอน
+1. การบรรยายเชิงวิชาการด้านวิศวกรรมซอฟต์แวร์ ปัญญาประดิษฐ์ และนวัตกรรมดิจิทัล
+2. การวิเคราะห์กรณีศึกษาและการจำลองสถานการณ์จริง (Case Studies & Project Simulations)
+3. การฝึกปฏิบัติการจำลองเสมือนจริง 2D/3D AR MediaPipe Hands และ AI Vision
+4. การพัฒนาชิ้นงานโครงงานนวัตกรรมและการทดสอบซอฟต์แวร์ตามมาตรฐานสากล
+
+### สื่อการเรียนการสอน
+1. ตำราเรียนวิชาการ วิทยาการคำนวณ 3 วิศวกรรมซอฟต์แวร์ ปัญญาประดิษฐ์ประยุกต์ และการพัฒนาโครงงานนวัตกรรม
+2. ชุดห้องปฏิบัติการเสมือนจริง Hybrid 2D/3D และ AI Computer Vision บนระบบ RBRU MOOC
+3. สไลด์บรรยายอิเล็กทรอนิกส์และเอกสารมาตรฐาน IEEE/ISO
+
+### การวัดและประเมินผล
+1. การประเมินผลการทำใบงานและโครงงานนวัตกรรมปฏิบัติการ (40%)
+2. การประเมินผลงานการเขียนโค้ดและสถาปัตยกรรมระบบ (30%)
+3. การทดสอบวัดผลสัมฤทธิ์ทางการเรียนและการนำเสนอผลงาน (30%)
+
+---
+
+## 🌌 4.0 เรื่องเล่าเปิดบทเรียนและบริบททางประวัติศาสตร์
+
+ในคริสต์ศักราช 2019 ทีมวิจัยของ Google Research นำโดย ฟ่าน จาง (Fan Zhang) และคณะ ได้เปิดตัวโมเดล **MediaPipe Hands** ซึ่งสร้างปรากฏการณ์ใหม่ให้แก่วงการปัญญาประดิษฐ์ ด้วยการสามารถตรวจจับและประมาณตำแหน่งข้อต่อของมือมนุษย์ได้ถึง **21 จุด (21 3D Landmarks)** พร้อมพิกัดแกน $X, Y, Z$ แบบเรียลไทม์บนสมาร์ตโฟนและเว็บเบราว์เซอร์ทั่วไป โดยไม่ต้องพึ่งพาเซนเซอร์วัดระยะลึกราคาแพง (Depth Cameras)
+
+---
+
+## 📐 4.1 ทฤษฎีและรากฐานทางวิชาการเชิงลึก
+
+<div align="center" style="margin: 24px 0;">
+  <img src="../assets/book3_images/fig_07_mediapipe_hand_classifier.png" alt="ภาพที่ 4.1 การตรวจจับท่าทางมือด้วย MediaPipe" style="max-width: 100%; border-radius: 12px; box-shadow: 0 8px 30px rgba(0,0,0,0.2);" />
+  <p style="color: #64748b; font-size: 0.88em; margin-top: 8px;"><em>ภาพที่ 4.1 ระบบคอมพิวเตอร์วิทัศน์จำแนกท่าทางมือแบบเรียลไทม์ด้วย Google MediaPipe และ KNN Classifier</em></p>
+</div>
+
+
+### คณิตศาสตร์การตรวจจับท่าจีบนิ้ว
+ท่าจีบนิ้ว (Pinch Gesture) ตรวจจับได้จากการวัดระยะห่างยุคลิดสามมิติระหว่างปลายนิ้วโป้ง (Landmark 4) และปลายนิ้วชี้ (Landmark 8):
+
+$$d_{	ext{pinch}} = \sqrt{(x_8 - x_4)^2 + (y_8 - y_4)^2 + (z_8 - z_4)^2}$$
+
+$$\text{Action} = \begin{cases} \text{SELECT (จีบนิ้วสั่งการ)}, & d_{	ext{pinch}} < \text{Threshold} \ (0.08) \\ \text{HOVER (ปล่อยมือปกติ)}, & d_{	ext{pinch}} \ge \text{Threshold} \end{cases}$$
+
+```mermaid
+graph TD
+    Cam["1. Web Camera Video Feed"] --> Det["2. Palm Detector (ระบุตำแหน่งฝ่ามือ)"]
+    Det --> LM["3. Hand Landmark Model (สกัด 21 ข้อต่อ 3 มิติ)"]
+    LM --> Math["4. Geometry Math (คำนวณ Pinch / Angles)"]
+    Math --> UI["5. 3D WebGL / Audio Trigger (สั่งการเสมือนจริง)"]
+```
+
+---
+
+## 🧮 4.2 ตัวอย่างการวิเคราะห์และการประยุกต์ใช้จริง
+
+#### ตัวอย่างที่ 4.1 การคำนวณระยะ Pinch จากพิกัด Normalization
+กำหนดให้พิกัดปลายนิ้วโป้งคือ $P_4 = (0.45, 0.60, -0.02)$ และปลายนิ้วชี้คือ $P_8 = (0.47, 0.62, -0.01)$ จงคำนวณระยะ $d$ และวินิจฉัยว่าเป็นการจีบนิ้วหรือไม่ (Threshold $= 0.08$):
+
+**วิธีทำ**
+1. แทนค่าพิกัดลงในสมการระยะห่างยุคลิด
+   $$d = \sqrt{(0.47 - 0.45)^2 + (0.62 - 0.60)^2 + (-0.01 - (-0.02))^2}$$
+   $$d = \sqrt{(0.02)^2 + (0.02)^2 + (0.01)^2} = \sqrt{0.0004 + 0.0004 + 0.0001} = \sqrt{0.0009} = 0.03$$
+2. เปรียบเทียบกับเกณฑ์: เนื่องจาก $d = 0.03 < 0.08$
+3. **สรุป** ระบบตรวจพบท่าทาง **"Pinch Gesture (จีบนิ้วสั่งการ)"** อย่างสมบูรณ์
+
+---
+
+## 💻 4.3 การเขียนโปรแกรมและการพัฒนาซอฟต์แวร์ด้วย Python 3.11
+
+```python
+# mediapipe_gesture_detector.py
+# โปรแกรมจำแนกท่าทางมือด้วย MediaPipe และ OpenCV ใน Python 3.11
+import math
+from typing import Tuple, Optional
+
+def compute_pinch_distance(thumb_tip: Tuple[float, float, float], index_tip: Tuple[float, float, float]) -> float:
+    """คำนวณระยะห่าง 3 มิติระหว่างนิ้วโป้งและนิ้วชี้"""
+    dx = index_tip[0] - thumb_tip[0]
+    dy = index_tip[1] - thumb_tip[1]
+    dz = index_tip[2] - thumb_tip[2]
+    return math.sqrt(dx*dx + dy*dy + dz*dz)
+
+def classify_gesture(thumb_tip: Tuple[float, float, float], index_tip: Tuple[float, float, float], threshold: float = 0.08) -> str:
+    dist = compute_pinch_distance(thumb_tip, index_tip)
+    if dist < threshold:
+        return f"PINCH_ACTIVE (d={dist:.4f})"
+    return f"HAND_OPEN (d={dist:.4f})"
+
+if __name__ == "__main__":
+    t4 = (0.45, 0.60, -0.02)
+    t8 = (0.47, 0.62, -0.01)
+    status = classify_gesture(t4, t8)
+    print("ผลการจำแนกท่าทาง:", status)
+    assert "PINCH_ACTIVE" in status, "ต้องจำแนกเป็น Pinch"
+    print("✅ ระบบตรวจสอบการคำนวณ Pinch Gesture สำเร็จ 100%!")
+```
+
+---
+
+## 🔬 4.4 คู่มือห้องปฏิบัติการเสมือนจริง 2D/3D AR MediaPipe Hands
+
+ผู้เรียนสามารถเข้าสู่ชุดจำลองเสมือนจริง 2D/3D เพื่อทดลองตรวจจับมือจริงผ่านเว็บแคมได้ที่ [chapter09_mediapipe_vision.html](https://tsanaphy2023.github.io/computing-science/simulators/chapter09_mediapipe_vision.html)
+
+---
+
+## 💡 4.5 สรุปสารัตถะสำคัญประจำบท
+
+1. MediaPipe Hands ใช้อัลกอริทึม Machine Learning สองระดับ (Palm Detection $\rightarrow$ Landmark Regression)
+2. ระยะห่างยุคลิดระหว่างข้อต่อสามารถนำมาแปลงเป็นท่าทางสั่งการ (Gesture Control) ในระบบ Web AR ได้อย่างแม่นยำ
+
+---
+
+## ❓ 4.6 แบบฝึกหัดและคำถามท้ายบทเพื่อการประเมินผล
+
+1. เหตุใด MediaPipe จึงต้องแบ่งโมเดลออกเป็น Palm Detector และ Landmark Model แทนที่จะตรวจจับข้อต่อโดยตรงทั้งภาพ?
+2. ให้นักเรียนออกแบบอัลกอริทึมในการจำแนกท่าทาง "ชูสองนิ้ว (Peace Sign)" จากพิกัด 21 จุด
+
+---
+
+## 📚 เอกสารอ้างอิงประจำบท
+
+* Zhang, F. et al. (2020). MediaPipe Hands: On-device Real-time Hand Tracking. *arXiv preprint arXiv:2006.10214*.
+* Szeliski, R. (2022). *Computer Vision: Algorithms and Applications* (2nd ed.). Springer.
+
+
+<!-- CHAPTER BREAK -->
+
+# วิทยาการคำนวณ 3 การพัฒนาโครงงานบูรณาการ ปัญญาประดิษฐ์ และนวัตกรรมการจัดการเรียนรู้วิทยาศาสตร์
+## บทที่ 5 อินเทอร์เน็ตของสรรพสิ่งและระบบตรวจวัดทางกายภาพอัจฉริยะ
+**ผู้เขียน** ผู้ช่วยศาสตราจารย์ ดร.ชีวะ ทัศนา • สาขาวิชาฟิสิกส์ คณะวิทยาศาสตร์และเทคโนโลยี มหาวิทยาลัยราชภัฏรำไพพรรณี
+
+---
+
+## 🎯 ผลลัพธ์การเรียนรู้ประจำบท
+เมื่อศึกษาบทเรียนนี้จบแล้ว ผู้เรียนสามารถ
+1. **อธิบาย ** สถาปัตยกรรมการทำงานของระบบอินเทอร์เน็ตของสรรพสิ่ง (Internet of Things - IoT) และการประมวลผลทางกายภาพ (Physical Computing)
+2. **จำแนกและเลือกใช้ ** ไมโครคอนโทรลเลอร์ (ESP32, Micro:bit, Raspberry Pi Pico) ร่วมกับเซนเซอร์แอนะล็อกและดิจิทัล (GPIO, ADC, PWM)
+3. **ประยุกต์ใช้โปรโตคอลสื่อสาร ** มาตรฐาน MQTT (Publish/Subscribe) และ HTTP REST API ในการรับส่งข้อมูลผ่านระบบคลาวด์
+4. **พัฒนาระบบตรวจสอบทางไกล ** เพื่อบันทึกค่าทางฟิสิกส์และสิ่งแวดล้อมแบบเรียลไทม์
+
+---
+
+## 🌌 5.0 เรื่องเล่าเปิดบทเรียน สะพานเชื่อมโลกกายภาพสู่เครือข่ายคลาวด์
+
+ในอดีต หากเราต้องการทราบอุณหภูมิในโรงเรือนเพาะปลูกหรือวัดค่าระดับน้ำในเขื่อน นักฟิสิกส์ต้องเดินไปอ่านค่าจากมาตรวัดปรอทด้วยตนเอง แต่ในยุคของ **Internet of Things (IoT)** อุปกรณ์และเซนเซอร์นับหมื่นล้านตัวทั่วโลกสามารถ พูดคุยและส่งข้อมูลหากัน ผ่านเครือข่ายไร้สายได้ตลอด 24 ชั่วโมง
+
+```mermaid
+graph LR
+    Sensors["1. โลกกายภาพ (Physical World):\nเซนเซอร์วัดอุณหภูมิ, ความชื้น, แสง"] --> Microcontroller["2. ขอบระบบ (Edge Node):\nไมโครคอนโทรลเลอร์ ESP32 + ADC"]
+    Microcontroller --"WiFi / 4G / LoRa (MQTT Protocol)"--> CloudBroker["3. คลาวด์โบรกเกอร์ (Cloud Broker):\nHiveMQ / EMQX / AWS IoT"]
+    CloudBroker --> Dashboard["4. ส่วนแสดงผลและการตัดสินใจ (HMI):\nเว็บแดชบอร์ด, แจ้งเตือนผ่าน LINE/Telegram"]
+```
+
+IoT จึงเป็นหัวใจสำคัญของการปฏิวัติสู่ **เกษตรแม่นยำสูง **, **เมืองอัจฉริยะ **, และ **ระบบตรวจวัดทางฟิสิกส์อัตโนมัติ**
+
+---
+
+## 🔌 5.1 สัญญาณกายภาพและอินเตอร์เฟซฮาร์ดแวร์
+
+### 1. ขาเชื่อมต่ออินพุต/เอาต์พุตดิจิทัล
+* รับหรือจ่ายสัญญาณได้เพียง 2 ระดับ: **HIGH ($3.3\text{V} / 5\text{V}$) หรือ LOW ($0\text{V}$)**
+
+### 2. การแปลงสัญญาณแอนะล็อกเป็นดิจิทัล
+แปลงระดับแรงดันไฟฟ้าต่อเนื่อง ($0 - 3.3\text{V}$) ให้กลายเป็นตัวเลขดิจิทัล
+* **ADC 10 บิต:** ให้ค่าตัวเลข $0 - 1023$ ($2^{10} - 1$)
+* **ADC 12 บิต (ESP32):** ให้ค่าตัวเลข $0 - 4095$ ($2^{12} - 1$)
+
+$$\text{Voltage (V)} = \frac{\text{ADC Value}}{4095} \times 3.3\text{ V}$$
+
+### 3. การมอดูเลตความกว้างพัลส์
+การปรับสัดส่วนเวลาเปิด-ปิดสัญญาณ (Duty Cycle) เพื่อควบคุมความสว่างของหลอดไฟ LED หรือความเร็วของมอเตอร์
+
+---
+
+## 📡 5.2 สถาปัตยกรรมโปรโตคอล MQTT
+
+โปรโตคอล **MQTT (Message Queuing Telemetry Transport)** เป็นโปรโตคอลที่มีขนาดแพ็กเก็ตเล็กมาก (Lightweight) ใช้พลังงานต่ำ และเหมาะอย่างยิ่งสำหรับอุปกรณ์ IoT:
+
+```mermaid
+graph TD
+    Publisher["เซนเซอร์โรงเรือน (Publisher)\nส่งข้อมูลอุณหภูมิไปที่ Topic:\n'rbru/farm/sensor1/temp'"] --"Publish"--> Broker["MQTT Broker\n(ศูนย์กลางกระจายข้อความ)"]
+    Broker --"Subscribe (ส่งต่อทันที)"--> Subscriber1["แอปบนมือถือเกษตรกร (Subscriber)"]
+    Broker --"Subscribe (ส่งต่อทันที)"--> Subscriber2["เซิร์ฟเวอร์ฐานข้อมูล AI (Subscriber)"]
+```
+
+---
+
+## 💻 5.3 โค้ดคอมพิวเตอร์ ระบบจำลอง IoT Telemetry Client ด้วย Python
+
+```python
+# iot_telemetry_simulator.py
+# โปรแกรมจำลองการอ่านค่าเซนเซอร์ IoT และแปลงข้อมูลส่งผ่านโครงสร้าง MQTT/JSON
+# ผู้เขียน: ผศ.ดร.ชีวะ ทัศนา (มรภ.รำไพพรรณี)
+
+import json
+import time
+import random
+
+class SmartIoTSensorNode:
+    def __init__(self, node_id: str, location: str):
+        self.node_id = node_id
+        self.location = location
+        
+    def read_physical_sensors(self) -> dict:
+        """จำลองการอ่านค่าเซนเซอร์กายภาพจากฮาร์ดแวร์จริง"""
+        # อุณหภูมิ (°C), ความชื้น (%), ความชื้นดิน (%), แสง (Lux)
+        temp_c = round(random.uniform(28.0, 38.5), 2)
+        humidity_pct = round(random.uniform(50.0, 85.0), 2)
+        soil_moisture_raw = random.randint(1200, 3800) # ADC 12-bit
+        soil_pct = round((1.0 - (soil_moisture_raw / 4095.0)) * 100.0, 2)
+        lux = round(random.uniform(100.0, 45000.0), 1)
+        
+        payload = {
+            "node_id": self.node_id,
+            "location": self.location,
+            "timestamp": time.strftime("%Y-%m-%d %H:%M:%S"),
+            "telemetry": {
+                "temperature_c": temp_c,
+                "humidity_percent": humidity_pct,
+                "soil_moisture_percent": soil_pct,
+                "light_lux": lux
+            },
+            "system_status": {
+                "battery_voltage": 3.95,
+                "wifi_rssi_dbm": -58
+            }
+        }
+        return payload
+
+def main():
+    print("=" * 70)
+    print("📡 ระบบส่งข้อมูลโทรมาตร IoT สู่คลาวด์ (Smart IoT Telemetry Stream)")
+    print("=" * 70)
+    
+    node = SmartIoTSensorNode("ESP32-NODE-01", "สวนทุเรียนแปลงวิจัยฟิสิกส์เกษตร มรภ.รำไพพรรณี")
+    
+    # จำลองการส่งข้อมูล 3 แพ็กเก็ต
+    for i in range(1, 4):
+        data_packet = node.read_physical_sensors()
+        json_message = json.dumps(data_packet, indent=2, ensure_ascii=False)
+        
+        print(f"\n📦 [แพ็กเก็ตที่ {i}] Topic: 'rbru/agriphysics/telemetry'")
+        print(json_message)
+        print("-" * 70)
+        time.sleep(0.5)
+
+if __name__ == "__main__":
+    main()
+```
+
+---
+
+## 💡 5.4 สรุปใจความสำคัญและแบบฝึกหัดท้ายบทที่ 5
+
+### 📌 สรุปประเด็นสำคัญ
+1. **IoT และ Physical Computing** เปลี่ยนข้อมูลทางกายภาพ (อุณหภูมิ แสง แรงดัน) ให้เป็นข้อมูลดิจิทัลที่ประมวลผลได้
+2. **ADC** มีหน้าที่แปลงค่าแรงดันไฟฟ้าต่อเนื่องเป็นตัวเลขตามความละเอียดบิต ($2^N - 1$)
+3. **MQTT Protocol** เป็นหัวใจของการสื่อสารข้อมูลแบบเรียลไทม์ที่ประหยัดแบนด์วิดท์สูงสุด
+
+---
+
+### 📝 แบบฝึกหัดทบทวน 3 ระดับ
+
+#### ระดับที่ 1 ความรู้ความเข้าใจพื้นฐาน
+1. ในโมเดลการสื่อสารแบบ **MQTT** อธิบายบทบาทหน้าที่ของ: (A) Publisher, (B) Subscriber, (C) Broker
+2. ไมโครคอนโทรลเลอร์ที่มี ADC ขนาด 10 บิต ($0-1023$) รับแรงดันอ้างอิง $5.0\text{ V}$ หากอ่านค่า ADC ได้ $512$ แรงดันไฟฟ้าจริงมีค่ากี่โวลต์
+
+#### ระดับที่ 2 การวิเคราะห์และประยุกต์ใช้
+3. ให้นักเรียนออกแบบผังวงจรและโฟลว์การส่งข้อมูลของโครงงาน **ระบบแจ้งเตือนน้ำท่วมในชุมชนริมแม่น้ำจันทบุรี** โดยใช้เซนเซอร์อัลตราโซนิก (HC-SR04) และบอร์ด ESP32
+
+#### ระดับที่ 3 การคิดขั้นสูงและบูรณาการ
+4. จงเขียนโปรแกรม Python ตรวจสอบข้อมูลสตรีม JSON จากเซนเซอร์ หากพบว่า `temperature_c > 40.0` หรือ `battery_voltage < 3.3` ให้ส่งคำสั่งยิงแจ้งเตือนผ่าน Webhook หรือ API ทันที
+
+
+<!-- CHAPTER BREAK -->
+
+# วิทยาการคำนวณ 3 การพัฒนาโครงงานบูรณาการ ปัญญาประดิษฐ์ และนวัตกรรมการจัดการเรียนรู้วิทยาศาสตร์
+## บทที่ 6 การทดสอบระบบ การประกันคุณภาพ และจริยธรรมดิจิทัล
+**ผู้เขียน** ผู้ช่วยศาสตราจารย์ ดร.ชีวะ ทัศนา • สาขาวิชาฟิสิกส์ คณะวิทยาศาสตร์และเทคโนโลยี มหาวิทยาลัยราชภัฏรำไพพรรณี
+
+---
+
+## 🎯 ผลลัพธ์การเรียนรู้ประจำบท
+เมื่อศึกษาบทเรียนนี้จบแล้ว ผู้เรียนสามารถ
+1. **อธิบาย ** ลำดับชั้นของการทดสอบซอฟต์แวร์ (Unit Testing, Integration Testing, System Testing, UAT) และเทคนิคการออกแบบกรณีทดสอบ (Boundary Value Analysis)
+2. **เขียนชุดทดสอบอัตโนมัติ ** ด้วยโมดูล `unittest` / `pytest` ในภาษา Python เพื่อรับประกันความถูกต้องของซอฟต์แวร์
+3. **วิเคราะห์และปฏิบัติตาม ** กฎหมายคุ้มครองข้อมูลส่วนบุคคล และหลักการความมั่นคงปลอดภัยสารสนเทศ (CIA Triad)
+4. **ประเมินจริยธรรมปัญญาประดิษฐ์ ** ในมิติของความโปร่งใส (Explainability), ความเป็นธรรม (Algorithmic Fairness), และการลดอคติในข้อมูล (Bias Mitigation)
+
+---
+
+## 🌌 6.0 เรื่องเล่าเปิดบทเรียน อุบัติเหตุทางการแพทย์และความรับผิดชอบของนักพัฒนา
+
+ในปี ค.ศ. 1985–1987 เครื่องฉายรังสีรักษามะเร็ง **Therac-25** เกิดข้อผิดพลาดของซอฟต์แวร์ (Race Condition Bug) ทำให้เครื่องยิงรังสีพลังงานสูงเกินขนาดที่กำหนดถึง **100 เท่า** ส่งผลให้ผู้ป่วยได้รับบาดเจ็บสาหัสและเสียชีวิตหลายราย
+
+```mermaid
+graph LR
+    Bug["ข้อผิดพลาดเล็กๆ ในซอฟต์แวร์\n(Race Condition / Untested Code)"] --> Catastrophe["ความเสียหายร้ายแรงต่อชีวิตและทรัพย์สิน\n(Therac-25 Radiation Overdose)"]
+    Catastrophe --> QualityAssurance["การทดสอบระบบและการประกันคุณภาพอย่างเคร่งครัด\n(Software Testing & QA Protocols)"]
+```
+
+บทเรียนราคาแพงนี้ตอกย้ำว่า **"ซอฟต์แวร์และ AI ที่ดีไม่ได้วัดกันที่ฟีเจอร์ที่เยอะ แต่ต้องมีความถูกต้อง เสถียร ปลอดภัย และมีจริยธรรมสูงสุด"**
+
+---
+
+## 🧪 6.1 ลำดับชั้นการทดสอบซอฟต์แวร์
+
+```mermaid
+graph TD
+    UI["1. การทดสอบการยอมรับของผู้ใช้ (UAT & End-to-End Testing)\nทดสอบประสบการณ์ผู้ใช้จริงบนหน้าเว็บ/แอป"] --> Sys["2. การทดสอบทั้งระบบ (System Testing)\nทดสอบประสิทธิภาพและความปลอดภัยแบบครบวงจร"]
+    Sys --> Int["3. การทดสอบการผสานระบบ (Integration Testing)\nทดสอบการเชื่อมต่อระหว่างโมดูลและฐานข้อมูล"]
+    Int --> Unit["4. การทดสอบระดับหน่วยย่อย (Unit Testing) ⚡ ฐานรากสำคัญที่สุด!\nทดสอบฟังก์ชันและคลาสย่อยๆ ให้ผ่าน 100%"]
+```
+
+### เทคนิคการออกแบบกรณีทดสอบกล่องดำ 
+* **Equivalence Partitioning (การแบ่งส่วนความเท่าเทียม):** แบ่งช่วงข้อมูลเป็นกลุ่มที่ถูกต้อง (Valid) และไม่ถูกต้อง (Invalid)
+* **Boundary Value Analysis (การวิเคราะห์ค่าขอบเขต):** การทดสอบที่จุดรอยต่อ เช่น ขอบเขตอายุ $1-100$ ให้ทดสอบที่ $0, 1, 2, 99, 100, 101$ (จุดที่มักพบบั๊กมากที่สุด)
+
+---
+
+## 🔒 6.2 พ.ร.บ. คุ้มครองข้อมูลส่วนบุคคล และความปลอดภัยสารสนเทศ
+
+<div style="background: linear-gradient(135deg, #fef2f2, #fee2e2); border-left: 5px solid #ef4444; border-radius: 12px; padding: 18px 22px; margin: 20px 0; color: #7f1d1d;">
+  <h4 style="color: #991b1b; margin-top: 0;">🛡️ ข้อกำหนดสำคัญตามกฎหมาย PDPA (พ.ศ. 2562)</h4>
+  <ul style="margin: 0; line-height: 1.75;">
+    <li><strong>Consent (ความยินยอม):</strong> ต้องขอความยินยอมอย่างชัดเจนก่อนเก็บรวบรวมข้อมูลส่วนบุคคล (ชื่อ ภาพถ่าย เบอร์โทร พิกัด GPS)</li>
+    <li><strong>Purpose Limitation (จำกัดวัตถุประสงค์):</strong> ใช้ข้อมูลเฉพาะตามวัตถุประสงค์ที่แจ้งไว้เท่านั้น ห้ามนำไปขายหรือส่งต่อ</li>
+    <li><strong>Data Minimization (เก็บเท่าที่จำเป็น):</strong> เก็บเฉพาะข้อมูลที่จำเป็นต่อการทำงานของระบบ</li>
+    <li><strong>Security Safeguards:</strong> ต้องมีการเข้ารหัสข้อมูล (Encryption เช่น Hashing SHA-256) ป้องกันข้อมูลรั่วไหล</li>
+  </ul>
+</div>
+
+---
+
+## ⚖️ 6.3 จริยธรรมปัญญาประดิษฐ์และความเป็นธรรมของอัลกอริทึม
+
+```mermaid
+graph TD
+    AIEthics["4 เสาหลักของจริยธรรม AI สากล"]
+    AIEthics --> F["1. ความเป็นธรรม (Fairness & Non-Discrimination)\nไม่มีอคติทางเพศ เชื้อชาติ หรือฐานะ"]
+    AIEthics --> T["2. ความโปร่งใสและอธิบายได้ (Transparency & XAI)\nสามารถอธิบายเหตุผลเบื้องหลังการตัดสินใจของ AI ได้"]
+    AIEthics --> P["3. ความเป็นส่วนตัวและความปลอดภัย (Privacy & Security)\nคุ้มครองข้อมูลส่วนบุคคลของผู้ใช้"]
+    AIEthics --> A["4. ความรับผิดชอบ (Accountability)\nมีมนุษย์เป็นผู้รับผิดชอบต่อผลกระทบของระบบ"]
+```
+
+---
+
+## 💻 6.4 โค้ดคอมพิวเตอร์ ชุดทดสอบอัตโนมัติด้วย Python `unittest`
+
+```python
+# test_physics_engine.py
+# โปรแกรมทดสอบหน่วยย่อยอัตโนมัติ (Automated Unit Testing) สำหรับโมดูลคำนวณฟิสิกส์
+# ผู้เขียน: ผศ.ดร.ชีวะ ทัศนา (มรภ.รำไพพรรณี)
+
+import unittest
+import math
+
+def calculate_pendulum_period(length_m: float, g: float = 9.81) -> float:
+    """ฟังก์ชันคำนวณคาบการแกว่งของลูกตุ้ม T = 2*pi*sqrt(L/g)"""
+    if length_m < 0 or g <= 0:
+        raise ValueError("ความยาวเชือกและความเร่งโน้มถ่วงต้องเป็นค่าบวกเท่านั้น")
+    return 2.0 * math.pi * math.sqrt(length_m / g)
+
+class TestPhysicsFunctions(unittest.TestCase):
+    """ชุดการทดสอบอัตโนมัติ (Automated Test Suite)"""
+    
+    def test_standard_period(self):
+        """กรณีทดสอบที่ 1: ความยาวเชือกมาตรฐาน 1 เมตร"""
+        period = calculate_pendulum_period(1.0, 9.81)
+        self.assertAlmostEqual(period, 2.006, places=3)
+        
+    def test_zero_length(self):
+        """กรณีทดสอบที่ 2: ความยาวเชือก 0 เมตร (Boundary Value)"""
+        period = calculate_pendulum_period(0.0, 9.81)
+        self.assertEqual(period, 0.0)
+        
+    def test_negative_length_raises_error(self):
+        """กรณีทดสอบที่ 3: ความยาวเชือกติดลบ ต้อง Throw ValueError ทันที"""
+        with self.assertRaises(ValueError):
+            calculate_pendulum_period(-5.0, 9.81)
+
+if __name__ == "__main__":
+    print("=" * 65)
+    print("🧪 เริ่มต้นรันชุดทดสอบความถูกต้องของซอฟต์แวร์ (Unit Test Runner)")
+    print("=" * 65)
+    unittest.main(verbosity=2)
+```
+
+---
+
+## 💡 6.5 สรุปใจความสำคัญและแบบฝึกหัดท้ายบทที่ 6
+
+### 📌 สรุปประเด็นสำคัญ
+1. **Unit Testing** เป็นด่านแรกและด่านที่สำคัญที่สุดในการป้องกันข้อผิดพลาดของระบบ
+2. การพัฒนาแอปพลิเคชันและโครงงานต้องปฏิบัติตามกฎหมาย **PDPA** และมาตรฐานความปลอดภัยอย่างเคร่งครัด
+3. การพัฒนา AI ต้องคำนึงถึง **จริยธรรม ความเป็นธรรม และความโปร่งใส** เพื่อไม่ให้เกิดอคติต่อกลุ่มคนในสังคม
+
+---
+
+### 📝 แบบฝึกหัดทบทวน 3 ระดับ
+
+#### ระดับที่ 1 ความรู้ความเข้าใจพื้นฐาน
+1. จงอธิบายความแตกต่างระหว่างการทดสอบแบบ **White-Box Testing** กับ **Black-Box Testing**
+2. หลักการ **CIA Triad** ในความมั่นคงปลอดภัยไซเบอร์ ประกอบด้วย 3 องค์ประกอบใดบ้าง
+
+#### ระดับที่ 2 การวิเคราะห์และประยุกต์ใช้
+3. หากระบบรับข้อมูลเกรดของนักเรียนตั้งแต่ $0$ ถึง $100$ จงออกแบบกรณีทดสอบด้วยเทคนิค **Boundary Value Analysis (BVA)** มา 6 กรณีทดสอบ
+
+#### ระดับที่ 3 การคิดขั้นสูงและบูรณาการ
+4. ในการพัฒนาระบบตรวจจับใบหน้าเพื่อเช็คชื่อเข้าชั้นเรียน ให้นักเรียนวิเคราะห์ความเสี่ยงด้าน **PDPA** และ **AI Ethics** พร้อมเสนอแนวทางป้องกันความเสี่ยง 3 ข้อ
+
+
+<!-- CHAPTER BREAK -->
+
+# วิทยาการคำนวณ 3 การพัฒนาโครงงานบูรณาการ ปัญญาประดิษฐ์ และนวัตกรรมการจัดการเรียนรู้วิทยาศาสตร์
+## บทที่ 7 การเขียนรายงานวิชาการ 5 บท และการจัดทำเอกสารเผยแพร่
+**ผู้เขียน** ผู้ช่วยศาสตราจารย์ ดร.ชีวะ ทัศนา • สาขาวิชาฟิสิกส์ คณะวิทยาศาสตร์และเทคโนโลยี มหาวิทยาลัยราชภัฏรำไพพรรณี
+
+---
+
+## 🎯 ผลลัพธ์การเรียนรู้ประจำบท
+เมื่อศึกษาบทเรียนนี้จบแล้ว ผู้เรียนสามารถ
+1. **อธิบาย ** โครงสร้าง มาตรฐาน และระเบียบแบบแผนการเขียนรายงานโครงงานวิชาการ 5 บท ตามเกณฑ์มหาวิทยาลัยราชภัฏรำไพพรรณีและมาตรฐานสากล
+2. **เรียบเรียงและสังเคราะห์ ** ผลการดำเนินงาน การวิเคราะห์ทางสถิติ และการอภิปรายผล (Discussion) ในบทที่ 4 และ 5 ได้อย่างมีหลักการทางวิทยาศาสตร์
+3. **ออกแบบโปสเตอร์วิชาการ ** อัตราส่วน 16:9 / A0 ที่มีลำดับชั้นทางสายตา (Visual Hierarchy) และคมชัดระดับสากล
+4. **นำเสนอผลงานและสาธิต ** โครงงานนวัตกรรมในการสอบป้องกัน (Project Defense) และการแข่งขันระดับชาติได้อย่างน่าประทับใจ
+
+---
+
+## 🌌 7.0 เรื่องเล่าเปิดบทเรียน วิทยาศาสตร์ที่ไม่ถูกสื่อสาร คือวิทยาศาสตร์ที่ไร้ตัวตน
+
+นักดาราศาสตร์ผู้ยิ่งใหญ่แห่งศตวรรษที่ 20 คาร์ล เซแกน (Carl Sagan) กล่าวไว้ว่า: **การทำงานทางวิทยาศาสตร์ไม่เคยเสร็จสมบูรณ์ จนกว่าผลงานนั้นจะถูกถ่ายทอด อธิบาย และเผยแพร่ให้ผู้อื่นเข้าใจได้อย่างแจ่มแจ้ง**
+
+แม้ว่าท่านจะพัฒนาโมเดล AI ที่ยอดเยี่ยมที่สุด หรือเขียนโค้ดที่ไร้บั๊ก แต่หากไม่สามารถถ่ายทอดคุณค่า วิธีการ และผลกระทบของโครงงานผ่าน **รายงานวิชาการ 5 บท** และ **การนำเสนออย่างมืออาชีพ** ผลงานนวัตกรรมนั้นก็ยากที่จะได้รับการยอมรับ ต่อยอด หรือนำไปใช้ประโยชน์ในระดับชาติ
+
+```mermaid
+graph LR
+    Tech["นวัตกรรมทางเทคนิค\n(Code + Hardware + AI)"] --> Doc["รายงานวิชาการ 5 บทมาตรฐาน\n(Academic Rigor & Documentation)"]
+    Doc --> Impact["การเผยแพร่และสร้างผลกระทบต่อสังคม\n(Journals, Conferences, Patents, Open Source)"]
+```
+
+---
+
+## 📑 7.1 โครงสร้างรายงานโครงงานวิชาการ 5 บทมาตรฐาน
+
+```mermaid
+graph TD
+    B1["บทที่ 1: บทนำ (Introduction)\n• ความเป็นมาและความสำคัญ\n• วัตถุประสงค์ของโครงงาน (SMART)\n• ขอบเขต สมมติฐาน และประโยชน์ที่คาดว่าจะได้รับ"]
+    
+    B2["บทที่ 2: เอกสารและงานวิจัยที่เกี่ยวข้อง (Literature Review)\n• ทฤษฎีฟิสิกส์ ตรรกะ อัลกอริทึม\n• สถาปัตยกรรมเทคโนโลยี (MediaPipe, IoT, AI)\n• การสังเคราะห์ตารางเปรียบเทียบงานวิจัยในอดีต"]
+    
+    B3["บทที่ 3: วิธีดำเนินการวิจัยและพัฒนาระบบ (Methodology)\n• สถาปัตยกรรมระบบ (System Architecture)\n• ผังงานขั้นตอนวิธี (Flowcharts & Pseudocode)\n• รายละเอียดฮาร์ดแวร์ วงจรไฟฟ้า และชุดข้อมูล (Dataset)"]
+    
+    B4["บทที่ 4: ผลการดำเนินงานและการอภิปรายผล (Results & Discussion)\n• ข้อมูลผลการทดสอบเชิงปริมาณ (ตาราง, กราฟ, Confusion Matrix)\n• การวิเคราะห์ความคลาดเคลื่อน (Error Analysis)\n• การอภิปรายผลเชิงเปรียบเทียบกับทฤษฎีและงานวิจัยก่อนหน้า"]
+    
+    B5["บทที่ 5: สรุปผล ข้อจำกัด และข้อเสนอแนะ (Conclusion & Recommendations)\n• สรุปผลสัมฤทธิ์ตอบทุกวัตถุประสงค์ในบทที่ 1\n• ข้อจำกัดที่พบในการทดลองจริง\n• แนวทางการพัฒนาต่อยอดในอนาคต"]
+    
+    B1 --> B2 --> B3 --> B4 --> B5
+```
+
+---
+
+## 🎨 7.2 ศิลปะการออกแบบโปสเตอร์วิชาการ 16 9
+
+<div style="background: linear-gradient(135deg, #f0fdf4, #dcfce7); border-left: 5px solid #16a34a; border-radius: 12px; padding: 18px 22px; margin: 20px 0; color: #14532d;">
+  <h4 style="color: #15803d; margin-top: 0;">📌 กฎ 3 ข้อของโปสเตอร์วิชาการระดับสากล</h4>
+  <ol style="margin: 0; line-height: 1.75;">
+    <li><strong>3-Second Rule:</strong> ผู้เดินผ่านต้องเข้าใจหัวข้อโครงงานและจุดเด่นหลักได้ภายใน 3 วินาทีแรก</li>
+    <li><strong>Visual Hierarchy:</strong> ใช้รูปภาพ กราฟ แผนผังระบบ และการ์ดสรุปตัวเลขเด่น มากกว่าตัวหนังสือยาวๆ (สัดส่วนภาพต่อข้อความ 60:40)</li>
+    <li><strong>QR Code Call-to-Action:</strong> ฝัง QR Code ลิงก์ตรงไปยังคลังซอร์สโค้ด GitHub และเว็บสาธิตจำลองสด (Live Interactive Web Demo)</li>
+  </ol>
+</div>
+
+---
+
+## 🎤 7.3 เทคนิคการนำเสนอและการสอบป้องกันโครงงาน
+
+```mermaid
+graph LR
+    P1["1. Hook (30 วิแรก):\nเล่าปัญหาที่น่าตกใจหรือจุดประกาย"] --> P2["2. Solution & Demo (2-3 นาที):\nแสดงการทำงานจริงของระบบและผลทดสอบ"]
+    P2 --> P3["3. Impact & Value (1 นาที):\nสรุปผลลัพธ์ที่เป็นรูปธรรมต่อชุมชน/วิทยาศาสตร์"]
+    P3 --> P4["4. Q&A Defense:\nตอบคำถามคณะกรรมการอย่างมั่นใจด้วยหลักฐานข้อมูล"]
+```
+
+---
+
+## 💡 7.4 สรุปใจความสำคัญและแบบฝึกหัดท้ายบทที่ 7
+
+### 📌 สรุปประเด็นสำคัญ
+1. **รายงาน 5 บท** เป็นบันทึกหลักฐานทางวิชาการที่ต้องมีความสอดคล้อง (Alignment) ตั้งแต่วัตถุประสงค์ในบทที่ 1 ไปจนถึงข้อสรุปในบทที่ 5
+2. **การอภิปรายผล (Discussion ในบทที่ 4)** คือส่วนที่แสดงความลึกซึ้งทางปัญญาของนักวิจัย โดยต้องอธิบาย ทำไมผลจึงเป็นเช่นนั้น ไม่ใช่แค่การอ่านตัวเลขในตารางซ้ำ
+3. **โปสเตอร์และการนำเสนอ** ต้องกระชับ ทรงพลัง เน้นภาพกราฟิก และมี Live Demonstration
+
+---
+
+### 📝 แบบฝึกหัดทบทวน 3 ระดับ
+
+#### ระดับที่ 1 ความรู้ความเข้าใจพื้นฐาน
+1. จงอธิบายความแตกต่างระหว่าง **บทคัดย่อ ** กับ **บทสรุปผลการทดลอง (Conclusion ในบทที่ 5)**
+2. เพราะเหตุใดเราจึงห้ามนำ ความคิดเห็นส่วนตัวที่ไม่มีข้อมูลรองรับ มาเขียนในบทที่ 4 (ผลการทดลอง)
+
+#### ระดับที่ 2 การวิเคราะห์และประยุกต์ใช้
+3. ให้นักเรียนเขียน **"บทคัดย่อภาษาไทย (Thai Abstract)"** ความยาวไม่เกิน 250 คำ สำหรับโครงงานคอมพิวเตอร์ที่ตนเองสนใจ โดยให้มีองค์ประกอบครบถ้วน: วัตถุประสงค์, วิธีดำเนินการ, ผลการทดลอง, และสรุปประโยชน์
+
+#### ระดับที่ 3 การคิดขั้นสูงและบูรณาการ
+4. จงออกแบบเค้าโครงร่างภาพของ **โปสเตอร์วิชาการ 16:9 (Wireframe Poster Layout)** โดยจัดวางตำแหน่งหัวข้อ โลโก้มหาวิทยาลัย รูปภาพระบบ ผลการทดลอง และ QR Code ให้สวยงามตามหลัก Visual Hierarchy
+
+
+<!-- CHAPTER BREAK -->
+
+# วิทยาการคำนวณ 3 การพัฒนาโครงงานบูรณาการ ปัญญาประดิษฐ์ และนวัตกรรมการจัดการเรียนรู้วิทยาศาสตร์
+## บทที่ 8 นวัตกรรมการจัดการเรียนรู้วิทยาการคำนวณสำหรับครูยุคใหม่
+**ผู้เขียน** ผู้ช่วยศาสตราจารย์ ดร.ชีวะ ทัศนา • สาขาวิชาฟิสิกส์ คณะวิทยาศาสตร์และเทคโนโลยี มหาวิทยาลัยราชภัฏรำไพพรรณี
+
+---
+
+## 🎯 ผลลัพธ์การเรียนรู้ประจำบท
+เมื่อศึกษาบทเรียนนี้จบแล้ว ผู้เรียนสามารถ
+1. **อธิบาย ** กรอบแนวคิด TPACK (Technological Pedagogical Content Knowledge) และทฤษฎีการสร้างสรรค์ความรู้ด้วยปัญญา (Constructionism) ในการสอนวิทยาการคำนวณ
+2. **ออกแบบแผนการจัดการเรียนรู้เชิงรุก ** ตามกระบวนการสืบเสาะ 5 ขั้น (5E Instructional Model) และสะเต็มศึกษา (STEM/STEAM Education)
+3. **สร้างเครื่องมือวัดและประเมินผล ** ตามสภาพจริง (Authentic Assessment) ทั้งด้านทักษะกระบวนการคิด ทักษะการเขียนโปรแกรม และทักษะการแก้ปัญหา
+4. **บูรณาการสื่อนวัตกรรมดิจิทัล ** เช่น AR Simulators, MediaPipe, และ MOOC เพื่อยกระดับห้องเรียนวิทยาการคำนวณในศตวรรษที่ 21
+
+---
+
+## 🌌 8.0 เรื่องเล่าเปิดบทเรียน จากผู้บริโภคเทคโนโลยีสู่ผู้สร้างสรรค์นวัตกรรม
+
+เซย์มัวร์ พาเพิร์ต (Seymour Papert) นักคณิตศาสตร์และนักการศึกษาผู้บุกเบิกแห่ง MIT Media Lab กล่าวไว้ว่า: **"บทบาทที่ยิ่งใหญ่ที่สุดของคอมพิวเตอร์ในการศึกษา ไม่ใช่การนำมาใช้เพื่อสอนเด็ก แต่คือการให้เด็กได้เป็นผู้สั่งการคอมพิวเตอร์ เพื่อสร้างสรรค์องค์ความรู้ขึ้นในสมองของตนเอง (Constructionism)"**
+
+```mermaid
+graph LR
+    Old["❌ การศึกษาแบบเดิม:\nนักเรียนเป็น 'ผู้บริโภคเทคโนโลยี (Passive Consumers)'\nนั่งฟังบรรยาย ท่องจำไวยากรณ์โค้ด"]
+    New["✅ การศึกษาวิทยาการคำนวณยุคใหม่:\nนักเรียนเป็น 'ผู้สร้างสรรค์นวัตกรรม (Active Creators)'\nแก้ปัญหาจริง สร้างแบบจำลอง AR และโครงงานชุมชน"]
+```
+
+วิชาวิทยาการคำนวณจึงไม่ใช่เพียงวิชาคอมพิวเตอร์ทั่วไป แต่เป็น **วิชาแห่งการฝึกทักษะชีวิตและความคิดสร้างสรรค์** สำหรับเยาวชนในศตวรรษที่ 21
+
+---
+
+## 🏛️ 8.1 กรอบแนวคิด TPACK สำหรับครูวิทยาการคำนวณ
+
+```mermaid
+graph TD
+    CK["1. Content Knowledge (CK)\nเนื้อหาวิชาการ: ตรรกะ, ฟิสิกส์, อัลกอริทึม, โครงสร้างข้อมูล"]
+    PK["2. Pedagogical Knowledge (PK)\nศาสตร์การสอน: 5E, Active Learning, การวัดและประเมินผล"]
+    TK["3. Technological Knowledge (TK)\nความรู้เทคโนโลยี: Python, MediaPipe, IoT, AR, MOOC"]
+    
+    CK & PK & TK --> TPACK["🎯 TPACK Core:\nความสามารถในการบูรณาการเทคโนโลยีเข้ากับเนื้อหาและศาสตร์การสอนได้อย่างลงตัวสมบูรณ์แบบ"]
+```
+
+---
+
+## 🔄 8.2 การออกแบบกิจกรรมการเรียนรู้แบบ Active Learning
+
+<div style="background: linear-gradient(135deg, #eff6ff, #dbeafe); border-left: 5px solid #2563eb; border-radius: 12px; padding: 18px 22px; margin: 20px 0; color: #1e3a8a;">
+  <h4 style="color: #1d4ed8; margin-top: 0;">📌 5 ขั้นตอนของการจัดกิจกรรมสืบเสาะวิทยาการคำนวณ</h4>
+  <ol style="margin: 0; line-height: 1.75;">
+    <li><strong>1. Engagement (กระตุ้นความสนใจ):</strong> เปิดด้วยปริศนา เกม Unplugged หรือคลิปวิดีโอสถานการณ์ปัญหาจริงในชุมชน</li>
+    <li><strong>2. Exploration (สำรวจและค้นหา):</strong> ให้นักเรียนลงมือทดลองใน Interactive Sandbox หรือต่อวงจรเซนเซอร์ด้วยตนเองเป็นกลุ่ม</li>
+    <li><strong>3. Explanation (อธิบายและลงข้อสรุป):</strong> นักเรียนนำเสนอผลการค้นพบ ครูเชื่อมโยงสู่ทฤษฎีและสมการคณิตศาสตร์</li>
+    <li><strong>4. Elaboration (ขยายความรู้):</strong> มอบหมายโจทย์ท้าทายระดับสูงขึ้น หรือให้นำโค้ดไปประยุกต์กับบริบทใหม่</li>
+    <li><strong>5. Evaluation (ประเมินผล):</strong> ประเมินตามสภาพจริงด้วยเกณฑ์รูบริกส์ (Rubrics) และการสะท้อนคิด (Reflection)</li>
+  </ol>
+</div>
+
+---
+
+## 🏆 8.3 เกณฑ์การวัดและประเมินผลตามสภาพจริง
+
+| มิติการประเมิน | ยอดเยี่ยม (4 คะแนน) | ดี (3 คะแนน) | พอใช้ (2 คะแนน) | ปรับปรุง (1 คะแนน) |
+| :--- | :--- | :--- | :--- | :--- |
+| **1. ทักษะแนวคิดเชิงคำนวณ ** | ย่อยปัญหาและสกัดแก่นนามธรรมได้อย่างสมบูรณ์แบบ | วิเคราะห์ปัญหาได้ดี มีขั้นตอนวิธีชัดเจน | ย่อยปัญหาได้บางส่วน ขาดความกระชับ | ไม่สามารถแยกแยะปัญหาได้ |
+| **2. ความถูกต้องและการจัดโครงสร้างโค้ด** | โค้ดสะอาด เป็นโมดูล ไร้บั๊ก มีเอกสารกำกับ | โค้ดทำงานได้ถูกต้อง แต่อ่านยากเล็กน้อย | โค้ดมีข้อผิดพลาดบางกรณี | โค้ดรันไม่ผ่าน |
+| **3. การคิดสร้างสรรค์และบูรณาการ** | สร้างสรรค์นวัตกรรมใหม่ตอบโจทย์ผู้ใช้จริง | โครงงานมีประโยชน์แต่ดัดแปลงจากตัวอย่างเดิม | โครงงานเป็นไปตามเกณฑ์ขั้นต่ำ | ขาดความคิดสร้างสรรค์ |
+| **4. การสื่อสารและการนำเสนอ** | ถ่ายทอดเข้าใจง่าย มั่นใจ ตอบคำถามมีหลักฐาน | นำเสนอได้ดี สื่อสารประเด็นหลักได้ครบ | นำเสนอติดขัด ขาดการสาธิตระบบ | ไม่สามารถสื่อสารผลงานได้ |
+
+---
+
+## 🎓 8.4 สรุปภาพรวมชุดตำราวิทยาการคำนวณ 3 เล่ม และการก้าวสู่สื่อดิจิทัล MOOC (เล่มที่ 4)
+
+ขอแสดงความยินดีและชื่นชมผู้เรียน นักศึกษาครู และคณาจารย์ทุกท่านที่ได้ร่วมเดินทางผ่านการศึกษา **ชุดตำราวิทยาการคำนวณครบทั้ง 3 เล่ม 3 ระดับ**:
+
+```mermaid
+graph LR
+    Vol1["เล่ม 1: ระดับเริ่มต้น\n(Foundations & Unplugged)"] --> Vol2["เล่ม 2: ระดับกลาง\n(Algorithms & Python)"]
+    Vol2 --> Vol3["เล่ม 3: ระดับขั้นสูง\n(Capstone, AI, IoT & Pedagogy)"]
+    Vol3 --> Vol4["เล่มที่ 4: สื่อดิจิทัลบนระบบ MOOC\n(50 Interactive Labs บน GitHub Pages CDN)"]
+```
+
+องค์ความรู้ทั้งหมดนี้พร้อมแล้วที่จะถูกนำไปถ่ายทอด สานต่อ และสร้างแรงบันดาลใจให้กับเยาวชนและสังคมไทย เพื่อสร้างสรรค์อนาคตที่ขับเคลื่อนด้วยวิทยาการและปัญญาประดิษฐ์อย่างยั่งยืน!
+
+---
+
+### 📝 แบบฝึกหัดทบทวน 3 ระดับ
+
+#### ระดับที่ 1 ความรู้ความเข้าใจพื้นฐาน
+1. จงอธิบายความหมายของแนวคิด **Constructionism** ของ Seymour Papert และความแตกต่างจากการเรียนรู้แบบ Passive Learning
+2. ในกรอบแนวคิด **TPACK** ส่วนที่เป็นจุดตัดระหว่างเทคโนโลยีและศาสตร์การสอนเรียกว่าอะไร และมีความสำคัญอย่างไร
+
+#### ระดับที่ 2 การวิเคราะห์และประยุกต์ใช้
+3. ให้นักเรียนเขียน **แผนการจัดการเรียนรู้ 1 คาบ (50 นาที)** ในหัวข้อ *"การสอนเรื่องโครงสร้างเงื่อนไข if-else ผ่านกิจกรรมจำลองระบบเซนเซอร์อัตโนมัติ"* ตามกระบวนการ 5E Model
+
+#### ระดับที่ 3 การคิดขั้นสูงและบูรณาการ
+4. จงออกแบบ **เกณฑ์การประเมินรูบริกส์ (Scoring Rubrics 4 ระดับ)** สำหรับประเมินโครงงานปัญญาประดิษฐ์ (AI Capstone Project) ของนักเรียนระดับมัธยมศึกษาตอนปลาย หรือระดับอุดมศึกษา
+
+
+<!-- CHAPTER BREAK -->
+
+# วิทยาการคำนวณ 3 การสร้างแบบจำลองทางฟิสิกส์ ปัญญาประดิษฐ์ และคอมพิวเตอร์วิทัศน์
+## บทที่ 9 โครงข่ายประสาทเทียมเชิงลึกและการรู้จำภาพด้วย Convolutional Neural Networks
+**ผู้เขียน** ผู้ช่วยศาสตราจารย์ ดร.ชีวะ ทัศนา  
+**สังกัด** สาขาวิชาฟิสิกส์ คณะวิทยาศาสตร์และเทคโนโลยี มหาวิทยาลัยราชภัฏรำไพพรรณี  
+**เอกสารประกอบรายวิชา** 4122106 ปัญญาประดิษฐ์และการสร้างแบบจำลองทางวิทยาศาสตร์
+
+---
+
+## 📋 แผนบริหารการสอนประจำบทที่ 9
+
+### 1. หัวข้อเนื้อหาประจำบท
+1. **รากฐานโครงข่ายประสาทเทียม (Artificial Neural Networks Foundations):** เพอร์เซปตรอน (Perceptron), ฟังก์ชันกระตุ้น (ReLU, Sigmoid, Softmax), และอัลกอริทึม Backpropagation
+2. **สถาปัตยกรรม Convolutional Neural Networks (CNN):** Convolutional Layer, Kernel Filters, Pooling Layer, และ Dense Classification Layer
+3. **การประยุกต์ใช้ CNN ในการจำแนกภาพทางวิทยาศาสตร์:** การจำแนกชนิดผลึกแร่ และการตรวจจับเซลล์จุลชีพ
+4. **เทคนิค Transfer Learning และ Fine-tuning โมเดลยุคใหม่:** MobileNetV3, ResNet, EfficientNet
+5. **คู่มือห้องปฏิบัติการเสมือนจริง 3D AR MediaPipe:** การจำแนกวัตถุและแสดงแผนที่ความร้อน (Heatmap Visualization) แบบสด
+
+### 2. วัตถุประสงค์เชิงพฤติกรรม
+เมื่อศึกษาบทเรียนนี้จบแล้ว ผู้เรียนสามารถ
+1. **อธิบาย** หลักการทางคณิตศาสตร์ของการส่งผ่านข้อมูลไปข้างหน้า (Forward Pass) และการแพร่ย้อนกลับ (Backpropagation) ได้อย่างถูกต้อง
+2. **ออกแบบและพัฒนา** โครงข่ายประสาทเทียมแบบคอนโวลูชัน (CNN) ในภาษา Python ด้วยไลบรารี PyTorch หรือ TensorFlow
+3. **ประเมินผล** ความแม่นยำของโมเดลด้วยเมทริกซ์ Confusion Matrix, Precision, Recall, และ F1-Score
+4. **ประยุกต์ใช้** คอมพิวเตอร์วิทัศน์ในการแก้ปัญหาทางวิทยาศาสตร์จริงได้อย่างมีจริยธรรม
+
+---
+
+## 🧠 9.1 สถาปัตยกรรมโครงข่ายประสาทเทียมเชิงลึก
+
+โครงข่ายประสาทเทียมคอนโวลูชัน (CNN) ได้รับแรงบันดาลใจจากระบบการมองเห็นของสมองสิ่งมีชีวิต (Visual Cortex) โดยใช้ตัวกรองขนาดเล็ก (Kernels) เลื่อนกวาดผ่านเมทริกซ์ของภาพ เพื่อสกัดคุณลักษณะเด่น (Feature Maps) ตั้งแต่ระดับเส้นขอบ รูปทรงเรขาคณิต ไปจนถึงวัตถุที่สมบูรณ์
+
+<div align="center" style="margin: 24px 0; page-break-inside: avoid;">
+  <img src="../assets/book3_images/fig_cnn_model.jpg" alt="สถาปัตยกรรมโครงข่าย CNN" style="max-width: 100%; max-height: 440px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.08);" />
+  <p style="color: #64748b; font-size: 0.88em; margin-top: 6px;"><em>ภาพที่ 9.1 แผนภาพสถาปัตยกรรมโครงข่ายประสาทเทียมเชิงลึกแบบคอนโวลูชัน (CNN Feature Extraction & Classification)</em></p>
+</div>
+
+### โค้ดตัวอย่างการสร้างโมเดลจำแนกภาพอย่างง่ายด้วย PyTorch
+
+```python
+import torch
+import torch.nn as nn
+
+class ScientificCNN(nn.Module):
+    """โครงข่ายประสาทเทียม CNN สำหรับจำแนกภาพตัวอย่างทางวิทยาศาสตร์"""
+    def __init__(self, num_classes: int = 10):
+        super(ScientificCNN, self).__init__()
+        self.features = nn.Sequential(
+            nn.Conv2d(in_channels=1, out_channels=16, kernel_size=3, padding=1),
+            nn.ReLU(),
+            nn.MaxPool2d(kernel_size=2, stride=2),
+            nn.Conv2d(in_channels=16, out_channels=32, kernel_size=3, padding=1),
+            nn.ReLU(),
+            nn.MaxPool2d(kernel_size=2, stride=2)
+        )
+        self.classifier = nn.Sequential(
+            nn.Linear(32 * 7 * 7, 64),
+            nn.ReLU(),
+            nn.Linear(64, num_classes)
+        )
+
+    def forward(self, x: torch.Tensor) -> torch.Tensor:
+        x = self.features(x)
+        x = x.view(x.size(0), -1)  # Flatten
+        return self.classifier(x)
+
+# ตรวจสอบโครงสร้างโมเดล
+model = ScientificCNN(num_classes=5)
+dummy_input = torch.randn(1, 1, 28, 28)
+output = model(dummy_input)
+print("ขนาดผลลัพธ์จากโมเดล (Batch, Classes):", output.shape)
+```
+
+
+<!-- CHAPTER BREAK -->
+
+# วิทยาการคำนวณ 3 การสร้างแบบจำลองทางฟิสิกส์ ปัญญาประดิษฐ์ และคอมพิวเตอร์วิทัศน์
+## บทที่ 10 ระบบตัวแทนปัญญาประดิษฐ์อัตโนมัติและโครงงานวิจัยนวัตกรรมทางวิทยาศาสตร์
+**ผู้เขียน** ผู้ช่วยศาสตราจารย์ ดร.ชีวะ ทัศนา  
+**สังกัด** สาขาวิชาฟิสิกส์ คณะวิทยาศาสตร์และเทคโนโลยี มหาวิทยาลัยราชภัฏรำไพพรรณี  
+**เอกสารประกอบรายวิชา** 4122106 ปัญญาประดิษฐ์และการสร้างแบบจำลองทางวิทยาศาสตร์
+
+---
+
+## 📋 แผนบริหารการสอนประจำบทที่ 10
+
+### 1. หัวข้อเนื้อหาประจำบท
+1. **วิวัฒนาการสู่ระบบตัวแทนปัญญาประดิษฐ์อัตโนมัติ (Autonomous AI Agents):** Sense-Plan-Act Cycle, ReAct Prompting, Tool Calling
+2. **การบูรณาการคอมพิวเตอร์วิทัศน์ 3 มิติเข้ากับระบบควบคุมหุ่นยนต์:** MediaPipe 21-Joint 3D Hand Tracking และการสั่งการไร้สัมผัส
+3. **การสร้างระบบจำลองปรากฏการณ์ฟิสิกส์แบบเรียลไทม์ (Real-Time Physics Engine):** Numerical Integration (Euler vs Verlet), Particle Collision
+4. **จริยธรรมปัญญาประดิษฐ์และความปลอดภัยทางไซเบอร์ (AI Ethics & Safety):** AI Bias, Privacy, และการปฏิบัติตาม พ.ร.บ. คุ้มครองข้อมูลส่วนบุคคล (PDPA)
+5. **คู่มือโครงงานนวัตกรรม Capstone ประจำเล่มที่ 3:** ระบบควบคุมห้องปฏิบัติการอัจฉริยะแบบไร้สัมผัส (Touchless Smart Lab System)
+
+### 2. วัตถุประสงค์เชิงพฤติกรรม
+เมื่อศึกษาบทเรียนนี้จบแล้ว ผู้เรียนสามารถ
+1. **สังเคราะห์** แนวคิดการเขียนโปรแกรมเชิงคำนวณ โครงสร้างข้อมูล และปัญญาประดิษฐ์เข้าเป็นโครงงานนวัตกรรมที่แก้ปัญหาได้จริง
+2. **พัฒนา** ระบบจำลองทางฟิสิกส์หรือปัญญาประดิษฐ์ที่ทำงานร่วมกับระบบติดตามท่าทางมือ 3 มิติ MediaPipe Hands
+3. **จัดทำ** รายงานการวิจัยฉบับสมบูรณ์ตามมาตรฐานวิชาการสากล พร้อมการนำเสนอผลงานสู่สาธารณะได้อย่างสง่างาม
+
+---
+
+## 🤖 10.1 สถาปัตยกรรมระบบตัวแทนปัญญาประดิษฐ์อัตโนมัติ
+
+<div align="center" style="margin: 24px 0; page-break-inside: avoid;">
+  <img src="../assets/book3_images/fig_mediapipe_ar.jpg" alt="ระบบติดตามมือ 3 มิติ MediaPipe Hands" style="max-width: 100%; max-height: 440px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.08);" />
+  <p style="color: #64748b; font-size: 0.88em; margin-top: 6px;"><em>ภาพที่ 10.1 โครงข่ายกระดูกมือ 21 จุด 3 มิติ (21 3D Hand Landmarks) สำหรับการควบคุมระบบตัวแทนปัญญาประดิษฐ์แบบไร้สัมผัส</em></p>
+</div>
+
+### โค้ดตัวอย่างการจำลองการเคลื่อนที่ของอนุภาคในสนามโน้มถ่วง (Verlet Integration)
+
+```python
+class VerletParticle:
+    """อนุภาคจำลองการเคลื่อนที่ด้วยวิธี Verlet Integration ที่มีความแม่นยำสูง"""
+    def __init__(self, x: float, y: float, vx: float, vy: float, mass: float = 1.0):
+        self.x = x
+        self.y = y
+        self.mass = mass
+        self.old_x = x - vx * 0.016  # dt = 0.016s (60 FPS)
+        self.old_y = y - vy * 0.016
+
+    def update(self, fx: float, fy: float, dt: float = 0.016):
+        ax = fx / self.mass
+        ay = fy / self.mass
+        
+        new_x = 2 * self.x - self.old_x + ax * dt**2
+        new_y = 2 * self.y - self.old_y + ay * dt**2
+        
+        self.old_x, self.old_y = self.x, self.y
+        self.x, self.y = new_x, new_y
+
+    def __repr__(self) -> str:
+        return f"Particle(x={self.x:.2f}, y={self.y:.2f})"
+
+# ทดสอบจำลองการตกอย่างอิสระใต้แรงโน้มถ่วง (g = -9.8 m/s^2)
+p = VerletParticle(x=0.0, y=100.0, vx=10.0, vy=0.0)
+for step in range(5):
+    p.update(fx=0.0, fy=-9.8 * p.mass, dt=0.1)
+    print(f"Step {step + 1}: {p}")
+```
+
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const rawMd = document.getElementById("raw-markdown").textContent;
+    document.getElementById("main-book-content").innerHTML = marked.parse(rawMd);
+    renderMathInElement(document.body, {
+        delimiters: [
+            {left: "$$", right: "$$", display: true},
+            {left: "$", right: "$", display: false}
+        ]
+    });
+    hljs.highlightAll();
+});
+</script>
+
+</body>
+</html>
