@@ -23,110 +23,38 @@
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 
 <style>
+/* ==========================================================================
+   PAGE SETUP & ZERO MARGIN PRINTING FOR FULL-BLEED COVER
+   ========================================================================== */
+
 @page {
-    size: A4 portrait;
-    margin-top: 1.0in;
-    margin-bottom: 1.0in;
-    margin-left: 1.5in;
-    margin-right: 1.0in;
-
-    @bottom-right {
-        content: counter(page);
-        font-family: 'Kanit', sans-serif;
-        font-size: 10pt;
-        font-weight: 600;
-        color: #0284c7;
-    }
+    size: 210mm 297mm;
+    margin: 0 !important;
 }
 
-@page :left {
-    margin-left: 1.0in;
-    margin-right: 1.5in;
-    @top-left {
-        content: "วิทยาการคำนวณ 1 รากฐานแนวคิดเชิงคำนวณและการแก้ปัญหาอย่างเป็นระบบ";
-        font-family: 'Sarabun', sans-serif;
-        font-size: 8.5pt;
-        color: #64748b;
-        border-bottom: 0.5pt solid #cbd5e1;
-        padding-bottom: 4px;
-    }
-    @bottom-right {
-        content: counter(page);
-        font-family: 'Kanit', sans-serif;
-        font-size: 10pt;
-        font-weight: 600;
-        color: #0284c7;
-    }
-}
-
-@page :right {
-    margin-left: 1.5in;
-    margin-right: 1.0in;
-    @top-right {
-        content: "ผศ.ดร.ชีวะ ทัศนา // มหาวิทยาลัยราชภัฏรำไพพรรณี";
-        font-family: 'Sarabun', sans-serif;
-        font-size: 8.5pt;
-        color: #64748b;
-        border-bottom: 0.5pt solid #cbd5e1;
-        padding-bottom: 4px;
-    }
-    @bottom-right {
-        content: counter(page);
-        font-family: 'Kanit', sans-serif;
-        font-size: 10pt;
-        font-weight: 600;
-        color: #0284c7;
-    }
-}
-
-/* หน้าปก: ไม่มี Margin เต็มหน้า 210mm x 297mm 100% */
-@page cover-page {
-    size: A4 portrait;
+html, body {
     margin: 0 !important;
     padding: 0 !important;
-    @top-left { content: none; }
-    @top-right { content: none; }
-    @bottom-right { content: none; }
-}
-
-@page front-matter {
-    margin-top: 1.0in;
-    margin-bottom: 1.0in;
-    margin-left: 1.5in;
-    margin-right: 1.0in;
-    @top-left { content: none; }
-    @top-right { content: none; }
-    @bottom-right {
-        content: counter(page, lower-roman);
-        font-family: 'Kanit', sans-serif;
-        font-size: 9.5pt;
-        color: #64748b;
-    }
-}
-
-body {
+    width: 210mm;
+    background: #ffffff;
     font-family: 'Sarabun', -apple-system, BlinkMacSystemFont, 'Leelawadee UI', sans-serif;
     font-size: 10.5pt;
     line-height: 1.85;
     color: #1e293b;
-    background: #ffffff;
-    margin: 0;
-    padding: 0;
     text-align: justify;
     text-justify: inter-word;
 }
 
-/* 1. ปกหน้าเต็มแผ่น A4 ไร้ขอบ (Full-bleed 100% A4 Cover) */
+/* 1. ปกหน้าเต็มแผ่น A4 100% ไร้ขอบขาว (Full-bleed Cover) */
 .book-cover {
-    page: cover-page;
-    break-after: always;
-    page-break-after: always;
     width: 210mm !important;
     height: 297mm !important;
-    min-width: 210mm !important;
-    min-height: 297mm !important;
+    max-width: 210mm !important;
+    max-height: 297mm !important;
     margin: 0 !important;
     padding: 0 !important;
+    page-break-after: always;
+    break-after: always;
     position: relative;
     overflow: hidden;
     background: #000000;
@@ -142,25 +70,35 @@ body {
     min-height: 297mm !important;
     margin: 0 !important;
     padding: 0 !important;
+    border: none !important;
     border-radius: 0 !important;
     box-shadow: none !important;
     object-fit: fill !important;
     display: block !important;
 }
 
-/* Front Matter */
+/* ==========================================================================
+   INNER CONTENT PADDING (กั้นซ้าย 1.5 นิ้ว, ขอบบน-ล่าง-ขวา 1.0 นิ้ว)
+   ========================================================================== */
+
+.front-matter-section, #main-book-content {
+    padding-left: 1.5in !important;
+    padding-right: 1.0in !important;
+    padding-top: 1.0in !important;
+    padding-bottom: 1.0in !important;
+    box-sizing: border-box;
+    width: 210mm;
+}
+
 .front-matter-section {
-    page: front-matter;
-    break-before: right;
-    page-break-before: right;
-    padding: 10px 0;
+    page-break-before: always;
+    break-before: always;
+    min-height: 297mm;
 }
 
 .half-title-page {
     text-align: center;
-    padding-top: 60px;
-    break-after: always;
-    page-break-after: always;
+    padding-top: 2.0in !important;
 }
 
 .featured-scientist-card {
@@ -174,9 +112,10 @@ body {
 }
 
 .featured-scientist-card img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    margin: 0 !important;
 }
 
 .quartet-gallery {
@@ -196,9 +135,10 @@ body {
 }
 
 .quartet-item img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    margin: 0 !important;
 }
 
 .half-title-page h1 {
@@ -224,9 +164,7 @@ body {
     font-size: 9pt;
     line-height: 1.7;
     color: #475569;
-    padding-top: 140px;
-    break-after: always;
-    page-break-after: always;
+    padding-top: 2.2in !important;
 }
 
 .cip-box {
@@ -327,6 +265,7 @@ code {
 
 pre code { background: transparent; color: inherit; padding: 0; }
 
+/* ภาพประกอบในเนื้อหา */
 #main-book-content img {
     max-width: 100%;
     max-height: 460px;
@@ -342,7 +281,7 @@ p em { display: block; text-align: center; text-indent: 0; font-size: 8.5pt; col
 </head>
 <body>
 
-<!-- 1. ปกหน้าเต็มแผ่น A4 (100% Full-bleed A4 Cover) -->
+<!-- 1. ปกหน้าเต็มแผ่น A4 100% (210mm x 297mm Full-bleed A4 Cover) -->
 <div class="book-cover">
     <img class="bg-cover" src="../assets/all_image_versions/contrast_cover_book1.jpg" alt="ปกหนังสือ วิทยาการคำนวณ 1">
 </div>
@@ -396,7 +335,7 @@ p em { display: block; text-align: center; text-indent: 0; font-size: 8.5pt; col
 </div>
 
 <!-- 4. คำนำ (Preface) -->
-<div class="front-matter-section" style="break-before: right; page-break-before: right;">
+<div class="front-matter-section">
     <h1 style="font-size: 18pt; text-align: center; margin-bottom: 24px;">คำนำ</h1>
     <p>
         ตำรา <strong>"วิทยาการคำนวณ 1: รากฐานแนวคิดเชิงคำนวณและการแก้ปัญหาอย่างเป็นระบบ"</strong> เล่มนี้ ได้รับการประพันธ์และเรียบเรียงขึ้นอย่างประณีต เพื่อใช้เป็นตำราหลักในรายวิชา <strong>4122104 วิทยาการคำนวณและการแก้ปัญหาเชิงคำนวณ / การสอนวิทยาการคำนวณ</strong> โดยมีจุดมุ่งหมายเพื่อยกระดับทักษะการคิดเชิงคำนวณ การออกแบบขั้นตอนวิธี และการประยุกต์ใช้เทคโนโลยีปัญญาประดิษฐ์ของนิสิต นักศึกษา และครูวิทยาศาสตร์ในระดับอุดมศึกษา
@@ -413,7 +352,7 @@ p em { display: block; text-align: center; text-indent: 0; font-size: 8.5pt; col
 </div>
 
 <!-- 5. กิตติกรรมประกาศ (Acknowledgements) -->
-<div class="front-matter-section" style="break-before: right; page-break-before: right;">
+<div class="front-matter-section">
     <h1 style="font-size: 18pt; text-align: center; margin-bottom: 24px;">กิตติกรรมประกาศ</h1>
     <p>
         ความสำเร็จในการจัดทำตำราวิชาการชุดนี้ สำเร็จลุล่วงลงได้ด้วยความอนุเคราะห์และการสนับสนุนอย่างดียิ่งจากหลากหลายภาคส่วน ผู้เขียนขอกราบขอบพระคุณ <strong>มหาวิทยาลัยราชภัฏรำไพพรรณี</strong> และ <strong>คณะวิทยาศาสตร์และเทคโนโลยี</strong> ที่ได้ส่งเสริมและสนับสนุนทุนวิจัยและการพัฒนานวัตกรรมการจัดการเรียนการสอนอันเป็นประโยชน์ต่อนักศึกษาและวงการวิชาการ
@@ -430,7 +369,7 @@ p em { display: block; text-align: center; text-indent: 0; font-size: 8.5pt; col
 </div>
 
 <!-- 6. สารบัญ (Table of Contents) -->
-<div class="front-matter-section" style="break-before: right; page-break-before: right;">
+<div class="front-matter-section">
     <h1 style="font-size: 18pt; text-align: center; margin-bottom: 24px;">สารบัญ</h1>
     <table style="border:none; box-shadow:none;">
         <tr style="border-bottom: 2px solid #0f172a; background:transparent;">
@@ -460,7 +399,7 @@ p em { display: block; text-align: center; text-indent: 0; font-size: 8.5pt; col
 </div>
 
 <!-- 7. สารบัญภาพ (List of Figures) -->
-<div class="front-matter-section" style="break-before: right; page-break-before: right;">
+<div class="front-matter-section">
     <h1 style="font-size: 18pt; text-align: center; margin-bottom: 24px;">สารบัญภาพ</h1>
     <table style="border:none; box-shadow:none;">
         <tr style="border-bottom: 2px solid #0f172a; background:transparent;">
@@ -479,7 +418,7 @@ p em { display: block; text-align: center; text-indent: 0; font-size: 8.5pt; col
 </div>
 
 <!-- 8. สารบัญตาราง (List of Tables) -->
-<div class="front-matter-section" style="break-before: right; page-break-before: right;">
+<div class="front-matter-section">
     <h1 style="font-size: 18pt; text-align: center; margin-bottom: 24px;">สารบัญตาราง</h1>
     <table style="border:none; box-shadow:none;">
         <tr style="border-bottom: 2px solid #0f172a; background:transparent;">
@@ -499,7 +438,7 @@ p em { display: block; text-align: center; text-indent: 0; font-size: 8.5pt; col
 <div id="main-book-content"></div>
 
 <!-- 10. บรรณานุกรม (References) -->
-<div class="front-matter-section" style="break-before: right; page-break-before: right;">
+<div class="front-matter-section">
     <h1 style="font-size: 18pt; text-align: center; margin-bottom: 24px;">บรรณานุกรม</h1>
     <div style="font-size: 9.5pt; line-height: 1.8; color: #334155;">
         <p style="text-indent:-2em; margin-left:2em;">Cormen, T. H., Leiserson, C. E., Rivest, R. L., &amp; Stein, C. (2022). <em>Introduction to Algorithms</em> (4th ed.). MIT Press.</p>
@@ -511,7 +450,7 @@ p em { display: block; text-align: center; text-indent: 0; font-size: 8.5pt; col
     </div>
 </div>
 
-<!-- Raw Markdown Container (Safe from JS string escaping issues) -->
+<!-- Raw Markdown Container -->
 <script type="text/markdown" id="raw-markdown">
 
 
