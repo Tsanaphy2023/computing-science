@@ -23,10 +23,6 @@
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 
 <style>
-/* ==========================================================================
-   PAGE SETUP & MARGINS (A4 Portrait, กั้นซ้าย 1.5 นิ้ว, ขอบบน/ล่าง/นอก 1.0 นิ้ว)
-   ========================================================================== */
-
 @page {
     size: A4 portrait;
     margin-top: 1.0in;
@@ -94,7 +90,6 @@
 }
 
 @page front-matter {
-    size: A4 portrait;
     margin-top: 1.0in;
     margin-bottom: 1.0in;
     margin-left: 1.5in;
@@ -179,13 +174,9 @@ body {
 }
 
 .featured-scientist-card img {
-    width: 100% !important;
-    height: 100% !important;
-    max-height: none !important;
-    object-fit: cover !important;
-    margin: 0 !important;
-    border-radius: 0 !important;
-    box-shadow: none !important;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .quartet-gallery {
@@ -205,13 +196,9 @@ body {
 }
 
 .quartet-item img {
-    width: 100% !important;
-    height: 100% !important;
-    max-height: none !important;
-    object-fit: cover !important;
-    margin: 0 !important;
-    border-radius: 0 !important;
-    box-shadow: none !important;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .half-title-page h1 {
@@ -340,7 +327,6 @@ code {
 
 pre code { background: transparent; color: inherit; padding: 0; }
 
-/* เนื้อหาในเล่มทั่วไป */
 #main-book-content img {
     max-width: 100%;
     max-height: 460px;
@@ -525,7 +511,7 @@ p em { display: block; text-align: center; text-indent: 0; font-size: 8.5pt; col
     </div>
 </div>
 
-<!-- Raw Markdown Container -->
+<!-- Raw Markdown Container (Safe from JS string escaping issues) -->
 <script type="text/markdown" id="raw-markdown">
 
 
