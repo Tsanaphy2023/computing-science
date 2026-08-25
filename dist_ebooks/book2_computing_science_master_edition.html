@@ -51,12 +51,8 @@ html, body {
 
 /* 1. ปกหน้าเต็มแผ่น A4 100% ไร้ขอบขาว (Full-bleed Cover) */
 .book-cover {
-    width: 210mm !important;
-    height: 297mm !important;
-    min-width: 210mm !important;
-    min-height: 297mm !important;
-    max-width: 210mm !important;
-    max-height: 297mm !important;
+    width: 100vw !important;
+    height: 100vh !important;
     margin: 0 !important;
     padding: 0 !important;
     page-break-after: always;
@@ -68,18 +64,18 @@ html, body {
 }
 
 .book-cover img.bg-cover {
-    width: 210mm !important;
-    height: 297mm !important;
-    min-width: 210mm !important;
-    min-height: 297mm !important;
-    max-width: 210mm !important;
-    max-height: 297mm !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    max-width: none !important;
+    max-height: none !important;
+    min-width: 100vw !important;
+    min-height: 100vh !important;
     margin: 0 !important;
     padding: 0 !important;
     border: none !important;
     border-radius: 0 !important;
     box-shadow: none !important;
-    object-fit: fill !important;
+    object-fit: cover !important;
     display: block !important;
 }
 
