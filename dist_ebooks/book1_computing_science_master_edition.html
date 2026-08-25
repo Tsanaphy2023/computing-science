@@ -2,7 +2,7 @@
 <html lang="th">
 <head>
 <meta charset="UTF-8">
-<title>วิทยาการคำนวณ 1 รากฐานแนวคิดเชิงคำนวณและการแก้ปัญหาอย่างเป็นระบบ - ผศ.ดร.ชีวะ ทัศนา</title>
+<title>วิทยาการคำนวณ ๑ รากฐานแนวคิดเชิงคำนวณและการแก้ปัญหาอย่างเป็นระบบ - ผศ.ดร.ชีวะ ทัศนา</title>
 
 <!-- Google Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -23,28 +23,22 @@
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 
 <style>
-/* ==========================================================================
-   PAGE SETUP & ZERO MARGIN PRINTING FOR FULL-BLEED COVER
-   ========================================================================== */
-
 @page {
     size: A4 portrait;
     margin: 0 !important;
-}
-
-* {
-    box-sizing: border-box !important;
 }
 
 html, body {
     margin: 0 !important;
     padding: 0 !important;
     width: 100% !important;
-    background: #ffffff;
-    font-family: 'Sarabun', -apple-system, BlinkMacSystemFont, 'Leelawadee UI', sans-serif;
-    font-size: 11.5pt;
-    line-height: 1.9;
+    background-color: #ffffff;
+    font-family: 'Sarabun', 'TH Sarabun New', sans-serif;
+    font-size: 10.5pt;
+    line-height: 1.65;
     color: #1e293b;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
     text-align: justify;
     text-justify: inter-word;
 }
@@ -79,10 +73,7 @@ html, body {
     display: block !important;
 }
 
-/* ==========================================================================
-   INNER CONTENT PADDING (กั้นซ้าย 1.5 นิ้ว, ขอบบน-ล่าง-ขวา 1.0 นิ้ว)
-   ========================================================================== */
-
+/* INNER CONTENT PADDING (กั้นซ้าย 1.5 นิ้ว, ขอบบน-ล่าง-ขวา 1.0 นิ้ว) */
 .front-matter-section, #main-book-content {
     padding-left: 1.5in !important;
     padding-right: 1.0in !important;
@@ -100,81 +91,73 @@ html, body {
 
 .half-title-page {
     text-align: center;
-    padding-top: 1.2in !important;
+    padding-top: 2.0in !important;
 }
 
 .featured-scientist-card {
-    margin: 15px auto 25px auto;
-    width: 170px;
-    height: 170px;
+    margin: 20px auto;
+    width: 150px;
+    height: 150px;
     border-radius: 50%;
     overflow: hidden;
     border: 4px solid #0284c7;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.14);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.12);
 }
 
 .featured-scientist-card img {
     width: 100% !important;
     height: 100% !important;
     object-fit: cover !important;
-    margin: 0 !important;
+}
+
+.half-title-page h1 {
+    font-family: 'Kanit', sans-serif;
+    font-size: 24pt;
+    font-weight: 700;
+    color: #0f172a;
+    margin-top: 20px;
+    margin-bottom: 4px;
+}
+
+.half-title-page h2 {
+    font-family: 'Kanit', sans-serif;
+    font-size: 13.5pt;
+    font-weight: 500;
+    color: #0284c7;
+    margin-top: 0;
 }
 
 .quartet-gallery {
     display: flex;
     justify-content: center;
-    gap: 18px;
-    margin: 35px 0 15px 0;
-}
-
-.quartet-item {
-    width: 68px;
-    height: 68px;
-    border-radius: 50%;
-    overflow: hidden;
-    border: 2.5px solid #cbd5e1;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    gap: 16px;
+    margin: 30px auto;
+    max-width: 480px;
 }
 
 .quartet-item img {
-    width: 100% !important;
-    height: 100% !important;
-    object-fit: cover !important;
-    margin: 0 !important;
-}
-
-.half-title-page h1 {
-    font-family: 'Kanit', sans-serif;
-    font-size: 30pt;
-    font-weight: 700;
-    color: #0284c7;
-    margin-bottom: 8px;
-}
-
-.half-title-page h2 {
-    font-family: 'Kanit', sans-serif;
-    font-size: 15pt;
-    font-weight: 500;
-    color: #475569;
-    border: none;
-    background: none;
-    padding: 0;
-    margin-bottom: 18px;
-}
-
-.copyright-page {
-    font-size: 9pt;
-    line-height: 1.7;
-    color: #475569;
-    padding-top: 2.2in !important;
+    width: 68px;
+    height: 68px;
+    border-radius: 50%;
+    border: 2px solid #0284c7;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 
 .cip-box {
-    border: 1px solid #94a3b8;
-    padding: 16px 20px;
-    margin: 20px 0;
+    border: 1.5px solid #0f172a;
+    padding: 20px 24px;
+    margin: 40px auto;
+    max-width: 520px;
+    font-size: 9pt;
+    line-height: 1.7;
     background: #f8fafc;
     border-radius: 4px;
+}
+
+.chapter-page-break {
+    page-break-before: always;
+    break-before: page;
+    margin-top: 40px;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -247,45 +230,36 @@ pre {
     font-size: 8.5pt;
     background: #0f172a;
     color: #f8fafc;
-    padding: 16px 20px;
-    border-radius: 10px;
-    border: 1px solid #334155;
-    margin: 20px 0;
-    line-height: 1.55;
+    padding: 16px 18px;
+    border-radius: 8px;
+    overflow-x: auto;
     page-break-inside: avoid;
+    line-height: 1.5;
+    margin: 18px 0;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.06);
 }
 
 code {
     font-family: 'Fira Code', monospace;
-    background: #e0f2fe;
-    color: #0284c7;
-    padding: 1px 5px;
+    font-size: 8.8pt;
+    background: #f1f5f9;
+    color: #0369a1;
+    padding: 2px 6px;
     border-radius: 4px;
-    font-size: 9pt;
-    font-weight: 500;
 }
 
-pre code { background: transparent; color: inherit; padding: 0; }
-
-/* ภาพประกอบในเนื้อหา */
-#main-book-content img {
-    max-width: 100%;
-    max-height: 460px;
-    object-fit: contain;
-    border-radius: 12px;
-    display: block;
-    margin: 16px auto;
-    box-shadow: 0 6px 25px rgba(0,0,0,0.08);
+pre code {
+    background: transparent;
+    color: inherit;
+    padding: 0;
 }
-
-p em { display: block; text-align: center; text-indent: 0; font-size: 8.5pt; color: #64748b; margin-top: 6px; }
 </style>
 </head>
 <body>
 
-<!-- 1. ปกหน้าเต็มแผ่น A4 100% (210mm x 297mm Full-bleed A4 Cover) -->
+<!-- 1. ปกหน้าเต็มแผ่น A4 100% (Full-bleed A4 Cover) -->
 <div class="book-cover">
-    <img class="bg-cover" src="../assets/all_image_versions/contrast_cover_book1.jpg" alt="ปกหนังสือ วิทยาการคำนวณ 1">
+    <img class="bg-cover" src="../assets/all_image_versions/contrast_cover_book1.jpg" alt="ปกหนังสือ วิทยาการคำนวณ ๑">
 </div>
 
 <!-- 2. ใบรองปก (Half Title Page) -->
@@ -293,7 +267,7 @@ p em { display: block; text-align: center; text-indent: 0; font-size: 8.5pt; col
     <div class="featured-scientist-card">
         <img src="../assets/images/avatar_scientist_einstein.jpg" alt="Albert Einstein (ปรัชญาและมโนทัศน์ตรรกะเชิงคำนวณ)">
     </div>
-    <h1>วิทยาการคำนวณ 1</h1>
+    <h1>วิทยาการคำนวณ ๑</h1>
     <h2>รากฐานแนวคิดเชิงคำนวณและการแก้ปัญหาอย่างเป็นระบบ</h2>
     <p style="font-family:'Kanit',sans-serif; color:#94a3b8; font-size:10.5pt; margin-top:2px; text-indent:0;"><em>Foundations of Computational Thinking & Algorithmic Problem Solving</em></p>
     
@@ -320,7 +294,7 @@ p em { display: block; text-align: center; text-indent: 0; font-size: 8.5pt; col
     <div class="cip-box">
         <strong style="font-family:'Kanit', sans-serif; font-size:10pt; color:#0f172a;">ข้อมูลทางบรรณานุกรมของสำนักหอสมุดแห่งชาติ (National Library of Thailand CIP)</strong><br><br>
         ชีวะ ทัศนา.<br>
-        <strong>วิทยาการคำนวณ 1 รากฐานแนวคิดเชิงคำนวณและการแก้ปัญหาอย่างเป็นระบบ.</strong> -- จันทบุรี : สำนักพิมพ์มหาวิทยาลัยราชภัฏรำไพพรรณี, 2569.<br>
+        <strong>วิทยาการคำนวณ ๑ รากฐานแนวคิดเชิงคำนวณและการแก้ปัญหาอย่างเป็นระบบ.</strong> -- จันทบุรี : สำนักพิมพ์มหาวิทยาลัยราชภัฏรำไพพรรณี, 2569.<br>
         387 หน้า.<br><br>
         1. วิทยาการคำนวณ. 2. ขั้นตอนวิธีและการประมวลผลข้อมูล. 3. ภาษาไพทอน (คอมพิวเตอร์). I. ชื่อเรื่อง.<br>
         <strong>ISBN 978-616-XXXX-01-1 (ฉบับพิมพ์สมบูรณ์)</strong><br>
@@ -340,106 +314,49 @@ p em { display: block; text-align: center; text-indent: 0; font-size: 8.5pt; col
 <div class="front-matter-section">
     <h1 style="font-size: 18pt; text-align: center; margin-bottom: 24px;">คำนำ</h1>
     <p>
-        ตำรา <strong>"วิทยาการคำนวณ 1: รากฐานแนวคิดเชิงคำนวณและการแก้ปัญหาอย่างเป็นระบบ"</strong> เล่มนี้ ได้รับการประพันธ์และเรียบเรียงขึ้นอย่างประณีต เพื่อใช้เป็นตำราหลักในรายวิชา <strong>4122104 วิทยาการคำนวณและการแก้ปัญหาเชิงคำนวณ / การสอนวิทยาการคำนวณ</strong> โดยมีจุดมุ่งหมายเพื่อยกระดับทักษะการคิดเชิงคำนวณ การออกแบบขั้นตอนวิธี และการประยุกต์ใช้เทคโนโลยีปัญญาประดิษฐ์ของนิสิต นักศึกษา และครูวิทยาศาสตร์ในระดับอุดมศึกษา
+        ตำรา <strong>"วิทยาการคำนวณ ๑: รากฐานแนวคิดเชิงคำนวณและการแก้ปัญหาอย่างเป็นระบบ"</strong> เล่มนี้ ได้รับการประพันธ์และเรียบเรียงขึ้นอย่างประณีต เพื่อใช้เป็นตำราหลักในรายวิชา <strong>4122104 วิทยาการคำนวณและการแก้ปัญหาเชิงคำนวณ / การสอนวิทยาการคำนวณ</strong> โดยมีจุดมุ่งหมายเพื่อยกระดับทักษะการคิดเชิงคำนวณ การออกแบบขั้นตอนวิธี และการประยุกต์ใช้เทคโนโลยีปัญญาประดิษฐ์ของนิสิต นักศึกษา และครูวิทยาศาสตร์ในระดับอุดมศึกษา
     </p>
     <p>
         โครงสร้างของเนื้อหาในเล่ม ได้รับการร้อยเรียงตามกรอบทฤษฎีการศึกษา Bloom's Taxonomy และ Active Learning Cycle โดยผสานทฤษฎีคณิตศาสตร์เข้มข้นเข้ากับตัวอย่างโค้ดภาษา Python 3.11 และสื่อการทดลองเสมือนจริง <strong>3D AR MediaPipe Hands</strong> แบบไร้สัมผัส เพื่อให้ผู้เรียนเกิดมโนทัศน์ที่ลึกซึ้งและสามารถนำไปสร้างสรรค์นวัตกรรมได้จริง
     </p>
     <div style="margin-top: 40px; text-align: right; font-size: 10.5pt;">
-        <strong>ผู้ช่วยศาสตราจารย์ ดร.ชีวะ ทัศนา</strong><br>
+        <p style="text-indent:0;"><strong>ผู้ช่วยศาสตราจารย์ ดร.ชีวะ ทัศนา</strong><br>
         สาขาวิชาฟิสิกส์ คณะวิทยาศาสตร์และเทคโนโลยี<br>
-        มหาวิทยาลัยราชภัฏรำไพพรรณี<br>
-        สิงหาคม 2569
+        มหาวิทยาลัยราชภัฏรำไพพรรณี</p>
     </div>
 </div>
 
-<!-- 5. กิตติกรรมประกาศ (Acknowledgements) -->
-<div class="front-matter-section">
-    <h1 style="font-size: 18pt; text-align: center; margin-bottom: 24px;">กิตติกรรมประกาศ</h1>
-    <p>
-        ความสำเร็จในการจัดทำตำราวิชาการชุดนี้ สำเร็จลุล่วงลงได้ด้วยความอนุเคราะห์และการสนับสนุนอย่างดียิ่งจากหลากหลายภาคส่วน ผู้เขียนขอกราบขอบพระคุณ <strong>มหาวิทยาลัยราชภัฏรำไพพรรณี</strong> และ <strong>คณะวิทยาศาสตร์และเทคโนโลยี</strong> ที่ได้ส่งเสริมและสนับสนุนทุนวิจัยและการพัฒนานวัตกรรมการจัดการเรียนการสอนอันเป็นประโยชน์ต่อนักศึกษาและวงการวิชาการ
-    </p>
-    <p>
-        ขอขอบพระคุณ <strong>รองศาสตราจารย์ ดร.จิรพัฒน์ จันทมาลี</strong> และคณาจารย์ผู้ทรงคุณวุฒิทุกท่าน ที่ได้กรุณาให้คำปรึกษา แลกเปลี่ยนข้อคิดเห็นเชิงวิชาการ และร่วมพัฒนากรอบมาตรฐานการสอนวิทยาการคำนวณร่วมกันมาอย่างต่อเนื่อง
-    </p>
-    <p>
-        ขอขอบคุณนักศึกษาสาขาวิชาฟิสิกส์และวิทยาการคอมพิวเตอร์ทุกคน ที่ได้ร่วมทดลองใช้งานระบบห้องปฏิบัติการเสมือนจริง 3D AR และให้ข้อเสนอแนะอันมีค่ายิ่งต่อการปรับปรุงหนังสือเล่มนี้ให้มีความสมบูรณ์สูงสุด
-    </p>
-    <div style="margin-top: 40px; text-align: right; font-size: 10.5pt;">
-        <strong>ผู้ช่วยศาสตราจารย์ ดร.ชีวะ ทัศนา</strong>
-    </div>
-</div>
-
-<!-- 6. สารบัญ (Table of Contents) -->
+<!-- 5. สารบัญ (Table of Contents) -->
 <div class="front-matter-section">
     <h1 style="font-size: 18pt; text-align: center; margin-bottom: 24px;">สารบัญ</h1>
     <table style="border:none; box-shadow:none;">
         <tr style="border-bottom: 2px solid #0f172a; background:transparent;">
-            <th style="background:transparent; border:none; color:#0f172a;">หัวข้อและเนื้อหา</th>
+            <th style="background:transparent; border:none; color:#0f172a;">บทเรียน / หัวข้อ</th>
             <th style="background:transparent; border:none; text-align:right; color:#0f172a;">หน้า</th>
         </tr>
-        <tr><td><strong>คำนำ</strong></td><td align="right">iv</td></tr>
-        <tr><td><strong>กิตติกรรมประกาศ</strong></td><td align="right">v</td></tr>
-        <tr><td><strong>สารบัญภาพ</strong></td><td align="right">viii</td></tr>
-        <tr><td><strong>สารบัญตาราง</strong></td><td align="right">x</td></tr>
-        <tr><td><strong>แผนบริหารการสอนประจำรายวิชา 4122104</strong></td><td align="right">xii</td></tr>
-        <tr><td><strong>บทที่ 1 รากฐานแนวคิดและการสร้างแบบจำลองทางตรรกะ</strong></td><td align="right">1</td></tr>
-        <tr><td><strong>บทที่ 2 การออกแบบขั้นตอนวิธี รหัสลำลอง และผังงานมาตรฐานสากล</strong></td><td align="right">25</td></tr>
-        <tr><td><strong>บทที่ 3 การพัฒนาโปรแกรมภาษา Python และการจัดการข้อมูล</strong></td><td align="right">55</td></tr>
-        <tr><td><strong>บทที่ 4 โครงสร้างการควบคุม ทางเลือก การวนซ้ำ และระบบอัตโนมัติ</strong></td><td align="right">85</td></tr>
-        <tr><td><strong>บทที่ 5 โครงสร้างข้อมูลเชิงเส้นและอัลกอริทึมการค้นหา</strong></td><td align="right">115</td></tr>
-        <tr><td><strong>บทที่ 6 อัลกอริทึมการจัดเรียงข้อมูลและการวิเคราะห์ Big-O</strong></td><td align="right">145</td></tr>
-        <tr><td><strong>บทที่ 7 การโปรแกรมเชิงโมดูลและฟังก์ชันเรียกซ้ำ</strong></td><td align="right">175</td></tr>
-        <tr><td><strong>บทที่ 8 การสร้างแบบจำลองทางวิทยาศาสตร์และฟิสิกส์เชิงคำนวณ</strong></td><td align="right">205</td></tr>
-        <tr><td><strong>บทที่ 9 สถาปัตยกรรมโครงข่ายประสาทเทียมและปัญญาประดิษฐ์</strong></td><td align="right">235</td></tr>
-        <tr><td><strong>บทที่ 10 โครงงานบูรณาการและการสังเคราะห์นวัตกรรม Capstone</strong></td><td align="right">265</td></tr>
-        <tr><td><strong>คู่มือห้องปฏิบัติการเสมือนจริง 3D AR MediaPipe 10 ปฏิบัติการ</strong></td><td align="right">295</td></tr>
-        <tr><td><strong>ภาคผนวก ก ถึง ฉ (พร้อมคลังข้อสอบ 50 ข้อ)</strong></td><td align="right">335</td></tr>
-        <tr><td><strong>ดัชนีคำสำคัญ (Index)</strong></td><td align="right">375</td></tr>
-        <tr><td><strong>บรรณานุกรม (References)</strong></td><td align="right">381</td></tr>
+        <tr><td>คำนำ (Preface)</td><td align="right">ง</td></tr>
+        <tr><td>สารบัญภาพ (List of Figures)</td><td align="right">ฉ</td></tr>
+        <tr><td>สารบัญตาราง (List of Tables)</td><td align="right">ซ</td></tr>
+        <tr><td><strong>บทที่ 1 การวิเคราะห์และรากฐานเชิงทฤษฎี</strong></td><td align="right">1</td></tr>
+        <tr><td><strong>บทที่ 2 การออกแบบขั้นตอนวิธีและโครงสร้างโมดูล</strong></td><td align="right">32</td></tr>
+        <tr><td><strong>บทที่ 3 การจัดการหน่วยความจำและแถวลำดับ</strong></td><td align="right">65</td></tr>
+        <tr><td><strong>บทที่ 4 โครงสร้างข้อมูลขั้นสูงและตารางแฮช</strong></td><td align="right">98</td></tr>
+        <tr><td><strong>บทที่ 5 การค้นหาและโครงสร้างเชิงเส้น</strong></td><td align="right">130</td></tr>
+        <tr><td><strong>บทที่ 6 ขั้นตอนวิธีจัดเรียงข้อมูลและการวิเคราะห์ Big-O</strong></td><td align="right">162</td></tr>
+        <tr><td><strong>บทที่ 7 การจัดการไฟล์และสตรีมข้อมูลขนาดใหญ่</strong></td><td align="right">195</td></tr>
+        <tr><td><strong>บทที่ 8 การสร้างแบบจำลองเชิงฟิสิกส์และการคำนวณ</strong></td><td align="right">228</td></tr>
+        <tr><td><strong>บทที่ 9 ปัญญาประดิษฐ์และคอมพิวเตอร์วิทัศน์</strong></td><td align="right">260</td></tr>
+        <tr><td><strong>บทที่ 10 โครงงานบูรณาการและการสังเคราะห์นวัตกรรม Capstone</strong></td><td align="right">292</td></tr>
+        <tr><td><strong>คู่มือห้องปฏิบัติการเสมือนจริง 3D AR MediaPipe 10 ปฏิบัติการ</strong></td><td align="right">325</td></tr>
+        <tr><td><strong>ภาคผนวก (Appendix) และคลังข้อสอบประเมินผล</strong></td><td align="right">355</td></tr>
+        <tr><td><strong>บรรณานุกรม (References)</strong></td><td align="right">370</td></tr>
     </table>
 </div>
 
-<!-- 7. สารบัญภาพ (List of Figures) -->
-<div class="front-matter-section">
-    <h1 style="font-size: 18pt; text-align: center; margin-bottom: 24px;">สารบัญภาพ</h1>
-    <table style="border:none; box-shadow:none;">
-        <tr style="border-bottom: 2px solid #0f172a; background:transparent;">
-            <th style="background:transparent; border:none; color:#0f172a;">ภาพที่</th>
-            <th style="background:transparent; border:none; color:#0f172a;">ชื่อภาพ</th>
-            <th style="background:transparent; border:none; text-align:right; color:#0f172a;">หน้า</th>
-        </tr>
-        <tr><td>ภาพที่ 1.1</td><td>เสาหลักทั้ง 4 ของแนวคิดเชิงคำนวณ (Decomposition, Pattern, Abstraction, Algorithm)</td><td align="right">6</td></tr>
-        <tr><td>ภาพที่ 2.1</td><td>แผนผังโครงสร้าง 5 คุณสมบัติของขั้นตอนวิธีที่ดี</td><td align="right">28</td></tr>
-        <tr><td>ภาพที่ 2.2</td><td>สัญลักษณ์ผังงานมาตรฐานสากล ISO 5807 และ ANSI Standard</td><td align="right">32</td></tr>
-        <tr><td>ภาพที่ 2.3</td><td>แผนผังเปรียบเทียบ 3 โครงสร้างควบคุมหลัก (Sequential, Selection, Iteration)</td><td align="right">36</td></tr>
-        <tr><td>ภาพที่ 3.1</td><td>โครงสร้างหน่วยความจำ RAM และลำดับการประมวลผลทางคณิตศาสตร์ PEMDAS</td><td align="right">58</td></tr>
-        <tr><td>ภาพที่ 9.1</td><td>สถาปัตยกรรมโครงข่ายประสาทเทียมเชิงลึกแบบคอนโวลูชัน (CNN Model)</td><td align="right">238</td></tr>
-        <tr><td>ภาพที่ 10.1</td><td>โครงข่ายกระดูกมือ 21 จุด 3 มิติ (MediaPipe 3D Hand Tracking System)</td><td align="right">268</td></tr>
-    </table>
-</div>
-
-<!-- 8. สารบัญตาราง (List of Tables) -->
-<div class="front-matter-section">
-    <h1 style="font-size: 18pt; text-align: center; margin-bottom: 24px;">สารบัญตาราง</h1>
-    <table style="border:none; box-shadow:none;">
-        <tr style="border-bottom: 2px solid #0f172a; background:transparent;">
-            <th style="background:transparent; border:none; color:#0f172a;">ตารางที่</th>
-            <th style="background:transparent; border:none; color:#0f172a;">ชื่อตาราง</th>
-            <th style="background:transparent; border:none; text-align:right; color:#0f172a;">หน้า</th>
-        </tr>
-        <tr><td>ตารางที่ 1.1</td><td>ตารางคำศัพท์และนิยามเชิงตรรกะประจำบทเรียนที่ 1</td><td align="right">12</td></tr>
-        <tr><td>ตารางที่ 2.1</td><td>คำสำคัญมาตรฐานสากลในการเขียนรหัสลำลอง (Pseudocode Standard)</td><td align="right">30</td></tr>
-        <tr><td>ตารางที่ 2.2</td><td>สัญลักษณ์ผังงานและหน้าที่ตามมาตรฐาน ISO 5807</td><td align="right">34</td></tr>
-        <tr><td>ตารางที่ 5.1</td><td>การเปรียบเทียบความซับซ้อนเชิงเวลาและเชิงพื้นที่ Big-O ของอัลกอริทึม</td><td align="right">120</td></tr>
-        <tr><td>ตารางที่ ข.1</td><td>บัตรสรุปความซับซ้อนของโครงสร้างข้อมูลมาตรฐาน Python</td><td align="right">340</td></tr>
-    </table>
-</div>
-
-<!-- 9. เนื้อหาหลักทั้ง 10 บทเรียน -->
+<!-- 6. เนื้อหาหลักทั้ง 10 บทเรียน -->
 <div id="main-book-content"></div>
 
-<!-- 10. บรรณานุกรม (References) -->
+<!-- 7. บรรณานุกรม (References) -->
 <div class="front-matter-section">
     <h1 style="font-size: 18pt; text-align: center; margin-bottom: 24px;">บรรณานุกรม</h1>
     <div style="font-size: 9.5pt; line-height: 1.8; color: #334155;">
@@ -454,10 +371,6 @@ p em { display: block; text-align: center; text-indent: 0; font-size: 8.5pt; col
 
 <!-- Raw Markdown Container -->
 <script type="text/markdown" id="raw-markdown">
-
-
-<!-- CHAPTER BREAK -->
-
 # วิทยาการคำนวณ 1 รากฐานแนวคิดเชิงคำนวณและการแก้ปัญหาอย่างเป็นระบบ
 ## บทที่ 1 การใช้เหตุผลเชิงตรรกะและกระบวนการคิดเชิงคำนวณ
 **ผู้เขียน** ผู้ช่วยศาสตราจารย์ ดร.ชีวะ ทัศนา  
@@ -833,7 +746,7 @@ graph TD
 5. Thassana, C. (2026). *Computational Thinking and Applied Artificial Intelligence for Science Education*. Rambhai Barni Rajabhat University Press.
 
 
-<!-- CHAPTER BREAK -->
+<div class="chapter-page-break"></div>
 
 # วิทยาการคำนวณ 1 รากฐานแนวคิดเชิงคำนวณและการแก้ปัญหาอย่างเป็นระบบ
 ## บทที่ 2 การออกแบบขั้นตอนวิธี รหัสลำลอง และผังงานมาตรฐานสากล
@@ -1172,7 +1085,7 @@ if __name__ == "__main__":
 5. Thassana, C. (2026). *Computational Thinking and Applied Artificial Intelligence for Science Education*. Rambhai Barni Rajabhat University Press.
 
 
-<!-- CHAPTER BREAK -->
+<div class="chapter-page-break"></div>
 
 # วิทยาการคำนวณ 1 รากฐานแนวคิดเชิงคำนวณและการแก้ปัญหาอย่างเป็นระบบ
 ## บทที่ 2 เสาหลักทั้ง 4 ของแนวคิดเชิงคำนวณ
@@ -1402,7 +1315,7 @@ if __name__ == "__main__":
 4. จงออกแบบขั้นตอนวิธี สำหรับการจัดคิวผู้ป่วยในห้องฉุกเฉินโรงพยาบาล (Triage Algorithm) โดยใช้เสาหลักทั้ง 4 เพื่อจัดลำดับความเร่งด่วน 3 ระดับ (วิกฤตสีแดง, เร่งด่วนสีเหลือง, ไม่รุนแรงสีเขียว)
 
 
-<!-- CHAPTER BREAK -->
+<div class="chapter-page-break"></div>
 
 # วิทยาการคำนวณ 1 รากฐานแนวคิดเชิงคำนวณและการแก้ปัญหาอย่างเป็นระบบ
 ## บทที่ 3 การเขียนรหัสลำลองและผังงานมาตรฐาน
@@ -1656,7 +1569,7 @@ if __name__ == "__main__":
 4. จงสร้างผังงานและ Trace Table สำหรับขั้นตอนวิธีตรวจสอบว่าตัวเลขจำนวนเต็มบวก $N$ ที่รับเข้ามาเป็น **"จำนวนเฉพาะ (Prime Number)"** หรือไม่
 
 
-<!-- CHAPTER BREAK -->
+<div class="chapter-page-break"></div>
 
 # วิทยาการคำนวณ 1 รากฐานแนวคิดเชิงคำนวณและการแก้ปัญหาอย่างเป็นระบบ
 ## บทที่ 3 พื้นฐานการเขียนโปรแกรมภาษา Python และการจัดการข้อมูลทางวิทยาศาสตร์
@@ -2001,7 +1914,7 @@ graph TD
 5. Thassana, C. (2026). *Computational Thinking and Applied Artificial Intelligence for Science Education*. Rambhai Barni Rajabhat University Press.
 
 
-<!-- CHAPTER BREAK -->
+<div class="chapter-page-break"></div>
 
 # วิทยาการคำนวณ 1 รากฐานแนวคิดเชิงคำนวณและการแก้ปัญหาอย่างเป็นระบบ
 ## บทที่ 4 โครงสร้างควบคุม เงื่อนไข และการทำซ้ำในงานวิทยาศาสตร์และระบบอัตโนมัติ
@@ -2333,7 +2246,7 @@ graph TD
 4. Thassana, C. (2026). *Computational Thinking and Applied Artificial Intelligence for Science Education*. Rambhai Barni Rajabhat University Press.
 
 
-<!-- CHAPTER BREAK -->
+<div class="chapter-page-break"></div>
 
 # วิทยาการคำนวณ 1 รากฐานแนวคิดเชิงคำนวณและการแก้ปัญหาอย่างเป็นระบบ
 ## บทที่ 4 กิจกรรม Unplugged Coding ในชีวิตประจำวัน
@@ -2520,7 +2433,7 @@ if __name__ == "__main__":
 4. จงออกแบบกิจกรรม Unplugged สำหรับสอนเรื่อง **"การค้นหาข้อมูลแบบทวิภาค (Binary Search)"** โดยใช้อุปกรณ์ในชีวิตประจำวัน เช่น กล่องของขวัญ หรือพจนานุกรมเล่มหนา พร้อมเขียนใบบันทึกผลและเกณฑ์การประเมิน
 
 
-<!-- CHAPTER BREAK -->
+<div class="chapter-page-break"></div>
 
 # วิทยาการคำนวณ 1 รากฐานการคิดเชิงคำนวณและการแก้ปัญหาเชิงตรรกะ
 ## บทที่ 5 โครงสร้างข้อมูลพื้นฐานและขั้นตอนวิธีการค้นหา
@@ -2690,7 +2603,7 @@ if __name__ == "__main__":
 * Knuth, D. E. (1997). *The Art of Computer Programming: Fundamental Algorithms* (Vol. 1). Addison-Wesley.
 
 
-<!-- CHAPTER BREAK -->
+<div class="chapter-page-break"></div>
 
 # วิทยาการคำนวณ 1 รากฐานแนวคิดเชิงคำนวณและการแก้ปัญหาอย่างเป็นระบบ
 ## บทที่ 5 ตัวแปร ชนิดข้อมูล และการรับส่งข้อมูลเบื้องต้น
@@ -2900,7 +2813,7 @@ if __name__ == "__main__":
    โดยให้ผู้ใช้กรอกส่วนสูงในหน่วย **เซนติเมตร ** และน้ำหนักในหน่วย **กิโลกรัม ** พร้อมตรวจสอบว่าหากผู้ใช้กรอกค่าส่วนสูงหรือน้ำหนักติดลบ ให้แจ้งเตือนข้อผิดพลาดทันที
 
 
-<!-- CHAPTER BREAK -->
+<div class="chapter-page-break"></div>
 
 # วิทยาการคำนวณ 1 รากฐานแนวคิดเชิงคำนวณและการแก้ปัญหาอย่างเป็นระบบ
 ## บทที่ 6 โครงสร้างทางเลือกและการตัดสินใจแบบมีเงื่อนไข
@@ -3113,7 +3026,7 @@ else:
    * **แต่ถ้า** ปีนั้นหารด้วย 400 ลงตัว จะกลับมาเป็นปีอธิกสุรทินอีกครั้ง
 
 
-<!-- CHAPTER BREAK -->
+<div class="chapter-page-break"></div>
 
 # วิทยาการคำนวณ 1 รากฐานการคิดเชิงคำนวณและการแก้ปัญหาเชิงตรรกะ
 ## บทที่ 6 ขั้นตอนวิธีการจัดเรียงข้อมูลและการวิเคราะห์ความซับซ้อน
@@ -3272,7 +3185,7 @@ if __name__ == "__main__":
 * Sedgewick, R. (1978). Implementing Quicksort programs. *Communications of the ACM*, 21(10), 847-857.
 
 
-<!-- CHAPTER BREAK -->
+<div class="chapter-page-break"></div>
 
 # วิทยาการคำนวณ 1 รากฐานแนวคิดเชิงคำนวณและการแก้ปัญหาอย่างเป็นระบบ
 ## บทที่ 7 โครงสร้างการทำงานซ้ำและการวนลูป
@@ -3469,7 +3382,7 @@ print(total)
 4. จงเขียนโปรแกรมจำลอง **เกมทายตัวเลขปริศนา ** โดยให้คอมพิวเตอร์สุ่มตัวเลขจำนวนเต็ม $1-100$ แล้วให้ผู้ใช้ทายตัวเลขผ่าน `while loop` พร้อมบอกใบ้ว่า *มากเกินไป* หรือ *น้อยเกินไป* และสรุปจำนวนครั้งที่ทายเมื่อทายถูกต้อง
 
 
-<!-- CHAPTER BREAK -->
+<div class="chapter-page-break"></div>
 
 # วิทยาการคำนวณ 1 รากฐานการคิดเชิงคำนวณและการแก้ปัญหาเชิงตรรกะ
 ## บทที่ 7 การเขียนโปรแกรมเชิงโมดูลและฟังก์ชันเรียกซ้ำ
@@ -3612,7 +3525,7 @@ if __name__ == "__main__":
 * Roberts, E. (2006). *Thinking Recursively with Java*. John Wiley & Sons.
 
 
-<!-- CHAPTER BREAK -->
+<div class="chapter-page-break"></div>
 
 # วิทยาการคำนวณ 1 รากฐานการคิดเชิงคำนวณและการแก้ปัญหาเชิงตรรกะ
 ## บทที่ 8 วิทยาศาสตร์เชิงคำนวณและแบบจำลองฟิสิกส์
@@ -3799,7 +3712,7 @@ if __name__ == "__main__":
 * Press, W. H. et al. (2007). *Numerical Recipes: The Art of Scientific Computing* (3rd ed.). Cambridge University Press.
 
 
-<!-- CHAPTER BREAK -->
+<div class="chapter-page-break"></div>
 
 # วิทยาการคำนวณ 1 รากฐานแนวคิดเชิงคำนวณและการแก้ปัญหาอย่างเป็นระบบ
 ## บทที่ 8 การประยุกต์แก้ปัญหาทางคณิตศาสตร์และวิทยาศาสตร์เบื้องต้น
@@ -3980,7 +3893,7 @@ if __name__ == "__main__":
 4. จงเขียนโปรแกรมจำลองการคำนวณการเติบโตของประชากรแบคทีเรียตามฟังก์ชันเอกซ์โพเนนเชียล $P(t) = P_0 \cdot 2^{\frac{t}{g}}$ โดยรับค่าประชากรตั้งต้น ($P_0$), ระยะเวลาแบ่งตัวทวีคูณ ($g$), และจำลองจำนวนประชากรแบคทีเรียในทุกๆ 1 ชั่วโมงตลอด 24 ชั่วโมง
 
 
-<!-- CHAPTER BREAK -->
+<div class="chapter-page-break"></div>
 
 # วิทยาการคำนวณ 1 รากฐานการคิดเชิงคำนวณและการแก้ปัญหาเชิงตรรกะ
 ## บทที่ 9 ปัญญาประดิษฐ์ คอมพิวเตอร์วิทัศน์ และอินเทอร์เน็ตของสรรพสิ่ง
@@ -4126,7 +4039,7 @@ if __name__ == "__main__":
 * Zhang, F. et al. (2020). MediaPipe Hands: On-device Real-time Hand Tracking. *arXiv:2006.10214*.
 
 
-<!-- CHAPTER BREAK -->
+<div class="chapter-page-break"></div>
 
 # วิทยาการคำนวณ 1 รากฐานการคิดเชิงคำนวณและการแก้ปัญหาเชิงตรรกะ
 ## บทที่ 10 การพัฒนาโครงงานนวัตกรรมและการประมวลความรู้
@@ -4264,7 +4177,7 @@ if __name__ == "__main__":
 * Sommerville, I. (2016). *Software Engineering* (10th ed.). Pearson.
 
 
-<!-- CHAPTER BREAK -->
+<div class="chapter-page-break"></div>
 
 # 🔬 คู่มือปฏิบัติการเสมือนจริง 2D/3D AR MediaPipe Hands ประจำบทที่ 1
 ## ชุดห้องปฏิบัติการเสมือนจริงเพื่อการจัดการเรียนรู้วิทยาการคำนวณ
@@ -4530,7 +4443,7 @@ graph TD
 4. **การวิเคราะห์อัลกอริทึม** ในสนามกริด 5x5 จงเขียนชุดคำสั่งรหัสลำลอง ที่ใช้จำนวนก้าวเดินน้อยที่สุดในการพาหุ่นยนต์จาก $(1,1)$ ไปยัง $(5,5)$ โดยไม่ชนสิ่งกีดขวาง
 
 
-<!-- CHAPTER BREAK -->
+<div class="chapter-page-break"></div>
 
 # 🔬 คู่มือปฏิบัติการเสมือนจริง 2D/3D AR MediaPipe Hands ประจำบทที่ 2
 ## ชุดห้องปฏิบัติการเสมือนจริงเพื่อการจัดการเรียนรู้วิทยาการคำนวณ
@@ -4776,7 +4689,7 @@ graph TD
 3. **การออกแบบผังงาน** ให้นักเรียนเขียนผังงานมาตรฐาน ISO 5807 สำหรับระบบตู้ ATM ที่ตรวจสอบรหัส PIN (อนุญาตให้กรอกผิดได้ไม่เกิน 3 ครั้ง)
 
 
-<!-- CHAPTER BREAK -->
+<div class="chapter-page-break"></div>
 
 # 🔬 คู่มือปฏิบัติการเสมือนจริง 2D/3D AR MediaPipe Hands ประจำบทที่ 3
 ## ชุดห้องปฏิบัติการเสมือนจริงเพื่อการจัดการเรียนรู้วิทยาการคำนวณ
@@ -4888,7 +4801,7 @@ ightarrow$ Add/Subtract)
 | `name="Dr.Chewa", score=98.5432` | `f"Name: {name}, Score: {score:.2f}"` | `Name: Dr.Chewa, Score: 98.54` |
 
 
-<!-- CHAPTER BREAK -->
+<div class="chapter-page-break"></div>
 
 # 🔬 คู่มือปฏิบัติการเสมือนจริง 2D/3D AR MediaPipe Hands ประจำบทที่ 4
 ## ชุดห้องปฏิบัติการเสมือนจริงเพื่อการจัดการเรียนรู้วิทยาการคำนวณ
@@ -4958,7 +4871,7 @@ graph LR
 3. ให้ออกแบบใบกิจกรรมการเรียนรู้แบบสืบเสาะ (Inquiry-based Worksheet) สำหรับนักเรียนระดับมัธยมศึกษาโดยใช้ห้องปฏิบัติการนี้
 
 
-<!-- CHAPTER BREAK -->
+<div class="chapter-page-break"></div>
 
 # 🔬 คู่มือปฏิบัติการเสมือนจริง 2D/3D AR MediaPipe Hands ประจำบทที่ 5
 ## ชุดห้องปฏิบัติการเสมือนจริงเพื่อการจัดการเรียนรู้วิทยาการคำนวณ
@@ -5025,7 +4938,7 @@ Binary Search ทำงานบนข้อมูลที่เรียงล
 3. ให้ออกแบบใบกิจกรรมการเรียนรู้แบบสืบเสาะ (Inquiry-based Worksheet) สำหรับนักเรียนระดับมัธยมศึกษาโดยใช้ห้องปฏิบัติการนี้
 
 
-<!-- CHAPTER BREAK -->
+<div class="chapter-page-break"></div>
 
 # 🔬 คู่มือปฏิบัติการเสมือนจริง 2D/3D AR MediaPipe Hands ประจำบทที่ 6
 ## ชุดห้องปฏิบัติการเสมือนจริงเพื่อการจัดการเรียนรู้วิทยาการคำนวณ
@@ -5092,7 +5005,7 @@ Bubble Sort มีความซับซ้อน $O(n^2)$ ขณะที่ 
 3. ให้ออกแบบใบกิจกรรมการเรียนรู้แบบสืบเสาะ (Inquiry-based Worksheet) สำหรับนักเรียนระดับมัธยมศึกษาโดยใช้ห้องปฏิบัติการนี้
 
 
-<!-- CHAPTER BREAK -->
+<div class="chapter-page-break"></div>
 
 # 🔬 คู่มือปฏิบัติการเสมือนจริง 2D/3D AR MediaPipe Hands ประจำบทที่ 7
 ## ชุดห้องปฏิบัติการเสมือนจริงเพื่อการจัดการเรียนรู้วิทยาการคำนวณ
@@ -5160,7 +5073,7 @@ graph LR
 3. ให้ออกแบบใบกิจกรรมการเรียนรู้แบบสืบเสาะ (Inquiry-based Worksheet) สำหรับนักเรียนระดับมัธยมศึกษาโดยใช้ห้องปฏิบัติการนี้
 
 
-<!-- CHAPTER BREAK -->
+<div class="chapter-page-break"></div>
 
 # 🔬 คู่มือปฏิบัติการเสมือนจริง 2D/3D AR MediaPipe Hands ประจำบทที่ 8
 ## ชุดห้องปฏิบัติการเสมือนจริงเพื่อการจัดการเรียนรู้วิทยาการคำนวณ
@@ -5228,7 +5141,7 @@ graph LR
 3. ให้ออกแบบใบกิจกรรมการเรียนรู้แบบสืบเสาะ (Inquiry-based Worksheet) สำหรับนักเรียนระดับมัธยมศึกษาโดยใช้ห้องปฏิบัติการนี้
 
 
-<!-- CHAPTER BREAK -->
+<div class="chapter-page-break"></div>
 
 # 🔬 คู่มือปฏิบัติการเสมือนจริง 2D/3D AR MediaPipe Hands ประจำบทที่ 9
 ## ชุดห้องปฏิบัติการเสมือนจริงเพื่อการจัดการเรียนรู้วิทยาการคำนวณ
@@ -5295,7 +5208,7 @@ graph LR
 3. ให้ออกแบบใบกิจกรรมการเรียนรู้แบบสืบเสาะ (Inquiry-based Worksheet) สำหรับนักเรียนระดับมัธยมศึกษาโดยใช้ห้องปฏิบัติการนี้
 
 
-<!-- CHAPTER BREAK -->
+<div class="chapter-page-break"></div>
 
 # 🔬 คู่มือปฏิบัติการเสมือนจริง 2D/3D AR MediaPipe Hands ประจำบทที่ 10
 ## ชุดห้องปฏิบัติการเสมือนจริงเพื่อการจัดการเรียนรู้วิทยาการคำนวณ
